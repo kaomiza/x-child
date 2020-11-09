@@ -78,7 +78,7 @@ if($_SERVER['SERVER_NAME'] == "localhost"){
 		'dsn'	=> '',
 		'hostname' => 'localhost',
 		'username' => 'root',
-		'password' => 'x123456',
+		'password' => '',
 		'database' => 'db_xchild',
 		'dbdriver' => 'mysqli',
 		'dbprefix' => '',

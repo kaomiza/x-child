@@ -67,7 +67,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary text_btn" data-dismiss="modal">ปิด</button>
-                <button type="button" class="btn text_btn" style="background-color: #1e7e34; color:white;" onclick="onClickSave('edit')">บันทึก</button>
+                <button type="button" class="btn text_btn edit_btn" style="background-color: #1e7e34; color:white;" onclick="onClickSave('edit')">บันทึก</button>
             </div>
 
         </div>
@@ -169,6 +169,22 @@
             }
             if (checkError == true) {
                 /********insert**********/
+                $.post('<?php echo base_url('admin/diseased/create') ?>', {
+                    d_nameTH: inputTH,
+                    d_nameEN: inputEN
+                }).done((res) => {
+                    if (res == true) {
+                        $('#InputDiseaTH1').val();
+                        $('#InputDiseaEN1').val();
+                        $('#insertDiseased').modal('hide');
+                        toastr.success('เพิ่มข้อมูลสำเร็จ');
+                        $('#diseased').DataTable().ajax.reload();
+                    } else {
+                        toastr.error('ไม่สามารถเพิ่มข้อมูลได้ โปรดลองใหม่ภายหลัง');
+                    }
+                }).fail((xhr, status, error) => {
+                    toastr.error('ไม่สามารถเพิ่มข้อมูลได้ โปรดลองใหม่ภายหลัง');
+                });
                 console.log('Start Insert');
             }
 
@@ -194,6 +210,23 @@
             }
             if (checkError == true) {
                 /********update**********/
+                var id = $('.edit_btn').attr('id');
+                $.post('<?php echo base_url('admin/diseased/update') ?>/' + id, {
+                    d_nameTH: inputTH,
+                    d_nameEN: inputEN
+                }).done((res) => {
+                    if (res == true) {
+                        $('#InputDiseaTH2').val();
+                        $('#InputDiseaEN2').val();
+                        $('#editPosition').modal('hide');
+                        toastr.success('แก้ไขข้อมูลสำเร็จ');
+                        $('#diseased').DataTable().ajax.reload();
+                    } else {
+                        toastr.error('ไม่สามารถแก้ไขข้อมูลได้ โปรดลองใหม่ภายหลัง');
+                    }
+                }).fail((xhr, status, error) => {
+                    toastr.error('ไม่สามารถแก้ไขข้อมูลได้ โปรดลองใหม่ภายหลัง');
+                });
                 console.log('Start Update');
             }
         }
@@ -202,15 +235,15 @@
     function onClickEdit(id) {
         $.get('<?php echo base_url('admin/diseased/getById'); ?>/' + id).done((res) => {
             $('#InputDiseaTH2').val(res.d_nameTH);
-            $('#InputDiseaEN2').val(res.p_name);
-            $('.edit_btn').attr('id', res.p_id);
+            $('#InputDiseaEN2').val(res.d_nameEN);
+            $('.edit_btn').attr('id', res.d_id);
         });
     }
 
     function onClickActivate(id) {
         if ($('#at' + id).is(":checked")) {
             $.post('<?php echo base_url('admin/diseased/update'); ?>/' + id, {
-                p_status: 1
+                d_status: 1
             }).done((res) => {
                 toastr.info('NO');
             }).fail((xhr, status, error) => {
@@ -218,7 +251,7 @@
             })
         } else {
             $.post('<?php echo base_url('admin/diseased/update'); ?>/' + id, {
-                p_status: 0
+                d_status: 0
             }).done((res) => {
                 toastr.info('OFF');
             }).fail((xhr, status, error) => {
