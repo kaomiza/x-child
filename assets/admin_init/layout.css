@@ -1,0 +1,597 @@
+label,
+p,
+h2,
+h1 {
+    margin-bottom: 0px;
+}
+
+li {
+    list-style: none;
+}
+
+ul {
+    padding: 0px;
+    margin: 0px;
+}
+
+.btn.focus,
+.btn:focus {
+    box-shadow: unset !important;
+}
+
+.bg_color {
+    background-color: #F5F5F5;
+}
+
+.t-center {
+    text-align: center;
+}
+
+.text-w {
+    color: #fff;
+}
+
+.border-or {
+    height: 3px;
+    width: 120px;
+    background: #E75C46;
+    border-radius: 20px;
+}
+
+.main-margin>div:not(:last-child) {
+    margin-bottom: 40px;
+}
+
+.content_padding>div:not(:last-child) {
+    margin-bottom: 15px;
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .main-margin>div:not(:last-child) {
+        margin-bottom: 30px;
+    }
+}
+
+@media (min-width: 200px) and (max-width: 767px) {
+    .main-margin>div:not(:last-child) {
+        margin-bottom: 20px;
+    }
+}
+
+
+/* ----------------------------------------------------------------------------- */
+
+
+/* ------------- Text --------------- */
+
+@media (min-width: 1281px) {
+    .h1-title {
+        font-family: "Kanit";
+        font-size: 40px;
+    }
+    .text-heading {
+        font-family: "Kanit";
+        font-size: 25px;
+    }
+    .text-paragraph {
+        font-family: "Kanit";
+        font-size: 14px;
+    }
+    .body__text-title {
+        font-family: "Kanit";
+        font-size: 20px;
+    }
+    .body__text-des {
+        font-family: "Kanit";
+        font-size: 23px;
+    }
+    .text__content-h1 {
+        font-family: "Kanit";
+        font-size: 40px;
+    }
+    .text__content-h2 {
+        font-family: "Kanit";
+        font-size: 16px;
+    }
+    .text__content-h3 {
+        font-family: "Kanit";
+        font-size: 22px;
+    }
+    .text_btn {
+        font-family: "Kanit";
+        font-size: 16px;
+    }
+}
+
+@media (min-width: 1025px) and (max-width: 1280px) {
+    .h1-title {
+        font-family: "Kanit";
+        font-size: 35px;
+    }
+    .text-heading {
+        font-family: "Kanit";
+        font-size: 25px;
+    }
+    .text-paragraph {
+        font-family: "Kanit";
+        font-size: 14px;
+    }
+    .body__text-title {
+        font-family: "Kanit";
+        font-size: 20px;
+    }
+    .body__text-des {
+        font-family: "Kanit";
+        font-size: 23px;
+    }
+    .text__content-h1 {
+        font-family: "Kanit";
+        font-size: 40px;
+    }
+    .text__content-h2 {
+        font-family: "Kanit";
+        font-size: 16px;
+    }
+    .text__content-h3 {
+        font-family: "Kanit";
+        font-size: 20px;
+    }
+    .text_btn {
+        font-family: "Kanit";
+        font-size: 16px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .h1-title {
+        font-family: "Kanit";
+        font-size: 30px;
+    }
+    .text-heading {
+        font-family: "Kanit";
+        font-size: 23px;
+    }
+    .text-paragraph {
+        font-family: "Kanit";
+        font-size: 12px;
+    }
+    .body__text-title {
+        font-family: "Kanit";
+        font-size: 18px;
+    }
+    .body__text-des {
+        font-family: "Kanit";
+        font-size: 18px;
+    }
+    .text__content-h1 {
+        font-family: "Kanit";
+        font-size: 35px;
+    }
+    .text__content-h2 {
+        font-family: "Kanit";
+        font-size: 14px;
+    }
+    .text__content-h3 {
+        font-family: "Kanit";
+        font-size: 18px;
+    }
+    .text_btn {
+        font-family: "Kanit";
+        font-size: 14px;
+    }
+}
+
+@media (min-width: 200px) and (max-width: 767px) {
+    .h1-title {
+        font-family: "Kanit";
+        font-size: 30px;
+    }
+    .text-heading {
+        font-family: "Kanit";
+        font-size: 23px;
+    }
+    .text-paragraph {
+        font-family: "Kanit";
+        font-size: 12px;
+    }
+    .body__text-title {
+        font-family: "Kanit";
+        font-size: 18px;
+    }
+    .body__text-des {
+        font-family: "Kanit";
+        font-size: 18px;
+    }
+    .text__content-h1 {
+        font-family: "Kanit";
+        font-size: 25px;
+    }
+    .text__content-h2 {
+        font-family: "Kanit";
+        font-size: 12px;
+    }
+    .text__content-h3 {
+        font-family: "Kanit";
+        font-size: 18px;
+    }
+    .text_btn {
+        font-family: "Kanit";
+        font-size: 14px;
+    }
+}
+
+
+/* --------------Text-------------- */
+
+
+/* ----------------------------------------------------------------------------- */
+
+
+/*--------- Padding ---------------*/
+
+.padding_main {
+    padding: 50px;
+}
+
+.body__content {
+    margin: 0 auto;
+    max-width: 1220px;
+}
+
+.body__content--padding {
+    padding: 100px 0px;
+}
+
+@media (min-width: 1025px) and (max-width: 1280px) {
+    .padding_main {
+        padding: 30px;
+    }
+    .body__content {
+        margin: 0 auto;
+        max-width: 960px;
+    }
+    .body__content--padding {
+        padding: 80px 0px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .padding_main {
+        padding: 30px;
+    }
+    .body__content {
+        padding: 0px 50px;
+    }
+    .body__content--padding {
+        padding: 80px 50px;
+    }
+}
+
+@media (min-width: 200px) and (max-width: 767px) {
+    .padding_main {
+        padding: 20px 20px;
+    }
+    .body__content {
+        padding: 50px 20px !important;
+    }
+    .body__content--padding {
+        padding: 50px 20px;
+    }
+}
+
+
+/* -------------- Padding ---------------- */
+
+.btn-or {
+    width: 260px;
+    border-radius: 50px;
+    background-color: #E75C46;
+    color: #fff;
+    cursor: pointer;
+    padding: 10px 20px;
+}
+
+.btn-or:hover {
+    background-color: #C74C38;
+    color: #fff;
+}
+
+
+/***************************************** Start Row Column **********************************/
+
+.box-content {
+    display: flex;
+}
+
+.box-item {
+    width: 25%;
+    border-radius: 10px;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    padding: 20px 15px;
+    justify-content: space-between;
+}
+
+.box-item>div:not(:last-child) {
+    margin-bottom: 20px;
+}
+
+@media (min-width: 1025px) and (max-width: 1280px) {
+    .box-content {
+        flex-flow: row wrap;
+    }
+    .box-item {
+        width: 50%;
+        border-radius: 10px;
+        display: flex;
+        text-align: center;
+        flex-direction: column;
+        padding: 20px;
+        justify-content: space-between;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .box-content {
+        flex-flow: row wrap;
+    }
+    .box-item {
+        width: 50%;
+        border-radius: 10px;
+        display: flex;
+        text-align: center;
+        flex-direction: column;
+        padding: 20px 20px;
+        justify-content: space-between;
+    }
+    .box-item>div:not(:last-child) {
+        margin-bottom: 15px;
+    }
+}
+
+@media (min-width: 200px) and (max-width: 767px) {
+    .box-content {
+        display: flex;
+        flex-direction: column;
+    }
+    .box-item {
+        width: auto;
+        border-radius: 10px;
+        display: flex;
+        text-align: center;
+        flex-direction: column;
+        padding: 0px 0px;
+        justify-content: space-between;
+    }
+    .box-item:not(:last-child) {
+        margin-bottom: 25px;
+    }
+    .box-item>div:not(:last-child) {
+        margin-bottom: 20px;
+    }
+}
+
+
+/***************************************** End Row Column **********************************/
+
+.btn_backend {
+    border: 1px solid #000;
+    color: #000;
+    background-color: #fff;
+    width: 20vw;
+    padding: 10px;
+    box-shadow: inset 0 0 20px rgba(255, 255, 255, 0);
+    outline: 1px solid rgb(0 0 0 / 0);
+    outline-color: rgb(0 0 0 / .1);
+    outline-offset: 0px;
+    text-shadow: none;
+    transition: all 1250ms cubic-bezier(0.19, 1, 0.22, 1);
+    border-radius: 0px;
+}
+
+.btn_backend:hover {
+    color: #000;
+    border: 1px solid;
+    outline: 1px solid rgb(255 255 255 / 50%);
+    outline-color: rgba(255, 255, 255, 50);
+    outline-offset: 15px;
+}
+
+.boxHeader {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+@media (min-width: 1025px) and (max-width: 1280px) {
+    .btn_backend {
+        width: auto;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .btn_backend {
+        margin-top: 20px;
+        width: auto;
+    }
+    .boxHeader {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+}
+
+@media (min-width: 200px) and (max-width: 767px) {
+    .btn_backend {
+        margin-top: 20px;
+        width: auto;
+    }
+    .boxHeader {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+}
+
+.modal-body>div:not(:last-child) {
+    padding-bottom: 10px;
+}
+
+.bgWhite {
+    background-color: white;
+}
+
+.mainBoxRadius {
+    border-radius: 10px;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid #ddd;
+}
+
+th,
+td {
+    text-align: left;
+    padding: 8px;
+    border: 1px solid rgba(49, 53, 61, 0.5)
+}
+
+tr:nth-child(even) {
+    background-color: #dedee6;
+}
+
+@media (min-width: 1281px) {
+    .th_text {
+        font-family: "Kanit";
+        font-size: 18px;
+    }
+    .td_text {
+        font-family: "Kanit";
+        font-size: 16px;
+    }
+}
+
+@media (min-width: 1025px) and (max-width: 1280px) {
+    .th_text {
+        font-family: "Kanit";
+        font-size: 18px;
+    }
+    .td_text {
+        font-family: "Kanit";
+        font-size: 16px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .th_text {
+        font-family: "Kanit";
+        font-size: 16px;
+    }
+    .td_text {
+        font-family: "Kanit";
+        font-size: 14px;
+    }
+}
+
+@media (min-width: 200px) and (max-width: 767px) {
+    .th_text {
+        font-family: "Kanit";
+        font-size: 14px;
+    }
+    .td_text {
+        font-family: "Kanit";
+        font-size: 12px;
+    }
+}
+
+
+/***************************************** Sart Card **********************************/
+
+.cardBox {
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px #d8d8d8;
+    padding: 30px 0px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    word-break: break-word;
+}
+
+
+/***************************************** End Card **********************************/
+
+
+/************************* Start Toggle **********************/
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 65px;
+    height: 30px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 22px;
+    width: 22px;
+    left: 11px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked+.slider {
+    background-color: #2196F3;
+}
+
+input:focus+.slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked+.slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+
+/* Rounded sliders */
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+
+/************************* End Toggle **********************/
+
+
+/* --------------------------------All layout--------------------------------------------- */
