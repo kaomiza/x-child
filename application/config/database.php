@@ -97,13 +97,12 @@ if($_SERVER['SERVER_NAME'] == "localhost"){
 	);
 }
 else{
-
 	$db['default'] = array(
 		'dsn'	=> '',
 		'hostname' => 'localhost',
-		'username' => 'intlabco_kao',
-		'password' => '3l23pIoDw',
-		'database' => 'intlabco_kao',
+		'username' => 'root',
+		'password' => '',
+		'database' => 'db_xchild',
 		'dbdriver' => 'mysqli',
 		'dbprefix' => '',
 		'pconnect' => FALSE,

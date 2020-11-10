@@ -47,7 +47,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary text_btn" data-dismiss="modal">ปิด</button>
-                <button type="button" class="btn text_btn" style="background-color: #1e7e34; color:white;" onclick="onClickSave('edit')">บันทึก</button>
+                <button type="button" class="btn text_btn edit_btn" style="background-color: #1e7e34; color:white;" onclick="onClickSave('edit')">บันทึก</button>
             </div>
         </div>
     </div>
@@ -62,34 +62,61 @@
         </div>
     </div>
     <div class="bgWhite padding_main mainBoxRadius">
-        <div style="overflow-x:auto;">
-            <table>
+        <table id="type_document" class="table table-bordered table-striped">
+            <thead>
                 <tr>
                     <th class="th_text">เลขที่</th>
                     <th class="th_text">ชื่อประเภทเอกสารความรู้</th>
                     <th class="th_text">แก้ไข</th>
                     <th class="th_text">สถานะ</th>
                 </tr>
-                <tr>
-                    <td class="td_text">1</td>
-                    <td class="td_text">นิทานปรัมปรา</td>
-                    <td class="td_text">
-                        <button class="btn btn-success" data-toggle="modal" data-target="#editTypeDoc">
-                            <i class="fa fa-edit"></i>
-                        </button>
-                    </td>
-                    <td class="td_text">
-                        <label class="switch">
-                            <input type="checkbox" checked>
-                            <span class="slider round"></span>
-                        </label>
-                    </td>
-
-                </tr>
-            </table>
-        </div>
+            </thead>
+        </table>
     </div>
 </div>
+<script>
+    $("#type_document").DataTable({
+        "processing": true,
+        "responsive": true,
+        "autoWidth": false,
+        "ajax": {
+            url: "<?php echo base_url('admin/type_document/getAll'); ?>",
+            type: "GET"
+        },
+        "columns": [{
+                "data": "tc_id",
+                className: "td_text"
+            },
+            {
+                "data": "tc_name",
+                className: "td_text"
+            },
+            {
+                "data": null,
+                "render": (data, type, row, meta) => {
+                    return `
+                        <button class="btn btn-success" data-toggle="modal" data-target="#editTypeDoc"
+                        onclick="onClickEdit(` + row.tc_id + `)"><i class="fa fa-edit"></i>
+                        </button>
+                        `;
+                }
+            },
+            {
+                "data": null,
+                "render": (data, type, row, meta) => {
+                    return `
+                            <label class="switch">
+                                <input id="at` + row.tc_id + `" type="checkbox" ` +
+                        (row.tc_status == 1 ? 'checked' : '') + `
+                            onclick="onClickActivate(` + row.tc_id + `)">
+                                <span class="slider round"></span>
+                            </label>
+                        `;
+                }
+            }
+        ]
+    });
+</script>
 <script>
     function onClickSave(func) {
         console.log(func);
@@ -106,6 +133,20 @@
             }
             if (checkError == true) {
                 /********insert**********/
+                $.post('<?php echo base_url('admin/type_document/create') ?>', {
+                    tc_name: input
+                }).done((res) => {
+                    if (res == true) {
+                        $('#InputTD1').val();
+                        $('#insertTypeDoc').modal('hide');
+                        toastr.success('เพิ่มข้อมูลสำเร็จ');
+                        $('#type_document').DataTable().ajax.reload();
+                    } else {
+                        toastr.error('ไม่สามารถเพิ่มข้อมูลได้ โปรดลองใหม่ภายหลัง');
+                    }
+                }).fail((xhr, status, error) => {
+                    toastr.error('ไม่สามารถเพิ่มข้อมูลได้ โปรดลองใหม่ภายหลัง');
+                });
                 console.log('Start Insert');
             }
 
@@ -122,8 +163,50 @@
             }
             if (checkError == true) {
                 /********update**********/
+                var id = $('.edit_btn').attr('id');
+                $.post('<?php echo base_url('admin/type_document/update') ?>/' + id, {
+                    tc_name: input
+                }).done((res) => {
+                    if (res == true) {
+                        $('#InputTD2').val();
+                        $('#editTypeDoc').modal('hide');
+                        toastr.success('แก้ไขข้อมูลสำเร็จ');
+                        $('#type_document').DataTable().ajax.reload();
+                    } else {
+                        toastr.error('ไม่สามารถแก้ไขข้อมูลได้ โปรดลองใหม่ภายหลัง');
+                    }
+                }).fail((xhr, status, error) => {
+                    toastr.error('ไม่สามารถแก้ไขข้อมูลได้ โปรดลองใหม่ภายหลัง');
+                });
                 console.log('Start Update');
             }
+        }
+    }
+
+    function onClickEdit(id) {
+        $.get('<?php echo base_url('admin/type_document/getById'); ?>/' + id).done((res) => {
+            $('#InputTD2').val(res.tc_name);
+            $('.edit_btn').attr('id', res.tc_id);
+        });
+    }
+
+    function onClickActivate(id) {
+        if ($('#at' + id).is(":checked")) {
+            $.post('<?php echo base_url('admin/type_document/update'); ?>/' + id, {
+                tc_status: 1
+            }).done((res) => {
+                toastr.info('NO');
+            }).fail((xhr, status, error) => {
+                toastr.error('Error')
+            })
+        } else {
+            $.post('<?php echo base_url('admin/type_document/update'); ?>/' + id, {
+                tc_status: 0
+            }).done((res) => {
+                toastr.info('OFF');
+            }).fail((xhr, status, error) => {
+                toastr.error('Error')
+            })
         }
     }
 </script>

@@ -13,8 +13,8 @@
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <link href='https://fonts.googleapis.com/css?family=Kanit' rel='stylesheet'>
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/adminlte/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
-    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/adminlte/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/adminlte/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/adminlte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/adminlte/dist/css/adminlte.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin_init/navbar.css">
@@ -22,14 +22,19 @@
 
     <script src="<?php echo base_url(); ?>assets/admin_init/validateCheck.js"></script>
     <script src="<?php echo base_url(); ?>assets/adminlte/plugins/jquery/jquery.min.js"></script>
-    <!-- DataTables -->
+
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/adminlte/plugins/toastr/toastr.min.css">
+    <script src="<?php echo base_url(); ?>assets/adminlte/plugins/toastr/toastr.min.js"></script>
+
+    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+
     <script src="<?php echo base_url(); ?>assets/adminlte/plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/adminlte/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/adminlte/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/adminlte/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/adminlte/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-    <!-- toastr -->
-    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/adminlte/plugins/toastr/toastr.min.css">
-    <script src="<?php echo base_url(); ?>assets/adminlte/plugins/toastr/toastr.min.js"></script>
     <script>
         toastr.options = {
             "closeButton": false,
@@ -133,9 +138,21 @@
                                     <li>
                                         <a href="<?php echo base_url('admin/type_children'); ?>">ข้อมูลประเภทเด็กพิการ</a>
                                     </li>
-                                    <li><a href="#">จัดการจังหวัด</a></li>
-                                    <li><a href="#">จัดการอำเภอ</a></li>  
-                                    <li><a href="#">จัดการตำบล</a></li>
+                                    <li>
+                                        <a href="#">
+                                            <span>จัดการจังหวัด</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <span>จัดการอำเภอ</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <span>จัดการตำบล</span>
+                                        </a>
+                                    </li>
                                 </ul>
                             </div>
                         </li>
@@ -150,7 +167,7 @@
                             <div class="sidebar-submenu">
                                 <ul>
                                     <li>
-                                        <a href="#">จัดการเด็กพิเศษ</a>
+                                        <a href="<?php echo base_url('admin/Children'); ?>">จัดการเด็กพิเศษ</a>
                                     </li>
                                     <li>
                                         <a href="#">การแพ้ยาของเด็ก</a>
@@ -162,13 +179,13 @@
                             </div>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="<?php echo base_url('admin/Parents'); ?>">
                                 <i class="fas fa-users"></i>
                                 <span>จัดการข้อมูลผู้ปกครอง</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="<?php echo base_url('admin/Expert'); ?>">
                                 <i class="fas fa-users-cog"></i>
                                 <span>จัดการข้อมูลผู้เชี่ยวชาญ</span>
                             </a>
@@ -198,24 +215,6 @@
                 </div>
                 <!-- sidebar-menu  -->
             </div>
-            <!-- sidebar-content  -->
-            <!-- <div class="sidebar-footer">
-                <a href="#">
-                    <i class="fa fa-bell"></i>
-                    <span class="badge badge-pill badge-warning notification">3</span>
-                </a>
-                <a href="#">
-                    <i class="fa fa-envelope"></i>
-                    <span class="badge badge-pill badge-success notification">7</span>
-                </a>
-                <a href="#">
-                    <i class="fa fa-cog"></i>
-                    <span class="badge-sonar"></span>
-                </a>
-                <a href="#">
-                    <i class="fa fa-power-off"></i>
-                </a>
-            </div> -->
         </nav>
         <!-- sidebar-wrapper  -->
         <main class="page-content">

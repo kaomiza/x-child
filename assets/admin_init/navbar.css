@@ -511,3 +511,26 @@ body {
 .chiller-theme .sidebar-footer>a:last-child {
     border-right: none;
 }
+
+span,
+strong,
+a,
+label,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+td,
+th,
+tr,
+li,
+input,
+button,
+div,
+select,
+option {
+    font-family: 'Kanit';
+}

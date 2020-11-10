@@ -4,7 +4,7 @@ class GroupDrugModel extends CI_Model
     protected $table = 'group_drug';
     protected $primaryKey = 'gd_id';
     protected $fields = 'gd_name';
-    
+
     public function findAll()
     {
         return $this->db->get($this->table)->result();

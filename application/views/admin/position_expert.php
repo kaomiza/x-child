@@ -59,14 +59,14 @@
         <div>
             <h1 class="h1-title">ตำแหน่งผู้เชี่ยวชาญ</h1>
         </div>
-        <div>
+    </div>
+    <div class="bgWhite padding_main mainBoxRadius">
+        <div class="mb-2">
             <button class="btn_backend text_btn btn" id="btnInsert" data-toggle="modal" data-target="#insertPosition">
                 <i class="fa fa-plus"></i>&nbsp;&nbsp;
                 เพิ่มตำแหน่งผู้เชี่ยวชาญ
             </button>
         </div>
-    </div>
-    <div class="bgWhite padding_main mainBoxRadius">
         <table id="position" class="table table-bordered table-striped">
             <thead>
                 <tr>
@@ -76,14 +76,6 @@
                     <th class="th_text">สถานะ</th>
                 </tr>
             </thead>
-            <tfoot>
-                <tr>
-                    <th class="th_text">เลขที่</th>
-                    <th class="th_text">ชื่อตำแหน่งผู้เชี่ยวชาญ</th>
-                    <th class="th_text">แก้ไข</th>
-                    <th class="th_text">สถานะ</th>
-                </tr>
-            </tfoot>
         </table>
     </div>
 </div>
@@ -97,16 +89,18 @@
             type: "GET"
         },
         "columns": [{
-                "data": "p_id"
+                "data": "p_id",
+                className: "td_text"
             },
             {
-                "data": "p_name"
+                "data": "p_name",
+                className: "td_text"
             },
             {
                 "data": null,
                 "render": (data, type, row, meta) => {
                     return `
-                        <button class="btn btn-success" data-toggle="modal" data-target="#editPosition"
+                        <button class="btn btn-flat btn-success" data-toggle="modal" data-target="#editPosition"
                         onclick="onClickEdit(` + row.p_id + `)"><i class="fa fa-edit"></i>
                         </button>
                         `;
@@ -116,11 +110,11 @@
                 "data": null,
                 "render": (data, type, row, meta) => {
                     return `
-                            <label class="switch">
-                                <input id="at` + row.p_id + `" type="checkbox" ` +
-                        (row.p_status == 1 ? 'checked' : '') + `
-                            onclick="onClickActivate(` + row.p_id + `)">
-                                <span class="slider round"></span>
+                            <label for="toggle-` + row.p_id + `" class="toggle-1">
+                                <input type="checkbox" id="toggle-` + row.p_id + `" 
+                                class="toggle-1__input"  ` + (row.p_status == 1 ? 'checked' : '') + `
+                                onchange="onClickActivate(` + row.p_id + `)">
+                                <span class="toggle-1__button"></span>
                             </label>
                         `;
                 }
@@ -200,7 +194,7 @@
     }
 
     function onClickActivate(id) {
-        if ($('#at' + id).is(":checked")) {
+        if ($('#toggle-' + id).is(":checked")) {
             $.post('<?php echo base_url('admin/position_expert/update'); ?>/' + id, {
                 p_status: 1
             }).done((res) => {

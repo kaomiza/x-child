@@ -11,7 +11,7 @@ class DrugModel extends CI_Model
         'drug_status'
     ];
     protected $table_join = 'group_drug';
-    protected $join = 'group_drug.gd_id = drug.drug_id';
+    protected $join = 'group_drug.gd_id = drug.gd_id';
 
     public function findAll()
     {

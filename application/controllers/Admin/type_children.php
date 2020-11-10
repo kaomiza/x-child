@@ -12,7 +12,7 @@ class Type_children extends CI_Controller
     public function index()
     {
         $data = [
-            'title' => 'จัดการประเภทเด็กพิเศษ',
+            'title' => 'จัดการประเภทเด็กพิเศษ - Admin X-Child',
             'admin_content' => $this->load->view('admin/type_children', NULL, TRUE)
         ];
         $this->load->view('index_admin', $data);

@@ -1,6 +1,6 @@
 <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
-<div class="modal fade show" tabindex="-1" role="dialog" id="insertTypeDoc" style="display:none;">
+<div class="modal fade show" tabindex="-1" role="dialog" id="insertTypeVdo" style="display:none;">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -26,7 +26,7 @@
         </div>
     </div>
 </div>
-<div class="modal fade show" tabindex="-1" role="dialog" id="editTypeDoc" style="display:none;">
+<div class="modal fade show" tabindex="-1" role="dialog" id="editTypeVdo" style="display:none;">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -47,7 +47,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary text_btn" data-dismiss="modal">ปิด</button>
-                <button type="button" class="btn text_btn" style="background-color: #1e7e34; color:white;" onclick="onClickSave('edit')">บันทึก</button>
+                <button type="button" class="btn text_btn edit_btn" style="background-color: #1e7e34; color:white;" onclick="onClickSave('edit')">บันทึก</button>
             </div>
         </div>
     </div>
@@ -58,73 +58,153 @@
             <h1 class="h1-title">ประเภทวิดีโอความรู้</h1>
         </div>
         <div>
-            <button class="btn_backend text_btn btn" id="btnInsert" data-toggle="modal" data-target="#insertTypeDoc"><i class="fa fa-plus"></i>&nbsp;&nbsp;เพิ่มประเภทวิดีโอความรู้</button>
+            <button class="btn_backend text_btn btn" id="btnInsert" data-toggle="modal" data-target="#insertTypeVdo"><i class="fa fa-plus"></i>&nbsp;&nbsp;เพิ่มประเภทวิดีโอความรู้</button>
         </div>
     </div>
     <div class="bgWhite padding_main mainBoxRadius">
-        <div style="overflow-x:auto;">
-            <table>
+        <table id="type_video" class="table table-bordered table-striped">
+            <thead>
                 <tr>
                     <th class="th_text">เลขที่</th>
                     <th class="th_text">ชื่อประเภทวิดีโอความรู้</th>
                     <th class="th_text">แก้ไข</th>
                     <th class="th_text">สถานะ</th>
                 </tr>
-                <tr>
-                    <td class="td_text">1</td>
-                    <td class="td_text">เด็กที่มีความบกพร่องทางสติปัญญา</td>
-                    <td class="td_text">
-                        <button class="btn btn-success" data-toggle="modal" data-target="#editTypeDoc">
-                            <i class="fa fa-edit"></i>
-                        </button>
-                    </td>
-                    <td class="td_text">
-                        <label class="switch">
-                            <input type="checkbox" checked>
-                            <span class="slider round"></span>
-                        </label>
-                    </td>
-
-                </tr>
-            </table>
-        </div>
+            </thead>
+        </table>
     </div>
 </div>
-<div>
-    <script>
-        function onClickSave(func) {
-            console.log(func);
-            var checkError = true;
-            if (func == 'insert') {
-                var input = document.getElementById("InputTV1").value;
-                if (input == "") {
-                    document.getElementById("TV-error1").style.display = "block";
-                    document.getElementById("InputTV1").style.border = "1px solid #bd2130";
-                    checkError = false;
-                } else {
-                    document.getElementById("TV-error1").style.display = "none";
-                    document.getElementById("InputTV1").style.border = "1px solid #ced4da";
+<script>
+    $("#type_video").DataTable({
+        "processing": true,
+        "responsive": true,
+        "autoWidth": false,
+        "ajax": {
+            url: "<?php echo base_url('admin/type_video/getAll'); ?>",
+            type: "GET"
+        },
+        "columns": [{
+                "data": "tv_id"
+            },
+            {
+                "data": "tv_name"
+            },
+            {
+                "data": null,
+                "render": (data, type, row, meta) => {
+                    return `
+                        <button class="btn btn-success" data-toggle="modal" data-target="#editTypeVdo"
+                        onclick="onClickEdit(` + row.tv_id + `)"><i class="fa fa-edit"></i>
+                        </button>
+                        `;
                 }
-                if (checkError == true) {
-                    /********insert**********/
-                    console.log('Start Insert');
-                }
-
-
-            } else if (func == 'edit') {
-                var input = document.getElementById("InputTV2").value;
-                if (input == "") {
-                    document.getElementById("TV-error2").style.display = "block";
-                    document.getElementById("InputTV2").style.border = "1px solid #bd2130";
-                    checkError = false;
-                } else {
-                    document.getElementById("TV-error2").style.display = "none";
-                    document.getElementById("InputTV2").style.border = "1px solid #ced4da";
-                }
-                if (checkError == true) {
-                    /********update**********/
-                    console.log('Start Update');
+            },
+            {
+                "data": null,
+                "render": (data, type, row, meta) => {
+                    return `
+                            <label class="switch">
+                                <input id="at` + row.tv_id + `" type="checkbox" ` +
+                        (row.tv_status == 1 ? 'checked' : '') + `
+                            onclick="onClickActivate(` + row.tv_id + `)">
+                                <span class="slider round"></span>
+                            </label>
+                        `;
                 }
             }
+        ]
+    });
+</script>
+<script>
+    function onClickSave(func) {
+        console.log(func);
+        var checkError = true;
+        if (func == 'insert') {
+            var input = document.getElementById("InputTV1").value;
+            if (input == "") {
+                document.getElementById("TV-error1").style.display = "block";
+                document.getElementById("InputTV1").style.border = "1px solid #bd2130";
+                checkError = false;
+            } else {
+                document.getElementById("TV-error1").style.display = "none";
+                document.getElementById("InputTV1").style.border = "1px solid #ced4da";
+            }
+            if (checkError == true) {
+                /********insert**********/
+                $.post('<?php echo base_url('admin/type_video/create') ?>', {
+                    tv_name: input
+                }).done((res) => {
+                    if (res == true) {
+                        $('#InputTV1').val();
+                        $('#insertTypeVdo').modal('hide');
+                        toastr.success('เพิ่มข้อมูลสำเร็จ');
+                        $('#type_video').DataTable().ajax.reload();
+                    } else {
+                        toastr.error('ไม่สามารถเพิ่มข้อมูลได้ โปรดลองใหม่ภายหลัง');
+                    }
+                }).fail((xhr, status, error) => {
+                    toastr.error('ไม่สามารถเพิ่มข้อมูลได้ โปรดลองใหม่ภายหลัง');
+                });
+                console.log('Start Insert');
+            }
+
+
+        } else if (func == 'edit') {
+            var input = document.getElementById("InputTV2").value;
+            if (input == "") {
+                document.getElementById("TV-error2").style.display = "block";
+                document.getElementById("InputTV2").style.border = "1px solid #bd2130";
+                checkError = false;
+            } else {
+                document.getElementById("TV-error2").style.display = "none";
+                document.getElementById("InputTV2").style.border = "1px solid #ced4da";
+            }
+            if (checkError == true) {
+                /********update**********/
+                var id = $('.edit_btn').attr('id');
+                $.post('<?php echo base_url('admin/type_video/update') ?>/' + id, {
+                    tv_name: input
+                }).done((res) => {
+                    if (res == true) {
+                        $('#InputTV2').val();
+                        $('#editTypeVdo').modal('hide');
+                        toastr.success('แก้ไขข้อมูลสำเร็จ');
+                        $('#type_video').DataTable().ajax.reload();
+                    } else {
+                        toastr.error('ไม่สามารถแก้ไขข้อมูลได้ โปรดลองใหม่ภายหลัง');
+                    }
+                }).fail((xhr, status, error) => {
+                    toastr.error('ไม่สามารถแก้ไขข้อมูลได้ โปรดลองใหม่ภายหลัง');
+                });
+                console.log('Start Update');
+            }
         }
-    </script>
+    }
+
+    function onClickEdit(id) {
+        $.get('<?php echo base_url('admin/type_video/getById'); ?>/' + id).done((res) => {
+            $('#InputTV2').val(res.tv_name);
+            $('.edit_btn').attr('id', res.tv_id);
+        });
+    }
+
+    function onClickActivate(id) {
+        if ($('#at' + id).is(":checked")) {
+            $.post('<?php echo base_url('admin/type_video/update'); ?>/' + id, {
+                tv_status: 1
+            }).done((res) => {
+                toastr.info('NO');
+            }).fail((xhr, status, error) => {
+                toastr.error('Error')
+            })
+        } else {
+            $.post('<?php echo base_url('admin/type_video/update'); ?>/' + id, {
+                tv_status: 0
+            }).done((res) => {
+                toastr.info('OFF');
+            }).fail((xhr, status, error) => {
+                toastr.error('Error')
+            })
+        }
+    }
+</script>

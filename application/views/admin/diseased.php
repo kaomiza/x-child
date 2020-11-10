@@ -110,13 +110,16 @@
             type: "GET"
         },
         "columns": [{
-                "data": "d_id"
+                "data": "d_id",
+                className: "td_text"
             },
             {
-                "data": "d_nameTH"
+                "data": "d_nameTH",
+                className: "td_text"
             },
             {
-                "data": "d_nameEN"
+                "data": "d_nameEN",
+                className: "td_text"
             },
             {
                 "data": null,

@@ -1,5 +1,3 @@
-<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
-<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 <div class="modal fade show" tabindex="-1" role="dialog" id="insertTypeSchool" style="display:none;">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -57,11 +55,11 @@
         <div>
             <h1 class="h1-title">ประเภทโรงเรียน</h1>
         </div>
-        <div>
-            <button class="btn_backend text_btn btn" id="btnInsert" data-toggle="modal" data-target="#insertTypeSchool"><i class="fa fa-plus"></i>&nbsp;&nbsp;เพิ่มประเภทโรงเรียน</button>
-        </div>
     </div>
     <div class="bgWhite padding_main mainBoxRadius">
+        <div class="mb-2">
+            <button class="btn_backend text_btn btn" id="btnInsert" data-toggle="modal" data-target="#insertTypeSchool"><i class="fa fa-plus"></i>&nbsp;&nbsp;เพิ่มประเภทโรงเรียน</button>
+        </div>
         <table id="type_school" class="table table-bordered table-striped">
             <thead>
                 <tr>
@@ -71,14 +69,6 @@
                     <th class="th_text">สถานะ</th>
                 </tr>
             </thead>
-            <tfoot>
-                <tr>
-                    <th class="th_text">เลขที่</th>
-                    <th class="th_text">ชื่อประเภทโรงเรียน</th>
-                    <th class="th_text">แก้ไข</th>
-                    <th class="th_text">สถานะ</th>
-                </tr>
-            </tfoot>
         </table>
     </div>
 </div>
@@ -93,16 +83,18 @@
                 type: "GET"
             },
             "columns": [{
-                    "data": "tsc_id"
+                    "data": "tsc_id",
+                    className: "td_text"
                 },
                 {
-                    "data": "tsc_name"
+                    "data": "tsc_name",
+                    className: "td_text"
                 },
                 {
                     "data": null,
                     "render": (data, type, row, meta) => {
                         return `
-                        <button class="btn btn-success" data-toggle="modal" data-target="#editTypeSchool"
+                        <button class="btn btn-flat btn-success" data-toggle="modal" data-target="#editTypeSchool"
                         onclick="onClickEdit(` + row.tsc_id + `)"><i class="fa fa-edit"></i>
                         </button>
                         `;
@@ -112,11 +104,11 @@
                     "data": null,
                     "render": (data, type, row, meta) => {
                         return `
-                            <label class="switch">
-                                <input id="at` + row.tsc_id + `" type="checkbox" ` +
-                            (row.tsc_status == 1 ? 'checked' : '') + `
-                            onclick="onClickActivate(` + row.tsc_id + `)">
-                                <span class="slider round"></span>
+                            <label for="toggle-` + row.tsc_id + `" class="toggle-1">
+                                <input type="checkbox" id="toggle-` + row.tsc_id + `" 
+                                class="toggle-1__input"  ` + (row.tsc_status == 1 ? 'checked' : '') + `
+                                onchange="onClickActivate(` + row.tsc_id + `)">
+                                <span class="toggle-1__button"></span>
                             </label>
                         `;
                     }
@@ -196,7 +188,7 @@
         }
 
         function onClickActivate(id) {
-            if ($('#at' + id).is(":checked")) {
+            if ($('#toggle-' + id).is(":checked")) {
                 $.post('<?php echo base_url('admin/type_school/update'); ?>/' + id, {
                     tsc_status: 1
                 }).done((res) => {

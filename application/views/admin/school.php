@@ -149,7 +149,7 @@
                             <label class="text-paragraph" style="color: red;">*</label>
                         </div>
                         <div>
-                            <input onkeyup="isNumEngchar(this.value,this)" id="NumPhone1" style="font-family: 'Kanit';" type="text" class="form-control" placeholder="044214983">
+                            <input onkeyup="isNumEngchar(this.value,this)" id="NumPhone1" maxlength="10" style="font-family: 'Kanit';" type="text" class="form-control" placeholder="044214983">
                             <label class="text-paragraph" id="erNumPhone1-1" style="color: red; display:none; padding-top:5px;">
                                 กรุณากรอกเบอร์โทรศัพท์
                             </label>
@@ -348,7 +348,7 @@
                             <label class="text-paragraph" style="color: red;">*</label>
                         </div>
                         <div>
-                            <input onkeyup="isNumEngchar(this.value,this)" id="NumPhone2" style="font-family: 'Kanit';" type="text" class="form-control" placeholder="044214983">
+                            <input onkeyup="isNumEngchar(this.value,this)" maxlength="10" id="NumPhone2" style="font-family: 'Kanit';" type="text" class="form-control" placeholder="044214983">
                             <label class="text-paragraph" id="erNumPhone2-1" style="color: red; display:none; padding-top:5px;">
                                 กรุณากรอกเบอร์โทรศัพท์
                             </label>

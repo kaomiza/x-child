@@ -13,7 +13,7 @@ class Mapdata extends CI_Controller
     
     public function index()
     {
-        $data = $this->SchoolModel->get();
+        $data = $this->SchoolModel->findAllActive();
         echo json_encode($data);
     }
 }
