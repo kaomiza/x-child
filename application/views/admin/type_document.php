@@ -195,7 +195,7 @@
     }
 
     function onClickActivate(id) {
-        if ($('#at' + id).is(":checked")) {
+        if ($('#toggle-' + id).is(":checked")) {
             $.post('<?php echo base_url('admin/type_document/update'); ?>/' + id, {
                 tc_status: 1
             }).done((res) => {

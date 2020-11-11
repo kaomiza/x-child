@@ -193,7 +193,7 @@
     }
 
     function onClickActivate(id) {
-        if ($('#at' + id).is(":checked")) {
+        if ($('#toggle-' + id).is(":checked")) {
             $.post('<?php echo base_url('admin/type_video/update'); ?>/' + id, {
                 tv_status: 1
             }).done((res) => {

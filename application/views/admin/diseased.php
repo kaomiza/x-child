@@ -248,7 +248,7 @@
     }
 
     function onClickActivate(id) {
-        if ($('#at' + id).is(":checked")) {
+        if ($('#toggle-' + id).is(":checked")) {
             $.post('<?php echo base_url('admin/diseased/update'); ?>/' + id, {
                 d_status: 1
             }).done((res) => {
