@@ -79,25 +79,28 @@
         <div>
             <h1 class="h1-title">โรคประจำตัว</h1>
         </div>
+    </div>
+    <div class="bgWhite padding_main mainBoxRadius main-margin">
         <div>
             <button class="btn_backend text_btn btn" id="btnInsert" data-toggle="modal" data-target="#insertDiseased">
                 <i class="fa fa-plus"></i>&nbsp;&nbsp;
                 เพิ่มโรคประจำตัว
             </button>
         </div>
-    </div>
-    <div class="bgWhite padding_main mainBoxRadius">
-        <table id="diseased" class="table table-bordered table-striped">
-            <thead>
-                <tr>
-                    <th class="th_text">เลขที่</th>
-                    <th class="th_text">ชื่อโรคประจำตัวภาษาไทย</th>
-                    <th class="th_text">ชื่อโรคประจำตัวภาษาอังกฤษ</th>
-                    <th class="th_text">แก้ไข</th>
-                    <th class="th_text">สถานะ</th>
-                </tr>
-            </thead>
-        </table>
+        <div>
+            <table id="diseased" class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th class="th_text">เลขที่</th>
+                        <th class="th_text">ชื่อโรคประจำตัวภาษาไทย</th>
+                        <th class="th_text">ชื่อโรคประจำตัวภาษาอังกฤษ</th>
+                        <th class="th_text">แก้ไข</th>
+                        <th class="th_text">สถานะ</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+
     </div>
 </div>
 <script>
@@ -125,7 +128,7 @@
                 "data": null,
                 "render": (data, type, row, meta) => {
                     return `
-                        <button class="btn btn-success" data-toggle="modal" data-target="#editDiseased"
+                        <button class="btn" style="padding: 2px .75rem; color: #199a6f;" data-toggle="modal" data-target="#editDiseased"
                         onclick="onClickEdit(` + row.d_id + `)"><i class="fa fa-edit"></i>
                         </button>
                         `;
@@ -135,12 +138,13 @@
                 "data": null,
                 "render": (data, type, row, meta) => {
                     return `
-                            <label class="switch">
-                                <input id="at` + row.d_id + `" type="checkbox" ` +
-                        (row.d_status == 1 ? 'checked' : '') + `
-                            onclick="onClickActivate(` + row.d_id + `)">
-                                <span class="slider round"></span>
-                            </label>
+                        <label for="toggle-` + row.d_id + `" class="toggle-1">
+                            <input type="checkbox" id="toggle-` + row.d_id + `" 
+                            class="toggle-1__input"  ` + (row.d_status == 1 ? 'checked' : '') + `
+                            onchange="onClickActivate(` + row.d_id + `)">
+                            <span class="toggle-1__button"></span>
+                        </label>
+                            
                         `;
                 }
             }

@@ -404,16 +404,12 @@ ul {
     justify-content: space-between;
 }
 
-@media (min-width: 1025px) and (max-width: 1280px) {
-    .btn_backend {
-        width: auto;
-    }
-}
+@media (min-width: 1025px) and (max-width: 1280px) {}
 
 @media (min-width: 768px) and (max-width: 1024px) {
     .btn_backend {
         margin-top: 20px;
-        width: auto;
+        width: 100%;
     }
     .boxHeader {
         flex-direction: column;
@@ -425,7 +421,7 @@ ul {
 @media (min-width: 200px) and (max-width: 767px) {
     .btn_backend {
         margin-top: 20px;
-        width: auto;
+        width: 100%;
     }
     .boxHeader {
         flex-direction: column;
@@ -457,7 +453,7 @@ th,
 td {
     text-align: left !important;
     padding: 8px !important;
-    border: 1px solid rgba(49, 53, 61, 0.5) !important;
+    border: 1px solid rgba(0, 0, 0, 0.5) !important;
 }
 
 tr:nth-child(even) {
@@ -546,15 +542,16 @@ tr:nth-child(even) {
     position: relative;
     cursor: pointer;
     display: inline-block;
-    font-family: "Roboto", sans-serif;
+    font-family: "Kanit", sans-serif;
     text-transform: uppercase;
-    font-size: 1rem;
+    font-size: 0.7rem;
     line-height: 20px;
-    width: 80px;
+    width: 65px;
     height: 30px;
     color: white;
-    background-color: #f2395a;
-    border: solid 1px #f2395a;
+    background-color: #da919e;
+    border: solid 1px #da919e;
+    border-radius: 15px;
     /* box-shadow: 0 0 12px rgba(255, 61, 94, 0.5); */
     transition: all 0.3 ease;
 }
@@ -567,20 +564,22 @@ tr:nth-child(even) {
     left: 35px;
     height: 20px;
     padding: 0 5px;
-    content: "off";
+    content: "ปิด";
     background: white;
-    color: #f2395a;
+    border-radius: 15px;
+    color: #da919e;
     transition: all 0.3s ease;
 }
 
 .toggle-1__input:checked+.toggle-1__button {
-    background: #28a745;
-    border: solid 1px #28a745;
+    background: #89e09d;
+    border: solid 1px #89e09d;
+    border-radius: 15px;
     /* box-shadow: 0 2px 20px rgba(142, 207, 69, 0.5); */
 }
 
 .toggle-1__input:checked+.toggle-1__button::before {
-    content: "on";
+    content: "เปิด";
     left: 5px;
     color: #8ecf45;
 }
@@ -599,15 +598,15 @@ tr:nth-child(even) {
     position: relative;
     cursor: pointer;
     display: inline-block;
-    font-family: "Roboto", sans-serif;
+    font-family: "Kanit", sans-serif;
     text-transform: uppercase;
-    font-size: 1rem;
+    font-size: 0.7rem;
     line-height: 20px;
-    width: 80px;
+    width: 65px;
     height: 30px;
     color: white;
-    background-color: #f2395a;
-    border: solid 1px #f2395a;
+    background-color: #da919e;
+    border: solid 1px #da919e;
     /* box-shadow: 0 0 12px rgba(255, 61, 94, 0.5); */
     transition: all 0.3 ease;
 }
@@ -620,20 +619,20 @@ tr:nth-child(even) {
     left: 35px;
     height: 20px;
     padding: 0 5px;
-    content: "off";
+    content: "ปิด";
     background: white;
-    color: #f2395a;
+    color: #da919e;
     transition: all 0.3s ease;
 }
 
 .child .toggle-1__input:checked+.toggle-1__button {
-    background: #28a745;
-    border: solid 1px #28a745;
+    background: #89e09d;
+    border: solid 1px #89e09d;
     /* box-shadow: 0 2px 20px rgba(142, 207, 69, 0.5); */
 }
 
 .child .toggle-1__input:checked+.toggle-1__button::before {
-    content: "on";
+    content: "เปิด";
     left: 5px;
     color: #8ecf45;
 }

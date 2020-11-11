@@ -405,11 +405,11 @@
         <div>
             <h1 class="h1-title">โรงเรียน</h1>
         </div>
+    </div>
+    <div class="bgWhite padding_main mainBoxRadius main-margin">
         <div>
             <button class="btn_backend text_btn btn" id="btnInsert" data-toggle="modal" data-target="#insertSchool"><i class="fa fa-plus"></i>&nbsp;&nbsp;เพิ่มโรงเรียน</button>
         </div>
-    </div>
-    <div class="bgWhite padding_main mainBoxRadius">
         <div style="overflow-x:auto;">
             <table>
                 <tr>

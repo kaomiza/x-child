@@ -60,23 +60,26 @@
             <h1 class="h1-title">ตำแหน่งผู้เชี่ยวชาญ</h1>
         </div>
     </div>
-    <div class="bgWhite padding_main mainBoxRadius">
-        <div class="mb-2">
+    <div class="bgWhite padding_main mainBoxRadius main-margin">
+        <div>
             <button class="btn_backend text_btn btn" id="btnInsert" data-toggle="modal" data-target="#insertPosition">
                 <i class="fa fa-plus"></i>&nbsp;&nbsp;
                 เพิ่มตำแหน่งผู้เชี่ยวชาญ
             </button>
         </div>
-        <table id="position" class="table table-bordered table-striped">
-            <thead>
-                <tr>
-                    <th class="th_text">เลขที่</th>
-                    <th class="th_text">ชื่อตำแหน่งผู้เชี่ยวชาญ</th>
-                    <th class="th_text">แก้ไข</th>
-                    <th class="th_text">สถานะ</th>
-                </tr>
-            </thead>
-        </table>
+        <div>
+            <table id="position" class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th class="th_text">เลขที่</th>
+                        <th class="th_text">ชื่อตำแหน่งผู้เชี่ยวชาญ</th>
+                        <th class="th_text">แก้ไข</th>
+                        <th class="th_text">สถานะ</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+
     </div>
 </div>
 <script>
@@ -100,7 +103,7 @@
                 "data": null,
                 "render": (data, type, row, meta) => {
                     return `
-                        <button class="btn btn-flat btn-success" data-toggle="modal" data-target="#editPosition"
+                        <button class="btn btn-flat" style="padding: 2px .75rem; color: #199a6f;" data-toggle="modal" data-target="#editPosition"
                         onclick="onClickEdit(` + row.p_id + `)"><i class="fa fa-edit"></i>
                         </button>
                         `;

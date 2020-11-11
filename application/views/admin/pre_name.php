@@ -82,20 +82,23 @@
             <h1 class="h1-title">คำนำหน้าชื่อ</h1>
         </div>
     </div>
-    <div class="bgWhite padding_main mainBoxRadius">
-        <div class="mb-2">
+    <div class="bgWhite padding_main mainBoxRadius main-margin">
+        <div>
             <button class="btn_backend text_btn btn" id="btnInsert" data-toggle="modal" data-target="#insertPrename"><i class="fa fa-plus"></i>&nbsp;&nbsp;เพิ่มคำนำหน้าชื่อ</button>
         </div>
-        <table id="prename" class="table table-bordered table-striped">
-            <thead>
-                <tr>
-                    <th class="th_text">เลขที่</th>
-                    <th class="th_text">คำนำหน้าชื่อไทย</th>
-                    <th class="th_text">คำนำหน้าชื่ออังกฤษ</th>
-                    <th class="th_text">แก้ไข</th>
-                </tr>
-            </thead>
-        </table>
+        <div>
+            <table id="prename" class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th class="th_text">เลขที่</th>
+                        <th class="th_text">คำนำหน้าชื่อไทย</th>
+                        <th class="th_text">คำนำหน้าชื่ออังกฤษ</th>
+                        <th class="th_text">แก้ไข</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+
     </div>
 </div>
 <div>
@@ -124,7 +127,7 @@
                     "data": null,
                     "render": (data, type, row, meta) => {
                         return `
-                        <button class="btn btn-flat btn-success" id="` + row.n_id + `" 
+                        <button class="btn btn-flat" style="padding: 2px .75rem; color: #199a6f;" id="` + row.n_id + `" 
                         data-toggle="modal" data-target="#editPrename" onclick="onClickEdit(` + row.n_id + `)">
                             <i class="fa fa-edit"></i>
                         </button>`;

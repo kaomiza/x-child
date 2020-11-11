@@ -56,20 +56,23 @@
             <h1 class="h1-title">ประเภทโรงเรียน</h1>
         </div>
     </div>
-    <div class="bgWhite padding_main mainBoxRadius">
-        <div class="mb-2">
+    <div class="bgWhite padding_main mainBoxRadius main-margin">
+        <div>
             <button class="btn_backend text_btn btn" id="btnInsert" data-toggle="modal" data-target="#insertTypeSchool"><i class="fa fa-plus"></i>&nbsp;&nbsp;เพิ่มประเภทโรงเรียน</button>
         </div>
-        <table id="type_school" class="table table-bordered table-striped">
-            <thead>
-                <tr>
-                    <th class="th_text">เลขที่</th>
-                    <th class="th_text">ชื่อประเภทโรงเรียน</th>
-                    <th class="th_text">แก้ไข</th>
-                    <th class="th_text">สถานะ</th>
-                </tr>
-            </thead>
-        </table>
+        <div>
+            <table id="type_school" class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th class="th_text">เลขที่</th>
+                        <th class="th_text">ชื่อประเภทโรงเรียน</th>
+                        <th class="th_text">แก้ไข</th>
+                        <th class="th_text">สถานะ</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+
     </div>
 </div>
 <div>
@@ -94,7 +97,7 @@
                     "data": null,
                     "render": (data, type, row, meta) => {
                         return `
-                        <button class="btn btn-flat btn-success" data-toggle="modal" data-target="#editTypeSchool"
+                        <button class="btn btn-flat" style="padding: 2px .75rem; color: #199a6f;" data-toggle="modal" data-target="#editTypeSchool"
                         onclick="onClickEdit(` + row.tsc_id + `)"><i class="fa fa-edit"></i>
                         </button>
                         `;

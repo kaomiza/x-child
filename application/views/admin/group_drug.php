@@ -60,22 +60,25 @@
             <h1 class="h1-title">กลุ่มยา</h1>
         </div>
     </div>
-    <div class="bgWhite padding_main mainBoxRadius">
-        <div class="mb-2">
+    <div class="bgWhite padding_main mainBoxRadius main-margin">
+        <div>
             <button class="btn_backend text_btn btn" id="btnInsert" data-toggle="modal" data-target="#insertGD">
                 <i class="fa fa-plus"></i>&nbsp;&nbsp;
                 เพิ่มกลุ่มยา
             </button>
         </div>
-        <table id="group_drug" class="table table-bordered table-striped">
-            <thead>
-                <tr>
-                    <th class="th_text">เลขที่</th>
-                    <th class="th_text">ชื่อกลุ่มยา</th>
-                    <th class="th_text">แก้ไข</th>
-                </tr>
-            </thead>
-        </table>
+        <div>
+            <table id="group_drug" class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th class="th_text">เลขที่</th>
+                        <th class="th_text">ชื่อกลุ่มยา</th>
+                        <th class="th_text">แก้ไข</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+
     </div>
 </div>
 <script>
@@ -99,7 +102,7 @@
                 "data": null,
                 "render": (data, type, row, meta) => {
                     return `
-                        <button class="btn btn-flat btn-success" data-toggle="modal" data-target="#editGD"
+                        <button class="btn btn-flat" style="padding: 2px .75rem; color: #199a6f;" data-toggle="modal" data-target="#editGD"
                         onclick="onClickEdit(` + row.gd_id + `)"><i class="fa fa-edit"></i>
                         </button>
                         `;

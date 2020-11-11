@@ -57,21 +57,24 @@
         <div>
             <h1 class="h1-title">ประเภทเอกสารความรู้</h1>
         </div>
+    </div>
+    <div class="bgWhite padding_main mainBoxRadius main-margin">
         <div>
             <button class="btn_backend text_btn btn" id="btnInsert" data-toggle="modal" data-target="#insertTypeDoc"><i class="fa fa-plus"></i>&nbsp;&nbsp;เพิ่มประเภทเอกสารความรู้</button>
         </div>
-    </div>
-    <div class="bgWhite padding_main mainBoxRadius">
-        <table id="type_document" class="table table-bordered table-striped">
-            <thead>
-                <tr>
-                    <th class="th_text">เลขที่</th>
-                    <th class="th_text">ชื่อประเภทเอกสารความรู้</th>
-                    <th class="th_text">แก้ไข</th>
-                    <th class="th_text">สถานะ</th>
-                </tr>
-            </thead>
-        </table>
+        <div>
+            <table id="type_document" class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th class="th_text">เลขที่</th>
+                        <th class="th_text">ชื่อประเภทเอกสารความรู้</th>
+                        <th class="th_text">แก้ไข</th>
+                        <th class="th_text">สถานะ</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+
     </div>
 </div>
 <script>
@@ -95,7 +98,7 @@
                 "data": null,
                 "render": (data, type, row, meta) => {
                     return `
-                        <button class="btn btn-success" data-toggle="modal" data-target="#editTypeDoc"
+                        <button class="btn" style="padding: 2px .75rem; color: #199a6f;" data-toggle="modal" data-target="#editTypeDoc"
                         onclick="onClickEdit(` + row.tc_id + `)"><i class="fa fa-edit"></i>
                         </button>
                         `;
@@ -105,12 +108,13 @@
                 "data": null,
                 "render": (data, type, row, meta) => {
                     return `
-                            <label class="switch">
-                                <input id="at` + row.tc_id + `" type="checkbox" ` +
-                        (row.tc_status == 1 ? 'checked' : '') + `
-                            onclick="onClickActivate(` + row.tc_id + `)">
-                                <span class="slider round"></span>
-                            </label>
+                        <label for="toggle-` + row.tc_id + `" class="toggle-1">
+                            <input type="checkbox" id="toggle-` + row.tc_id + `" 
+                            class="toggle-1__input"  ` + (row.tc_status == 1 ? 'checked' : '') + `
+                            onchange="onClickActivate(` + row.tc_id + `)">
+                            <span class="toggle-1__button"></span>
+                        </label>
+                            
                         `;
                 }
             }
