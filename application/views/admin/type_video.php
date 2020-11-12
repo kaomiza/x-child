@@ -63,13 +63,13 @@
             <button class="btn_backend text_btn btn" id="btnInsert" data-toggle="modal" data-target="#insertTypeVdo"><i class="fa fa-plus"></i>&nbsp;&nbsp;เพิ่มประเภทวิดีโอความรู้</button>
         </div>
         <div>
-            <table id="type_video" class="table table-bordered table-striped">
+            <table id="type_video" class="table table-bordered table-striped nowrap" style="width: 100px;">
                 <thead>
                     <tr>
+                        <th class="th_text">สถานะ</th>
                         <th class="th_text">เลขที่</th>
                         <th class="th_text">ชื่อประเภทวิดีโอความรู้</th>
                         <th class="th_text">แก้ไข</th>
-                        <th class="th_text">สถานะ</th>
                     </tr>
                 </thead>
             </table>
@@ -87,6 +87,20 @@
             type: "GET"
         },
         "columns": [{
+                "data": null,
+                "render": (data, type, row, meta) => {
+                    return `
+                        <label for="toggle-` + row.tv_id + `" class="toggle-1">
+                            <input type="checkbox" id="toggle-` + row.tv_id + `" 
+                            class="toggle-1__input"  ` + (row.tv_status == 1 ? 'checked' : '') + `
+                            onchange="onClickActivate(` + row.tv_id + `)">
+                            <span class="toggle-1__button"></span>
+                        </label>
+                        `;
+                },
+                width: 10
+            },
+            {
                 "data": "tv_id"
             },
             {
@@ -99,20 +113,6 @@
                         <button class="btn" style="padding: 2px .75rem; color: #199a6f;" data-toggle="modal" data-target="#editTypeVdo"
                         onclick="onClickEdit(` + row.tv_id + `)"><i class="fa fa-edit"></i>
                         </button>
-                        `;
-                }
-            },
-            {
-                "data": null,
-                "render": (data, type, row, meta) => {
-                    return `
-                        <label for="toggle-` + row.tv_id + `" class="toggle-1">
-                            <input type="checkbox" id="toggle-` + row.tv_id + `" 
-                            class="toggle-1__input"  ` + (row.tv_status == 1 ? 'checked' : '') + `
-                            onchange="onClickActivate(` + row.tv_id + `)">
-                            <span class="toggle-1__button"></span>
-                        </label>
-                            
                         `;
                 }
             }

@@ -1,12 +1,9 @@
 <?php
-class TypeChildrenModel extends CI_Model
+class ProvinceModel extends CI_Model
 {
-    protected $table = 'type_children';
-    protected $primaryKey = 'tc_id';
-    protected $fields = [
-        'tc_name',
-        'tc_status'
-    ];
+    protected $table = 'province';
+    protected $primaryKey = 'PROVINCE_ID';
+    protected $fields = 'PROVINCE_NAME';
 
     public function findAll()
     {
@@ -23,7 +20,7 @@ class TypeChildrenModel extends CI_Model
         return ($this->db->insert($this->table, $data)) ? true : false;
     }
 
-    public function update($id, $data)
+    public function edit($id, $data)
     {
         return ($this->db->update($this->table, $data, array($this->primaryKey => $id))) ? true : false;
     }

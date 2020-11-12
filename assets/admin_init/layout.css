@@ -2,646 +2,587 @@ label,
 p,
 h2,
 h1 {
-    margin-bottom: 0px;
+  margin-bottom: 0px;
 }
 
 li {
-    list-style: none;
+  list-style: none;
 }
 
 ul {
-    padding: 0px;
-    margin: 0px;
+  padding: 0px;
+  margin: 0px;
 }
 
 .btn.focus,
 .btn:focus {
-    box-shadow: unset !important;
+  box-shadow: unset !important;
 }
 
 .bg_color {
-    background-color: #f5f5f5;
+  background-color: #f5f5f5;
 }
 
 .t-center {
-    text-align: center;
+  text-align: center;
 }
 
 .text-w {
-    color: #fff;
+  color: #fff;
 }
 
 .border-or {
-    height: 3px;
-    width: 120px;
-    background: #e75c46;
-    border-radius: 20px;
+  height: 3px;
+  width: 120px;
+  background: #e75c46;
+  border-radius: 20px;
 }
 
-.main-margin>div:not(:last-child) {
-    margin-bottom: 40px;
+.main-margin > div:not(:last-child) {
+  margin-bottom: 40px;
 }
 
-.content_padding>div:not(:last-child) {
-    margin-bottom: 15px;
+.content_padding > div:not(:last-child) {
+  margin-bottom: 15px;
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
-    .main-margin>div:not(:last-child) {
-        margin-bottom: 30px;
-    }
+  .main-margin > div:not(:last-child) {
+    margin-bottom: 30px;
+  }
 }
 
 @media (min-width: 200px) and (max-width: 767px) {
-    .main-margin>div:not(:last-child) {
-        margin-bottom: 20px;
-    }
+  .main-margin > div:not(:last-child) {
+    margin-bottom: 20px;
+  }
 }
 
-
 /* ----------------------------------------------------------------------------- */
-
 
 /* ------------- Text --------------- */
 
 @media (min-width: 1281px) {
-    .h1-title {
-        font-family: "Kanit";
-        font-size: 40px;
-    }
-    .text-heading {
-        font-family: "Kanit";
-        font-size: 25px;
-    }
-    .text-paragraph {
-        font-family: "Kanit";
-        font-size: 14px;
-    }
-    .body__text-title {
-        font-family: "Kanit";
-        font-size: 20px;
-    }
-    .body__text-des {
-        font-family: "Kanit";
-        font-size: 23px;
-    }
-    .text__content-h1 {
-        font-family: "Kanit";
-        font-size: 40px;
-    }
-    .text__content-h2 {
-        font-family: "Kanit";
-        font-size: 16px;
-    }
-    .text__content-h3 {
-        font-family: "Kanit";
-        font-size: 22px;
-    }
-    .text_btn {
-        font-family: "Kanit";
-        font-size: 16px;
-    }
+  .h1-title {
+    font-family: "Kanit";
+    font-size: 40px;
+  }
+  .text-heading {
+    font-family: "Kanit";
+    font-size: 25px;
+  }
+  .text-paragraph {
+    font-family: "Kanit";
+    font-size: 14px;
+  }
+  .body__text-title {
+    font-family: "Kanit";
+    font-size: 20px;
+  }
+  .body__text-des {
+    font-family: "Kanit";
+    font-size: 23px;
+  }
+  .text__content-h1 {
+    font-family: "Kanit";
+    font-size: 40px;
+  }
+  .text__content-h2 {
+    font-family: "Kanit";
+    font-size: 16px;
+  }
+  .text__content-h3 {
+    font-family: "Kanit";
+    font-size: 22px;
+  }
+  .text_btn {
+    font-family: "Kanit";
+    font-size: 16px;
+  }
 }
 
 @media (min-width: 1025px) and (max-width: 1280px) {
-    .h1-title {
-        font-family: "Kanit";
-        font-size: 35px;
-    }
-    .text-heading {
-        font-family: "Kanit";
-        font-size: 25px;
-    }
-    .text-paragraph {
-        font-family: "Kanit";
-        font-size: 14px;
-    }
-    .body__text-title {
-        font-family: "Kanit";
-        font-size: 20px;
-    }
-    .body__text-des {
-        font-family: "Kanit";
-        font-size: 23px;
-    }
-    .text__content-h1 {
-        font-family: "Kanit";
-        font-size: 40px;
-    }
-    .text__content-h2 {
-        font-family: "Kanit";
-        font-size: 16px;
-    }
-    .text__content-h3 {
-        font-family: "Kanit";
-        font-size: 20px;
-    }
-    .text_btn {
-        font-family: "Kanit";
-        font-size: 16px;
-    }
+  .h1-title {
+    font-family: "Kanit";
+    font-size: 35px;
+  }
+  .text-heading {
+    font-family: "Kanit";
+    font-size: 25px;
+  }
+  .text-paragraph {
+    font-family: "Kanit";
+    font-size: 14px;
+  }
+  .body__text-title {
+    font-family: "Kanit";
+    font-size: 20px;
+  }
+  .body__text-des {
+    font-family: "Kanit";
+    font-size: 23px;
+  }
+  .text__content-h1 {
+    font-family: "Kanit";
+    font-size: 40px;
+  }
+  .text__content-h2 {
+    font-family: "Kanit";
+    font-size: 16px;
+  }
+  .text__content-h3 {
+    font-family: "Kanit";
+    font-size: 20px;
+  }
+  .text_btn {
+    font-family: "Kanit";
+    font-size: 16px;
+  }
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
-    .h1-title {
-        font-family: "Kanit";
-        font-size: 30px;
-    }
-    .text-heading {
-        font-family: "Kanit";
-        font-size: 23px;
-    }
-    .text-paragraph {
-        font-family: "Kanit";
-        font-size: 12px;
-    }
-    .body__text-title {
-        font-family: "Kanit";
-        font-size: 18px;
-    }
-    .body__text-des {
-        font-family: "Kanit";
-        font-size: 18px;
-    }
-    .text__content-h1 {
-        font-family: "Kanit";
-        font-size: 35px;
-    }
-    .text__content-h2 {
-        font-family: "Kanit";
-        font-size: 14px;
-    }
-    .text__content-h3 {
-        font-family: "Kanit";
-        font-size: 18px;
-    }
-    .text_btn {
-        font-family: "Kanit";
-        font-size: 14px;
-    }
+  .h1-title {
+    font-family: "Kanit";
+    font-size: 30px;
+  }
+  .text-heading {
+    font-family: "Kanit";
+    font-size: 23px;
+  }
+  .text-paragraph {
+    font-family: "Kanit";
+    font-size: 12px;
+  }
+  .body__text-title {
+    font-family: "Kanit";
+    font-size: 18px;
+  }
+  .body__text-des {
+    font-family: "Kanit";
+    font-size: 18px;
+  }
+  .text__content-h1 {
+    font-family: "Kanit";
+    font-size: 35px;
+  }
+  .text__content-h2 {
+    font-family: "Kanit";
+    font-size: 14px;
+  }
+  .text__content-h3 {
+    font-family: "Kanit";
+    font-size: 18px;
+  }
+  .text_btn {
+    font-family: "Kanit";
+    font-size: 14px;
+  }
 }
 
 @media (min-width: 200px) and (max-width: 767px) {
-    .h1-title {
-        font-family: "Kanit";
-        font-size: 30px;
-    }
-    .text-heading {
-        font-family: "Kanit";
-        font-size: 23px;
-    }
-    .text-paragraph {
-        font-family: "Kanit";
-        font-size: 12px;
-    }
-    .body__text-title {
-        font-family: "Kanit";
-        font-size: 18px;
-    }
-    .body__text-des {
-        font-family: "Kanit";
-        font-size: 18px;
-    }
-    .text__content-h1 {
-        font-family: "Kanit";
-        font-size: 25px;
-    }
-    .text__content-h2 {
-        font-family: "Kanit";
-        font-size: 12px;
-    }
-    .text__content-h3 {
-        font-family: "Kanit";
-        font-size: 18px;
-    }
-    .text_btn {
-        font-family: "Kanit";
-        font-size: 14px;
-    }
+  .h1-title {
+    font-family: "Kanit";
+    font-size: 30px;
+  }
+  .text-heading {
+    font-family: "Kanit";
+    font-size: 23px;
+  }
+  .text-paragraph {
+    font-family: "Kanit";
+    font-size: 12px;
+  }
+  .body__text-title {
+    font-family: "Kanit";
+    font-size: 18px;
+  }
+  .body__text-des {
+    font-family: "Kanit";
+    font-size: 18px;
+  }
+  .text__content-h1 {
+    font-family: "Kanit";
+    font-size: 25px;
+  }
+  .text__content-h2 {
+    font-family: "Kanit";
+    font-size: 12px;
+  }
+  .text__content-h3 {
+    font-family: "Kanit";
+    font-size: 18px;
+  }
+  .text_btn {
+    font-family: "Kanit";
+    font-size: 14px;
+  }
 }
-
 
 /* --------------Text-------------- */
 
-
 /* ----------------------------------------------------------------------------- */
-
 
 /*--------- Padding ---------------*/
 
 .padding_main {
-    padding: 50px;
+  padding: 50px;
 }
 
 .body__content {
-    margin: 0 auto;
-    max-width: 1220px;
+  margin: 0 auto;
+  max-width: 1220px;
 }
 
 .body__content--padding {
-    padding: 100px 0px;
+  padding: 100px 0px;
 }
 
 @media (min-width: 1025px) and (max-width: 1280px) {
-    .padding_main {
-        padding: 30px;
-    }
-    .body__content {
-        margin: 0 auto;
-        max-width: 960px;
-    }
-    .body__content--padding {
-        padding: 80px 0px;
-    }
+  .padding_main {
+    padding: 30px;
+  }
+  .body__content {
+    margin: 0 auto;
+    max-width: 960px;
+  }
+  .body__content--padding {
+    padding: 80px 0px;
+  }
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
-    .padding_main {
-        padding: 30px;
-    }
-    .body__content {
-        padding: 0px 50px;
-    }
-    .body__content--padding {
-        padding: 80px 50px;
-    }
+  .padding_main {
+    padding: 30px;
+  }
+  .body__content {
+    padding: 0px 50px;
+  }
+  .body__content--padding {
+    padding: 80px 50px;
+  }
 }
 
 @media (min-width: 200px) and (max-width: 767px) {
-    .padding_main {
-        padding: 20px 20px;
-    }
-    .body__content {
-        padding: 50px 20px !important;
-    }
-    .body__content--padding {
-        padding: 50px 20px;
-    }
+  .padding_main {
+    padding: 20px 20px;
+  }
+  .body__content {
+    padding: 50px 20px !important;
+  }
+  .body__content--padding {
+    padding: 50px 20px;
+  }
 }
-
 
 /* -------------- Padding ---------------- */
 
 .btn-or {
-    width: 260px;
-    border-radius: 50px;
-    background-color: #e75c46;
-    color: #fff;
-    cursor: pointer;
-    padding: 10px 20px;
+  width: 260px;
+  border-radius: 50px;
+  background-color: #e75c46;
+  color: #fff;
+  cursor: pointer;
+  padding: 10px 20px;
 }
 
 .btn-or:hover {
-    background-color: #c74c38;
-    color: #fff;
+  background-color: #c74c38;
+  color: #fff;
 }
-
 
 /***************************************** Start Row Column **********************************/
 
 .box-content {
-    display: flex;
+  display: flex;
 }
 
 .box-item {
-    width: 25%;
+  width: 25%;
+  border-radius: 10px;
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  padding: 20px 15px;
+  justify-content: space-between;
+}
+
+.box-item > div:not(:last-child) {
+  margin-bottom: 20px;
+}
+
+@media (min-width: 1025px) and (max-width: 1280px) {
+  .box-content {
+    flex-flow: row wrap;
+  }
+  .box-item {
+    width: 50%;
     border-radius: 10px;
     display: flex;
     text-align: center;
     flex-direction: column;
-    padding: 20px 15px;
+    padding: 20px;
     justify-content: space-between;
-}
-
-.box-item>div:not(:last-child) {
-    margin-bottom: 20px;
-}
-
-@media (min-width: 1025px) and (max-width: 1280px) {
-    .box-content {
-        flex-flow: row wrap;
-    }
-    .box-item {
-        width: 50%;
-        border-radius: 10px;
-        display: flex;
-        text-align: center;
-        flex-direction: column;
-        padding: 20px;
-        justify-content: space-between;
-    }
+  }
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
-    .box-content {
-        flex-flow: row wrap;
-    }
-    .box-item {
-        width: 50%;
-        border-radius: 10px;
-        display: flex;
-        text-align: center;
-        flex-direction: column;
-        padding: 20px 20px;
-        justify-content: space-between;
-    }
-    .box-item>div:not(:last-child) {
-        margin-bottom: 15px;
-    }
+  .box-content {
+    flex-flow: row wrap;
+  }
+  .box-item {
+    width: 50%;
+    border-radius: 10px;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    padding: 20px 20px;
+    justify-content: space-between;
+  }
+  .box-item > div:not(:last-child) {
+    margin-bottom: 15px;
+  }
 }
 
 @media (min-width: 200px) and (max-width: 767px) {
-    .box-content {
-        display: flex;
-        flex-direction: column;
-    }
-    .box-item {
-        width: auto;
-        border-radius: 10px;
-        display: flex;
-        text-align: center;
-        flex-direction: column;
-        padding: 0px 0px;
-        justify-content: space-between;
-    }
-    .box-item:not(:last-child) {
-        margin-bottom: 25px;
-    }
-    .box-item>div:not(:last-child) {
-        margin-bottom: 20px;
-    }
+  .box-content {
+    display: flex;
+    flex-direction: column;
+  }
+  .box-item {
+    width: auto;
+    border-radius: 10px;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    padding: 0px 0px;
+    justify-content: space-between;
+  }
+  .box-item:not(:last-child) {
+    margin-bottom: 25px;
+  }
+  .box-item > div:not(:last-child) {
+    margin-bottom: 20px;
+  }
 }
-
 
 /***************************************** End Row Column **********************************/
 
 .btn_backend {
-    border: 1px solid #000;
-    color: #000;
-    background-color: #fff;
-    width: 20vw;
-    padding: 10px;
-    box-shadow: inset 0 0 20px rgba(255, 255, 255, 0);
-    outline: 1px solid rgb(0 0 0 / 0);
-    outline-color: rgb(0 0 0 / 0.1);
-    outline-offset: 0px;
-    text-shadow: none;
-    transition: all 1250ms cubic-bezier(0.19, 1, 0.22, 1);
-    border-radius: 0px;
+  border: 1px solid #000;
+  color: #000;
+  background-color: #fff;
+  width: 20vw;
+  padding: 10px;
+  box-shadow: inset 0 0 20px rgba(255, 255, 255, 0);
+  outline: 1px solid rgb(0 0 0 / 0);
+  outline-color: rgb(0 0 0 / 0.1);
+  outline-offset: 0px;
+  text-shadow: none;
+  transition: all 1250ms cubic-bezier(0.19, 1, 0.22, 1);
+  border-radius: 0px;
 }
 
 .btn_backend:hover {
-    color: #000;
-    border: 1px solid;
-    outline: 1px solid rgb(255 255 255 / 50%);
-    outline-color: rgba(255, 255, 255, 50);
-    outline-offset: 15px;
+  color: #000;
+  border: 1px solid;
+  outline: 1px solid rgb(255 255 255 / 50%);
+  outline-color: rgba(255, 255, 255, 50);
+  outline-offset: 15px;
 }
 
 .boxHeader {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
-@media (min-width: 1025px) and (max-width: 1280px) {}
+@media (min-width: 1025px) and (max-width: 1280px) {
+}
 
 @media (min-width: 768px) and (max-width: 1024px) {
-    .btn_backend {
-        margin-top: 20px;
-        width: 100%;
-    }
-    .boxHeader {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
+  .btn_backend {
+    margin-top: 20px;
+    width: 100%;
+  }
+  .boxHeader {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
 }
 
 @media (min-width: 200px) and (max-width: 767px) {
-    .btn_backend {
-        margin-top: 20px;
-        width: 100%;
-    }
-    .boxHeader {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
+  .btn_backend {
+    margin-top: 20px;
+    width: 100%;
+  }
+  .boxHeader {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
 }
 
-.modal-body>div:not(:last-child) {
-    padding-bottom: 10px;
+.modal-body > div:not(:last-child) {
+  padding-bottom: 10px;
 }
 
 .bgWhite {
-    background-color: white;
+  background-color: white;
 }
 
 .mainBoxRadius {
-    border-radius: 10px;
+  border-radius: 10px;
 }
 
 table {
-    border-collapse: collapse !important;
-    border-spacing: 0 !important;
-    width: 100% !important;
-    border: 1px solid #ddd !important;
+  border-collapse: collapse !important;
+  border-spacing: 0 !important;
+  width: 100% !important;
+  border: 1px solid #ddd !important;
 }
 
 th,
 td {
-    text-align: left !important;
-    padding: 8px !important;
-    border: 1px solid rgba(0, 0, 0, 0.5) !important;
+  text-align: left !important;
+  padding: 8px !important;
+  border: 1px solid rgba(0, 0, 0, 0.5) !important;
 }
 
 tr:nth-child(even) {
-    background-color: #dedee6;
+  background-color: #dedee6;
 }
 
 @media (min-width: 1281px) {
-    .th_text {
-        font-family: "Kanit";
-        font-size: 18px;
-    }
-    .td_text {
-        font-family: "Kanit";
-        font-size: 16px;
-    }
+  .th_text {
+    font-family: "Kanit";
+    font-size: 18px;
+  }
+  .td_text {
+    font-family: "Kanit";
+    font-size: 16px;
+  }
 }
 
 @media (min-width: 1025px) and (max-width: 1280px) {
-    .th_text {
-        font-family: "Kanit";
-        font-size: 18px;
-    }
-    .td_text {
-        font-family: "Kanit";
-        font-size: 16px;
-    }
+  .th_text {
+    font-family: "Kanit";
+    font-size: 18px;
+  }
+  .td_text {
+    font-family: "Kanit";
+    font-size: 16px;
+  }
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
-    .th_text {
-        font-family: "Kanit";
-        font-size: 16px;
-    }
-    .td_text {
-        font-family: "Kanit";
-        font-size: 14px;
-    }
+  .th_text {
+    font-family: "Kanit";
+    font-size: 16px;
+  }
+  .td_text {
+    font-family: "Kanit";
+    font-size: 14px;
+  }
 }
 
 @media (min-width: 200px) and (max-width: 767px) {
-    .th_text {
-        font-family: "Kanit";
-        font-size: 14px;
-    }
-    .td_text {
-        font-family: "Kanit";
-        font-size: 12px;
-    }
+  .th_text {
+    font-family: "Kanit";
+    font-size: 14px;
+  }
+  .td_text {
+    font-family: "Kanit";
+    font-size: 12px;
+  }
 }
-
 
 /***************************************** Sart Card **********************************/
 
 .cardBox {
-    border-radius: 10px;
-    box-shadow: 0px 0px 15px #d8d8d8;
-    padding: 30px 0px;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    word-break: break-word;
+  border-radius: 10px;
+  box-shadow: 0px 0px 15px #d8d8d8;
+  padding: 30px 0px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  word-break: break-word;
 }
-
 
 /***************************************** End Card **********************************/
 
 .cardUser:hover {
-    background-color: #dce2e8;
+  background-color: #dce2e8;
 }
 
-
 /***************************************** toggle ***************************************/
-
 .toggle-1 {
-    display: inline-block;
-    vertical-align: top;
-    margin: 0 15px 0 0;
+  display: inline-block;
+  vertical-align: top;
+  margin: 0 15px 0 0;
 }
 
 .toggle-1__input {
-    display: none;
+  display: none;
 }
 
 .toggle-1__button {
-    position: relative;
-    cursor: pointer;
-    display: inline-block;
-    font-family: "Kanit", sans-serif;
-    text-transform: uppercase;
-    font-size: 0.7rem;
-    line-height: 20px;
-    width: 65px;
-    height: 30px;
-    color: white;
-    background-color: #da919e;
-    border: solid 1px #da919e;
-    border-radius: 15px;
-    /* box-shadow: 0 0 12px rgba(255, 61, 94, 0.5); */
-    transition: all 0.3 ease;
+  position: relative;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Kanit", sans-serif;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  line-height: 20px;
+  width: 65px;
+  height: 30px;
+  color: white;
+  background-color: #da919e;
+  border: solid 1px #da919e;
+  border-radius: 15px;
+  /* box-shadow: 0 0 12px rgba(255, 61, 94, 0.5); */
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  transition: all 0.3 ease;
 }
 
 .toggle-1__button::before {
-    position: absolute;
-    display: flex;
-    align-items: center;
-    top: 4px;
-    left: 35px;
-    height: 20px;
-    padding: 0 5px;
-    content: "ปิด";
-    background: white;
-    border-radius: 15px;
-    color: #da919e;
-    transition: all 0.3s ease;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  top: 4px;
+  left: 35px;
+  height: 20px;
+  padding: 0 5px;
+  content: "ปิด";
+  background: white;
+  border-radius: 15px;
+  color: #da919e;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  transition: all 0.3s ease;
 }
 
-.toggle-1__input:checked+.toggle-1__button {
-    background: #89e09d;
-    border: solid 1px #89e09d;
-    border-radius: 15px;
-    /* box-shadow: 0 2px 20px rgba(142, 207, 69, 0.5); */
+.toggle-1__input:checked + .toggle-1__button {
+  background: #89e09d;
+  border: solid 1px #89e09d;
+  border-radius: 15px;
+  /* box-shadow: 0 2px 20px rgba(142, 207, 69, 0.5); */
 }
 
-.toggle-1__input:checked+.toggle-1__button::before {
-    content: "เปิด";
-    left: 5px;
-    color: #8ecf45;
-}
-
-.child .toggle-1 {
-    display: inline-block;
-    vertical-align: top;
-    margin: 0 15px 0 0;
-}
-
-.child .toggle-1__input {
-    display: none;
-}
-
-.child .toggle-1__button {
-    position: relative;
-    cursor: pointer;
-    display: inline-block;
-    font-family: "Kanit", sans-serif;
-    text-transform: uppercase;
-    font-size: 0.7rem;
-    line-height: 20px;
-    width: 65px;
-    height: 30px;
-    color: white;
-    background-color: #da919e;
-    border: solid 1px #da919e;
-    /* box-shadow: 0 0 12px rgba(255, 61, 94, 0.5); */
-    transition: all 0.3 ease;
-}
-
-.child .toggle-1__button::before {
-    position: absolute;
-    display: flex;
-    align-items: center;
-    top: 4px;
-    left: 35px;
-    height: 20px;
-    padding: 0 5px;
-    content: "ปิด";
-    background: white;
-    color: #da919e;
-    transition: all 0.3s ease;
-}
-
-.child .toggle-1__input:checked+.toggle-1__button {
-    background: #89e09d;
-    border: solid 1px #89e09d;
-    /* box-shadow: 0 2px 20px rgba(142, 207, 69, 0.5); */
-}
-
-.child .toggle-1__input:checked+.toggle-1__button::before {
-    content: "เปิด";
-    left: 5px;
-    color: #8ecf45;
+.toggle-1__input:checked + .toggle-1__button::before {
+  content: "เปิด";
+  left: 5px;
+  color: #8ecf45;
 }
 
 .dataTables_wrapper label {
-    font-size: 20px;
+  font-size: 20px;
 }
-
-.asdasdasdasdasdas {}
-
 
 /* --------------------------------All layout--------------------------------------------- */

@@ -50,7 +50,8 @@ class SchoolModel extends CI_Model
         website,
         phone,
         latitude,
-        longitude');
+        longitude,
+        sc_status');
         $this->db->join($this->table_join[0], $this->join[0]);
         $this->db->join($this->table_join[1], $this->join[1]);
         $this->db->join($this->table_join[2], $this->join[2]);
@@ -66,12 +67,19 @@ class SchoolModel extends CI_Model
         return $query->result();
     }
 
-    public function create()
+    public function findById($id)
     {
+        return $this->db->get_where($this->table, array($this->primaryKey => $id))->row();
     }
 
-    public function update($id)
+    public function create($data)
     {
+        return ($this->db->insert($this->table, $data)) ? true : false;
+    }
+
+    public function update($id, $data)
+    {
+        return ($this->db->update($this->table, $data, array($this->primaryKey => $id))) ? true : false;
     }
 
     public function delete($id)

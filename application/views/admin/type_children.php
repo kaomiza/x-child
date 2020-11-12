@@ -63,13 +63,13 @@
             <button class="btn_backend text_btn btn" id="btnInsert" data-toggle="modal" data-target="#insertTypeChild"><i class="fa fa-plus"></i>&nbsp;&nbsp;เพิ่มประเภทเด็กพิเศษ</button>
         </div>
         <div>
-            <table id="type_children" class="table table-bordered table-striped">
+            <table id="type_children" class="table table-bordered table-striped nowrap" style="width: 100%;">
                 <thead>
                     <tr>
+                        <th class="th_text">สถานะ</th>
                         <th class="th_text">เลขที่</th>
                         <th class="th_text">ชื่อประเภทเด็กพิเศษ</th>
                         <th class="th_text">แก้ไข</th>
-                        <th class="th_text">สถานะ</th>
                     </tr>
                 </thead>
             </table>
@@ -87,11 +87,25 @@
             type: "GET"
         },
         "columns": [{
-                "data": "td_id",
+                "data": null,
+                "render": (data, type, row, meta) => {
+                    return `
+                        <label for="toggle-` + row.tc_id + `" class="toggle-1">
+                            <input type="checkbox" id="toggle-` + row.tc_id + `" 
+                            class="toggle-1__input"  ` + (row.tc_status == 1 ? 'checked' : '') + `
+                            onchange="onClickActivate(` + row.tc_id + `)">
+                            <span class="toggle-1__button"></span>
+                        </label>
+                        `;
+                },
+                width: 10
+            },
+            {
+                "data": "tc_id",
                 className: "td_text"
             },
             {
-                "data": "td_name",
+                "data": "tc_name",
                 className: "td_text"
             },
             {
@@ -99,21 +113,8 @@
                 "render": (data, type, row, meta) => {
                     return `
                         <button class="btn" style="padding: 2px .75rem; color: #199a6f;" data-toggle="modal" data-target="#editTypeChild"
-                        onclick="onClickEdit(` + row.td_id + `)"><i class="fa fa-edit"></i>
+                        onclick="onClickEdit(` + row.tc_id + `)"><i class="fa fa-edit"></i>
                         </button>
-                        `;
-                }
-            },
-            {
-                "data": null,
-                "render": (data, type, row, meta) => {
-                    return `
-                        <label for="toggle-` + row.td_id + `" class="toggle-1">
-                            <input type="checkbox" id="toggle-` + row.td_id + `" 
-                            class="toggle-1__input"  ` + (row.td_status == 1 ? 'checked' : '') + `
-                            onchange="onClickActivate(` + row.td_id + `)">
-                            <span class="toggle-1__button"></span>
-                        </label>
                         `;
                 }
             }
@@ -137,7 +138,7 @@
             if (checkError == true) {
                 /********insert**********/
                 $.post('<?php echo base_url('admin/type_children/create') ?>', {
-                    td_name: input
+                    tc_name: input
                 }).done((res) => {
                     if (res == true) {
                         $('#InputTC1').val();
@@ -168,7 +169,7 @@
                 /********update**********/
                 var id = $('.edit_btn').attr('id');
                 $.post('<?php echo base_url('admin/type_children/update') ?>/' + id, {
-                    td_name: input
+                    tc_name: input
                 }).done((res) => {
                     if (res == true) {
                         $('#InputTC2').val();
@@ -196,7 +197,7 @@
     function onClickActivate(id) {
         if ($('#toggle-' + id).is(":checked")) {
             $.post('<?php echo base_url('admin/type_children/update'); ?>/' + id, {
-                td_status: 1
+                tc_status: 1
             }).done((res) => {
                 toastr.info('NO');
             }).fail((xhr, status, error) => {
@@ -204,7 +205,7 @@
             })
         } else {
             $.post('<?php echo base_url('admin/type_children/update'); ?>/' + id, {
-                td_status: 0
+                tc_status: 0
             }).done((res) => {
                 toastr.info('OFF');
             }).fail((xhr, status, error) => {

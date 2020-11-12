@@ -25,16 +25,26 @@ class ChildrenModel extends CI_Model
         'c_img',
         'c_status'
     ];
+
     public function findAll()
     {
+        $this->db->select('c_prenameTH,c_prenameEN,c_fnameTH,c_lnameTH,c_fnameEN,c_lnameEN,c_status');
+        return $this->db->get($this->table)->result();
     }
 
-    public function create()
+    public function findById($id)
     {
+        return $this->db->get_where($this->table, array($this->primaryKey => $id))->row();
     }
 
-    public function edit($id)
+    public function create($data)
     {
+        return ($this->db->insert($this->table, $data)) ? true : false;
+    }
+
+    public function update($id, $data)
+    {
+        return ($this->db->update($this->table, $data, array($this->primaryKey => $id))) ? true : false;
     }
 
     public function delete($id)

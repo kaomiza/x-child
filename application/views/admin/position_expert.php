@@ -68,18 +68,17 @@
             </button>
         </div>
         <div>
-            <table id="position" class="table table-bordered table-striped">
+            <table id="position" class="table table-bordered table-striped nowrap" style="width: 100%;">
                 <thead>
                     <tr>
+                        <th class="th_text">สถานะ</th>
                         <th class="th_text">เลขที่</th>
                         <th class="th_text">ชื่อตำแหน่งผู้เชี่ยวชาญ</th>
                         <th class="th_text">แก้ไข</th>
-                        <th class="th_text">สถานะ</th>
                     </tr>
                 </thead>
             </table>
         </div>
-
     </div>
 </div>
 <script>
@@ -92,6 +91,20 @@
             type: "GET"
         },
         "columns": [{
+                "data": null,
+                "render": (data, type, row, meta) => {
+                    return `
+                            <label for="toggle-` + row.p_id + `" class="toggle-1">
+                                <input type="checkbox" id="toggle-` + row.p_id + `" 
+                                class="toggle-1__input"  ` + (row.p_status == 1 ? 'checked' : '') + `
+                                onchange="onClickActivate(` + row.p_id + `)">
+                                <span class="toggle-1__button"></span>
+                            </label>
+                        `;
+                },
+                width: 10
+            },
+            {
                 "data": "p_id",
                 className: "td_text"
             },
@@ -106,19 +119,6 @@
                         <button class="btn btn-flat" style="padding: 2px .75rem; color: #199a6f;" data-toggle="modal" data-target="#editPosition"
                         onclick="onClickEdit(` + row.p_id + `)"><i class="fa fa-edit"></i>
                         </button>
-                        `;
-                }
-            },
-            {
-                "data": null,
-                "render": (data, type, row, meta) => {
-                    return `
-                            <label for="toggle-` + row.p_id + `" class="toggle-1">
-                                <input type="checkbox" id="toggle-` + row.p_id + `" 
-                                class="toggle-1__input"  ` + (row.p_status == 1 ? 'checked' : '') + `
-                                onchange="onClickActivate(` + row.p_id + `)">
-                                <span class="toggle-1__button"></span>
-                            </label>
                         `;
                 }
             }

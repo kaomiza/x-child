@@ -88,14 +88,14 @@
             </button>
         </div>
         <div>
-            <table id="diseased" class="table table-bordered table-striped">
+            <table id="diseased" class="table table-bordered table-striped nowrap" style="width: 100%;">
                 <thead>
                     <tr>
+                        <th class="th_text">สถานะ</th>
                         <th class="th_text">เลขที่</th>
                         <th class="th_text">ชื่อโรคประจำตัวภาษาไทย</th>
                         <th class="th_text">ชื่อโรคประจำตัวภาษาอังกฤษ</th>
                         <th class="th_text">แก้ไข</th>
-                        <th class="th_text">สถานะ</th>
                     </tr>
                 </thead>
             </table>
@@ -106,13 +106,26 @@
 <script>
     $("#diseased").DataTable({
         "processing": true,
-        "responsive": true,
         "autoWidth": false,
         "ajax": {
             url: "<?php echo base_url('admin/diseased/getAll'); ?>",
             type: "GET"
         },
         "columns": [{
+                "data": null,
+                "render": (data, type, row, meta) => {
+                    return `
+                        <label for="toggle-` + row.d_id + `" class="toggle-1">
+                            <input type="checkbox" id="toggle-` + row.d_id + `" 
+                            class="toggle-1__input"  ` + (row.d_status == 1 ? 'checked' : '') + `
+                            onchange="onClickActivate(` + row.d_id + `)">
+                            <span class="toggle-1__button"></span>
+                        </label>              
+                        `;
+                },
+                width: 10
+            },
+            {
                 "data": "d_id",
                 className: "td_text"
             },
@@ -131,20 +144,6 @@
                         <button class="btn" style="padding: 2px .75rem; color: #199a6f;" data-toggle="modal" data-target="#editDiseased"
                         onclick="onClickEdit(` + row.d_id + `)"><i class="fa fa-edit"></i>
                         </button>
-                        `;
-                }
-            },
-            {
-                "data": null,
-                "render": (data, type, row, meta) => {
-                    return `
-                        <label for="toggle-` + row.d_id + `" class="toggle-1">
-                            <input type="checkbox" id="toggle-` + row.d_id + `" 
-                            class="toggle-1__input"  ` + (row.d_status == 1 ? 'checked' : '') + `
-                            onchange="onClickActivate(` + row.d_id + `)">
-                            <span class="toggle-1__button"></span>
-                        </label>
-                            
                         `;
                 }
             }
