@@ -599,6 +599,13 @@
 <link rel="stylesheet" href="<?php echo base_url(); ?>assets/paginationjs/dist/pagination.css">
 <script src="<?php echo base_url(); ?>assets/paginationjs/dist/pagination.min.js"></script>
 <script>
+    function onClickEdit(id) {
+        $.get('<?php echo base_url('admin/children/getById'); ?>/' + id, (res) => {
+            console.log(res);
+        });
+    }
+</script>
+<script>
     $('#pagination-container').pagination({
         dataSource: (done) => {
             $.ajax({
@@ -628,7 +635,7 @@
             }
             html += `
             <div class="col-md-3 main-margin" style="text-align: center;">
-                    <div class="cardUser cardBox main-margin" style="cursor: pointer;" data-toggle="modal" data-target="#editChildren">
+                    <div class="cardUser cardBox main-margin" style="cursor: pointer;" data-toggle="modal" data-target="#editChildren" onclick="onClickEdit(` + item.c_id + `)">
                         <div class="main-margin">
                             <div>
                                 <img style="width: 80%; height: 80%;" src="<?php echo base_url(); ?>assets/images/admin/DefualtUser.png">

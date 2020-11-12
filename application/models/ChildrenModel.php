@@ -28,7 +28,7 @@ class ChildrenModel extends CI_Model
 
     public function findAll()
     {
-        $this->db->select('c_prenameTH,c_prenameEN,c_fnameTH,c_lnameTH,c_fnameEN,c_lnameEN,c_status');
+        $this->db->select('c_id,c_prenameTH,c_prenameEN,c_fnameTH,c_lnameTH,c_fnameEN,c_lnameEN,c_status');
         return $this->db->get($this->table)->result();
     }
 
