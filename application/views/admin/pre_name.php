@@ -90,6 +90,7 @@
             <table id="prename" class="table table-bordered table-striped">
                 <thead>
                     <tr>
+                        <th class="th_text">สถานะ</th>
                         <th class="th_text">เลขที่</th>
                         <th class="th_text">คำนำหน้าชื่อไทย</th>
                         <th class="th_text">คำนำหน้าชื่ออังกฤษ</th>
@@ -112,6 +113,19 @@
                 type: "GET"
             },
             "columns": [{
+                    "data": null,
+                    "render": (data, type, row, meta) => {
+                        return `
+                            <label for="toggle-` + row.n_id + `" class="toggle-1">
+                                <input type="checkbox" id="toggle-` + row.n_id + `" 
+                                class="toggle-1__input"  ` + (row.n_status == 1 ? 'checked' : '') + `
+                                onchange="onClickActivate(` + row.n_id + `)">
+                                <span class="toggle-1__button"></span>
+                            </label>
+                        `;
+                    },
+                    width: 10
+                }, {
                     "data": "n_id",
                     className: "td_text"
                 },
@@ -270,5 +284,25 @@
                 $('#InputprenameEN2').val(res.n_engname);
                 $('.edit_btn').attr('id', res.n_id);
             })
+        }
+
+        function onClickActivate(id) {
+            if ($('#toggle-' + id).is(":checked")) {
+                $.post('<?php echo base_url('admin/pre_name/update'); ?>/' + id, {
+                    n_status: 1
+                }).done((res) => {
+                    toastr.info('NO');
+                }).fail((xhr, status, error) => {
+                    toastr.error('Error')
+                })
+            } else {
+                $.post('<?php echo base_url('admin/pre_name/update'); ?>/' + id, {
+                    n_status: 0
+                }).done((res) => {
+                    toastr.info('OFF');
+                }).fail((xhr, status, error) => {
+                    toastr.error('Error')
+                })
+            }
         }
     </script>

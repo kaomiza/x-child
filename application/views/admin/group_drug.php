@@ -71,6 +71,7 @@
             <table id="group_drug" class="table table-bordered table-striped">
                 <thead>
                     <tr>
+                        <th class="th_text">สถานะ</th>
                         <th class="th_text">เลขที่</th>
                         <th class="th_text">ชื่อกลุ่มยา</th>
                         <th class="th_text">แก้ไข</th>
@@ -91,6 +92,19 @@
             type: "GET"
         },
         "columns": [{
+                "data": null,
+                "render": (data, type, row, meta) => {
+                    return `
+                            <label for="toggle-` + row.gd_id + `" class="toggle-1">
+                                <input type="checkbox" id="toggle-` + row.gd_id + `" 
+                                class="toggle-1__input"  ` + (row.gd_status == 1 ? 'checked' : '') + `
+                                onchange="onClickActivate(` + row.gd_id + `)">
+                                <span class="toggle-1__button"></span>
+                            </label>
+                        `;
+                },
+                width: 10
+            }, {
                 "data": "gd_id",
                 className: "td_text"
             },
@@ -180,5 +194,25 @@
             $('#InputGD2').val(res.gd_name);
             $('.edit_btn').attr('id', res.gd_id);
         });
+    }
+
+    function onClickActivate(id) {
+        if ($('#toggle-' + id).is(":checked")) {
+            $.post('<?php echo base_url('admin/group_drug/update'); ?>/' + id, {
+                gd_status: 1
+            }).done((res) => {
+                toastr.info('NO');
+            }).fail((xhr, status, error) => {
+                toastr.error('Error')
+            })
+        } else {
+            $.post('<?php echo base_url('admin/group_drug/update'); ?>/' + id, {
+                gd_status: 0
+            }).done((res) => {
+                toastr.info('OFF');
+            }).fail((xhr, status, error) => {
+                toastr.error('Error')
+            })
+        }
     }
 </script>

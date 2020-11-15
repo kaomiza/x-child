@@ -604,6 +604,26 @@
             console.log(res);
         });
     }
+
+    function fetch_prename() {
+        $.get('<?php echo base_url(''); ?>')
+    }
+
+    function fetch_typechildren() {
+
+    }
+
+    function fetch_school() {
+
+    }
+
+    function fetch_parent() {
+
+    }
+
+    function fetch_expert() {
+
+    }
 </script>
 <script>
     $('#pagination-container').pagination({
@@ -622,7 +642,7 @@
             var html = Templating(data);
             $('#data-container').html(html);
         }
-    })
+    });
 
     function Templating(data) {
         var html = '<div class="row">';
