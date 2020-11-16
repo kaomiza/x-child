@@ -965,7 +965,7 @@
         if (type == 'add') {
             $('#SelectTS1').empty();
             $('#SelectTS1').append('<option selected="">--- กรุณาเลือก ---</option>');
-            $.get('<?php echo base_url('admin/type_school/getall'); ?>', (res) => {
+            $.get('<?php echo base_url('admin/type_school/getListSelect'); ?>', (res) => {
                 res.data.forEach(element => {
                     $('#SelectTS1').append('<option value="' + element.tsc_id + '">' + element.tsc_name + '</option>')
                 });
@@ -975,7 +975,7 @@
         if (type == 'edit') {
             $('#SelectTS2').empty();
             $('#SelectTS2').append('<option selected="">--- กรุณาเลือก ---</option>');
-            $.get('<?php echo base_url('admin/type_school/getall'); ?>', (res) => {
+            $.get('<?php echo base_url('admin/type_school/getListSelect'); ?>', (res) => {
                 res.data.forEach(element => {
                     $('#SelectTS2').append('<option value="' + element.tsc_id + '">' + element.tsc_name + '</option>')
                 });

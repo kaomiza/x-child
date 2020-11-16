@@ -6,8 +6,7 @@ class ParentModel extends CI_Model
     protected $fields = [
         'pa_user',
         'pa_pass',
-        'pa_prenameTH',
-        'pa_prenameEN',
+        'pa_prename',
         'pa_fnameTH',
         'pa_lnameTH',
         'pa_fnameEN',
@@ -26,6 +25,22 @@ class ParentModel extends CI_Model
         'pa_img',
         'pa_status'
     ];
+
+    protected $table_join = [
+        'prename'
+    ];
+
+    protected $join = [
+        'prename.n_id = parent.pa_prename'
+    ];
+
+
+    public function listSelect()
+    {
+        $this->db->select('pa_id,n_thainame,n_engname,pa_fnameTH,pa_lnameTH,pa_fnameEN,pa_lnameEN');
+        $this->db->join($this->table_join[0], $this->join[0]);
+        return $this->db->get_where($this->table, array($this->fields[19] => 1))->result();
+    }
 
     public function findAll()
     {

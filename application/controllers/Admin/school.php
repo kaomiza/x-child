@@ -31,6 +31,19 @@ class School extends CI_Controller
         }
     }
 
+    public function getListSelect()
+    {
+        if ($this->input->server('REQUEST_METHOD') == 'GET') {
+            header('Content-Type: application/json');
+            $data = [
+                'data' => $this->SchoolModel->listSelect()
+            ];
+            echo json_encode($data);
+        } else {
+            show_error('Allow Form GET', 405);
+        }
+    }
+
     public function getById($id)
     {
         if ($this->input->server('REQUEST_METHOD') == 'GET') {

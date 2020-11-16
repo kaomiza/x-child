@@ -5,8 +5,15 @@ class PrenameModel extends CI_Model
     protected $primaryKey = 'n_id';
     protected $fields = [
         'n_thainame',
-        'n_engname'
+        'n_engname',
+        'n_status'
     ];
+
+
+    public function listSelect()
+    {
+        return $this->db->get_where($this->table, array($this->fields[2] => 1))->result();
+    }
 
     public function findAll()
     {

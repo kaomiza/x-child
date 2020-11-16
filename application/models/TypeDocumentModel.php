@@ -13,6 +13,11 @@ class TypeDocumentModel extends CI_Model
         return $this->db->get($this->table)->result();
     }
 
+    public function listSelect()
+    {
+        return $this->db->get_where($this->table, array($this->fields[1] => 1))->result();
+    }
+
     public function findById($id)
     {
         return $this->db->get_where($this->table, array($this->primaryKey => $id))->row();

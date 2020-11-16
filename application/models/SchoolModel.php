@@ -59,6 +59,12 @@ class SchoolModel extends CI_Model
         return $this->db->get($this->table)->result();
     }
 
+    public function listSelect()
+    {
+        $this->db->select('sc_id, sc_nameTH, sc_nameEN');
+        return $this->db->get_where($this->table, array($this->Fields[14] => 1))->result();
+    }
+
     public function findAllActive()
     {
         $this->db->where($this->Fields[14], 1);

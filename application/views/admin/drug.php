@@ -289,7 +289,7 @@
             $('#inputDrugTH2').val(res.drug_name_th);
             $('#inputDrugEN2').val(res.drug_name_en);
             $('.edit_btn').attr('id', res.drug_id);
-            $.get('<?php echo base_url('admin/group_drug/getall'); ?>', (res2) => {
+            $.get('<?php echo base_url('admin/group_drug/getListSelect'); ?>', (res2) => {
                 res2.data.forEach(element => {
                     if (element.gd_id == res.gd_id) {
                         $('#inputSelect2').append('<option value="' + element.gd_id + '" selected>' + element.gd_name + '</option>');
@@ -324,7 +324,7 @@
     function fetch_group_drug() {
         $('#inputSelect1').empty();
         $('#inputSelect1').append('<option selected="">--- กรุณาเลือก ---</option>');
-        $.get('<?php echo base_url('admin/group_drug/getall'); ?>', (res) => {
+        $.get('<?php echo base_url('admin/group_drug/getListSelect'); ?>', (res) => {
             res.data.forEach(element => {
                 $('#inputSelect1').append('<option value="' + element.gd_id + '">' + element.gd_name + '</option>')
             });

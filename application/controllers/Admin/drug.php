@@ -18,6 +18,20 @@ class Drug extends CI_Controller
         $this->load->view('index_admin', $data);
     }
 
+
+    public function getListSelect()
+    {
+        if ($this->input->server('REQUEST_METHOD') == 'GET') {
+            header('Content-Type: application/json');
+            $data = [
+                'data' => $this->DrugModel->listSelect()
+            ];
+            echo json_encode($data);
+        } else {
+            show_error('Allow Form GET', 405);
+        }
+    }
+
     public function getAll()
     {
         if ($this->input->server('REQUEST_METHOD') == 'GET') {

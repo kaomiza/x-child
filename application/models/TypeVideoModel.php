@@ -8,6 +8,11 @@ class TypeVideoModel extends CI_Model
         'tv_status'
     ];
 
+    public function listSelect()
+    {
+        return $this->db->get_where($this->table, array($this->fields[1] => 1))->result();
+    }
+
     public function findAll()
     {
         return $this->db->get($this->table)->result();

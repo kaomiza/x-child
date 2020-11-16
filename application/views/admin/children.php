@@ -1,6 +1,3 @@
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
-<script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
 <div class="modal fade show" tabindex="-1" role="dialog" id="insertChildren" style="display:none;">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -36,9 +33,8 @@
                             <label class="text-paragraph" style="color: red;">*</label>
                         </div>
                         <div>
-                            <select class="form-control text-paragraph" id="prenameTH1" required="">
+                            <select class="form-control text-paragraph select2bs4" id="prenameTH1" required="" onchange="auto_prename()">
                                 <option selected="">--- กรุณาเลือก ---</option>
-                                <option>นาย</option>
                             </select>
                             <label class="text-paragraph" id="erprenameTH1" style="color: red; display:none; padding-top:5px;">
                                 กรุณาเลือกคำนำหน้าชื่อภาษาไทย
@@ -77,9 +73,8 @@
                             <label class="text-paragraph" style="color: red;">*</label>
                         </div>
                         <div>
-                            <select class="form-control text-paragraph" id="prenameEN1" required="">
+                            <select class="form-control text-paragraph select2bs4" id="prenameEN1" required="" disabled>
                                 <option selected="">--- กรุณาเลือก ---</option>
-                                <option>Mr.</option>
                             </select>
                             <label class="text-paragraph" id="erprenameEN1" style="color: red; display:none; padding-top:5px;">
                                 กรุณาเลือกคำนำหน้าชื่อภาษาอังกฤษ
@@ -118,7 +113,12 @@
                             <label class="text-paragraph" style="color: red;">*</label>
                         </div>
                         <div>
-                            <input id="datepicker1" style="font-family: 'Kanit';" disabled value="วัน/เดือน/ปี" class="datepicker form-control" />
+                            <div class="input-group date" id="reservationdate" data-target-input="nearest">
+                                <input type="text" id="datepicker1" style="font-family: 'Kanit';" class="form-control datetimepicker-input" data-target="#reservationdate" id="datemask" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask placeholder="dd/mm/yyyy" />
+                                <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                </div>
+                            </div>
                             <label class="text-paragraph" id="erdatepicker1" style="color: red; display:none; padding-top:5px;">
                                 กรุณาเลือกวันเกิดให้ถูกต้อง
                             </label>
@@ -130,7 +130,7 @@
                             <label class="text-paragraph" style="color: red;">*</label>
                         </div>
                         <div>
-                            <select class="form-control text-paragraph" id="tc1" required="">
+                            <select class="form-control text-paragraph select2bs4" id="tc1" required="">
                                 <option selected="">--- กรุณาเลือก ---</option>
                             </select>
                             <label class="text-paragraph" id="ertc1" style="color: red; display:none; padding-top:5px;">
@@ -144,7 +144,7 @@
                             <label class="text-paragraph" style="color: red;">*</label>
                         </div>
                         <div>
-                            <select class="form-control text-paragraph" id="school1" required="">
+                            <select class="form-control text-paragraph select2bs4" id="school1" required="">
                                 <option selected="">--- กรุณาเลือก ---</option>
                             </select>
                             <label class="text-paragraph" id="erschool1" style="color: red; display:none; padding-top:5px;">
@@ -160,7 +160,7 @@
                             <label class="text-paragraph" style="color: red;">*</label>
                         </div>
                         <div>
-                            <select class="form-control text-paragraph" id="parent1" required="">
+                            <select class="select2bs4 form-control text-paragraph" id="parent1" required="">
                                 <option selected="">--- กรุณาเลือก ---</option>
                             </select>
                             <label class="text-paragraph" id="erparent1" style="color: red; display:none; padding-top:5px;">
@@ -174,7 +174,7 @@
                             <label class="text-paragraph" style="color: red;">*</label>
                         </div>
                         <div>
-                            <select class="form-control text-paragraph" id="expert1" required="">
+                            <select class="form-control text-paragraph select2bs4" id="expert1" required="">
                                 <option selected="">--- กรุณาเลือก ---</option>
                             </select>
                             <label class="text-paragraph" id="erexpert1" style="color: red; display:none; padding-top:5px;">
@@ -214,7 +214,7 @@
                             <label class="text-paragraph" style="color: red;">*</label>
                         </div>
                         <div>
-                            <select class="form-control text-paragraph" id="SelectPro1" required="">
+                            <select class="form-control text-paragraph select2bs4" id="SelectPro1" required="">
                                 <option selected="">--- กรุณาเลือก ---</option>
                                 <option>นครราชสีมา</option>
                             </select>
@@ -231,7 +231,7 @@
                             <label class="text-paragraph" style="color: red;">*</label>
                         </div>
                         <div>
-                            <select class="form-control text-paragraph" id="SelectAm1" required="">
+                            <select class="form-control text-paragraph select2bs4" id="SelectAm1" required="">
                                 <option selected="">--- กรุณาเลือก ---</option>
                                 <option>อำเภอนครราชสีมา</option>
                             </select>
@@ -246,7 +246,7 @@
                             <label class="text-paragraph" style="color: red;">*</label>
                         </div>
                         <div>
-                            <select class="form-control text-paragraph" id="SelectDist1" required="">
+                            <select class="form-control text-paragraph select2bs4" id="SelectDist1" required="">
                                 <option selected="">--- กรุณาเลือก ---</option>
                                 <option>ในเมือง</option>
                             </select>
@@ -307,7 +307,7 @@
                             <label class="text-paragraph" style="color: red;">*</label>
                         </div>
                         <div>
-                            <select class="form-control text-paragraph" id="prenameTH2" required="">
+                            <select class="form-control text-paragraph select2bs4" id="prenameTH2" required="">
                                 <option selected="">--- กรุณาเลือก ---</option>
                                 <option>นาย</option>
                             </select>
@@ -348,7 +348,7 @@
                             <label class="text-paragraph" style="color: red;">*</label>
                         </div>
                         <div>
-                            <select class="form-control text-paragraph" id="prenameEN2" required="">
+                            <select class="form-control text-paragraph select2bs4" id="prenameEN2" required="">
                                 <option selected="">--- กรุณาเลือก ---</option>
                                 <option>Mr.</option>
                             </select>
@@ -401,7 +401,7 @@
                             <label class="text-paragraph" style="color: red;">*</label>
                         </div>
                         <div>
-                            <select class="form-control text-paragraph" id="tc2" required="">
+                            <select class="form-control text-paragraph select2bs4" id="tc2" required="">
                                 <option selected="">--- กรุณาเลือก ---</option>
                             </select>
                             <label class="text-paragraph" id="ertc2" style="color: red; display:none; padding-top:5px;">
@@ -415,7 +415,7 @@
                             <label class="text-paragraph" style="color: red;">*</label>
                         </div>
                         <div>
-                            <select class="form-control text-paragraph" id="school2" required="">
+                            <select class="form-control text-paragraph select2bs4" id="school2" required="">
                                 <option selected="">--- กรุณาเลือก ---</option>
                             </select>
                             <label class="text-paragraph" id="erschool2" style="color: red; display:none; padding-top:5px;">
@@ -431,7 +431,7 @@
                             <label class="text-paragraph" style="color: red;">*</label>
                         </div>
                         <div>
-                            <select class="form-control text-paragraph" id="parent2" required="">
+                            <select class="form-control text-paragraph select2bs4" id="parent2" required="">
                                 <option selected="">--- กรุณาเลือก ---</option>
                             </select>
                             <label class="text-paragraph" id="erparent2" style="color: red; display:none; padding-top:5px;">
@@ -445,7 +445,7 @@
                             <label class="text-paragraph" style="color: red;">*</label>
                         </div>
                         <div>
-                            <select class="form-control text-paragraph" id="expert2" required="">
+                            <select class="form-control text-paragraph select2bs4" id="expert2" required="">
                                 <option selected="">--- กรุณาเลือก ---</option>
                             </select>
                             <label class="text-paragraph" id="erexpert2" style="color: red; display:none; padding-top:5px;">
@@ -485,7 +485,7 @@
                             <label class="text-paragraph" style="color: red;">*</label>
                         </div>
                         <div>
-                            <select class="form-control text-paragraph" id="SelectPro2" required="">
+                            <select class="form-control text-paragraph select2bs4" id="SelectPro2" required="">
                                 <option selected="">--- กรุณาเลือก ---</option>
                                 <option>นครราชสีมา</option>
                             </select>
@@ -502,7 +502,7 @@
                             <label class="text-paragraph" style="color: red;">*</label>
                         </div>
                         <div>
-                            <select class="form-control text-paragraph" id="SelectAm2" required="">
+                            <select class="form-control text-paragraph select2bs4" id="SelectAm2" required="">
                                 <option selected="">--- กรุณาเลือก ---</option>
                                 <option>อำเภอนครราชสีมา</option>
                             </select>
@@ -517,7 +517,7 @@
                             <label class="text-paragraph" style="color: red;">*</label>
                         </div>
                         <div>
-                            <select class="form-control text-paragraph" id="SelectDist2" required="">
+                            <select class="form-control text-paragraph select2bs4" id="SelectDist2" required="">
                                 <option selected="">--- กรุณาเลือก ---</option>
                                 <option>ในเมือง</option>
                             </select>
@@ -570,7 +570,7 @@
             <h1 class="h1-title">เด็กพิเศษ</h1>
         </div>
         <div>
-            <button class="btn_backend text_btn btn" id="btnInsert" data-toggle="modal" data-target="#insertChildren"><i class="fa fa-plus"></i>&nbsp;&nbsp;เพิ่มเด็กพิเศษ</button>
+            <button class="btn_backend text_btn btn" id="btnInsert" data-toggle="modal" data-target="#insertChildren" onclick="add_fetchData()"><i class="fa fa-plus"></i>&nbsp;&nbsp;เพิ่มเด็กพิเศษ</button>
         </div>
     </div>
     <div class="bgWhite padding_main mainBoxRadius">
@@ -599,30 +599,130 @@
 <link rel="stylesheet" href="<?php echo base_url(); ?>assets/paginationjs/dist/pagination.css">
 <script src="<?php echo base_url(); ?>assets/paginationjs/dist/pagination.min.js"></script>
 <script>
+    var prename = [];
+
     function onClickEdit(id) {
         $.get('<?php echo base_url('admin/children/getById'); ?>/' + id, (res) => {
             console.log(res);
         });
     }
 
-    function fetch_prename() {
-        $.get('<?php echo base_url(''); ?>')
+    function auto_prename() {
+        var p_id = $('#prenameTH1').val();
+        $('#prenameEN1').empty();
+        $('#prenameEN1').append('<option selected="">--- select ---</option>');
+        prename.forEach(element => {
+            if (element.n_id == p_id) {
+                $('#prenameEN1').append('<option value="' + element.n_id + '" selected>' + element.n_engname +
+                    '</option>');
+            } else {
+                $('#prenameEN1').append('<option value="' + element.n_id + '">' + element.n_engname +
+                    '</option>');
+            }
+        });
     }
 
-    function fetch_typechildren() {
+    function add_fetchData() {
+        fetch_prename('add');
+        fetch_typechildren('add');
+        fetch_school('add');
+        fetch_parent('add');
+        fetch_expert('add   ');
+    }
+
+    function fetch_prename(fn) {
+        if (fn == 'add') {
+            $('#prenameTH1').empty();
+            $('#prenameTH1').append('<option selected="">--- กรุณาเลือก ---</option>');
+            $('#prenameEN1').empty();
+            $('#prenameEN1').append('<option selected="">--- select ---</option>');
+            $.get('<?php echo base_url("admin/pre_name/getListSelect"); ?>').done((res) => {
+                res.data.forEach(element => {
+                    $('#prenameTH1').append('<option value="' + element.n_id + '">' + element
+                        .n_thainame +
+                        '</option>');
+                });
+                prename = res.data;
+            });
+        }
+
+        if (fn == 'edit') {
+
+        }
+    }
+
+    function fetch_typechildren(fn) {
+        if (fn == 'add') {
+            $('#tc1').empty();
+            $('#tc1').append('<option selected="">--- กรุณาเลือก ---</option>');
+            $.get('<?php echo base_url('admin/type_children/getListSelect'); ?>').done((res) => {
+                res.data.forEach(element => {
+                    $('#tc1').append('<option value="' + element.tc_id + '">' + element.tc_name +
+                        '</option>');
+                });
+            });
+
+        }
+        if (fn == 'edit') {
+
+        }
+    }
+
+    function fetch_school(fn) {
+        if (fn == 'add') {
+            $('#school1').empty();
+            $('#school1').append('<option selected="">--- กรุณาเลือก ---</option>');
+            $.get('<?php echo base_url('admin/school/getListSelect'); ?>').done((res) => {
+                res.data.forEach(element => {
+                    $('#school1').append('<option value="' + element.sc_id + '">' + element.sc_nameTH +
+                        '</option>');
+                });
+            });
+        }
+        if (fn == 'edit') {
+
+        }
 
     }
 
-    function fetch_school() {
+    function fetch_parent(fn) {
+        if (fn == 'add') {
+            $('#parent1').empty();
+            $('#parent1').append('<option selected="">--- กรุณาเลือก ---</option>');
+            $.get('<?php echo base_url('admin/parents/getlistselect'); ?>').done((res) => {
+                res.forEach(element => {
+                    $('#parent1').append('<option value="' + element.pa_id + '">' +
+                        element.n_thainame + ' ' +
+                        element.pa_fnameTH + ' ' +
+                        element.pa_lnameTH +
+                        '</option>');
+                });
+            });
+        }
 
+        if (fn == 'edit') {
+
+        }
     }
 
-    function fetch_parent() {
+    function fetch_expert(fn) {
+        if (fn == 'add') {
+            $.get('<?php echo base_url('admin/expert/getlistselect'); ?>').done((res) => {
+                $('#expert1').empty();
+                $('#expert1').append('<option selected="">--- กรุณาเลือก ---</option>');
+                res.forEach(element => {
+                    $('#expert1').append('<option value="' + element.e_id + '">' +
+                        element.n_thainame + ' ' +
+                        element.e_fnameTH + ' ' +
+                        element.e_lnameTH +
+                        '</option>');
+                });
+            });
+        }
 
-    }
+        if (fn == 'edit') {
 
-    function fetch_expert() {
-
+        }
     }
 </script>
 <script>
@@ -653,20 +753,22 @@
             } else {
                 status += '<span style="color: #ff2727;">ปิดใช้งาน</span>'
             }
-            html += `
+            html +=
+                `
             <div class="col-md-3 main-margin" style="text-align: center;">
-                    <div class="cardUser cardBox main-margin" style="cursor: pointer;" data-toggle="modal" data-target="#editChildren" onclick="onClickEdit(` + item.c_id + `)">
+                    <div class="cardUser cardBox main-margin" style="cursor: pointer;" data-toggle="modal" data-target="#editChildren" onclick="onClickEdit(` +
+                item.c_id + `)">
                         <div class="main-margin">
                             <div>
                                 <img style="width: 80%; height: 80%;" src="<?php echo base_url(); ?>assets/images/admin/DefualtUser.png">
                             </div>
                             <div>
                                 <label style="cursor: pointer;" class="text-paragraph">` +
-                item.c_prenameTH + ' ' +
+                item.n_thainame + ' ' +
                 item.c_fnameTH + ' ' +
                 item.c_lnameTH +
                 `<br>` +
-                item.c_prenameEN + ' ' +
+                item.n_engname + ' ' +
                 item.c_fnameEN + ' ' +
                 item.c_fnameEN +
                 `</label>
@@ -688,14 +790,19 @@
         $('.toggle').css("width", "100px");
     });
     //*********start datepickker************ */
-    $('#datepicker1').datepicker({
-        format: 'dd/mm/yyyy',
-        uiLibrary: 'bootstrap4'
+    $('#reservationdate').datetimepicker({
+        format: 'DD/MM/YYYY',
+        maxDate: moment()
     });
-    $('#datepicker2').datepicker({
-        format: 'dd/mm/yyyy',
-        uiLibrary: 'bootstrap4'
-    });
+    $('#datemask').inputmask('dd/mm/yyyy');
+    // $('#datepicker1').datepicker({
+    //     format: 'dd/mm/yyyy',
+    //     uiLibrary: 'bootstrap4'
+    // });
+    // $('#datepicker2').datepicker({
+    //     format: 'dd/mm/yyyy',
+    //     uiLibrary: 'bootstrap4'
+    // });
     //*********end datepickker************ */
     //*********start chooseImg************ */
     /*** choose IMG for insert ****/

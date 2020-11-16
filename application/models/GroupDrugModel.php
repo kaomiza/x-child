@@ -3,11 +3,19 @@ class GroupDrugModel extends CI_Model
 {
     protected $table = 'group_drug';
     protected $primaryKey = 'gd_id';
-    protected $fields = 'gd_name';
+    protected $fields = [
+        'gd_name',
+        'gd_status'
+    ];
 
     public function findAll()
     {
         return $this->db->get($this->table)->result();
+    }
+
+    public function listSelect()
+    {
+        return $this->db->get_where($this->table, array($this->fields[1] => 1))->result();
     }
 
     public function findById($id)

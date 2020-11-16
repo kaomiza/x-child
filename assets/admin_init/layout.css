@@ -435,21 +435,21 @@ ul {
   border-radius: 10px;
 }
 
-table {
+.table.dataTable {
   border-collapse: collapse !important;
   border-spacing: 0 !important;
   width: 100% !important;
   border: 1px solid #ddd !important;
 }
 
-th,
-td {
+table.dataTable td,
+table.dataTable th {
   text-align: left !important;
   padding: 8px !important;
   border: 1px solid rgba(0, 0, 0, 0.5) !important;
 }
 
-tr:nth-child(even) {
+table.dataTable tr:nth-child(even) {
   background-color: #dedee6;
 }
 

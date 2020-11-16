@@ -7,8 +7,7 @@ class ExpertModel extends CI_Model
         'e_user',
         'drug_id',
         'e_pass',
-        'e_prenameTH',
-        'e_prenameEN',
+        'e_prename',
         'e_fnameTH',
         'e_lnameTH',
         'e_fnameEN',
@@ -27,6 +26,21 @@ class ExpertModel extends CI_Model
         'e_img',
         'e_status'
     ];
+
+    protected $table_join = [
+        'prename'
+    ];
+
+    protected $join = [
+        'prename.n_id = expert.e_prename'
+    ];
+
+    public function listSelect()
+    {
+        $this->db->select('e_id,n_thainame,n_engname,e_fnameTH,e_lnameTH,e_fnameEN,e_lnameEN');
+        $this->db->join($this->table_join[0], $this->join[0]);
+        return $this->db->get_where($this->table, array($this->fields[20] => 1))->result();
+    }
 
     public function findAll()
     {

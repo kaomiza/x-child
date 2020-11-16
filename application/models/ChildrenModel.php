@@ -4,8 +4,7 @@ class ChildrenModel extends CI_Model
     protected $table = 'children';
     protected $primaryKey = 'c_id';
     protected $Fields = [
-        'c_prenameTH',
-        'c_prenameEN',
+        'c_prename',
         'c_fnameTH',
         'c_lnameTH',
         'c_fnameEN',
@@ -26,9 +25,18 @@ class ChildrenModel extends CI_Model
         'c_status'
     ];
 
+    protected $table_join = [
+        'prename'
+    ];
+
+    protected $join = [
+        'prename.n_id = children.c_prename'
+    ];
+
     public function findAll()
     {
-        $this->db->select('c_id,c_prenameTH,c_prenameEN,c_fnameTH,c_lnameTH,c_fnameEN,c_lnameEN,c_status');
+        $this->db->select('c_id,n_thainame,n_engname,c_fnameTH,c_lnameTH,c_fnameEN,c_lnameEN,c_status');
+        $this->db->join($this->table_join[0], $this->join[0]);
         return $this->db->get($this->table)->result();
     }
 
