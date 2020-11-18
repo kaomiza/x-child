@@ -113,12 +113,7 @@
                             <label class="text-paragraph" style="color: red;">*</label>
                         </div>
                         <div>
-                            <div class="input-group date" id="reservationdate" data-target-input="nearest">
-                                <input type="text" id="datepicker1" style="font-family: 'Kanit';" class="form-control datetimepicker-input" data-target="#reservationdate" id="datemask" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask placeholder="dd/mm/yyyy" />
-                                <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
-                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                </div>
-                            </div>
+                            <input id="datepicker1" placeholder="วัน/เดือน/ปี" readonly>
                             <label class="text-paragraph" id="erdatepicker1" style="color: red; display:none; padding-top:5px;">
                                 กรุณาเลือกวันเกิดให้ถูกต้อง
                             </label>
@@ -214,9 +209,8 @@
                             <label class="text-paragraph" style="color: red;">*</label>
                         </div>
                         <div>
-                            <select class="form-control text-paragraph select2bs4" id="SelectPro1" required="">
+                            <select class="form-control text-paragraph select2bs4" id="SelectPro1" required="" onchange="fetch_amphur('add')">
                                 <option selected="">--- กรุณาเลือก ---</option>
-                                <option>นครราชสีมา</option>
                             </select>
                             <label class="text-paragraph" id="erSelectPro1" style="color: red; display:none; padding-top:5px;">
                                 กรุณาเลือกจังหวัด
@@ -231,9 +225,8 @@
                             <label class="text-paragraph" style="color: red;">*</label>
                         </div>
                         <div>
-                            <select class="form-control text-paragraph select2bs4" id="SelectAm1" required="">
+                            <select class="form-control text-paragraph select2bs4" disabled id="SelectAm1" required="" onchange="fetch_district('add')">
                                 <option selected="">--- กรุณาเลือก ---</option>
-                                <option>อำเภอนครราชสีมา</option>
                             </select>
                             <label class="text-paragraph" id="erSelectAm1" style="color: red; display:none; padding-top:5px;">
                                 กรุณาเลือกอำเภอ
@@ -246,9 +239,8 @@
                             <label class="text-paragraph" style="color: red;">*</label>
                         </div>
                         <div>
-                            <select class="form-control text-paragraph select2bs4" id="SelectDist1" required="">
+                            <select class="form-control text-paragraph select2bs4" disabled id="SelectDist1" required="">
                                 <option selected="">--- กรุณาเลือก ---</option>
-                                <option>ในเมือง</option>
                             </select>
                             <label class="text-paragraph" id="erSelectDist1" style="color: red; display:none; padding-top:5px;">
                                 กรุณาเลือกตำบล
@@ -260,7 +252,7 @@
                             <label class="text-paragraph">ไปรษณีย์</label>
                         </div>
                         <div>
-                            <input style="font-family: 'Kanit';" type="text" class="form-control" disabled placeholder="30000">
+                            <input id="Postcode1" style="font-family: 'Kanit';" type="text" class="form-control" disabled placeholder="30000">
                         </div>
                     </div>
                 </div>
@@ -627,7 +619,8 @@
         fetch_typechildren('add');
         fetch_school('add');
         fetch_parent('add');
-        fetch_expert('add   ');
+        fetch_expert('add');
+        fetch_province('add');
     }
 
     function fetch_prename(fn) {
@@ -724,6 +717,113 @@
 
         }
     }
+
+    function fetch_province(type) {
+        if (type == 'add') {
+            $('#SelectPro1').empty();
+            $('#SelectPro1').append('<option selected="">--- กรุณาเลือก ---</option>');
+            $.get('<?php echo base_url('api/address/province'); ?>', (res) => {
+                res.forEach(element => {
+                    $('#SelectPro1').append('<option value="' + element.PROVINCE_ID + '">' + element.PROVINCE_NAME + '</option>')
+                });
+            })
+        }
+        if (type == 'edit') {
+            $('#SelectPro2').empty();
+            $('#SelectPro2').append('<option selected="">--- กรุณาเลือก ---</option>');
+            $.get('<?php echo base_url('api/address/province'); ?>', (res) => {
+                res.forEach(element => {
+                    $('#SelectPro2').append('<option value="' + element.PROVINCE_ID + '">' + element.PROVINCE_NAME + '</option>')
+                });
+            })
+        }
+    }
+
+    function fetch_amphur(type) {
+        if (type == 'add') {
+            var p = $('#SelectPro1').val();
+            if (p == '--- กรุณาเลือก ---') {
+                $('#SelectAm1').prop('disabled', true);
+                $('#SelectDist1').prop('disabled', true);
+                $('#SelectAm1').empty();
+                $('#SelectAm1').append('<option selected="">--- กรุณาเลือก ---</option>');
+                $('#SelectDist1').empty();
+                $('#SelectDist1').append('<option selected="">--- กรุณาเลือก ---</option>');
+            } else {
+                $('#SelectAm1').empty();
+                $('#SelectAm1').append('<option selected="">--- กรุณาเลือก ---</option>');
+                $('#SelectAm1').prop('disabled', false);
+                $('#SelectDist1').prop('disabled', true);
+                $.get('<?php echo base_url('api/address/amphur'); ?>/' + p, (res) => {
+                    res.forEach(element => {
+                        $('#SelectAm1').append('<option value="' + element.AMPHUR_ID + '">' + element.AMPHUR_NAME + '</option>')
+                    });
+                })
+            }
+        }
+        if (type == 'edit') {
+            var p = $('#SelectPro2').val();
+            if (p == '--- กรุณาเลือก ---') {
+                $('#SelectAm2').prop('disabled', true);
+                $('#SelectDist2').prop('disabled', true);
+                $('#SelectAm2').empty();
+                $('#SelectAm2').append('<option selected="">--- กรุณาเลือก ---</option>');
+                $('#SelectDist2').empty();
+                $('#SelectDist2').append('<option selected="">--- กรุณาเลือก ---</option>');
+            } else {
+                $('#SelectAm2').empty();
+                $('#SelectAm2').append('<option selected="">--- กรุณาเลือก ---</option>');
+                $('#SelectAm2').prop('disabled', false);
+                $('#SelectDist2').prop('disabled', true);
+                $.get('<?php echo base_url('api/address/amphur'); ?>/' + p, (res) => {
+                    res.forEach(element => {
+                        $('#SelectAm2').append('<option value="' + element.AMPHUR_ID + '">' + element.AMPHUR_NAME + '</option>')
+                    });
+                })
+            }
+        }
+    }
+
+    function fetch_district(type) {
+        if (type == 'add') {
+            var amphur = $('#SelectAm1').val();
+            if (amphur == '--- กรุณาเลือก ---') {
+                $('#SelectDist1').append('<option selected="">--- กรุณาเลือก ---</option>');
+                $('#SelectDist1').prop('disabled', true);
+            } else {
+                $.get('<?php echo base_url('api/address/amphurById'); ?>/' + amphur, (res) => {
+                    $('#Postcode1').val(res.POSTCODE);
+                })
+                $('#SelectDist1').prop('disabled', false);
+                $('#SelectDist1').empty();
+                $('#SelectDist1').append('<option selected="">--- กรุณาเลือก ---</option>');
+                $.get('<?php echo base_url('api/address/district'); ?>/' + amphur, (res) => {
+                    res.forEach(element => {
+                        $('#SelectDist1').append('<option value="' + element.DISTRICT_ID + '">' + element.DISTRICT_NAME + '</option>')
+                    });
+                });
+            }
+        }
+        if (type == 'edit') {
+            var amphur = $('#SelectAm2').val();
+            if (amphur == '--- กรุณาเลือก ---') {
+                $('#SelectDist2').append('<option selected="">--- กรุณาเลือก ---</option>');
+                $('#SelectDist2').prop('disabled', true);
+            } else {
+                $.get('<?php echo base_url('api/address/amphurById'); ?>/' + amphur, (res) => {
+                    $('#Postcode2').val(res.POSTCODE);
+                })
+                $('#SelectDist2').prop('disabled', false);
+                $('#SelectDist2').empty();
+                $('#SelectDist2').append('<option selected="">--- กรุณาเลือก ---</option>');
+                $.get('<?php echo base_url('api/address/district'); ?>/' + amphur, (res) => {
+                    res.forEach(element => {
+                        $('#SelectDist2').append('<option value="' + element.DISTRICT_ID + '">' + element.DISTRICT_NAME + '</option>')
+                    });
+                });
+            }
+        }
+    }
 </script>
 <script>
     $('#pagination-container').pagination({
@@ -786,24 +886,17 @@
     }
 </script>
 <script>
+    var path_image = null;
+
     $(document).on("click", ".cardUser", function() {
         $('.toggle').css("width", "100px");
     });
     //*********start datepickker************ */
-    $('#reservationdate').datetimepicker({
-        format: 'DD/MM/YYYY',
-        maxDate: moment()
+    $('#datepicker1').datepicker({
+        format: 'dd/mm/yyyy',
+        maxDate: new Date(),
+        uiLibrary: 'bootstrap4'
     });
-    $('#datemask').inputmask('dd/mm/yyyy');
-    // $('#datepicker1').datepicker({
-    //     format: 'dd/mm/yyyy',
-    //     uiLibrary: 'bootstrap4'
-    // });
-    // $('#datepicker2').datepicker({
-    //     format: 'dd/mm/yyyy',
-    //     uiLibrary: 'bootstrap4'
-    // });
-    //*********end datepickker************ */
     //*********start chooseImg************ */
     /*** choose IMG for insert ****/
     $(document).on("click", "#browse1", function() {
@@ -812,15 +905,46 @@
     });
     $('#inputFile1').change(function(e) {
         var fileName = e.target.files[0].name;
+        var file = e.target.files[0];
         $("#file1").val(fileName);
+        var allowedExtensions =
+            /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+        if (!allowedExtensions.exec(fileName)) {
+            alert('Invalid file type');
+            $("#file1").val('');
+            $("#preview1").attr("src", "<?php echo base_url(); ?>assets/images/admin/DefualtUser.png");
+            return false;
+        } else {
+            if (file) {
+                if (e.target.files[0].size <= 2000000) {
 
-        var reader = new FileReader();
-        reader.onload = function(e) {
-            // get loaded data and render thumbnail.
-            document.getElementById("preview1").src = e.target.result;
-        };
-        // read the image file as a data URL.
-        reader.readAsDataURL(this.files[0]);
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                        document.getElementById("preview1").src = e.target.result;
+                    };
+                    reader.readAsDataURL(this.files[0]);
+
+                    var formData = new FormData();
+                    formData.append('file', file);
+                    $.ajax({
+                        url: '<?php echo base_url('admin/children/storeImage'); ?>',
+                        type: "post",
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        cache: false,
+                        async: true,
+                        success: (res) => {
+                            path_image = res.image_metadata.file_path
+                        }
+                    });
+                } else {
+                    $("#file1").val('');
+                    alert('ขนาดรูปภาพต้องไม่เกิน 2 mb');
+                    return false;
+                }
+            }
+        }
     });
     /*** choose IMG for update ****/
     $(document).on("click", "#browse2", function() {
