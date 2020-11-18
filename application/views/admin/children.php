@@ -256,6 +256,54 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div>
+                            <label class="text-paragraph">การแพ้ยาของเด็กพิเศษ</label>
+                        </div>
+                        <div id="drug_add">
+
+                        </div>
+                        <div>
+                            <div class="input-group">
+                                <select class="custom-select text-paragraph" id="selectDrug1">
+                                    <option selected>--- กรุณาเลือก ---</option>
+                                    <option value="One">One</option>
+                                    <option value="Two">Two</option>
+                                    <option value="Three">Three</option>
+                                </select>
+                                <div class="input-group-append">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary" type="button" onclick="addDrug()"><i class="fas fa-plus-square"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div>
+                            <label class="text-paragraph">โรคประจำตัวของเด็กพิเศษ</label>
+                        </div>
+                        <div id="diseased_add">
+
+                        </div>
+                        <div>
+                            <div class="input-group">
+                                <select class="custom-select text-paragraph" id="selectDiseased1">
+                                    <option selected>--- กรุณาเลือก ---</option>
+                                    <option value="One">One</option>
+                                    <option value="Two">Two</option>
+                                    <option value="Three">Three</option>
+                                </select>
+                                <div class="input-group-append">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary" type="button" onclick="addDiseased()"><i class="fas fa-plus-square"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary text_btn" data-dismiss="modal">ปิด</button>
@@ -524,6 +572,54 @@
                         </div>
                         <div>
                             <input style="font-family: 'Kanit';" type="text" class="form-control" disabled placeholder="30000">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div>
+                            <label class="text-paragraph">การแพ้ยาของเด็กพิเศษ</label>
+                        </div>
+                        <div id="drug_update">
+
+                        </div>
+                        <div>
+                            <div class="input-group">
+                                <select class="custom-select text-paragraph" id="selectDrug2">
+                                    <option selected>--- กรุณาเลือก ---</option>
+                                    <option value="One">One</option>
+                                    <option value="Two">Two</option>
+                                    <option value="Three">Three</option>
+                                </select>
+                                <div class="input-group-append">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary" type="button" onclick="updateDrug()"><i class="fas fa-plus-square"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div>
+                            <label class="text-paragraph">โรคประจำตัวของเด็กพิเศษ</label>
+                        </div>
+                        <div id="diseased_update">
+
+                        </div>
+                        <div>
+                            <div class="input-group">
+                                <select class="custom-select text-paragraph" id="selectDiseased2">
+                                    <option selected>--- กรุณาเลือก ---</option>
+                                    <option value="One">One</option>
+                                    <option value="Two">Two</option>
+                                    <option value="Three">Three</option>
+                                </select>
+                                <div class="input-group-append">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary" type="button" onclick="updateDiseased()"><i class="fas fa-plus-square"></i></button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -886,6 +982,204 @@
     }
 </script>
 <script>
+    var drug1 = [];
+    var diseased1 = [];
+
+    function addDrug() {
+        var name = $('#selectDrug1').val();
+        // console.log(name);
+        // console.log("----");
+        var checkAdd = drug1.includes(name);
+        if (name != '--- กรุณาเลือก ---' && checkAdd != true) {
+            var drug_group = document.getElementById("drug_add");
+            var tag = document.createElement("div");
+            tag.classList.add("mb-2");
+            tag.classList.add("input-group");
+            tag.id = name;
+            var input = document.createElement("input");
+            input.type = "text";
+            input.style.fontFamily = "Kanit";
+            input.classList.add("form-control");
+            input.disabled = true;
+            input.placeholder = name;
+            var divBtn = document.createElement("div");
+            divBtn.classList.add("input-group-append");
+            var delBtn = document.createElement("button");
+            delBtn.classList.add("btn");
+            delBtn.classList.add("btn-outline-secondary");
+            delBtn.type = "button";
+            delBtn.onclick = function() {
+                delDrug(name)
+            };
+            var iconDel = document.createElement("i");
+            iconDel.classList.add("fas");
+            iconDel.classList.add("fa-trash-alt");
+            delBtn.appendChild(iconDel);
+            divBtn.appendChild(delBtn);
+            tag.appendChild(input);
+            tag.appendChild(divBtn);
+            drug_group.appendChild(tag);
+            drug1.push(name);
+        }
+    }
+
+    function delDrug(name) {
+        $("#drug_add").children('#' + name).remove();
+        var index = drug1.indexOf(name);
+        delete drug1[index];
+        drug1 = drug1.filter(
+            function(el) {
+                return el != null;
+            }
+        );
+    }
+
+
+    function addDiseased() {
+        var name = $('#selectDiseased1').val();
+        var checkAdd = diseased1.includes(name);
+        if (name != '--- กรุณาเลือก ---' && checkAdd != true) {
+            var diseased_group = document.getElementById("diseased_add");
+            var tag = document.createElement("div");
+            tag.classList.add("mb-2");
+            tag.classList.add("input-group");
+            tag.id = name;
+            var input = document.createElement("input");
+            input.type = "text";
+            input.style.fontFamily = "Kanit";
+            input.classList.add("form-control");
+            input.disabled = true;
+            input.placeholder = name;
+            var divBtn = document.createElement("div");
+            divBtn.classList.add("input-group-append");
+            var delBtn = document.createElement("button");
+            delBtn.classList.add("btn");
+            delBtn.classList.add("btn-outline-secondary");
+            delBtn.type = "button";
+            delBtn.onclick = function() {
+                delDiseased(name)
+            };
+            var iconDel = document.createElement("i");
+            iconDel.classList.add("fas");
+            iconDel.classList.add("fa-trash-alt");
+            delBtn.appendChild(iconDel);
+            divBtn.appendChild(delBtn);
+            tag.appendChild(input);
+            tag.appendChild(divBtn);
+            diseased_group.appendChild(tag);
+            diseased1.push(name);
+        }
+    }
+
+    function delDiseased(name) {
+        $("#diseased_add").children('#' + name).remove();
+        var index = diseased1.indexOf(name);
+        delete diseased1[index];
+        diseased1 = diseased1.filter(
+            function(el) {
+                return el != null;
+            }
+        );
+    }
+    var drug2 = [];
+    var diseased2 = [];
+
+    function updateDrug() {
+        var name = $('#selectDrug2').val();
+        // console.log(name);
+        // console.log("----");
+        var checkAdd = drug2.includes(name);
+        if (name != '--- กรุณาเลือก ---' && checkAdd != true) {
+            var drug_group = document.getElementById("drug_update");
+            var tag = document.createElement("div");
+            tag.classList.add("mb-2");
+            tag.classList.add("input-group");
+            tag.id = name;
+            var input = document.createElement("input");
+            input.type = "text";
+            input.style.fontFamily = "Kanit";
+            input.classList.add("form-control");
+            input.disabled = true;
+            input.placeholder = name;
+            var divBtn = document.createElement("div");
+            divBtn.classList.add("input-group-append");
+            var delBtn = document.createElement("button");
+            delBtn.classList.add("btn");
+            delBtn.classList.add("btn-outline-secondary");
+            delBtn.type = "button";
+            delBtn.onclick = function() {
+                delDrugUpdate(name)
+            };
+            var iconDel = document.createElement("i");
+            iconDel.classList.add("fas");
+            iconDel.classList.add("fa-trash-alt");
+            delBtn.appendChild(iconDel);
+            divBtn.appendChild(delBtn);
+            tag.appendChild(input);
+            tag.appendChild(divBtn);
+            drug_group.appendChild(tag);
+            drug2.push(name);
+        }
+    }
+
+    function delDrugUpdate(name) {
+        $("#drug_update").children('#' + name).remove();
+        var index = drug2.indexOf(name);
+        delete drug2[index];
+        drug2 = drug2.filter(
+            function(el) {
+                return el != null;
+            }
+        );
+    }
+
+
+    function updateDiseased() {
+        var name = $('#selectDiseased2').val();
+        var checkAdd = diseased2.includes(name);
+        if (name != '--- กรุณาเลือก ---' && checkAdd != true) {
+            var diseased_group = document.getElementById("diseased_update");
+            var tag = document.createElement("div");
+            tag.classList.add("mb-2");
+            tag.classList.add("input-group");
+            tag.id = name;
+            var input = document.createElement("input");
+            input.type = "text";
+            input.style.fontFamily = "Kanit";
+            input.classList.add("form-control");
+            input.disabled = true;
+            input.placeholder = name;
+            var divBtn = document.createElement("div");
+            divBtn.classList.add("input-group-append");
+            var delBtn = document.createElement("button");
+            delBtn.classList.add("btn");
+            delBtn.classList.add("btn-outline-secondary");
+            delBtn.type = "button";
+            delBtn.onclick = function() {
+                delDiseasedUpdate(name)
+            };
+            var iconDel = document.createElement("i");
+            iconDel.classList.add("fas");
+            iconDel.classList.add("fa-trash-alt");
+            delBtn.appendChild(iconDel);
+            divBtn.appendChild(delBtn);
+            tag.appendChild(input);
+            tag.appendChild(divBtn);
+            diseased_group.appendChild(tag);
+            diseased2.push(name);
+        }
+    }
+
+    function delDiseasedUpdate(name) {
+        $("#diseased_update").children('#' + name).remove();
+        var index = diseased2.indexOf(name);
+        delete diseased2[index];
+        diseased2 = diseased2.filter(
+            function(el) {
+                return el != null;
+            }
+        );
+    }
     var path_image = null;
 
     $(document).on("click", ".cardUser", function() {
