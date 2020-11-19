@@ -16,7 +16,6 @@ class ChildrenModel extends CI_Model
         'date',
         'c_house_no',
         'c_village_no',
-        'c_lane',
         'c_road',
         'c_district',
         'c_amphur',
@@ -35,7 +34,7 @@ class ChildrenModel extends CI_Model
 
     public function findAll()
     {
-        $this->db->select('c_id,n_thainame,n_engname,c_fnameTH,c_lnameTH,c_fnameEN,c_lnameEN,c_status');
+        $this->db->select('c_id,n_thainame,n_engname,c_fnameTH,c_lnameTH,c_fnameEN,c_lnameEN,c_status,c_img');
         $this->db->join($this->table_join[0], $this->join[0]);
         return $this->db->get($this->table)->result();
     }
@@ -47,7 +46,8 @@ class ChildrenModel extends CI_Model
 
     public function create($data)
     {
-        return ($this->db->insert($this->table, $data)) ? true : false;
+        $this->db->insert($this->table, $data);
+        return $this->db->insert_id();
     }
 
     public function update($id, $data)

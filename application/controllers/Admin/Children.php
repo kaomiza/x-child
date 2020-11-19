@@ -7,6 +7,8 @@ class Children extends CI_Controller
     {
         parent::__construct();
         $this->load->model('ChildrenModel');
+        $this->load->model('ChildDiseasedModel');
+        $this->load->model('DrugAllergyModel');
     }
 
     public function index()
@@ -60,12 +62,86 @@ class Children extends CI_Controller
         }
     }
 
+    public function storeDrug($c_id)
+    {
+        if ($this->input->server('REQUEST_METHOD') == 'POST') {
+            header('Content-Type: application/json');
+            $data = $this->DrugAllergyModel->findById($c_id);
+            $input = $this->input->post();
+            try {
+                if ($data != null) {
+                    $del = $this->DrugAllergyModel->delete($c_id);
+                    if ($del) {
+                        foreach ($input['drug'] as $item) {
+                            $insert = [
+                                'c_id' => $c_id,
+                                'drug_id' => $item
+                            ];
+                            $this->DrugAllergyModel->create($insert);
+                        }
+                    }
+                } else {
+                    foreach ($input['drug'] as $item) {
+                        $insert = [
+                            'c_id' => $c_id,
+                            'drug_id' => $item
+                        ];
+                        $this->DrugAllergyModel->create($insert);
+                    }
+                }
+                echo json_encode(['status' => 'success']);
+            } catch (\Throwable $th) {
+                echo json_encode(['status' => $th]);
+            }
+        } else {
+            show_error('Allow Form POST', 405);
+        }
+    }
+
+    public function storeDiseased($c_id)
+    {
+        if ($this->input->server('REQUEST_METHOD') == 'POST') {
+            header('Content-Type: application/json');
+            $data = $this->ChildDiseasedModel->findById($c_id);
+            $input = $this->input->post();
+            try {
+                if ($data != null) {
+                    $del = $this->ChildDiseasedModel->delete($c_id);
+                    if ($del) {
+                        foreach ($input['diseased'] as $item) {
+                            $insert = [
+                                'c_id' => $c_id,
+                                'd_id' => $item
+                            ];
+                            $this->ChildDiseasedModel->create($insert);
+                        }
+                    }
+                } else {
+                    foreach ($input['diseased'] as $item) {
+                        $insert = [
+                            'c_id' => $c_id,
+                            'd_id' => $item
+                        ];
+                        $this->ChildDiseasedModel->create($insert);
+                    }
+                }
+                echo json_encode(['status' => 'success']);
+            } catch (\Throwable $th) {
+                echo json_encode(['status' => $th]);
+            }
+        } else {
+            show_error('Allow Form POST', 405);
+        }
+    }
+
     public function create()
     {
         if ($this->input->server('REQUEST_METHOD') == 'POST') {
             header('Content-Type: application/json');
             $data = $this->input->post();
-            $result = $this->ChildrenModel->create($data);
+            $result = [
+                'insert_id' => $this->ChildrenModel->create($data)
+            ];
             echo json_encode($result);
         } else {
             show_error('Allow Form POST', 405);

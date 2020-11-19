@@ -3,7 +3,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title text-heading">เพิ่มเด็กพิเศษ</h4>
-                <button type="button" class="close" data-dismiss="modal">×</button>
+                <button type="button" class="close" data-dismiss="modal" onclick="reset_form('add')">×</button>
             </div>
             <div class="modal-body">
                 <div class="row">
@@ -33,7 +33,7 @@
                             <label class="text-paragraph" style="color: red;">*</label>
                         </div>
                         <div>
-                            <select class="form-control text-paragraph select2bs4" id="prenameTH1" required="" onchange="auto_prename()">
+                            <select class="form-control text-paragraph select2bs4" id="prenameTH1" required="" onchange="auto_prename('add')">
                                 <option selected="">--- กรุณาเลือก ---</option>
                             </select>
                             <label class="text-paragraph" id="erprenameTH1" style="color: red; display:none; padding-top:5px;">
@@ -182,7 +182,7 @@
                             <label class="text-paragraph">บ้านเลขที่</label>
                         </div>
                         <div>
-                            <input onkeyup="isHomeNumchar(this.value,this)" style="font-family: 'Kanit';" type="text" class="form-control" placeholder="เช่น 70/1">
+                            <input id="HouseNo1" onkeyup="isHomeNumchar(this.value,this)" style="font-family: 'Kanit';" type="text" class="form-control" placeholder="เช่น 70/1">
                         </div>
                     </div>
                 </div>
@@ -192,7 +192,7 @@
                             <label class="text-paragraph">หมู่</label>
                         </div>
                         <div>
-                            <input onkeyup="isNumAllchar(this.value,this)" style="font-family: 'Kanit';" type="text" class="form-control" placeholder="เช่น 10">
+                            <input id="VillageNo1" onkeyup="isNumAllchar(this.value,this)" style="font-family: 'Kanit';" type="text" class="form-control" placeholder="เช่น 10">
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -200,7 +200,7 @@
                             <label class="text-paragraph">ถนน</label>
                         </div>
                         <div>
-                            <input onkeyup="isRoadchar(this.value,this)" style="font-family: 'Kanit';" type="text" class="form-control" placeholder="เช่น ถนนมิตรภาพ">
+                            <input id="Road1" onkeyup="isRoadchar(this.value,this)" style="font-family: 'Kanit';" type="text" class="form-control" placeholder="เช่น ถนนมิตรภาพ">
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -268,9 +268,6 @@
                             <div class="input-group">
                                 <select class="custom-select text-paragraph" id="selectDrug1">
                                     <option selected>--- กรุณาเลือก ---</option>
-                                    <option value="One">One</option>
-                                    <option value="Two">Two</option>
-                                    <option value="Three">Three</option>
                                 </select>
                                 <div class="input-group-append">
                                     <div class="input-group-append">
@@ -291,9 +288,6 @@
                             <div class="input-group">
                                 <select class="custom-select text-paragraph" id="selectDiseased1">
                                     <option selected>--- กรุณาเลือก ---</option>
-                                    <option value="One">One</option>
-                                    <option value="Two">Two</option>
-                                    <option value="Three">Three</option>
                                 </select>
                                 <div class="input-group-append">
                                     <div class="input-group-append">
@@ -306,7 +300,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary text_btn" data-dismiss="modal">ปิด</button>
+                <button type="button" class="btn btn-secondary text_btn" data-dismiss="modal" onclick="reset_form('add')">ปิด</button>
                 <button type="button" class="btn text_btn" style="background-color: #1e7e34; color:white;" onclick="onClickSave('insert')">บันทึก</button>
             </div>
         </div>
@@ -347,9 +341,8 @@
                             <label class="text-paragraph" style="color: red;">*</label>
                         </div>
                         <div>
-                            <select class="form-control text-paragraph select2bs4" id="prenameTH2" required="">
+                            <select class="form-control text-paragraph select2bs4" id="prenameTH2" required="" onchange="auto_prename('edit')">
                                 <option selected="">--- กรุณาเลือก ---</option>
-                                <option>นาย</option>
                             </select>
                             <label class="text-paragraph" id="erprenameTH2" style="color: red; display:none; padding-top:5px;">
                                 กรุณาเลือกคำนำหน้าชื่อภาษาไทย
@@ -388,9 +381,8 @@
                             <label class="text-paragraph" style="color: red;">*</label>
                         </div>
                         <div>
-                            <select class="form-control text-paragraph select2bs4" id="prenameEN2" required="">
+                            <select class="form-control text-paragraph select2bs4" id="prenameEN2" required="" disabled>
                                 <option selected="">--- กรุณาเลือก ---</option>
-                                <option>Mr.</option>
                             </select>
                             <label class="text-paragraph" id="erprenameEN2" style="color: red; display:none; padding-top:5px;">
                                 กรุณาเลือกคำนำหน้าชื่อภาษาอังกฤษ
@@ -663,23 +655,7 @@
     </div>
     <div class="bgWhite padding_main mainBoxRadius">
         <div id="data-container">
-            <!-- <div class="row">
-                <div class="col-md-3 main-margin" style="text-align: center;">
-                    <div class="cardUser cardBox main-margin" style="cursor: pointer;" data-toggle="modal" data-target="#editChildren">
-                        <div class="main-margin">
-                            <div>
-                                <img style="width: 80%; height: 80%;" src="<?php echo base_url(); ?>assets/images/admin/DefualtUser.png">
-                            </div>
-                            <div>
-                                <label style="cursor: pointer;" class="text-paragraph">นาย เกียรติศักดิ์ เลือดใหม่<br>Mr. kattisack radmai</label>
-                            </div>
-                            <div>
-                                <label style="cursor: pointer;" class="text-paragraph">สถานะการใช้งาน : <span style="color: #1ebb63;">เปิดใช้งาน</span></label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
+            <!-- fetch_list -->
         </div>
         <div class="d-flex justify-content-center mt-3" id="pagination-container"></div>
     </div>
@@ -688,25 +664,22 @@
 <script src="<?php echo base_url(); ?>assets/paginationjs/dist/pagination.min.js"></script>
 <script>
     var prename = [];
+    var drug1 = [];
+    var diseased1 = [];
+    var drug2 = [];
+    var diseased2 = [];
 
     function onClickEdit(id) {
         $.get('<?php echo base_url('admin/children/getById'); ?>/' + id, (res) => {
+            fetch_prename('edit', res.c_prename);
+            fetch_typechildren('edit');
+            fetch_school('edit');
+            fetch_parent('edit');
+            fetch_expert('edit');
+            fetch_province('edit');
+            fetch_children_drug('edit');
+            fetch_children_allergy('edit');
             console.log(res);
-        });
-    }
-
-    function auto_prename() {
-        var p_id = $('#prenameTH1').val();
-        $('#prenameEN1').empty();
-        $('#prenameEN1').append('<option selected="">--- select ---</option>');
-        prename.forEach(element => {
-            if (element.n_id == p_id) {
-                $('#prenameEN1').append('<option value="' + element.n_id + '" selected>' + element.n_engname +
-                    '</option>');
-            } else {
-                $('#prenameEN1').append('<option value="' + element.n_id + '">' + element.n_engname +
-                    '</option>');
-            }
         });
     }
 
@@ -717,9 +690,86 @@
         fetch_parent('add');
         fetch_expert('add');
         fetch_province('add');
+        fetch_children_drug('add');
+        fetch_children_allergy('add');
     }
 
-    function fetch_prename(fn) {
+    function reset_form(fn) {
+        if (fn == 'add') {
+            $("#preview1").attr("src", "<?php echo base_url(); ?>assets/images/admin/DefualtUser.png");
+            elementInputAdd = [
+                '#prenameTH1',
+                '#prenameEN1',
+                '#fnameTH1',
+                '#lnameTH1',
+                '#fnameEN1',
+                '#lnameEN1',
+                '#datepicker1',
+                '#HouseNo1',
+                '#VillageNo1',
+                '#Road1',
+                '#Postcode1',
+                '#file1'
+            ];
+            elementInputAdd.forEach(element => {
+                $(element).val('');
+            });
+            elementSelectAdd = [
+                '#SelectPro1',
+                '#SelectAm1',
+                '#SelectDist1',
+                '#tc1',
+                '#parent1',
+                '#expert1',
+                '#school1',
+                '#selectDrug1',
+                '#selectDiseased1'
+            ];
+            elementSelectAdd.forEach(element => {
+                $(element).empty();
+                $(element).append('<option selected="">--- กรุณาเลือก ---</option>');
+            });
+        }
+        if (fn == 'edit') {
+
+        }
+    }
+
+    function fetch_children_drug(fn) {
+        if (fn == 'add') {
+            $('#selectDrug1').empty();
+            $('#selectDrug1').append('<option selected="">--- กรุณาเลือก ---</option>');
+            $.get('<?php echo base_url('admin/drug/getListSelect'); ?>').done((res) => {
+                console.log(res);
+                res.data.forEach(element => {
+                    $('#selectDrug1').append('<option value="' + element.drug_id + '">' +
+                        element.drug_name_th + '</option>');
+                });
+            });
+        }
+        if (fn == 'edit') {
+
+        }
+    }
+
+    function fetch_children_allergy(fn) {
+        if (fn == 'add') {
+            $('#selectDiseased1').empty();
+            $('#selectDiseased1').append('<option selected="">--- กรุณาเลือก ---</option>');
+            $.get('<?php echo base_url('admin/Diseased/getListSelect'); ?>').done((res) => {
+                console.log(res);
+                res.data.forEach(element => {
+                    $('#selectDiseased1').append('<option value="' + element.d_id + '">' +
+                        element.d_nameTH + '</option>');
+                });
+            });
+        }
+        if (fn == 'edit') {
+
+        }
+    }
+
+    function fetch_prename(fn, id = null) {
         if (fn == 'add') {
             $('#prenameTH1').empty();
             $('#prenameTH1').append('<option selected="">--- กรุณาเลือก ---</option>');
@@ -736,11 +786,66 @@
         }
 
         if (fn == 'edit') {
-
+            $('#prenameTH2').empty();
+            $('#prenameTH2').append('<option>--- กรุณาเลือก ---</option>');
+            $('#prenameEN2').empty();
+            $('#prenameEN2').append('<option>--- select ---</option>');
+            $.get('<?php echo base_url("admin/pre_name/getListSelect"); ?>').done((res) => {
+                res.data.forEach(element => {
+                    if (element.n_id == id) {
+                        $('#prenameTH2').append('<option selected value="' + element.n_id + '">' + element
+                            .n_thainame +
+                            '</option>');
+                        $('#prenameEN2').append('<option selected value="' + element.n_id + '">' + element
+                            .n_engname +
+                            '</option>');
+                    } else {
+                        $('#prenameTH2').append('<option value="' + element.n_id + '">' + element
+                            .n_thainame +
+                            '</option>');
+                        $('#prenameEN2').append('<option value="' + element.n_id + '">' + element
+                            .n_engname +
+                            '</option>');
+                    }
+                });
+                prename = res.data;
+            });
         }
     }
 
-    function fetch_typechildren(fn) {
+    function auto_prename(fn) {
+        if (fn == 'add') {
+            var p_id = $('#prenameTH1').val();
+            $('#prenameEN1').empty();
+            $('#prenameEN1').append('<option selected="">--- select ---</option>');
+            prename.forEach(element => {
+                if (element.n_id == p_id) {
+                    $('#prenameEN1').append('<option value="' + element.n_id + '" selected>' + element.n_engname +
+                        '</option>');
+                } else {
+                    $('#prenameEN1').append('<option value="' + element.n_id + '">' + element.n_engname +
+                        '</option>');
+                }
+            });
+        }
+
+        if (fn == 'edit') {
+            var p_id = $('#prenameTH2').val();
+            $('#prenameEN1').empty();
+            $('#prenameEN2').append('<option selected="">--- select ---</option>');
+            prename.forEach(element => {
+                if (element.n_id == p_id) {
+                    $('#prenameEN2').append('<option value="' + element.n_id + '" selected>' + element.n_engname +
+                        '</option>');
+                } else {
+                    $('#prenameEN2').append('<option value="' + element.n_id + '">' + element.n_engname +
+                        '</option>');
+                }
+            });
+        }
+    }
+
+    function fetch_typechildren(fn, id = null) {
         if (fn == 'add') {
             $('#tc1').empty();
             $('#tc1').append('<option selected="">--- กรุณาเลือก ---</option>');
@@ -750,7 +855,6 @@
                         '</option>');
                 });
             });
-
         }
         if (fn == 'edit') {
 
@@ -920,82 +1024,19 @@
             }
         }
     }
-</script>
-<script>
-    $('#pagination-container').pagination({
-        dataSource: (done) => {
-            $.ajax({
-                type: 'GET',
-                url: '<?php echo base_url('admin/children/getall'); ?>',
-                success: (response) => {
-                    done(response);
-                }
-            });
-        },
-        pageSize: 4,
-        className: 'paginationjs-theme-blue paginationjs-big',
-        callback: function(data, pagination) {
-            var html = Templating(data);
-            $('#data-container').html(html);
-        }
-    });
-
-    function Templating(data) {
-        var html = '<div class="row">';
-        $.each(data, function(index, item) {
-            var status = '';
-            if (item.c_status == 1) {
-                status += '<span style="color: #1ebb63;">เปิดใช้งาน</span>'
-            } else {
-                status += '<span style="color: #ff2727;">ปิดใช้งาน</span>'
-            }
-            html +=
-                `
-            <div class="col-md-3 main-margin" style="text-align: center;">
-                    <div class="cardUser cardBox main-margin" style="cursor: pointer;" data-toggle="modal" data-target="#editChildren" onclick="onClickEdit(` +
-                item.c_id + `)">
-                        <div class="main-margin">
-                            <div>
-                                <img style="width: 80%; height: 80%;" src="<?php echo base_url(); ?>assets/images/admin/DefualtUser.png">
-                            </div>
-                            <div>
-                                <label style="cursor: pointer;" class="text-paragraph">` +
-                item.n_thainame + ' ' +
-                item.c_fnameTH + ' ' +
-                item.c_lnameTH +
-                `<br>` +
-                item.n_engname + ' ' +
-                item.c_fnameEN + ' ' +
-                item.c_fnameEN +
-                `</label>
-                            </div>
-                            <div>
-                                <label style="cursor: pointer;" class="text-paragraph">สถานะการใช้งาน : ` + status + `</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `;
-        });
-        html += '</div>';
-        return html;
-    }
-</script>
-<script>
-    var drug1 = [];
-    var diseased1 = [];
 
     function addDrug() {
-        var name = $('#selectDrug1').val();
+        var name = $('#selectDrug1 option:selected').text();
+        var id = $('#selectDrug1').val();
         // console.log(name);
         // console.log("----");
-        var checkAdd = drug1.includes(name);
-        if (name != '--- กรุณาเลือก ---' && checkAdd != true) {
+        var checkAdd = drug1.includes(id);
+        if (id != '--- กรุณาเลือก ---' && checkAdd != true) {
             var drug_group = document.getElementById("drug_add");
             var tag = document.createElement("div");
             tag.classList.add("mb-2");
             tag.classList.add("input-group");
-            tag.id = name;
+            tag.id = id;
             var input = document.createElement("input");
             input.type = "text";
             input.style.fontFamily = "Kanit";
@@ -1009,7 +1050,7 @@
             delBtn.classList.add("btn-outline-secondary");
             delBtn.type = "button";
             delBtn.onclick = function() {
-                delDrug(name)
+                delDrug(id)
             };
             var iconDel = document.createElement("i");
             iconDel.classList.add("fas");
@@ -1019,13 +1060,13 @@
             tag.appendChild(input);
             tag.appendChild(divBtn);
             drug_group.appendChild(tag);
-            drug1.push(name);
+            drug1.push(id);
         }
     }
 
-    function delDrug(name) {
-        $("#drug_add").children('#' + name).remove();
-        var index = drug1.indexOf(name);
+    function delDrug(id) {
+        $("#drug_add").children('#' + id).remove();
+        var index = drug1.indexOf(id);
         delete drug1[index];
         drug1 = drug1.filter(
             function(el) {
@@ -1036,14 +1077,15 @@
 
 
     function addDiseased() {
-        var name = $('#selectDiseased1').val();
+        var name = $('#selectDiseased1 option:selected').text();
+        var id = $('#selectDiseased1').val();
         var checkAdd = diseased1.includes(name);
         if (name != '--- กรุณาเลือก ---' && checkAdd != true) {
             var diseased_group = document.getElementById("diseased_add");
             var tag = document.createElement("div");
             tag.classList.add("mb-2");
             tag.classList.add("input-group");
-            tag.id = name;
+            tag.id = id;
             var input = document.createElement("input");
             input.type = "text";
             input.style.fontFamily = "Kanit";
@@ -1057,7 +1099,7 @@
             delBtn.classList.add("btn-outline-secondary");
             delBtn.type = "button";
             delBtn.onclick = function() {
-                delDiseased(name)
+                delDiseased(id)
             };
             var iconDel = document.createElement("i");
             iconDel.classList.add("fas");
@@ -1067,7 +1109,7 @@
             tag.appendChild(input);
             tag.appendChild(divBtn);
             diseased_group.appendChild(tag);
-            diseased1.push(name);
+            diseased1.push(id);
         }
     }
 
@@ -1081,8 +1123,6 @@
             }
         );
     }
-    var drug2 = [];
-    var diseased2 = [];
 
     function updateDrug() {
         var name = $('#selectDrug2').val();
@@ -1180,8 +1220,90 @@
             }
         );
     }
-    var path_image = null;
+</script>
+<script>
+    $('#pagination-container').pagination({
+        dataSource: (done) => {
+            $.ajax({
+                type: 'GET',
+                url: '<?php echo base_url('admin/children/getall'); ?>',
+                success: (response) => {
+                    done(response);
+                }
+            });
+        },
+        pageSize: 4,
+        className: 'paginationjs-theme-blue paginationjs-big',
+        callback: function(data, pagination) {
+            var html = Templating(data);
+            $('#data-container').html(html);
+        }
+    });
 
+    function list_reload() {
+        $('#data-container').empty();
+        $('#pagination-container').pagination({
+            dataSource: (done) => {
+                $.ajax({
+                    type: 'GET',
+                    url: '<?php echo base_url('admin/children/getall'); ?>',
+                    success: (response) => {
+                        done(response);
+                    }
+                });
+            },
+            pageSize: 4,
+            className: 'paginationjs-theme-blue paginationjs-big',
+            callback: function(data, pagination) {
+                var html = Templating(data);
+                $('#data-container').html(html);
+            }
+        });
+    }
+
+    function Templating(data) {
+        var html = '<div class="row">';
+        $.each(data, function(index, item) {
+            var status = '';
+            if (item.c_status == 1) {
+                status += '<span style="color: #1ebb63;">เปิดใช้งาน</span>'
+            } else {
+                status += '<span style="color: #ff2727;">ปิดใช้งาน</span>'
+            }
+            html +=
+                `
+            <div class="col-md-3 main-margin" style="text-align: center;">
+                    <div class="cardUser cardBox main-margin" style="cursor: pointer;" data-toggle="modal" data-target="#editChildren" onclick="onClickEdit(` +
+                item.c_id + `)">
+                        <div class="main-margin">
+                            <div>
+                                <img style="width: 80%; height: 80%;" src="<?php echo base_url(); ?>` + item.c_img + `">
+                            </div>
+                            <div>
+                                <label style="cursor: pointer;" class="text-paragraph">` +
+                item.n_thainame + ' ' +
+                item.c_fnameTH + ' ' +
+                item.c_lnameTH +
+                `<br>` +
+                item.n_engname + ' ' +
+                item.c_fnameEN + ' ' +
+                item.c_fnameEN +
+                `</label>
+                            </div>
+                            <div>
+                                <label style="cursor: pointer;" class="text-paragraph">สถานะการใช้งาน : ` + status + `</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+        html += '</div>';
+        return html;
+    }
+</script>
+<script>
+    var path_image = null;
     $(document).on("click", ".cardUser", function() {
         $('.toggle').css("width", "100px");
     });
@@ -1229,7 +1351,8 @@
                         cache: false,
                         async: true,
                         success: (res) => {
-                            path_image = res.image_metadata.file_path
+                            path_image = 'upload/images/' + res.image_metadata.file_name
+                            console.log(path_image);
                         }
                     });
                 } else {
@@ -1259,8 +1382,23 @@
     });
     //********end chooseImg************* */
 
+    function update_drug(user_id, list) {
+        $.post('<?php echo base_url('admin/children/storeDrug') ?>/' + user_id, {
+            drug: list
+        }).done((res) => {
+            console.log(res);
+        });
+    }
+
+    function update_diseased(user_id, list) {
+        $.post('<?php echo base_url('admin/children/storeDiseased') ?>/' + user_id, {
+            diseased: list
+        }).done((res) => {
+            console.log(res);
+        });
+    }
+
     function onClickSave(func) {
-        console.log(func);
         var checkError = true;
         if (func == 'insert') {
             var prenameTH1 = document.getElementById("prenameTH1").value;
@@ -1335,8 +1473,6 @@
                 var splitBD = birthday1.split('/');
                 var currentDate = new Date();
                 var dateSelect = new Date(splitBD[1] + "/" + splitBD[0] + "/" + splitBD[2]);
-                console.log(currentDate);
-                console.log(dateSelect);
                 if (dateSelect >= currentDate) {
                     document.getElementById("erdatepicker1").style.display = "block";
                     document.getElementById("datepicker1").style.border = "2px solid #bd2130";
@@ -1405,6 +1541,39 @@
 
             if (checkError == true) {
                 /********insert**********/
+                var HouseNo = document.getElementById("HouseNo1").value;
+                var VillageNo = document.getElementById("VillageNo1").value;
+                var Road = document.getElementById("Road1").value;
+                var Postcode = document.getElementById("Postcode1").value;
+                $.post('<?php echo base_url('admin/children/create'); ?>', {
+                    c_prename: prenameTH1,
+                    c_fnameTH: fnameTH1,
+                    c_lnameTH: lnameTH1,
+                    c_fnameEN: fnameEN1,
+                    c_lnameEN: lnameEN1,
+                    tc_id: tc1,
+                    school_id: school1,
+                    c_parent_id: parent1,
+                    c_expert_id: expert1,
+                    date: birthday1,
+                    c_house_no: HouseNo,
+                    c_village_no: VillageNo,
+                    c_road: Road,
+                    c_province: SelectPro1,
+                    c_district: SelectDist1,
+                    c_amphur: SelectAm1,
+                    c_zip: Postcode,
+                    c_img: path_image != null ? path_image : 'assets/images/admin/DefualtUser.png',
+                }).done((res) => {
+                    // reset_form('add');
+                    update_drug(res.insert_id, drug1);
+                    update_diseased(res.insert_id, diseased1);
+                    $('#insertChildren').modal('hide');
+                    toastr.success('เพิ่มข้อมูลสำเร็จ');
+                    list_reload();
+                }).fail((xhr, status, error) => {
+                    toastr.error('ไม่สามารถเพิ่มข้อมูลได้ โปรดลองใหม่ภายหลัง');
+                });
                 console.log('Start Insert');
             }
         } else if (func == 'edit') {
