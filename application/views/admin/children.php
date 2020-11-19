@@ -421,7 +421,7 @@
                             <label class="text-paragraph" style="color: red;">*</label>
                         </div>
                         <div>
-                            <input id="datepicker2" style="font-family: 'Kanit';" value="วัน/เดือน/ปี" disabled class="datepicker form-control" />
+                            <input id="datepicker2" placeholder="วัน/เดือน/ปี" readonly>
                             <label class="text-paragraph" id="erdatepicker2" style="color: red; display:none; padding-top:5px;">
                                 กรุณาเลือกวันเกิดให้ถูกต้อง
                             </label>
@@ -490,7 +490,7 @@
                             <label class="text-paragraph">บ้านเลขที่</label>
                         </div>
                         <div>
-                            <input onkeyup="isHomeNumchar(this.value,this)" style="font-family: 'Kanit';" type="text" class="form-control" placeholder="เช่น 70/2">
+                            <input id="HouseNo2" onkeyup="isHomeNumchar(this.value,this)" style="font-family: 'Kanit';" type="text" class="form-control" placeholder="เช่น 70/2">
                         </div>
                     </div>
                 </div>
@@ -500,7 +500,7 @@
                             <label class="text-paragraph">หมู่</label>
                         </div>
                         <div>
-                            <input onkeyup="isNumAllchar(this.value,this)" style="font-family: 'Kanit';" type="text" class="form-control" placeholder="เช่น 20">
+                            <input id="VillageNo2" onkeyup="isNumAllchar(this.value,this)" style="font-family: 'Kanit';" type="text" class="form-control" placeholder="เช่น 20">
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -508,7 +508,7 @@
                             <label class="text-paragraph">ถนน</label>
                         </div>
                         <div>
-                            <input onkeyup="isRoadchar(this.value,this)" style="font-family: 'Kanit';" type="text" class="form-control" placeholder="เช่น ถนนมิตรภาพ">
+                            <input id="Road2" onkeyup="isRoadchar(this.value,this)" style="font-family: 'Kanit';" type="text" class="form-control" placeholder="เช่น ถนนมิตรภาพ">
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -517,9 +517,8 @@
                             <label class="text-paragraph" style="color: red;">*</label>
                         </div>
                         <div>
-                            <select class="form-control text-paragraph select2bs4" id="SelectPro2" required="">
+                            <select class="form-control text-paragraph select2bs4" id="SelectPro2" required="" onchange="fetch_amphur('edit')">
                                 <option selected="">--- กรุณาเลือก ---</option>
-                                <option>นครราชสีมา</option>
                             </select>
                             <label class="text-paragraph" id="erSelectPro2" style="color: red; display:none; padding-top:5px;">
                                 กรุณาเลือกจังหวัด
@@ -534,9 +533,8 @@
                             <label class="text-paragraph" style="color: red;">*</label>
                         </div>
                         <div>
-                            <select class="form-control text-paragraph select2bs4" id="SelectAm2" required="">
+                            <select class="form-control text-paragraph select2bs4" id="SelectAm2" required="" onchange="fetch_district('edit')">
                                 <option selected="">--- กรุณาเลือก ---</option>
-                                <option>อำเภอนครราชสีมา</option>
                             </select>
                             <label class="text-paragraph" id="erSelectAm2" style="color: red; display:none; padding-top:5px;">
                                 กรุณาเลือกอำเภอ
@@ -551,7 +549,6 @@
                         <div>
                             <select class="form-control text-paragraph select2bs4" id="SelectDist2" required="">
                                 <option selected="">--- กรุณาเลือก ---</option>
-                                <option>ในเมือง</option>
                             </select>
                             <label class="text-paragraph" id="erSelectDist2" style="color: red; display:none; padding-top:5px;">
                                 กรุณาเลือกตำบล
@@ -563,7 +560,7 @@
                             <label class="text-paragraph">ไปรษณีย์</label>
                         </div>
                         <div>
-                            <input style="font-family: 'Kanit';" type="text" class="form-control" disabled placeholder="30000">
+                            <input id="Postcode2" style="font-family: 'Kanit';" type="text" class="form-control" disabled placeholder="30000">
                         </div>
                     </div>
                 </div>
@@ -579,9 +576,6 @@
                             <div class="input-group">
                                 <select class="custom-select text-paragraph" id="selectDrug2">
                                     <option selected>--- กรุณาเลือก ---</option>
-                                    <option value="One">One</option>
-                                    <option value="Two">Two</option>
-                                    <option value="Three">Three</option>
                                 </select>
                                 <div class="input-group-append">
                                     <div class="input-group-append">
@@ -602,9 +596,6 @@
                             <div class="input-group">
                                 <select class="custom-select text-paragraph" id="selectDiseased2">
                                     <option selected>--- กรุณาเลือก ---</option>
-                                    <option value="One">One</option>
-                                    <option value="Two">Two</option>
-                                    <option value="Three">Three</option>
                                 </select>
                                 <div class="input-group-append">
                                     <div class="input-group-append">
@@ -672,15 +663,81 @@
     function onClickEdit(id) {
         $.get('<?php echo base_url('admin/children/getById'); ?>/' + id, (res) => {
             fetch_prename('edit', res.c_prename);
-            fetch_typechildren('edit');
-            fetch_school('edit');
-            fetch_parent('edit');
-            fetch_expert('edit');
-            fetch_province('edit');
+            fetch_typechildren('edit', res.tc_id);
+            fetch_school('edit', res.school_id);
+            fetch_parent('edit', res.c_parent_id);
+            fetch_expert('edit', res.c_expert_id);
+            fetch_province('edit', res.c_province);
+            fetch_amphur('edit', res.c_amphur);
+            fetch_editAddress(res.c_district, res.c_province, res.c_amphur);
             fetch_children_drug('edit');
             fetch_children_allergy('edit');
+            $('#fnameTH2').val(res.c_fnameTH);
+            $('#lnameTH2').val(res.c_lnameTH);
+            $('#fnameEN2').val(res.c_fnameEN);
+            $('#lnameEN2').val(res.c_lnameEN);
+            $('#datepicker2').val(res.date);
+            $('#HouseNo2').val(res.c_house_no);
+            $('#VillageNo2').val(res.c_village_no);
+            $('#Road2').val(res.c_road);
+            $('#Postcode2').val(res.c_zip);
+            $("#preview2").attr("src", "<?php echo base_url(); ?>" + res.c_img);
             console.log(res);
         });
+    }
+
+    async function fetch_editAddress(district_id, province_id, amphur_id) {
+        await $.get('<?php echo base_url('api/address/province'); ?>', (res) => {
+            res.forEach(element => {
+                if (element.PROVINCE_ID == province_id) {
+                    $('#SelectPro2').append('<option value="' + element.PROVINCE_ID + '" selected>' + element.PROVINCE_NAME + '</option>')
+                } else {
+                    $('#SelectPro2').append('<option value="' + element.PROVINCE_ID + '">' + element.PROVINCE_NAME + '</option>')
+                }
+            });
+        })
+
+
+        var p = await $('#SelectPro2').val();
+        if (p == '--- กรุณาเลือก ---') {
+            await $('#SelectAm2').prop('disabled', true);
+        } else {
+            await $('#SelectAm2').empty();
+            await $('#SelectAm2').append('<option selected="">--- กรุณาเลือก ---</option>');
+            await $('#SelectAm2').prop('disabled', false);
+            await $('#SelectDist2').prop('disabled', true);
+            await $.get('<?php echo base_url('api/address/amphur'); ?>/' + p, (res) => {
+                res.forEach(element => {
+                    if (element.AMPHUR_ID == amphur_id) {
+                        $('#SelectAm2').append('<option value="' + element.AMPHUR_ID + '" selected>' + element.AMPHUR_NAME + '</option>')
+                    } else {
+                        $('#SelectAm2').append('<option value="' + element.AMPHUR_ID + '">' + element.AMPHUR_NAME + '</option>')
+                    }
+                });
+            })
+        }
+
+        var amphur = await $('#SelectAm2').val();
+        if (amphur == '--- กรุณาเลือก ---') {
+            await $('#SelectDist2').append('<option selected="">--- กรุณาเลือก ---</option>');
+            await $('#SelectDist2').prop('disabled', true);
+        } else {
+            await $.get('<?php echo base_url('api/address/amphurById'); ?>/' + amphur, (res) => {
+                $('#Postcode2').val(res.POSTCODE);
+            })
+            await $('#SelectDist2').prop('disabled', false);
+            await $('#SelectDist2').empty();
+            await $('#SelectDist2').append('<option selected="">--- กรุณาเลือก ---</option>');
+            await $.get('<?php echo base_url('api/address/district'); ?>/' + amphur, (res) => {
+                res.forEach(element => {
+                    if (element.DISTRICT_ID == district_id) {
+                        $('#SelectDist2').append('<option value="' + element.DISTRICT_ID + '" selected>' + element.DISTRICT_NAME + '</option>')
+                    } else {
+                        $('#SelectDist2').append('<option value="' + element.DISTRICT_ID + '">' + element.DISTRICT_NAME + '</option>');
+                    }
+                });
+            });
+        }
     }
 
     function add_fetchData() {
@@ -740,7 +797,6 @@
             $('#selectDrug1').empty();
             $('#selectDrug1').append('<option selected="">--- กรุณาเลือก ---</option>');
             $.get('<?php echo base_url('admin/drug/getListSelect'); ?>').done((res) => {
-                console.log(res);
                 res.data.forEach(element => {
                     $('#selectDrug1').append('<option value="' + element.drug_id + '">' +
                         element.drug_name_th + '</option>');
@@ -748,7 +804,14 @@
             });
         }
         if (fn == 'edit') {
-
+            $('#selectDrug2').empty();
+            $('#selectDrug2').append('<option selected="">--- กรุณาเลือก ---</option>');
+            $.get('<?php echo base_url('admin/drug/getListSelect'); ?>').done((res) => {
+                res.data.forEach(element => {
+                    $('#selectDrug2').append('<option value="' + element.drug_id + '">' +
+                        element.drug_name_th + '</option>');
+                });
+            });
         }
     }
 
@@ -757,7 +820,6 @@
             $('#selectDiseased1').empty();
             $('#selectDiseased1').append('<option selected="">--- กรุณาเลือก ---</option>');
             $.get('<?php echo base_url('admin/Diseased/getListSelect'); ?>').done((res) => {
-                console.log(res);
                 res.data.forEach(element => {
                     $('#selectDiseased1').append('<option value="' + element.d_id + '">' +
                         element.d_nameTH + '</option>');
@@ -765,7 +827,14 @@
             });
         }
         if (fn == 'edit') {
-
+            $('#selectDiseased2').empty();
+            $('#selectDiseased2').append('<option selected="">--- กรุณาเลือก ---</option>');
+            $.get('<?php echo base_url('admin/Diseased/getListSelect'); ?>').done((res) => {
+                res.data.forEach(element => {
+                    $('#selectDiseased2').append('<option value="' + element.d_id + '">' +
+                        element.d_nameTH + '</option>');
+                });
+            });
         }
     }
 
@@ -857,11 +926,23 @@
             });
         }
         if (fn == 'edit') {
-
+            $('#tc2').empty();
+            $('#tc2').append('<option>--- กรุณาเลือก ---</option>');
+            $.get('<?php echo base_url('admin/type_children/getListSelect'); ?>').done((res) => {
+                res.data.forEach(element => {
+                    if (element.tc_id == id) {
+                        $('#tc2').append('<option selected value="' + element.tc_id + '">' + element.tc_name +
+                            '</option>');
+                    } else {
+                        $('#tc2').append('<option value="' + element.tc_id + '">' + element.tc_name +
+                            '</option>');
+                    }
+                });
+            });
         }
     }
 
-    function fetch_school(fn) {
+    function fetch_school(fn, id = null) {
         if (fn == 'add') {
             $('#school1').empty();
             $('#school1').append('<option selected="">--- กรุณาเลือก ---</option>');
@@ -873,12 +954,24 @@
             });
         }
         if (fn == 'edit') {
-
+            $('#school2').empty();
+            $('#school2').append('<option>--- กรุณาเลือก ---</option>');
+            $.get('<?php echo base_url('admin/school/getListSelect'); ?>').done((res) => {
+                res.data.forEach(element => {
+                    if (element.sc_id == id) {
+                        $('#school2').append('<option selected value="' + element.sc_id + '">' + element.sc_nameTH +
+                            '</option>');
+                    } else {
+                        $('#school2').append('<option value="' + element.sc_id + '">' + element.sc_nameTH +
+                            '</option>');
+                    }
+                });
+            });
         }
 
     }
 
-    function fetch_parent(fn) {
+    function fetch_parent(fn, id = null) {
         if (fn == 'add') {
             $('#parent1').empty();
             $('#parent1').append('<option selected="">--- กรุณาเลือก ---</option>');
@@ -894,11 +987,30 @@
         }
 
         if (fn == 'edit') {
+            $('#parent2').empty();
+            $('#parent2').append('<option>--- กรุณาเลือก ---</option>');
+            $.get('<?php echo base_url('admin/parents/getlistselect'); ?>').done((res) => {
+                res.forEach(element => {
+                    if (element.pa_id == id) {
+                        $('#parent2').append('<option selected value="' + element.pa_id + '">' +
+                            element.n_thainame + ' ' +
+                            element.pa_fnameTH + ' ' +
+                            element.pa_lnameTH +
+                            '</option>');
 
+                    } else {
+                        $('#parent2').append('<option value="' + element.pa_id + '">' +
+                            element.n_thainame + ' ' +
+                            element.pa_fnameTH + ' ' +
+                            element.pa_lnameTH +
+                            '</option>');
+                    }
+                });
+            });
         }
     }
 
-    function fetch_expert(fn) {
+    function fetch_expert(fn, id = null) {
         if (fn == 'add') {
             $.get('<?php echo base_url('admin/expert/getlistselect'); ?>').done((res) => {
                 $('#expert1').empty();
@@ -914,7 +1026,25 @@
         }
 
         if (fn == 'edit') {
-
+            $.get('<?php echo base_url('admin/expert/getlistselect'); ?>').done((res) => {
+                $('#expert2').empty();
+                $('#expert2').append('<option>--- กรุณาเลือก ---</option>');
+                res.forEach(element => {
+                    if (element.e_id == id) {
+                        $('#expert2').append('<option selected value="' + element.e_id + '">' +
+                            element.n_thainame + ' ' +
+                            element.e_fnameTH + ' ' +
+                            element.e_lnameTH +
+                            '</option>');
+                    } else {
+                        $('#expert2').append('<option value="' + element.e_id + '">' +
+                            element.n_thainame + ' ' +
+                            element.e_fnameTH + ' ' +
+                            element.e_lnameTH +
+                            '</option>');
+                    }
+                });
+            });
         }
     }
 
@@ -1309,6 +1439,11 @@
     });
     //*********start datepickker************ */
     $('#datepicker1').datepicker({
+        format: 'dd/mm/yyyy',
+        maxDate: new Date(),
+        uiLibrary: 'bootstrap4'
+    });
+    $('#datepicker2').datepicker({
         format: 'dd/mm/yyyy',
         maxDate: new Date(),
         uiLibrary: 'bootstrap4'
