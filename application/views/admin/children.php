@@ -3,7 +3,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title text-heading">เพิ่มเด็กพิเศษ</h4>
-                <button type="button" class="close" data-dismiss="modal" onclick="reset_form('add')">×</button>
+                <button type="button" class="close" data-dismiss="modal">×</button>
             </div>
             <div class="modal-body">
                 <div class="row">
@@ -300,7 +300,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary text_btn" data-dismiss="modal" onclick="reset_form('add')">ปิด</button>
+                <button type="button" class="btn btn-secondary text_btn" data-dismiss="modal">ปิด</button>
                 <button type="button" class="btn text_btn" style="background-color: #1e7e34; color:white;" onclick="onClickSave('insert')">บันทึก</button>
             </div>
         </div>
@@ -311,7 +311,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title text-heading">แก้ไขเด็กพิเศษ</h4>
-                <button type="button" class="close" data-dismiss="modal" onclick="reset_form('edit')">×</button>
+                <button type="button" class="close" data-dismiss="modal">×</button>
             </div>
             <div class="modal-body">
                 <div class="row">
@@ -626,7 +626,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary text_btn" data-dismiss="modal" onclick="reset_form('edit')">ปิด</button>
+                <button type="button" class="btn btn-secondary text_btn" data-dismiss="modal">ปิด</button>
                 <button type="button" class="btn text_btn edit_btn" style="background-color: #1e7e34; color:white;" onclick="onClickSave('edit')">บันทึก</button>
             </div>
         </div>
@@ -650,6 +650,14 @@
 </div>
 <link rel="stylesheet" href="<?php echo base_url(); ?>assets/paginationjs/dist/pagination.css">
 <script src="<?php echo base_url(); ?>assets/paginationjs/dist/pagination.min.js"></script>
+<script>
+    $('#insertChildren').on('hidden.bs.modal', function() {
+        reset_form('add');
+    })
+    $('#editChildren').on('hidden.bs.modal', function() {
+        reset_form('edit');
+    })
+</script>
 <script>
     var prename = [];
     var drug1 = [];
@@ -1851,7 +1859,6 @@
                     $('#insertChildren').modal('hide');
                     toastr.success('เพิ่มข้อมูลสำเร็จ');
                     list_reload();
-                    reset_form('add');
                 }).fail((xhr, status, error) => {
                     toastr.error('ไม่สามารถเพิ่มข้อมูลได้ โปรดลองใหม่ภายหลัง');
                 });
@@ -2029,7 +2036,6 @@
                     $('#editChildren').modal('hide');
                     toastr.success('เพิ่มข้อมูลสำเร็จ');
                     list_reload();
-                    reset_form('edit');
                 }).fail((xhr, status, error) => {
                     toastr.error('ไม่สามารถเพิ่มข้อมูลได้ โปรดลองใหม่ภายหลัง');
                 });

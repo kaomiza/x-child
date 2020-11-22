@@ -27,4 +27,14 @@ class Parents extends CI_Controller
             show_error('Allow Form GET', 405);
         }
     }
+
+    public function getAll()
+    {
+        if ($this->input->server('REQUEST_METHOD') == 'GET') {
+            header('Content-Type: application/json');
+            echo json_encode($this->ParentModel->findAll());
+        } else {
+            show_error('Allow Form GET', 405);
+        }
+    }
 }

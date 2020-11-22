@@ -44,6 +44,9 @@ class ParentModel extends CI_Model
 
     public function findAll()
     {
+        $this->db->select('pa_id,n_thainame,n_engname,pa_fnameTH,pa_lnameTH,pa_fnameEN,pa_lnameEN,pa_status,pa_img');
+        $this->db->join($this->table_join[0], $this->join[0]);
+        return $this->db->get($this->table)->result();
     }
 
     public function create()
