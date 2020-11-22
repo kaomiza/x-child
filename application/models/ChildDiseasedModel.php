@@ -7,6 +7,17 @@ class ChildDiseasedModel extends CI_Model
         'd_id'
     ];
 
+    protected $table_join = 'diseased_info';
+
+    protected $join = 'diseased_info.d_id = children_diseased.d_id';
+
+    public function SelectedById($id)
+    {
+        $this->db->select('children_diseased.c_id,children_diseased.d_id,d_nameTH');
+        $this->db->join($this->table_join, $this->join);
+        return $this->db->get_where($this->table, array('children_diseased.' . $this->fields[0] => $id))->result();
+    }
+
     public function findAll()
     {
         return $this->db->get($this->table)->result();

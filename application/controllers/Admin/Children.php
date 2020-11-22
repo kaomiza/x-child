@@ -41,6 +41,29 @@ class Children extends CI_Controller
         }
     }
 
+
+    public function DrugSelected($id)
+    {
+        if ($this->input->server('REQUEST_METHOD') == 'GET') {
+            header('Content-Type: application/json');
+            $result = $this->DrugAllergyModel->SelectedById($id);
+            echo json_encode($result);
+        } else {
+            show_error('Allow Form GET', 405);
+        }
+    }
+
+    public function DiseasedSelected($id)
+    {
+        if ($this->input->server('REQUEST_METHOD') == 'GET') {
+            header('Content-Type: application/json');
+            $result = $this->ChildDiseasedModel->SelectedById($id);
+            echo json_encode($result);
+        } else {
+            show_error('Allow Form GET', 405);
+        }
+    }
+
     public function storeImage()
     {
         if ($this->input->server('REQUEST_METHOD') == 'POST') {
@@ -153,7 +176,7 @@ class Children extends CI_Controller
         if ($this->input->server('REQUEST_METHOD') == 'POST') {
             header('Content-Type: application/json');
             $data = $this->input->post();
-            $result = $this->ChildrenModel->edit($id, $data);
+            $result = $this->ChildrenModel->update($id, $data);
             echo json_encode($result);
         } else {
             show_error('Allow Form POST', 405);

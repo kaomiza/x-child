@@ -579,42 +579,6 @@
                 </div>
             </div>
         </div>
-        <!-- <div style="overflow-x:auto;">
-            <table>
-                <tr>
-                    <th class="th_text">เลขที่</th>
-                    <th class="th_text">ชื่อ-นามสกุล</th>
-                    <th class="th_text">ผู้ปกครอง</th>
-                    <th class="th_text">ผู้เชี่ยวชาญ</th>
-                    <th class="th_text">ประเภทผู้ปกครอง</th>
-                    <th class="th_text">โรงเรียน</th>
-                    <th class="th_text">ที่อยู่อาศัย</th>
-                    <th class="th_text">แก้ไข</th>
-                    <th class="th_text">สถานะ</th>
-                </tr>
-                <tr>
-                    <td class="td_text">1</td>
-                    <td class="td_text">นาย เกียรติศักดิ์ เลือดใหม่<br>Mr. kattisack radmai</td>
-                    <td class="td_text">นาย สารัช ธนภัทรภักดี<br>Mr. sarat thanabhatbhakdi</td>
-                    <td class="td_text">นาย แอดมิน แอดมิน<br>Mr. admin admin</td>
-                    <td class="td_text">เด็กที่มีความบกพร่องทางการมองเห็น</td>
-                    <td class="td_text">โรงเรียนนครราชสีมาปัญญานุกูล จังหวัดนครราชสีมา<br>Nakhonratchasima Panyanukul School</td>
-                    <td class="td_text">บ้านเลขที่ หมู่ ถนน ตำบล พระบรมมหาราชวัง อำเภอ เขตพระนคร จังหวัดกรุงเทพมหานคร</td>
-                    <td class="td_text">
-                        <button class="btn btn-success" data-toggle="modal" data-target="#editParents">
-                            <i class="fa fa-edit"></i>
-                        </button>
-                    </td>
-                    <td class="td_text">
-                        <label class="switch" id="status">
-                            <input type="checkbox" checked>
-                            <span class="slider round"></span>
-                        </label>
-                    </td>
-
-                </tr>
-            </table>
-        </div> -->
     </div>
 </div>
 <div>

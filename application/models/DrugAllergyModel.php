@@ -7,9 +7,20 @@ class DrugAllergyModel extends CI_Model
         'drug_id',
     ];
 
+    protected $table_join = 'drug';
+
+    protected $join = 'drug.drug_id = drug_allergy.drug_id';
+
     public function findAll()
     {
         return $this->db->get($this->table)->result();
+    }
+
+    public function SelectedById($id)
+    {
+        $this->db->select('drug_allergy.c_id,drug_allergy.drug_id,drug_name_th');
+        $this->db->join($this->table_join, $this->join);
+        return $this->db->get_where($this->table, array('drug_allergy.' . $this->fields[0] => $id))->result();
     }
 
     public function findById($id)

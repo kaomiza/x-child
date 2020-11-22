@@ -8,6 +8,7 @@ class DiseasedModel extends CI_Model
         'd_nameEN',
         'd_status'
     ];
+
     public function findAll()
     {
         return $this->db->get($this->table)->result();

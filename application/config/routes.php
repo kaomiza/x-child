@@ -57,8 +57,8 @@ $route['admin/(:any)'] = 'Admin/$1';
 $route['admin/(:any)/(:any)'] = 'Admin/$1/$2';
 $route['admin/(:any)/(:any)/(:num)'] = 'Admin/$1/$2/$3';
 $route['api/(:any)'] = 'Api/$1';
-$route['api/(:any)/(:any)'] = 'Api/$1/$2';
 $route['api/(:any)/(:num)'] = 'Api/$1/index/$2';
+$route['api/(:any)/(:any)'] = 'Api/$1/$2';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

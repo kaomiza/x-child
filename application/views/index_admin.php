@@ -169,24 +169,11 @@
                         <li class="header-menu">
                             <span>User Management</span>
                         </li>
-                        <li class="sidebar-dropdown">
-                            <a href="#">
+                        <li>
+                            <a href="<?php echo base_url('admin/Children'); ?>">
                                 <i class="fas fa-baby"></i>
                                 <span>จัดการข้อมูลเด็กพิเศษ</span>
                             </a>
-                            <div class="sidebar-submenu">
-                                <ul>
-                                    <li>
-                                        <a href="<?php echo base_url('admin/Children'); ?>">จัดการเด็กพิเศษ</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">การแพ้ยาของเด็ก</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">โรคประจำตัวของเด็ก</a>
-                                    </li>
-                                </ul>
-                            </div>
                         </li>
                         <li>
                             <a href="<?php echo base_url('admin/Parents'); ?>">

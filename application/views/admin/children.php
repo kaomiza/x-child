@@ -311,7 +311,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title text-heading">แก้ไขเด็กพิเศษ</h4>
-                <button type="button" class="close" data-dismiss="modal">×</button>
+                <button type="button" class="close" data-dismiss="modal" onclick="reset_form('edit')">×</button>
             </div>
             <div class="modal-body">
                 <div class="row">
@@ -574,7 +574,7 @@
                         </div>
                         <div>
                             <div class="input-group">
-                                <select class="custom-select text-paragraph" id="selectDrug2">
+                                <select class="custom-select text-paragraph select2bs4" id="selectDrug2">
                                     <option selected>--- กรุณาเลือก ---</option>
                                 </select>
                                 <div class="input-group-append">
@@ -594,7 +594,7 @@
                         </div>
                         <div>
                             <div class="input-group">
-                                <select class="custom-select text-paragraph" id="selectDiseased2">
+                                <select class="custom-select text-paragraph select2bs4" id="selectDiseased2">
                                     <option selected>--- กรุณาเลือก ---</option>
                                 </select>
                                 <div class="input-group-append">
@@ -616,11 +616,8 @@
                                 สถานะการใช้งาน
                             </label>
                         </div>
-                        <div>
-                            <label style="width: 100%;" for="toggle-1" class="toggle-1">
-                                <input type="checkbox" id="toggle-1" class="toggle-1__input" checked>
-                                <span class="toggle-1__button"></span>
-                            </label>
+                        <div id="active">
+
                         </div>
                     </div>
                     <div class="col-md-3">
@@ -629,8 +626,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary text_btn" data-dismiss="modal">ปิด</button>
-                <button type="button" class="btn text_btn" style="background-color: #1e7e34; color:white;" onclick="onClickSave('edit')">บันทึก</button>
+                <button type="button" class="btn btn-secondary text_btn" data-dismiss="modal" onclick="reset_form('edit')">ปิด</button>
+                <button type="button" class="btn text_btn edit_btn" style="background-color: #1e7e34; color:white;" onclick="onClickSave('edit')">บันทึก</button>
             </div>
         </div>
     </div>
@@ -672,6 +669,8 @@
             fetch_editAddress(res.c_district, res.c_province, res.c_amphur);
             fetch_children_drug('edit');
             fetch_children_allergy('edit');
+            createListDrug(id);
+            createListDiseased(id);
             $('#fnameTH2').val(res.c_fnameTH);
             $('#lnameTH2').val(res.c_lnameTH);
             $('#fnameEN2').val(res.c_fnameEN);
@@ -682,7 +681,112 @@
             $('#Road2').val(res.c_road);
             $('#Postcode2').val(res.c_zip);
             $("#preview2").attr("src", "<?php echo base_url(); ?>" + res.c_img);
-            console.log(res);
+            path_image = res.c_img;
+            $('.edit_btn').attr('id', res.c_id);
+            $('#active').append(`
+               <label for="toggle-` + res.c_id + `" class="toggle-1">
+                    <input type="checkbox" id="toggle-` + res.c_id + `" 
+                    class="toggle-1__input" ` + (res.c_status == 1 ? 'checked' : '') + ` 
+                    onchange="StatusChildren(` + res.c_id + `)">
+                    <span class="toggle-1__button"></span>
+                </label>
+            `);
+        });
+    }
+
+    function StatusChildren(id) {
+        if ($('#toggle-' + id).is(":checked")) {
+            $.post('<?php echo base_url('admin/children/update'); ?>/' + id, {
+                c_status: 1
+            }).done((res) => {
+                toastr.info('เปิดการใช้งาน');
+            }).fail((xhr, status, error) => {
+                toastr.error('Error')
+            })
+        } else {
+            $.post('<?php echo base_url('admin/children/update'); ?>/' + id, {
+                c_status: 0
+            }).done((res) => {
+                toastr.info('ปิดการใช้งาน');
+            }).fail((xhr, status, error) => {
+                toastr.error('Error')
+            })
+        }
+    }
+
+    function createListDrug(id) {
+        $.get('<?php echo base_url('admin/children/DrugSelected'); ?>/' + id).done((res) => {
+            res.forEach(element => {
+                var name = element.drug_name_th;
+                var id = element.drug_id;
+                var drug_group = document.getElementById("drug_update");
+                var tag = document.createElement("div");
+                tag.classList.add("mb-2");
+                tag.classList.add("input-group");
+                tag.id = id;
+                var input = document.createElement("input");
+                input.type = "text";
+                input.style.fontFamily = "Kanit";
+                input.classList.add("form-control");
+                input.disabled = true;
+                input.placeholder = name;
+                var divBtn = document.createElement("div");
+                divBtn.classList.add("input-group-append");
+                var delBtn = document.createElement("button");
+                delBtn.classList.add("btn");
+                delBtn.classList.add("btn-outline-secondary");
+                delBtn.type = "button";
+                delBtn.onclick = function() {
+                    delDrugUpdate(id)
+                };
+                var iconDel = document.createElement("i");
+                iconDel.classList.add("fas");
+                iconDel.classList.add("fa-trash-alt");
+                delBtn.appendChild(iconDel);
+                divBtn.appendChild(delBtn);
+                tag.appendChild(input);
+                tag.appendChild(divBtn);
+                drug_group.appendChild(tag);
+                drug2.push(id);
+            });
+        });
+    }
+
+    function createListDiseased(id) {
+        $.get('<?php echo base_url('admin/children/DiseasedSelected'); ?>/' + id).done((res) => {
+            res.forEach(element => {
+                var name = element.d_nameTH;
+                var id = element.d_id;
+                var diseased_group = document.getElementById("diseased_update");
+                var tag = document.createElement("div");
+                tag.classList.add("mb-2");
+                tag.classList.add("input-group");
+                tag.id = id;
+                var input = document.createElement("input");
+                input.type = "text";
+                input.style.fontFamily = "Kanit";
+                input.classList.add("form-control");
+                input.disabled = true;
+                input.placeholder = name;
+                var divBtn = document.createElement("div");
+                divBtn.classList.add("input-group-append");
+                var delBtn = document.createElement("button");
+                delBtn.classList.add("btn");
+                delBtn.classList.add("btn-outline-secondary");
+                delBtn.type = "button";
+                delBtn.onclick = function() {
+                    delDiseasedUpdate(id)
+                };
+                var iconDel = document.createElement("i");
+                iconDel.classList.add("fas");
+                iconDel.classList.add("fa-trash-alt");
+                delBtn.appendChild(iconDel);
+                divBtn.appendChild(delBtn);
+                tag.appendChild(input);
+                tag.appendChild(divBtn);
+                diseased_group.appendChild(tag);
+                diseased2.push(id);
+            });
         });
     }
 
@@ -752,7 +856,14 @@
     }
 
     function reset_form(fn) {
+        prename = [];
+        drug1 = [];
+        diseased1 = [];
+        drug2 = [];
+        diseased2 = [];
         if (fn == 'add') {
+            $('#drug_add').empty();
+            $('#diseased_add').empty();
             $("#preview1").attr("src", "<?php echo base_url(); ?>assets/images/admin/DefualtUser.png");
             elementInputAdd = [
                 '#prenameTH1',
@@ -788,8 +899,44 @@
             });
         }
         if (fn == 'edit') {
-
+            $('#active').empty();
+            $('#drug_update').empty();
+            $('#diseased_update').empty();
+            $("#preview2").attr("src", "<?php echo base_url(); ?>assets/images/admin/DefualtUser.png");
+            elementInputAdd = [
+                '#prenameTH2',
+                '#prenameEN2',
+                '#fnameTH2',
+                '#lnameTH2',
+                '#fnameEN2',
+                '#lnameEN2',
+                '#datepicker2',
+                '#HouseNo2',
+                '#VillageNo2',
+                '#Road2',
+                '#Postcode2',
+                '#file2'
+            ];
+            elementInputAdd.forEach(element => {
+                $(element).val('');
+            });
+            elementSelectAdd = [
+                '#SelectPro2',
+                '#SelectAm2',
+                '#SelectDist2',
+                '#tc2',
+                '#parent2',
+                '#expert2',
+                '#school2',
+                '#selectDrug2',
+                '#selectDiseased2'
+            ];
+            elementSelectAdd.forEach(element => {
+                $(element).empty();
+                $(element).append('<option selected="">--- กรุณาเลือก ---</option>');
+            });
         }
+        list_reload();
     }
 
     function fetch_children_drug(fn) {
@@ -1205,7 +1352,6 @@
         );
     }
 
-
     function addDiseased() {
         var name = $('#selectDiseased1 option:selected').text();
         var id = $('#selectDiseased1').val();
@@ -1255,16 +1401,15 @@
     }
 
     function updateDrug() {
-        var name = $('#selectDrug2').val();
-        // console.log(name);
-        // console.log("----");
-        var checkAdd = drug2.includes(name);
+        var name = $('#selectDrug2 option:selected').text();
+        var id = $('#selectDrug2').val();
+        var checkAdd = drug2.includes(id);
         if (name != '--- กรุณาเลือก ---' && checkAdd != true) {
             var drug_group = document.getElementById("drug_update");
             var tag = document.createElement("div");
             tag.classList.add("mb-2");
             tag.classList.add("input-group");
-            tag.id = name;
+            tag.id = id;
             var input = document.createElement("input");
             input.type = "text";
             input.style.fontFamily = "Kanit";
@@ -1278,7 +1423,7 @@
             delBtn.classList.add("btn-outline-secondary");
             delBtn.type = "button";
             delBtn.onclick = function() {
-                delDrugUpdate(name)
+                delDrugUpdate(id)
             };
             var iconDel = document.createElement("i");
             iconDel.classList.add("fas");
@@ -1288,7 +1433,7 @@
             tag.appendChild(input);
             tag.appendChild(divBtn);
             drug_group.appendChild(tag);
-            drug2.push(name);
+            drug2.push(id);
         }
     }
 
@@ -1303,16 +1448,17 @@
         );
     }
 
-
     function updateDiseased() {
-        var name = $('#selectDiseased2').val();
-        var checkAdd = diseased2.includes(name);
+        var name = $('#selectDiseased2 option:selected').text();
+        var id = $('#selectDiseased2').val();
+
+        var checkAdd = diseased2.includes(id);
         if (name != '--- กรุณาเลือก ---' && checkAdd != true) {
             var diseased_group = document.getElementById("diseased_update");
             var tag = document.createElement("div");
             tag.classList.add("mb-2");
             tag.classList.add("input-group");
-            tag.id = name;
+            tag.id = id;
             var input = document.createElement("input");
             input.type = "text";
             input.style.fontFamily = "Kanit";
@@ -1326,7 +1472,7 @@
             delBtn.classList.add("btn-outline-secondary");
             delBtn.type = "button";
             delBtn.onclick = function() {
-                delDiseasedUpdate(name)
+                delDiseasedUpdate(id)
             };
             var iconDel = document.createElement("i");
             iconDel.classList.add("fas");
@@ -1336,7 +1482,7 @@
             tag.appendChild(input);
             tag.appendChild(divBtn);
             diseased_group.appendChild(tag);
-            diseased2.push(name);
+            diseased2.push(id);
         }
     }
 
@@ -1700,12 +1846,12 @@
                     c_zip: Postcode,
                     c_img: path_image != null ? path_image : 'assets/images/admin/DefualtUser.png',
                 }).done((res) => {
-                    // reset_form('add');
                     update_drug(res.insert_id, drug1);
                     update_diseased(res.insert_id, diseased1);
                     $('#insertChildren').modal('hide');
                     toastr.success('เพิ่มข้อมูลสำเร็จ');
                     list_reload();
+                    reset_form('add');
                 }).fail((xhr, status, error) => {
                     toastr.error('ไม่สามารถเพิ่มข้อมูลได้ โปรดลองใหม่ภายหลัง');
                 });
@@ -1853,7 +1999,41 @@
 
             if (checkError == true) {
                 /********insert**********/
-                console.log('Start Insert');
+                var id_user = $('.edit_btn').attr('id');
+                var HouseNo = document.getElementById("HouseNo2").value;
+                var VillageNo = document.getElementById("VillageNo2").value;
+                var Road = document.getElementById("Road2").value;
+                var Postcode = document.getElementById("Postcode2").value;
+                $.post('<?php echo base_url('admin/children/update'); ?>/' + id_user, {
+                    c_prename: prenameTH2,
+                    c_fnameTH: fnameTH2,
+                    c_lnameTH: lnameTH2,
+                    c_fnameEN: fnameEN2,
+                    c_lnameEN: lnameEN2,
+                    tc_id: tc2,
+                    school_id: school2,
+                    c_parent_id: parent2,
+                    c_expert_id: expert2,
+                    date: birthday2,
+                    c_house_no: HouseNo,
+                    c_village_no: VillageNo,
+                    c_road: Road,
+                    c_province: SelectPro2,
+                    c_district: SelectDist2,
+                    c_amphur: SelectAm2,
+                    c_zip: Postcode,
+                    c_img: path_image != null ? path_image : 'assets/images/admin/DefualtUser.png',
+                }).done((res) => {
+                    update_drug(id_user, drug2);
+                    update_diseased(id_user, diseased2);
+                    $('#editChildren').modal('hide');
+                    toastr.success('เพิ่มข้อมูลสำเร็จ');
+                    list_reload();
+                    reset_form('edit');
+                }).fail((xhr, status, error) => {
+                    toastr.error('ไม่สามารถเพิ่มข้อมูลได้ โปรดลองใหม่ภายหลัง');
+                });
+                console.log('Start edit');
             }
         }
     }
