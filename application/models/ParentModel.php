@@ -16,7 +16,6 @@ class ParentModel extends CI_Model
         'email',
         'pa_house_no',
         'pa_village_no',
-        'pa_lane',
         'pa_road',
         'pa_province',
         'pa_district',
@@ -49,8 +48,10 @@ class ParentModel extends CI_Model
         return $this->db->get($this->table)->result();
     }
 
-    public function create()
+    public function create($data)
     {
+        $this->db->insert($this->table, $data);
+        return $this->db->insert_id();
     }
 
     public function edit($id)

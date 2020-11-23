@@ -1659,15 +1659,47 @@
     });
     $('#inputFile2').change(function(e) {
         var fileName = e.target.files[0].name;
-        $("#file2").val(fileName);
+        var file = e.target.files[0];
+        $("#file1").val(fileName);
+        var allowedExtensions =
+            /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+        if (!allowedExtensions.exec(fileName)) {
+            alert('Invalid file type');
+            $("#file2").val('');
+            $("#preview2").attr("src", "<?php echo base_url(); ?>assets/images/admin/DefualtUser.png");
+            return false;
+        } else {
+            if (file) {
+                if (e.target.files[0].size <= 2000000) {
 
-        var reader = new FileReader();
-        reader.onload = function(e) {
-            // get loaded data and render thumbnail.
-            document.getElementById("preview2").src = e.target.result;
-        };
-        // read the image file as a data URL.
-        reader.readAsDataURL(this.files[0]);
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                        document.getElementById("preview2").src = e.target.result;
+                    };
+                    reader.readAsDataURL(this.files[0]);
+
+                    var formData = new FormData();
+                    formData.append('file', file);
+                    $.ajax({
+                        url: '<?php echo base_url('admin/children/storeImage'); ?>',
+                        type: "post",
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        cache: false,
+                        async: true,
+                        success: (res) => {
+                            path_image = 'upload/images/' + res.image_metadata.file_name
+                            console.log(path_image);
+                        }
+                    });
+                } else {
+                    $("#file2").val('');
+                    alert('ขนาดรูปภาพต้องไม่เกิน 2 mb');
+                    return false;
+                }
+            }
+        }
     });
     //********end chooseImg************* */
 

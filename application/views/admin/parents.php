@@ -499,21 +499,28 @@
                             <input style="font-family: 'Kanit';" type="text" class="form-control" disabled placeholder="30000">
                         </div>
                     </div>
+
+                </div>
+                <div class="row" style="padding-top: 10px;">
+                    <div class="col-md-12">
+                        <div style="border-bottom: 1px solid #dedede;"></div>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-md-4">
                         <div>
                             <label class="text-paragraph">ชื่อผู้ใช้งาน</label>
-                            <label class="text-paragraph" style="color: red;">*</label>
                         </div>
                         <div>
-                            <input style="font-family: 'Kanit';" id="username2" type="text" maxlength="20" class="form-control" placeholder="username._123">
-                            <label class="text-paragraph" id="erusername2" style="color: red; display:none; padding-top:5px;">
+                            <input style="font-family: 'Kanit';" id="" disabled type="text" maxlength="20" class="form-control" placeholder="username._123">
+                            <label class="text-paragraph" id="" style="color: red; display:none; padding-top:5px;">
                                 กรุณากรอกชื่อผู้ใช้งานให้ถูกต้อง ชื่อผู้ใช้ต้องมีความยาวต้องอยู่ระหว่าง 8-20 ตัวอักษร และ ต้องมีเฉพาะตัวอักษรอักกฤษ ตัวเลข . และ _ เช่น username._123
                             </label>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div>
-                            <label class="text-paragraph">รหัสผ่าน</label>
+                            <label class="text-paragraph">รหัสผ่านใหม่</label>
                             <label class="text-paragraph" style="color: red;">*</label>
                         </div>
                         <div>
@@ -522,6 +529,19 @@
                                 กรุณากรอกรหัสผ่านความยาวต้อง 8-20 ตัวอักษร เช่น P@55w0rd
                             </label>
                         </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div>
+                            <label class="text-paragraph"></label>
+                        </div>
+                        <div>
+                            <button type="button" id="browse2" class="browse btn btn-primary">เปลี่ยนรหัสผ่าน</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="padding-top: 10px;">
+                    <div class="col-md-12">
+                        <div style="border-bottom: 1px solid #dedede;"></div>
                     </div>
                 </div>
                 <div class="row">
@@ -535,7 +555,10 @@
                             </label>
                         </div>
                         <div>
-                            <input type="checkbox" style="width: 100%;" data-toggle="toggle" data-on="เปิด" data-off="ปิด" checked>
+                            <label for="toggle-2" class="toggle-1">
+                                <input type="checkbox" id="toggle-2" class="toggle-1__input" checked="" onchange="StatusChildren(2)">
+                                <span class="toggle-1__button"></span>
+                            </label>
                         </div>
                     </div>
                     <div class="col-md-3">
@@ -577,22 +600,24 @@
     })
 </script>
 <script>
+    function hashPassword(pain_text) {
+        $.post('<?php echo base_url('api/hashpassword/hashpass'); ?>', {
+            password: pain_text
+        }).done((res) => {
+            return res.hasdata;
+        });
+    }
+</script>
+<script>
     var prename = [];
 
     function onClickEdit(id) {
         $.get('<?php echo base_url('admin/children/getById'); ?>/' + id, (res) => {
             fetch_prename('edit', res.c_prename);
-            fetch_typechildren('edit', res.tc_id);
             fetch_school('edit', res.school_id);
-            fetch_parent('edit', res.c_parent_id);
-            fetch_expert('edit', res.c_expert_id);
             fetch_province('edit', res.c_province);
             fetch_amphur('edit', res.c_amphur);
             fetch_editAddress(res.c_district, res.c_province, res.c_amphur);
-            fetch_children_drug('edit');
-            fetch_children_allergy('edit');
-            createListDrug(id);
-            createListDiseased(id);
             $('#fnameTH2').val(res.c_fnameTH);
             $('#lnameTH2').val(res.c_lnameTH);
             $('#fnameEN2').val(res.c_fnameEN);
@@ -1171,15 +1196,47 @@
     });
     $('#inputFile1').change(function(e) {
         var fileName = e.target.files[0].name;
+        var file = e.target.files[0];
         $("#file1").val(fileName);
+        var allowedExtensions =
+            /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+        if (!allowedExtensions.exec(fileName)) {
+            alert('Invalid file type');
+            $("#file1").val('');
+            $("#preview1").attr("src", "<?php echo base_url(); ?>assets/images/admin/DefualtUser.png");
+            return false;
+        } else {
+            if (file) {
+                if (e.target.files[0].size <= 2000000) {
 
-        var reader = new FileReader();
-        reader.onload = function(e) {
-            // get loaded data and render thumbnail.
-            document.getElementById("preview1").src = e.target.result;
-        };
-        // read the image file as a data URL.
-        reader.readAsDataURL(this.files[0]);
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                        document.getElementById("preview1").src = e.target.result;
+                    };
+                    reader.readAsDataURL(this.files[0]);
+
+                    var formData = new FormData();
+                    formData.append('file', file);
+                    $.ajax({
+                        url: '<?php echo base_url('admin/children/storeImage'); ?>',
+                        type: "post",
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        cache: false,
+                        async: true,
+                        success: (res) => {
+                            path_image = 'upload/images/' + res.image_metadata.file_name
+                            console.log(path_image);
+                        }
+                    });
+                } else {
+                    $("#file1").val('');
+                    alert('ขนาดรูปภาพต้องไม่เกิน 2 mb');
+                    return false;
+                }
+            }
+        }
     });
     /*** choose IMG for update ****/
     $(document).on("click", "#browse2", function() {
@@ -1374,6 +1431,37 @@
 
             if (checkError == true) {
                 /********insert**********/
+                var HouseNo = document.getElementById("HouseNo1").value;
+                var VillageNo = document.getElementById("VillageNo1").value;
+                var Road = document.getElementById("Road1").value;
+                var Postcode = document.getElementById("Postcode1").value;
+                $.post('<?php echo base_url('admin/parents/create'); ?>', {
+                    pa_prename: prenameTH1,
+                    pa_fnameTH: fnameTH1,
+                    pa_lnameTH: lnameTH1,
+                    pa_fnameEN: fnameEN1,
+                    pa_lnameEN: lnameEN1,
+                    school_id: school1,
+                    phone: numPhone1,
+                    email: email1,
+                    pa_house_no: HouseNo,
+                    pa_village_no: VillageNo,
+                    pa_road: Road,
+                    pa_province: SelectPro1,
+                    pa_amphur: SelectAm1,
+                    pa_district: SelectDist1,
+                    pa_zip: Postcode,
+                    pa_user: username1,
+                    pa_pass: hashPassword(password1),
+                    pa_img: path_image != null ? path_image : 'assets/images/admin/DefualtUser.png',
+                }).done((res) => {
+                    $('#insertParents').modal('hide');
+                    toastr.success('เพิ่มข้อมูลสำเร็จ');
+                    list_reload();
+                }).fail((xhr, status, error) => {
+                    toastr.error('ไม่สามารถเพิ่มข้อมูลได้ โปรดลองใหม่ภายหลัง');
+                });
+
                 console.log('Start Insert');
             }
         } else if (func == 'edit') {
@@ -1389,7 +1477,6 @@
             var SelectPro2 = document.getElementById("SelectPro2").value;
             var SelectAm2 = document.getElementById("SelectAm2").value;
             var SelectDist2 = document.getElementById("SelectDist2").value;
-            var username2 = document.getElementById("username2").value;
             var password2 = document.getElementById("password2").value;
             if (prenameTH2 == '--- กรุณาเลือก ---') {
                 document.getElementById("erprenameTH2").style.display = "block";
@@ -1505,23 +1592,7 @@
                 document.getElementById("erSelectDist2").style.display = "none";
                 document.getElementById("SelectDist2").style.border = "2px solid #ced4da";
             }
-            if (username2.length < 8 && username2.length <= 20) {
-                document.getElementById("erusername2").style.display = "block";
-                document.getElementById("username2").style.border = "2px solid #bd2130";
-                checkError = false;
-            } else {
-                document.getElementById("erusername2").style.display = "none";
-                document.getElementById("username2").style.border = "2px solid #ced4da";
-                var checkUsername = isUsername(username2);
-                if (checkUsername == false) {
-                    document.getElementById("erusername2").style.display = "block";
-                    document.getElementById("username2").style.border = "2px solid #bd2130";
-                    checkError = false;
-                } else {
-                    document.getElementById("erusername2").style.display = "none";
-                    document.getElementById("username2").style.border = "2px solid #ced4da";
-                }
-            }
+
             if (password2.length < 8 && password2.length <= 20) {
                 document.getElementById("erpassword2").style.display = "block";
                 document.getElementById("password2").style.border = "2px solid #bd2130";
