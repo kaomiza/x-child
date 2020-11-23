@@ -113,7 +113,7 @@
                             <label class="text-paragraph" style="color: red;">*</label>
                         </div>
                         <div>
-                            <select class="form-control text-paragraph" id="school1" required="">
+                            <select class="form-control text-paragraph select2bs4" id="school1" required="">
                                 <option selected="">--- กรุณาเลือก ---</option>
                             </select>
                             <label class="text-paragraph" id="erschool1" style="color: red; display:none; padding-top:5px;">
@@ -182,7 +182,7 @@
                             <label class="text-paragraph" style="color: red;">*</label>
                         </div>
                         <div>
-                            <select class="form-control text-paragraph" id="SelectPro1" required="" onchange="fetch_amphur('add')">
+                            <select class="form-control text-paragraph select2bs4" id="SelectPro1" required="" onchange="fetch_amphur('add')">
                                 <option selected="">--- กรุณาเลือก ---</option>
                                 <option>นครราชสีมา</option>
                             </select>
@@ -197,7 +197,7 @@
                             <label class="text-paragraph" style="color: red;">*</label>
                         </div>
                         <div>
-                            <select class="form-control text-paragraph" id="SelectAm1" required="" disabled onchange="fetch_district('add')">
+                            <select class="form-control text-paragraph select2bs4" id="SelectAm1" required="" disabled onchange="fetch_district('add')">
                                 <option selected="">--- กรุณาเลือก ---</option>
                                 <option>อำเภอนครราชสีมา</option>
                             </select>
@@ -212,7 +212,7 @@
                             <label class="text-paragraph" style="color: red;">*</label>
                         </div>
                         <div>
-                            <select class="form-control text-paragraph" id="SelectDist1" disabled required="">
+                            <select class="form-control text-paragraph select2bs4" id="SelectDist1" disabled required="">
                                 <option selected="">--- กรุณาเลือก ---</option>
                                 <option>ในเมือง</option>
                             </select>
@@ -768,13 +768,8 @@
 
     function add_fetchData() {
         fetch_prename('add');
-        fetch_typechildren('add');
         fetch_school('add');
-        fetch_parent('add');
-        fetch_expert('add');
         fetch_province('add');
-        fetch_children_drug('add');
-        fetch_children_allergy('add');
     }
 
     function reset_form(fn) {
@@ -861,52 +856,6 @@
         list_reload();
     }
 
-    function fetch_children_drug(fn) {
-        if (fn == 'add') {
-            $('#selectDrug1').empty();
-            $('#selectDrug1').append('<option selected="">--- กรุณาเลือก ---</option>');
-            $.get('<?php echo base_url('admin/drug/getListSelect'); ?>').done((res) => {
-                res.data.forEach(element => {
-                    $('#selectDrug1').append('<option value="' + element.drug_id + '">' +
-                        element.drug_name_th + '</option>');
-                });
-            });
-        }
-        if (fn == 'edit') {
-            $('#selectDrug2').empty();
-            $('#selectDrug2').append('<option selected="">--- กรุณาเลือก ---</option>');
-            $.get('<?php echo base_url('admin/drug/getListSelect'); ?>').done((res) => {
-                res.data.forEach(element => {
-                    $('#selectDrug2').append('<option value="' + element.drug_id + '">' +
-                        element.drug_name_th + '</option>');
-                });
-            });
-        }
-    }
-
-    function fetch_children_allergy(fn) {
-        if (fn == 'add') {
-            $('#selectDiseased1').empty();
-            $('#selectDiseased1').append('<option selected="">--- กรุณาเลือก ---</option>');
-            $.get('<?php echo base_url('admin/Diseased/getListSelect'); ?>').done((res) => {
-                res.data.forEach(element => {
-                    $('#selectDiseased1').append('<option value="' + element.d_id + '">' +
-                        element.d_nameTH + '</option>');
-                });
-            });
-        }
-        if (fn == 'edit') {
-            $('#selectDiseased2').empty();
-            $('#selectDiseased2').append('<option selected="">--- กรุณาเลือก ---</option>');
-            $.get('<?php echo base_url('admin/Diseased/getListSelect'); ?>').done((res) => {
-                res.data.forEach(element => {
-                    $('#selectDiseased2').append('<option value="' + element.d_id + '">' +
-                        element.d_nameTH + '</option>');
-                });
-            });
-        }
-    }
-
     function fetch_prename(fn, id = null) {
         if (fn == 'add') {
             $('#prenameTH1').empty();
@@ -979,34 +928,6 @@
                     $('#prenameEN2').append('<option value="' + element.n_id + '">' + element.n_engname +
                         '</option>');
                 }
-            });
-        }
-    }
-
-    function fetch_typechildren(fn, id = null) {
-        if (fn == 'add') {
-            $('#tc1').empty();
-            $('#tc1').append('<option selected="">--- กรุณาเลือก ---</option>');
-            $.get('<?php echo base_url('admin/type_children/getListSelect'); ?>').done((res) => {
-                res.data.forEach(element => {
-                    $('#tc1').append('<option value="' + element.tc_id + '">' + element.tc_name +
-                        '</option>');
-                });
-            });
-        }
-        if (fn == 'edit') {
-            $('#tc2').empty();
-            $('#tc2').append('<option>--- กรุณาเลือก ---</option>');
-            $.get('<?php echo base_url('admin/type_children/getListSelect'); ?>').done((res) => {
-                res.data.forEach(element => {
-                    if (element.tc_id == id) {
-                        $('#tc2').append('<option selected value="' + element.tc_id + '">' + element.tc_name +
-                            '</option>');
-                    } else {
-                        $('#tc2').append('<option value="' + element.tc_id + '">' + element.tc_name +
-                            '</option>');
-                    }
-                });
             });
         }
     }
