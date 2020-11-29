@@ -191,19 +191,19 @@
                             <span>Document & Video</span>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="<?php echo base_url('admin/document'); ?>">
                                 <i class="fa fa-book"></i>
                                 <span>จัดการเอกสารความรู้</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="<?php echo base_url('admin/Video'); ?>">
                                 <i class="fas fa-video"></i>
                                 <span>จัดการวีดิโอความรู้</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="Live_Stream">
                                 <i class="fas fa-podcast"></i>
                                 <span>ถ่ายทอดสด</span>
                             </a>

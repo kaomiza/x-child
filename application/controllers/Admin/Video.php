@@ -1,0 +1,14 @@
+<?php
+defined('BASEPATH') or exit('No direct script access allowed');
+class Video extends CI_Controller
+{
+
+    public function index()
+    {
+        $data = [
+            'title' => 'จัดการวิดีโอความรู้',
+            'admin_content' => $this->load->view('admin/video', NULL, TRUE)
+        ];
+        $this->load->view('index_admin', $data);
+    }
+}
