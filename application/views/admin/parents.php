@@ -214,7 +214,6 @@
                         <div>
                             <select class="form-control text-paragraph select2bs4" id="SelectDist1" disabled required="">
                                 <option selected="">--- กรุณาเลือก ---</option>
-                                <option>ในเมือง</option>
                             </select>
                             <label class="text-paragraph" id="erSelectDist1" style="color: red; display:none; padding-top:5px;">
                                 กรุณาเลือกตำบล
@@ -299,7 +298,7 @@
                             <label class="text-paragraph" style="color: red;">*</label>
                         </div>
                         <div>
-                            <select class="form-control text-paragraph" id="prenameTH2" required="">
+                            <select class="form-control text-paragraph select2bs4" id="prenameTH2" required="">
                                 <option selected="">--- กรุณาเลือก ---</option>
                                 <option>นาย</option>
                             </select>
@@ -340,9 +339,8 @@
                             <label class="text-paragraph" style="color: red;">*</label>
                         </div>
                         <div>
-                            <select class="form-control text-paragraph" id="prenameEN2" required="">
+                            <select class="form-control text-paragraph select2bs4" id="prenameEN2" required="">
                                 <option selected="">--- กรุณาเลือก ---</option>
-                                <option>Mr.</option>
                             </select>
                             <label class="text-paragraph" id="erprenameEN2" style="color: red; display:none; padding-top:5px;">
                                 กรุณาเลือกคำนำหน้าชื่อภาษาอังกฤษ
@@ -381,7 +379,7 @@
                             <label class="text-paragraph" style="color: red;">*</label>
                         </div>
                         <div>
-                            <select class="form-control text-paragraph" id="school2" required="">
+                            <select class="form-control text-paragraph select2bs4" id="school2" required="">
                                 <option selected="">--- กรุณาเลือก ---</option>
                             </select>
                             <label class="text-paragraph" id="erschool2" style="color: red; display:none; padding-top:5px;">
@@ -423,7 +421,7 @@
                             <label class="text-paragraph">บ้านเลขที่</label>
                         </div>
                         <div>
-                            <input onkeyup="isHomeNumchar(this.value,this)" style="font-family: 'Kanit';" type="text" class="form-control" placeholder="เช่น 70/2">
+                            <input id="HouseNo2" onkeyup="isHomeNumchar(this.value,this)" style="font-family: 'Kanit';" type="text" class="form-control" placeholder="เช่น 70/2">
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -431,12 +429,12 @@
                             <label class="text-paragraph">หมู่</label>
                         </div>
                         <div>
-                            <input onkeyup="isNumAllchar(this.value,this)" style="font-family: 'Kanit';" type="text" class="form-control" placeholder="เช่น 20">
+                            <input id="VillageNo2" onkeyup="isNumAllchar(this.value,this)" style="font-family: 'Kanit';" type="text" class="form-control" placeholder="เช่น 20">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div>
-                            <label class="text-paragraph">ถนน</label>
+                            <label id="Road2" class="text-paragraph">ถนน</label>
                         </div>
                         <div>
                             <input onkeyup="isRoadchar(this.value,this)" style="font-family: 'Kanit';" type="text" class="form-control" placeholder="เช่น ถนนมิตรภาพ">
@@ -450,9 +448,8 @@
                             <label class="text-paragraph" style="color: red;">*</label>
                         </div>
                         <div>
-                            <select class="form-control text-paragraph" id="SelectPro2" required="">
+                            <select class="form-control text-paragraph select2bs4" id="SelectPro2" required="">
                                 <option selected="">--- กรุณาเลือก ---</option>
-                                <option>นครราชสีมา</option>
                             </select>
                             <label class="text-paragraph" id="erSelectPro2" style="color: red; display:none; padding-top:5px;">
                                 กรุณาเลือกจังหวัด
@@ -465,9 +462,8 @@
                             <label class="text-paragraph" style="color: red;">*</label>
                         </div>
                         <div>
-                            <select class="form-control text-paragraph" id="SelectAm2" required="">
+                            <select class="form-control text-paragraph select2bs4" id="SelectAm2" required="">
                                 <option selected="">--- กรุณาเลือก ---</option>
-                                <option>อำเภอนครราชสีมา</option>
                             </select>
                             <label class="text-paragraph" id="erSelectAm2" style="color: red; display:none; padding-top:5px;">
                                 กรุณาเลือกอำเภอ
@@ -480,9 +476,8 @@
                             <label class="text-paragraph" style="color: red;">*</label>
                         </div>
                         <div>
-                            <select class="form-control text-paragraph" id="SelectDist2" required="">
+                            <select class="form-control text-paragraph select2bs4" id="SelectDist2" required="">
                                 <option selected="">--- กรุณาเลือก ---</option>
-                                <option>ในเมือง</option>
                             </select>
                             <label class="text-paragraph" id="erSelectDist2" style="color: red; display:none; padding-top:5px;">
                                 กรุณาเลือกตำบล
@@ -496,7 +491,7 @@
                             <label class="text-paragraph">ไปรษณีย์</label>
                         </div>
                         <div>
-                            <input style="font-family: 'Kanit';" type="text" class="form-control" disabled placeholder="30000">
+                            <input id="Postcode2" style="font-family: 'Kanit';" type="text" class="form-control" disabled placeholder="30000">
                         </div>
                     </div>
 
@@ -512,7 +507,7 @@
                             <label class="text-paragraph">ชื่อผู้ใช้งาน</label>
                         </div>
                         <div>
-                            <input style="font-family: 'Kanit';" id="" disabled type="text" maxlength="20" class="form-control" placeholder="username._123">
+                            <input style="font-family: 'Kanit';" id="username" disabled type="text" maxlength="20" class="form-control" placeholder="username._123">
                             <label class="text-paragraph" id="" style="color: red; display:none; padding-top:5px;">
                                 กรุณากรอกชื่อผู้ใช้งานให้ถูกต้อง ชื่อผู้ใช้ต้องมีความยาวต้องอยู่ระหว่าง 8-20 ตัวอักษร และ ต้องมีเฉพาะตัวอักษรอักกฤษ ตัวเลข . และ _ เช่น username._123
                             </label>
@@ -535,7 +530,7 @@
                             <label class="text-paragraph"></label>
                         </div>
                         <div>
-                            <button type="button" id="browse2" class="browse btn btn-primary">เปลี่ยนรหัสผ่าน</button>
+                            <button type="button" class="browse btn btn-primary" onclick="changePassword()">เปลี่ยนรหัสผ่าน</button>
                         </div>
                     </div>
                 </div>
@@ -554,11 +549,7 @@
                                 สถานะการใช้งาน
                             </label>
                         </div>
-                        <div>
-                            <label for="toggle-2" class="toggle-1">
-                                <input type="checkbox" id="toggle-2" class="toggle-1__input" checked="" onchange="StatusChildren(2)">
-                                <span class="toggle-1__button"></span>
-                            </label>
+                        <div id="active">
                         </div>
                     </div>
                     <div class="col-md-3">
@@ -568,7 +559,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary text_btn" data-dismiss="modal">ปิด</button>
-                <button type="button" class="btn text_btn" style="background-color: #1e7e34; color:white;" onclick="onClickSave('edit')">บันทึก</button>
+                <button type="button" class="btn text_btn edit_btn" style="background-color: #1e7e34; color:white;" onclick="onClickSave('edit')">บันทึก</button>
             </div>
         </div>
     </div>
@@ -600,41 +591,45 @@
     })
 </script>
 <script>
-    function hashPassword(pain_text) {
-        $.post('<?php echo base_url('api/hashpassword/hashpass'); ?>', {
+    var prename = [];
+    var path_image = null;
+
+    async function hashPassword(pain_text) {
+        var passh = null;
+        await $.post('<?php echo base_url('api/hashpassword/hashpass'); ?>', {
             password: pain_text
         }).done((res) => {
-            return res.hasdata;
+            passh = res.hasdata;
         });
+        return passh;
     }
-</script>
-<script>
-    var prename = [];
 
     function onClickEdit(id) {
-        $.get('<?php echo base_url('admin/children/getById'); ?>/' + id, (res) => {
-            fetch_prename('edit', res.c_prename);
+        $.get('<?php echo base_url('admin/parents/getById'); ?>/' + id, (res) => {
+            fetch_prename('edit', res.pa_prename);
             fetch_school('edit', res.school_id);
-            fetch_province('edit', res.c_province);
-            fetch_amphur('edit', res.c_amphur);
-            fetch_editAddress(res.c_district, res.c_province, res.c_amphur);
-            $('#fnameTH2').val(res.c_fnameTH);
-            $('#lnameTH2').val(res.c_lnameTH);
-            $('#fnameEN2').val(res.c_fnameEN);
-            $('#lnameEN2').val(res.c_lnameEN);
-            $('#datepicker2').val(res.date);
-            $('#HouseNo2').val(res.c_house_no);
-            $('#VillageNo2').val(res.c_village_no);
-            $('#Road2').val(res.c_road);
-            $('#Postcode2').val(res.c_zip);
-            $("#preview2").attr("src", "<?php echo base_url(); ?>" + res.c_img);
-            path_image = res.c_img;
-            $('.edit_btn').attr('id', res.c_id);
+            fetch_province('edit', res.pa_province);
+            fetch_amphur('edit', res.pa_amphur);
+            fetch_editAddress(res.pa_district, res.pa_province, res.pa_amphur);
+            $('#username').val(res.pa_user);
+            $('#fnameTH2').val(res.pa_fnameTH);
+            $('#lnameTH2').val(res.pa_lnameTH);
+            $('#fnameEN2').val(res.pa_fnameEN);
+            $('#lnameEN2').val(res.pa_lnameEN);
+            $('#HouseNo2').val(res.pa_house_no);
+            $('#VillageNo2').val(res.pa_village_no);
+            $('#NumPhone2').val(res.phone);
+            $('#email2').val(res.email);
+            $('#Road2').val(res.pa_road);
+            $('#Postcode2').val(res.pa_zip);
+            $("#preview2").attr("src", "<?php echo base_url(); ?>" + res.pa_img);
+            path_image = res.pa_img;
+            $('.edit_btn').attr('id', res.pa_id);
             $('#active').append(`
-               <label for="toggle-` + res.c_id + `" class="toggle-1">
-                    <input type="checkbox" id="toggle-` + res.c_id + `" 
-                    class="toggle-1__input" ` + (res.c_status == 1 ? 'checked' : '') + ` 
-                    onchange="StatusChildren(` + res.c_id + `)">
+               <label for="toggle-` + res.pa_id + `" class="toggle-1">
+                    <input type="checkbox" id="toggle-` + res.pa_id + `" 
+                    class="toggle-1__input" ` + (res.pa_status == 1 ? 'checked' : '') + ` 
+                    onchange="onClickActivate(` + res.pa_id + `)">
                     <span class="toggle-1__button"></span>
                 </label>
             `);
@@ -643,98 +638,22 @@
 
     function onClickActivate(id) {
         if ($('#toggle-' + id).is(":checked")) {
-            $.post('<?php echo base_url('admin/children/update'); ?>/' + id, {
-                c_status: 1
+            $.post('<?php echo base_url('admin/parents/update'); ?>/' + id, {
+                pa_status: 1
             }).done((res) => {
                 toastr.info('เปิดการใช้งาน');
             }).fail((xhr, status, error) => {
                 toastr.error('Error')
             })
         } else {
-            $.post('<?php echo base_url('admin/children/update'); ?>/' + id, {
-                c_status: 0
+            $.post('<?php echo base_url('admin/parents/update'); ?>/' + id, {
+                pa_status: 0
             }).done((res) => {
                 toastr.info('ปิดการใช้งาน');
             }).fail((xhr, status, error) => {
                 toastr.error('Error')
             })
         }
-    }
-
-    function createListDrug(id) {
-        $.get('<?php echo base_url('admin/children/DrugSelected'); ?>/' + id).done((res) => {
-            res.forEach(element => {
-                var name = element.drug_name_th;
-                var id = element.drug_id;
-                var drug_group = document.getElementById("drug_update");
-                var tag = document.createElement("div");
-                tag.classList.add("mb-2");
-                tag.classList.add("input-group");
-                tag.id = id;
-                var input = document.createElement("input");
-                input.type = "text";
-                input.style.fontFamily = "Kanit";
-                input.classList.add("form-control");
-                input.disabled = true;
-                input.placeholder = name;
-                var divBtn = document.createElement("div");
-                divBtn.classList.add("input-group-append");
-                var delBtn = document.createElement("button");
-                delBtn.classList.add("btn");
-                delBtn.classList.add("btn-outline-secondary");
-                delBtn.type = "button";
-                delBtn.onclick = function() {
-                    delDrugUpdate(id)
-                };
-                var iconDel = document.createElement("i");
-                iconDel.classList.add("fas");
-                iconDel.classList.add("fa-trash-alt");
-                delBtn.appendChild(iconDel);
-                divBtn.appendChild(delBtn);
-                tag.appendChild(input);
-                tag.appendChild(divBtn);
-                drug_group.appendChild(tag);
-                drug2.push(id);
-            });
-        });
-    }
-
-    function createListDiseased(id) {
-        $.get('<?php echo base_url('admin/children/DiseasedSelected'); ?>/' + id).done((res) => {
-            res.forEach(element => {
-                var name = element.d_nameTH;
-                var id = element.d_id;
-                var diseased_group = document.getElementById("diseased_update");
-                var tag = document.createElement("div");
-                tag.classList.add("mb-2");
-                tag.classList.add("input-group");
-                tag.id = id;
-                var input = document.createElement("input");
-                input.type = "text";
-                input.style.fontFamily = "Kanit";
-                input.classList.add("form-control");
-                input.disabled = true;
-                input.placeholder = name;
-                var divBtn = document.createElement("div");
-                divBtn.classList.add("input-group-append");
-                var delBtn = document.createElement("button");
-                delBtn.classList.add("btn");
-                delBtn.classList.add("btn-outline-secondary");
-                delBtn.type = "button";
-                delBtn.onclick = function() {
-                    delDiseasedUpdate(id)
-                };
-                var iconDel = document.createElement("i");
-                iconDel.classList.add("fas");
-                iconDel.classList.add("fa-trash-alt");
-                delBtn.appendChild(iconDel);
-                divBtn.appendChild(delBtn);
-                tag.appendChild(input);
-                tag.appendChild(divBtn);
-                diseased_group.appendChild(tag);
-                diseased2.push(id);
-            });
-        });
     }
 
     async function fetch_editAddress(district_id, province_id, amphur_id) {
@@ -845,7 +764,7 @@
             $('#drug_update').empty();
             $('#diseased_update').empty();
             $("#preview2").attr("src", "<?php echo base_url(); ?>assets/images/admin/DefualtUser.png");
-            elementInputAdd = [
+            elementInputEdit = [
                 '#prenameTH2',
                 '#prenameEN2',
                 '#fnameTH2',
@@ -857,28 +776,66 @@
                 '#VillageNo2',
                 '#Road2',
                 '#Postcode2',
-                '#file2'
+                '#file2',
+                '#password2'
             ];
-            elementInputAdd.forEach(element => {
+            elementInputEdit.forEach(element => {
                 $(element).val('');
             });
-            elementSelectAdd = [
+            elementSelectEdit = [
                 '#SelectPro2',
                 '#SelectAm2',
                 '#SelectDist2',
-                '#tc2',
-                '#parent2',
-                '#expert2',
                 '#school2',
-                '#selectDrug2',
-                '#selectDiseased2'
             ];
-            elementSelectAdd.forEach(element => {
+            elementSelectEdit.forEach(element => {
                 $(element).empty();
                 $(element).append('<option selected="">--- กรุณาเลือก ---</option>');
             });
         }
         list_reload();
+        hideError();
+    }
+
+    function hideError() {
+        editFormError = [
+            'erprenameTH2',
+            'erfnameTH2',
+            'erlnameTH2',
+            'erprenameEN2',
+            'erfnameEN2',
+            'erlnameEN2',
+            'erschool2',
+            'erNumPhone2-1',
+            'erNumPhone2-2',
+            'eremail2',
+            'erSelectPro2',
+            'erSelectAm2',
+            'erSelectDist2',
+            'erpassword2'
+        ];
+        editFormInput = [
+            'prenameTH2',
+            'fnameTH2',
+            'lnameTH2',
+            'prenameEN2',
+            'fnameEN2',
+            'lnameEN2',
+            'school2',
+            'NumPhone2',
+            'email2',
+            'SelectPro2',
+            'SelectAm2',
+            'SelectDist2',
+            'password2'
+        ];
+        editFormError.forEach(element => {
+            document.getElementById(element).style.display = "none";
+        });
+        editFormInput.forEach(element => {
+            document.getElementById(element).style.border = "2px solid #ced4da";
+        });
+
     }
 
     function fetch_prename(fn, id = null) {
@@ -1271,7 +1228,7 @@
         return regExp.test(input);
     }
 
-    function onClickSave(func) {
+    async function onClickSave(func) {
         console.log(func);
         var checkError = true;
         if (func == 'insert') {
@@ -1435,6 +1392,7 @@
                 var VillageNo = document.getElementById("VillageNo1").value;
                 var Road = document.getElementById("Road1").value;
                 var Postcode = document.getElementById("Postcode1").value;
+                var ph = await hashPassword(password1);
                 $.post('<?php echo base_url('admin/parents/create'); ?>', {
                     pa_prename: prenameTH1,
                     pa_fnameTH: fnameTH1,
@@ -1452,12 +1410,11 @@
                     pa_district: SelectDist1,
                     pa_zip: Postcode,
                     pa_user: username1,
-                    pa_pass: hashPassword(password1),
+                    pa_pass: ph,
                     pa_img: path_image != null ? path_image : 'assets/images/admin/DefualtUser.png',
                 }).done((res) => {
                     $('#insertParents').modal('hide');
                     toastr.success('เพิ่มข้อมูลสำเร็จ');
-                    list_reload();
                 }).fail((xhr, status, error) => {
                     toastr.error('ไม่สามารถเพิ่มข้อมูลได้ โปรดลองใหม่ภายหลัง');
                 });
@@ -1477,7 +1434,6 @@
             var SelectPro2 = document.getElementById("SelectPro2").value;
             var SelectAm2 = document.getElementById("SelectAm2").value;
             var SelectDist2 = document.getElementById("SelectDist2").value;
-            var password2 = document.getElementById("password2").value;
             if (prenameTH2 == '--- กรุณาเลือก ---') {
                 document.getElementById("erprenameTH2").style.display = "block";
                 document.getElementById("prenameTH2").style.border = "2px solid #bd2130";
@@ -1593,19 +1549,63 @@
                 document.getElementById("SelectDist2").style.border = "2px solid #ced4da";
             }
 
-            if (password2.length < 8 && password2.length <= 20) {
-                document.getElementById("erpassword2").style.display = "block";
-                document.getElementById("password2").style.border = "2px solid #bd2130";
-                checkError = false;
-            } else {
-                document.getElementById("erpassword2").style.display = "none";
-                document.getElementById("password2").style.border = "2px solid #ced4da";
-            }
-
             if (checkError == true) {
                 /********insert**********/
-                console.log('Start Insert');
+                var id_user = $('.edit_btn').attr('id');
+                var HouseNo = document.getElementById("HouseNo2").value;
+                var VillageNo = document.getElementById("VillageNo2").value;
+                var Road = document.getElementById("Road2").value;
+                var Postcode = document.getElementById("Postcode2").value;
+                $.post('<?php echo base_url('admin/parents/update'); ?>/' + id_user, {
+                    pa_prename: prenameTH2,
+                    pa_fnameTH: fnameTH2,
+                    pa_lnameTH: lnameTH2,
+                    pa_fnameEN: fnameEN2,
+                    pa_lnameEN: lnameEN2,
+                    school_id: school2,
+                    phone: numPhone2,
+                    email: email2,
+                    pa_house_no: HouseNo,
+                    pa_village_no: VillageNo,
+                    pa_road: Road,
+                    pa_province: SelectPro2,
+                    pa_amphur: SelectAm2,
+                    pa_district: SelectDist2,
+                    pa_zip: Postcode,
+                    pa_img: path_image != null ? path_image : 'assets/images/admin/DefualtUser.png',
+                }).done((res) => {
+                    $('#editParents').modal('hide');
+                    toastr.success('แก้ไขข้อมูลสำเร็จ');
+                }).fail((xhr, status, error) => {
+                    toastr.error('ไม่สามารถแก้ไขข้อมูลได้ โปรดลองใหม่ภายหลัง');
+                });
+                console.log('Start Edit');
             }
+        }
+    }
+
+    async function changePassword() {
+        var checkError = true;
+        var password2 = document.getElementById("password2").value;
+        if (password2.length < 8 && password2.length <= 20) {
+            document.getElementById("erpassword2").style.display = "block";
+            document.getElementById("password2").style.border = "2px solid #bd2130";
+            checkError = false;
+        } else {
+            document.getElementById("erpassword2").style.display = "none";
+            document.getElementById("password2").style.border = "2px solid #ced4da";
+        }
+        if (checkError == true) {
+            var ph = await hashPassword(password2);
+            var id_user = $('.edit_btn').attr('id');
+            $.post('<?php echo base_url('admin/parents/update'); ?>/' + id_user, {
+                pa_pass: ph
+            }).done((res) => {
+                toastr.success('แก้ไขรหัสผ่านสำเร็จ');
+                $('#password2').val('');
+            }).fail((xhr, status, error) => {
+                toastr.error('ไม่สามารถแก้ไขข้อมูลได้ โปรดลองใหม่ภายหลัง');
+            });
         }
     }
 </script>

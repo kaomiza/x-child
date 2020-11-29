@@ -17,7 +17,6 @@ class ExpertModel extends CI_Model
         'e_phone',
         'e_house_no',
         'e_village_no',
-        'e_lane',
         'e_road',
         'e_province',
         'e_district',
@@ -39,18 +38,21 @@ class ExpertModel extends CI_Model
     {
         $this->db->select('e_id,n_thainame,n_engname,e_fnameTH,e_lnameTH,e_fnameEN,e_lnameEN');
         $this->db->join($this->table_join[0], $this->join[0]);
-        return $this->db->get_where($this->table, array($this->fields[20] => 1))->result();
+        return $this->db->get_where($this->table, array($this->fields[19] => 1))->result();
     }
 
     public function findAll()
     {
+        $this->db->select('e_id,n_thainame,n_engname,e_fnameTH,e_lnameTH,e_fnameEN,e_lnameEN,e_status,e_img');
+        $this->db->join($this->table_join[0], $this->join[0]);
+        return $this->db->get($this->table)->result();
     }
 
     public function create()
     {
     }
 
-    public function edit($id)
+    public function update($id)
     {
     }
 

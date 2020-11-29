@@ -38,7 +38,7 @@ class ParentModel extends CI_Model
     {
         $this->db->select('pa_id,n_thainame,n_engname,pa_fnameTH,pa_lnameTH,pa_fnameEN,pa_lnameEN');
         $this->db->join($this->table_join[0], $this->join[0]);
-        return $this->db->get_where($this->table, array($this->fields[19] => 1))->result();
+        return $this->db->get_where($this->table, array($this->fields[18] => 1))->result();
     }
 
     public function findAll()
@@ -48,14 +48,20 @@ class ParentModel extends CI_Model
         return $this->db->get($this->table)->result();
     }
 
+    public function findById($id)
+    {
+        return $this->db->get_where($this->table, array($this->primaryKey => $id))->row();
+    }
+
     public function create($data)
     {
         $this->db->insert($this->table, $data);
         return $this->db->insert_id();
     }
 
-    public function edit($id)
+    public function update($id, $data)
     {
+        return ($this->db->update($this->table, $data, array($this->primaryKey => $id))) ? true : false;
     }
 
     public function delete($id)

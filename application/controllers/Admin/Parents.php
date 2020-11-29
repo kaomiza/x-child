@@ -51,7 +51,7 @@ class Parents extends CI_Controller
             show_error('Allow Form POST', 405);
         }
     }
-    
+
     public function storeImage()
     {
         if ($this->input->server('REQUEST_METHOD') == 'POST') {
@@ -68,6 +68,29 @@ class Parents extends CI_Controller
                 $data = array('image_metadata' => $this->upload->data());
                 echo json_encode($data);
             }
+        } else {
+            show_error('Allow Form POST', 405);
+        }
+    }
+
+    public function getById($id)
+    {
+        if ($this->input->server('REQUEST_METHOD') == 'GET') {
+            header('Content-Type: application/json');
+            $result = $this->ParentModel->findById($id);
+            echo json_encode($result);
+        } else {
+            show_error('Allow Form GET', 405);
+        }
+    }
+
+    public function update($id)
+    {
+        if ($this->input->server('REQUEST_METHOD') == 'POST') {
+            header('Content-Type: application/json');
+            $data = $this->input->post();
+            $result = $this->ParentModel->update($id, $data);
+            echo json_encode($result);
         } else {
             show_error('Allow Form POST', 405);
         }
