@@ -41,6 +41,11 @@ class ExpertModel extends CI_Model
         return $this->db->get_where($this->table, array($this->fields[19] => 1))->result();
     }
 
+    public function findById($id)
+    {
+        return $this->db->get_where($this->table, array($this->primaryKey => $id))->row();
+    }
+
     public function findAll()
     {
         $this->db->select('e_id,n_thainame,n_engname,e_fnameTH,e_lnameTH,e_fnameEN,e_lnameEN,e_status,e_img');
@@ -48,12 +53,15 @@ class ExpertModel extends CI_Model
         return $this->db->get($this->table)->result();
     }
 
-    public function create()
+    public function create($data)
     {
+        $this->db->insert($this->table, $data);
+        return $this->db->insert_id();
     }
 
-    public function update($id)
+    public function update($id, $data)
     {
+        return ($this->db->update($this->table, $data, array($this->primaryKey => $id))) ? true : false;
     }
 
     public function delete($id)

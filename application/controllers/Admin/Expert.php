@@ -36,4 +36,63 @@ class Expert extends CI_Controller
             show_error('Allow Form GET', 405);
         }
     }
+
+    public function storeImage()
+    {
+        if ($this->input->server('REQUEST_METHOD') == 'POST') {
+            header('Content-Type: application/json');
+            $config['upload_path'] = './upload/images/';
+            $config['allowed_types'] = 'gif|jpg|png';
+            $config['max_size'] = 2000000;
+            $config['encrypt_name'] = TRUE;
+            $this->load->library('upload', $config);
+            if (!$this->upload->do_upload('file')) {
+                $error = array('error' => $this->upload->display_errors());
+                echo json_encode($error);
+            } else {
+                $data = array('image_metadata' => $this->upload->data());
+                echo json_encode($data);
+            }
+        } else {
+            show_error('Allow Form POST', 405);
+        }
+    }
+
+    public function create()
+    {
+        if ($this->input->server('REQUEST_METHOD') == 'POST') {
+            header('Content-Type: application/json');
+            $data = $this->input->post();
+            $result = [
+                'insert_id' => $this->ExpertModel->create($data)
+            ];
+            echo json_encode($result);
+        } else {
+            show_error('Allow Form POST', 405);
+        }
+    }
+
+    public function getById($id)
+    {
+        if ($this->input->server('REQUEST_METHOD') == 'GET') {
+            header('Content-Type: application/json');
+            $result = $this->ExpertModel->findById($id);
+            echo json_encode($result);
+        } else {
+            show_error('Allow Form GET', 405);
+        }
+    }
+
+
+    public function update($id)
+    {
+        if ($this->input->server('REQUEST_METHOD') == 'POST') {
+            header('Content-Type: application/json');
+            $data = $this->input->post();
+            $result = $this->ExpertModel->update($id, $data);
+            echo json_encode($result);
+        } else {
+            show_error('Allow Form POST', 405);
+        }
+    }
 }
