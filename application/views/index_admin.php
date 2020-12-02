@@ -81,7 +81,7 @@
                 </div>
                 <div class="sidebar-header">
                     <div class="user-pic">
-                        <img class="img-responsive img-rounded" src="https://scontent.fkkc4-1.fna.fbcdn.net/v/t1.0-9/119981968_3387716788121026_883271897146650157_o.jpg?_nc_cat=102&ccb=2&_nc_sid=09cbfe&_nc_eui2=AeHlJ0JzkmMi8NJmarzWpfufCjSt-rTfjkUKNK36tN-OReGQmDdnxwxQLHEsCeTzqnvaXd2rPFsFIuibOjqceNrv&_nc_ohc=BlYDGQoTg5cAX_RBSHv&_nc_ht=scontent.fkkc4-1.fna&oh=a1ee52bd5935e2dfbf92be7f0c6f7117&oe=5FC4F91F" alt="User picture">
+                        <img class="img-responsive img-rounded" src="https://scontent.fkkc3-1.fna.fbcdn.net/v/t1.0-1/p200x200/126184096_3450329945193043_4975428876046841981_n.jpg?_nc_cat=105&ccb=2&_nc_sid=7206a8&_nc_eui2=AeFs8K9GFNd5YYUuNaZMRELfzkNhPgxZKwLOQ2E-DFkrAjadEQaGLP1xf2CMjoe--p26B47vT5UHwPc-k7vPNMpr&_nc_ohc=GehO3gRGSG8AX-FN7pD&_nc_ht=scontent.fkkc3-1.fna&tp=6&oh=69f02080e92a5a139da75eab87ddce02&oe=5FEE218C" alt="User picture">
                     </div>
                     <div class="user-info">
                         <span class="user-name">Kunat

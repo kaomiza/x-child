@@ -1,6 +1,4 @@
-<link href="https://giDOCdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
-<script src="https://giDOCdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
-<div class="modal fade show" tabindex="-1" role="dialog" id="insertTypeChild" style="display:none;">
+<div class="modal fade show" tabindex="-1" role="dialog" id="insertDoc" style="display:none;">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -25,7 +23,6 @@
                 <div>
                     <select class="form-control text-paragraph" id="SelectTD1" required="">
                         <option selected="">--- กรุณาเลือก ---</option>
-                        <option value="1">นิทานปรำปรา</option>
                     </select>
                     <label class="text-paragraph" id="erSelectTD1" style="color: red; display:none; padding-top:5px;">
                         กรุณาเลือกประเภทเอกสารความรู้
@@ -50,7 +47,7 @@
         </div>
     </div>
 </div>
-<div class="modal fade show" tabindex="-1" role="dialog" id="editTypeChild" style="display:none;">
+<div class="modal fade show" tabindex="-1" role="dialog" id="editDoc" style="display:none;">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -108,10 +105,10 @@
     </div>
     <div class="bgWhite padding_main mainBoxRadius main-margin">
         <div>
-            <button class="btn_backend text_btn btn" id="btnInsert" data-toggle="modal" data-target="#insertTypeChild"><i class="fa fa-plus"></i>&nbsp;&nbsp;เพิ่มเอกสารความรู้</button>
+            <button class="btn_backend text_btn btn" id="btnInsert" data-toggle="modal" data-target="#insertDoc" onclick="fetch_type_document('add')"><i class="fa fa-plus"></i>&nbsp;&nbsp;เพิ่มเอกสารความรู้</button>
         </div>
         <div>
-            <table id="type_children" class="table table-bordered table-striped nowrap" style="width: 100%;">
+            <table id="document" class="table table-bordered table-striped nowrap" style="width: 100%;">
                 <thead>
                     <tr>
                         <th class="th_text">สถานะ</th>
@@ -127,12 +124,76 @@
     </div>
 </div>
 <script>
+    $("#document").DataTable({
+        "processing": true,
+        "autoWidth": false,
+        "ajax": {
+            url: "<?php echo base_url('admin/document/getAll'); ?>",
+            type: "GET"
+        },
+        "columns": [{
+                "data": null,
+                "render": (data, type, row, meta) => {
+                    return `
+                        <label for="toggle-` + row.doc_id + `" class="toggle-1">
+                            <input type="checkbox" id="toggle-` + row.doc_id + `" 
+                            class="toggle-1__input"  ` + (row.doc_status == 1 ? 'checked' : '') + `
+                            onchange="onClickActivate(` + row.doc_id + `)">
+                            <span class="toggle-1__button"></span>
+                        </label>
+                        `;
+                },
+                width: 10
+            },
+            {
+                "data": "doc_id",
+                className: "td_text"
+            },
+            {
+                "data": "td_name",
+                className: "td_text"
+            },
+            {
+                "data": "doc_name",
+                className: "td_text"
+            },
+            {
+                "data": null,
+                "render": (data, type, row, meta) => {
+                    return `
+                        <button class="btn" style="padding: 2px .75rem; color: #199a6f;" data-toggle="modal" data-target="#editDoc"
+                        onclick="onClickEdit(` + row.doc_id + `)"><i class="fa fa-edit"></i>
+                        </button>
+                        `;
+                }
+            }
+        ]
+    });
+</script>
+<script>
     $('#file_doc1').on('change', function() {
         //get the file name
         var fileName = $(this).val();
         //replace the "Choose a file" label
         $(this).next('.custom-file-label').html(fileName);
     })
+</script>
+<script>
+    $('#insertDoc').on('hidden.bs.modal', function() {
+        reset_form('add');
+    })
+    $('#editDoc').on('hidden.bs.modal', function() {
+        reset_form('edit');
+    })
+
+    function reset_form(fn) {
+        if (fn == 'add') {
+
+        }
+        if (fn == 'edit') {
+
+        }
+    }
 </script>
 <script>
     function onClickSave(func) {
@@ -210,6 +271,47 @@
                     checkError = false;
                 }
             }
+        }
+    }
+
+    function fetch_type_document(fn, id = null) {
+        if (fn == 'add') {
+            $.get('<?php echo base_url('admin/type_document/getListSelect'); ?>').done((res) => {
+                res.data.forEach(element => {
+                    $('#SelectTD1').append('<option value="' + element.tc_id + '">' + element.tc_name + '</option>')
+                });
+            });
+        }
+
+        if (fn == 'edit') {
+            $.get().done((res) => {});
+        }
+    }
+
+    function onClickEdit(id) {
+        $.get('<?php echo base_url('admin/document/getById'); ?>/' + id).done((res) => {
+            console.log(res);
+            $('.edit_btn').attr('id', res.tc_id);
+        });
+    }
+
+    function onClickActivate(id) {
+        if ($('#toggle-' + id).is(":checked")) {
+            $.post('<?php echo base_url('admin/document/update'); ?>/' + id, {
+                doc_status: 1
+            }).done((res) => {
+                toastr.info('NO');
+            }).fail((xhr, status, error) => {
+                toastr.error('Error')
+            })
+        } else {
+            $.post('<?php echo base_url('admin/document/update'); ?>/' + id, {
+                doc_status: 0
+            }).done((res) => {
+                toastr.info('OFF');
+            }).fail((xhr, status, error) => {
+                toastr.error('Error')
+            })
         }
     }
 </script>
