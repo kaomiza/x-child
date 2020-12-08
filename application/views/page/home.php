@@ -466,7 +466,7 @@
         items: 1,
     })
 </script>
-<script>
+<!-- <script>
     jQuery(document).ready(function($) {
         var start = 0;
         var row = 0;
@@ -520,4 +520,4 @@
         });
 
     });
-</script>
+</script> -->
