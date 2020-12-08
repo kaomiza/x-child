@@ -2,9 +2,215 @@
     body {
         background-color: #feffe4;
     }
+
+    .bannerimg {
+        width: 100%;
+        height: 700px;
+    }
+
+    @media (min-width: 1025px) and (max-width: 1280px) {
+        .bannerimg {
+            width: 100%;
+            height: auto;
+        }
+    }
+
+    @media (min-width: 768px) and (max-width: 1024px) {
+        .bannerimg {
+            width: 100%;
+            height: auto;
+        }
+    }
+
+    @media (min-width: 200px) and (max-width: 767px) {
+        .bannerimg {
+            width: 100%;
+            height: auto;
+        }
+    }
+
+    .content_warpper {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .live_warpper {
+        width: 40%;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .live_warpper>div:not(:last-child) {
+        margin-bottom: 10px;
+    }
+
+    .knowledge_warpper {
+        width: 59%;
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+    .knowledge_warpper>div:not(:last-child) {
+        margin-bottom: 10px;
+    }
+
+    @media (min-width: 768px) and (max-width: 1024px) {
+        .content_warpper {
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .live_warpper {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        .knowledge_warpper {
+            width: 100%;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+        }
+    }
+
+    @media (min-width: 200px) and (max-width: 767px) {
+        .content_warpper {
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .live_warpper {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        .knowledge_warpper {
+            width: 100%;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+        }
+    }
+
+    .img_live_box {
+        border-radius: 10px;
+        cursor: pointer;
+    }
+
+    @media (min-width: 768px) and (max-width: 1024px) {
+        .img_live_box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+
+    @media (min-width: 200px) and (max-width: 767px) {
+        .img_live_box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+
+    .content_live_box {
+        border-radius: 10px;
+        background-color: white;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+
+    .content_live_box>div:not(:last-child) {
+        margin-bottom: 10px;
+        border-bottom: 1px solid rgba(0, 0, 0, .2);
+    }
+
+    p {
+        margin: 0px;
+    }
+
+    .content_live_item {
+        padding: 10px 0px;
+    }
+
+    .content_knowledge_box {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .content_knowledge_box>div:not(:last-child) {
+        border-bottom: 1px solid rgba(0, 0, 0, .2);
+    }
+
+    .content_knowledge_item {
+        padding: 10px 0px;
+        display: flex;
+        flex-direction: row;
+    }
+
+    .img_knowledge_box {
+        width: 40%;
+        border-radius: 10px;
+    }
+
+    .img_knowledge_box>img {
+        border-radius: 10px;
+        height: 180px;
+    }
+
+    .detail_knowledge_box {
+        width: 60%;
+        padding: 0px 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    @media (min-width: 200px) and (max-width: 767px) {
+        .content_knowledge_box>div:not(:last-child) {
+            margin-bottom: 20px;
+        }
+
+        .content_knowledge_item {
+            padding: 0px 0px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .content_knowledge_item>div:not(:last-child) {
+            margin-bottom: 10px;
+        }
+
+
+        .img_knowledge_box {
+            width: 100%;
+            border-radius: 00px;
+        }
+
+        .img_knowledge_box>img {
+            border-radius: 0px;
+        }
+
+        .detail_knowledge_box {
+            width: 100%;
+            padding: 0px 0px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+
+    }
 </style>
 <div>
-    <img class="img-fluid" src="<?php echo base_url(); ?>/assets/images/background.png" alt="bg" style="width: 100%;">
+    <img src="<?php echo base_url(); ?>/assets/images/background.png" alt="bg" class="bannerimg">
 </div>
 <div class="site-section">
     <div class="container">
@@ -49,6 +255,91 @@
 <div class="site-section">
     <div class="container">
 
+        <div class="content_warpper">
+            <div class="live_warpper">
+                <div class="img_live_box">
+                    <img class="banner-wrap img-fluid" src="<?php echo base_url(); ?>/assets/images/live-picture-4.png" alt="live">
+                </div>
+                <div class="content_live_box">
+                    <div class="content_live_item">
+                        <a href="<?php echo base_url('live'); ?>">
+                            <p> [Live 🔴] การถ่ายทอดสดจากผู้เชี่ยวชาญเด็กพิการทางสายตา 25/01/2563</p>
+                        </a>
+                    </div>
+                    <div class="content_live_item">
+                        <a href="<?php echo base_url('live'); ?>">
+                            <p> [Live 🔴] การถ่ายทอดสดจากผู้เชี่ยวชาญเด็กพิการทางสายตา 25/01/2563</p>
+                        </a>
+                    </div>
+                    <div class="content_live_item">
+                        <a href="<?php echo base_url('live'); ?>">
+                            <p> [Live 🔴] การถ่ายทอดสดจากผู้เชี่ยวชาญเด็กพิการทางสายตา 25/01/2563</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="knowledge_warpper">
+                <div>
+                    <h3>
+                        ความรู้เกี่ยวกับเด็กพิเศษ
+                    </h3>
+                </div>
+                <div class="content_knowledge_box">
+                    <div class="content_knowledge_item">
+                        <div class="img_knowledge_box">
+                            <img src="<?php echo base_url(); ?>/assets/images/knowledge/1.jpg" width="100%">
+                        </div>
+                        <div class="detail_knowledge_box">
+                            <div>
+                                <div>
+                                    <a href="#">
+                                        <h7>เด็กพิเศษ หมายถึงอะไร?</h7>
+                                    </a>
+                                </div>
+                                <div>
+                                    <label>
+                                        เด็กพิเศษ คือ เด็กที่มีความต้องการพิเศษในการดูแลและส่งเสริมด้านต่างๆ เป็นพิเศษมากกว่าเด็กปกติทั่วไป อาจต้องจัดการเรียนรู้ให้เหมาะสม
+                                    </label>
+                                </div>
+
+                            </div>
+                            <div>
+                                <label><i class="far fa-clock"></i> 18 มีนาคม 2563</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content_knowledge_item">
+                        <div class="img_knowledge_box">
+                            <img src="<?php echo base_url(); ?>/assets/images/knowledge/2.jpg" width="100%">
+                        </div>
+                        <div class="detail_knowledge_box">
+                            <div>
+                                <div>
+                                    <a href="#">
+                                        <h7>เด็กออทิสติกเรียนร่วมกับเด็กปกติได้หรือไม่</h7>
+                                    </a>
+                                </div>
+                                <div>
+                                    <label>
+                                        เด็กออทิสติกสามารถเรียนร่วมกับเด็กทั่วไปได้หรือไม่ ขึ้นอยู่กับระดับความรุนแรงของปัญหาและความพร้อมบางด้านที่จำเป็น โดยทั่วไปเด็กสามารถเรียนร่วมได้
+                                    </label>
+                                </div>
+
+                            </div>
+                            <div>
+                                <label><i class="far fa-clock"></i> 18 มีนาคม 2563</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- <div class="site-section">
+    <div class="container">
+
         <div class="row">
             <div class="title-section text-center col">
                 <h2 class="text-uppercase">ความรู้เกี่ยวกับเด็กพิเศษ</h2>
@@ -67,9 +358,9 @@
         </div>
 
     </div>
-</div>
+</div> -->
 
-<div class="site-section">
+<!-- <div class="site-section">
     <div class="container">
         <div class="row">
             <div class="title-section text-center col-12">
@@ -102,16 +393,27 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 
-<div class="site-section">
+<div style=" padding-bottom: 2em; ">
     <div class="container">
-        <div class="row">
-            <div class="title-section text-center col-12">
-                <h2 class="text-uppercase"> ข่าวประชาสัมพันธ์อื่นๆ <h2>
+        <div class="row" style="background-color: white; margin:0px; border-radius:10px;">
+            <div style="
+                    padding-top: 20px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width:100%;
+                ">
+                <div>
+                    <h3>
+                        ข่าวประชาสัมพันธ์อื่นๆ
+                    </h3>
+                </div>
             </div>
-        </div>
-        <div class="row" style="background-color: white;">
+            <div>
+                
+            </div>
             <div class="col block-3 products-wrap">
                 <div class="owl-carousel owl-theme">
 
