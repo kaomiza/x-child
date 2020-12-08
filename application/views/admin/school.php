@@ -183,6 +183,19 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="alert alert-info" role="alert">
+                            <i class="fas fa-info-circle" style="font-size: 18px;"></i> สามารถกรอกละติจูดและลองจิจูด หรือ เลือกจากแผนที่
+                        </div>
+                    </div>
+                    <div class="col-6 mt-1">
+                        <button type="button" class="btn btn-primary" onclick="setZoom()"><i class="fas fa-map-marker-alt"></i></button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div id="map" style="height: 500px; width: 100%; max-width: 800px;"></div>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary text_btn" data-dismiss="modal" onclick="reset_form('add')">ปิด</button>
@@ -379,6 +392,19 @@
                     </div>
 
                 </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="alert alert-info" role="alert">
+                            <i class="fas fa-info-circle" style="font-size: 18px;"></i> สามารถกรอกละติจูดและลองจิจูด หรือ เลือกจากแผนที่
+                        </div>
+                    </div>
+                    <div class="col-6 mt-1">
+                        <button type="button" class="btn btn-primary" onclick="setZoom()"><i class="fas fa-map-marker-alt"></i></button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div id="mapEdit" style="height: 500px; width: 100%; max-width: 800px;"></div>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary text_btn" data-dismiss="modal">ปิด</button>
@@ -403,7 +429,8 @@
             <thead>
                 <tr>
                     <th class="th_text">สถานะ</th>
-                    <th class="th_text">เลขที่</th>
+                    <th class="th_text">ลำดับ</th>
+                    <th class="th_text">รหัสโรงเรียน</th>
                     <th class="th_text">ชื่อโรงเรียนภาษาไทย</th>
                     <th class="th_text">ชื่อโรงเรียนภาษาอังกฤษ</th>
                     <th class="th_text">ประเภทโรงเรียน</th>
@@ -418,6 +445,108 @@
         </table>
     </div>
 </div>
+<!-- google map -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGhJrZXYbgVyFaW4VWXI7kVkntUmrnTH8&callback=initMap" async defer></script>
+<script>
+    var map;
+    var marker;
+
+    function initMap(fn, lat = null, long = null) {
+        var thai;
+        if (fn == 'add') {
+            thai = new google.maps.LatLng(13.7750905, 101.1008421);
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: thai,
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                zoom: 6
+            });
+            marker = new google.maps.Marker({
+                draggable: true,
+                map: map,
+                title: "Select location"
+            });
+            google.maps.event.addListener(marker, 'dragend', function(event) {
+                lat = event.latLng.lat();
+                long = event.latLng.lng();
+                document.getElementById("Lat1").value = event.latLng.lat();
+                document.getElementById("Long1").value = event.latLng.lng();
+                auto_center(lat, long)
+            });
+
+            google.maps.event.addListener(map, 'click', function(event) {
+                lat = event.latLng.lat();
+                long = event.latLng.lng();
+                document.getElementById("Lat1").value = event.latLng.lat();
+                document.getElementById("Long1").value = event.latLng.lng();
+                marker.setPosition(event.latLng);
+                auto_center(lat, long)
+            });
+        }
+        if (fn == 'edit') {
+            thai = new google.maps.LatLng(lat, long);
+            map = new google.maps.Map(document.getElementById('mapEdit'), {
+                center: thai,
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                zoom: 15
+            });
+            marker = new google.maps.Marker({
+                draggable: true,
+                position: thai,
+                map: map,
+                title: "Select location"
+            });
+            google.maps.event.addListener(marker, 'dragend', function(event) {
+                lat = event.latLng.lat();
+                long = event.latLng.lng();
+                document.getElementById("Lat2").value = event.latLng.lat();
+                document.getElementById("Long2").value = event.latLng.lng();
+                auto_center(lat, long)
+            });
+
+            google.maps.event.addListener(map, 'click', function(event) {
+                lat = event.latLng.lat();
+                long = event.latLng.lng();
+                document.getElementById("Lat2").value = event.latLng.lat();
+                document.getElementById("Long2").value = event.latLng.lng();
+                marker.setPosition(event.latLng);
+                auto_center(lat, long)
+            });
+        }
+    }
+
+    function clearMarkers() {
+        marker.setMap(null);
+    }
+
+    function setZoom() {
+        latitude = $('#Lat1').val();
+        longitude = $('#Long1').val();
+        if (latitude != '' && longitude != '') {
+            map.setCenter(new google.maps.LatLng(latitude, longitude));
+            map.setZoom(15);
+        } else {
+            alert('Select Position');
+        }
+    }
+
+    function auto_center(latitude, longitude) {
+        var location = new google.maps.LatLng(latitude, longitude);
+        map.panTo(location);
+    }
+    // google.maps.event.addDomListener(window, "load", initMap());
+    // $(document).ready(function() {
+    //     initMap();
+    // });
+</script>
+<script>
+    $('#insertSchool').on('hidden.bs.modal', function() {
+        reset_form('add');
+    })
+    $('#editSchool').on('hidden.bs.modal', function() {
+        reset_form('edit');
+    })
+</script>
+<!-- datateble -->
 <script>
     $("#school").DataTable({
         "processing": true,
@@ -427,8 +556,12 @@
             url: "<?php echo base_url('admin/school/getAll'); ?>",
             type: "GET"
         },
+        "order": [
+            [1, "asc"]
+        ],
         "columns": [{
                 "data": null,
+                'orderable': false,
                 "render": (data, type, row, meta) => {
                     return `
                             <label for="toggle-` + row.sc_id + `" class="toggle-1">
@@ -439,6 +572,13 @@
                             </label> 
                         `;
                 },
+            },
+            {
+                "data": null,
+                className: "td_text",
+                "render": (data, type, row, meta) => {
+                    return meta.row + 1;
+                }
             },
             {
                 "data": "sc_id",
@@ -495,6 +635,7 @@
         ]
     });
 </script>
+<!-- save function -->
 <script>
     function isPhoneNo(input) {
         var regExp = /^0[0-9]{8,9}$/i;
@@ -639,7 +780,6 @@
                     longitude: long
                 }).done((res) => {
                     if (res == true) {
-                        reset_form('add');
                         $('#insertSchool').modal('hide');
                         toastr.success('เพิ่มข้อมูลสำเร็จ');
                         $('#school').DataTable().ajax.reload();
@@ -790,7 +930,6 @@
                     longitude: long
                 }).done((res) => {
                     if (res == true) {
-                        reset_form('edit');
                         $('#editSchool').modal('hide');
                         toastr.success('แก้ไขข้อมูลสำเร็จ');
                         $('#school').DataTable().ajax.reload();
@@ -805,84 +944,22 @@
         }
     }
 
-    async function onClickEdit(id) {
-        await $.get('<?php echo base_url('admin/school/getbyid'); ?>/' + id, async (data) => {
-            await $('.edit_btn').attr('id', data.sc_id);
-            await $('#NameSchoolTH2').val(data.sc_nameTH);
-            await $('#NameSchoolEN2').val(data.sc_nameEN);
-            await $('#HouseNo2').val(data.sc_house_no);
-            await $('#VillageNo2').val(data.sc_village_no);
-            await $('#Road2').val(data.sc_road);
-            await $('#Postcode2').val(data.sc_zip);
-            await $('#Website2').val(data.website);
-            await $('#NumPhone2').val(data.phone);
-            await $('#Lat2').val(data.latitude);
-            await $('#Long2').val(data.longitude);
-
-            await $('#SelectTS2').empty();
-            await $('#SelectTS2').append('<option selected="">--- กรุณาเลือก ---</option>');
-            await $.get('<?php echo base_url('admin/type_school/getall'); ?>', (res) => {
-                res.data.forEach(element => {
-                    if (element.tsc_id == data.sc_type) {
-                        $('#SelectTS2').append('<option value="' + element.tsc_id + '" selected>' + element.tsc_name + '</option>')
-                    } else {
-                        $('#SelectTS2').append('<option value="' + element.tsc_id + '">' + element.tsc_name + '</option>')
-                    }
-                });
-            })
-
-            await $.get('<?php echo base_url('api/address/province'); ?>', (res) => {
-                res.forEach(element => {
-                    if (element.PROVINCE_ID == data.sc_province) {
-                        $('#SelectPro2').append('<option value="' + element.PROVINCE_ID + '" selected>' + element.PROVINCE_NAME + '</option>')
-                    } else {
-                        $('#SelectPro2').append('<option value="' + element.PROVINCE_ID + '">' + element.PROVINCE_NAME + '</option>')
-                    }
-                });
-            })
-
-
-            var p = await $('#SelectPro2').val();
-            if (p == '--- กรุณาเลือก ---') {
-                await $('#SelectAm2').prop('disabled', true);
-            } else {
-                await $('#SelectAm2').empty();
-                await $('#SelectAm2').append('<option selected="">--- กรุณาเลือก ---</option>');
-                await $('#SelectAm2').prop('disabled', false);
-                await $('#SelectDist2').prop('disabled', true);
-                await $.get('<?php echo base_url('api/address/amphur'); ?>/' + p, (res) => {
-                    res.forEach(element => {
-                        if (element.AMPHUR_ID == data.sc_amphur) {
-                            $('#SelectAm2').append('<option value="' + element.AMPHUR_ID + '" selected>' + element.AMPHUR_NAME + '</option>')
-                        } else {
-                            $('#SelectAm2').append('<option value="' + element.AMPHUR_ID + '">' + element.AMPHUR_NAME + '</option>')
-                        }
-                    });
-                })
-            }
-
-            var amphur = await $('#SelectAm2').val();
-            if (amphur == '--- กรุณาเลือก ---') {
-                await $('#SelectDist2').append('<option selected="">--- กรุณาเลือก ---</option>');
-                await $('#SelectDist2').prop('disabled', true);
-            } else {
-                await $.get('<?php echo base_url('api/address/amphurById'); ?>/' + amphur, (res) => {
-                    $('#Postcode2').val(res.POSTCODE);
-                })
-                await $('#SelectDist2').prop('disabled', false);
-                await $('#SelectDist2').empty();
-                await $('#SelectDist2').append('<option selected="">--- กรุณาเลือก ---</option>');
-                await $.get('<?php echo base_url('api/address/district'); ?>/' + amphur, (res) => {
-                    res.forEach(element => {
-                        if (element.DISTRICT_ID == data.sc_district) {
-                            $('#SelectDist2').append('<option value="' + element.DISTRICT_ID + '" selected>' + element.DISTRICT_NAME + '</option>')
-                        } else {
-                            $('#SelectDist2').append('<option value="' + element.DISTRICT_ID + '">' + element.DISTRICT_NAME + '</option>');
-                        }
-                    });
-                });
-            }
-
+    function onClickEdit(id) {
+        $.get('<?php echo base_url('admin/school/getbyid'); ?>/' + id, async (data) => {
+            $('.edit_btn').attr('id', data.sc_id);
+            $('#NameSchoolTH2').val(data.sc_nameTH);
+            $('#NameSchoolEN2').val(data.sc_nameEN);
+            $('#HouseNo2').val(data.sc_house_no);
+            $('#VillageNo2').val(data.sc_village_no);
+            $('#Road2').val(data.sc_road);
+            $('#Postcode2').val(data.sc_zip);
+            $('#Website2').val(data.website);
+            $('#NumPhone2').val(data.phone);
+            $('#Lat2').val(data.latitude);
+            $('#Long2').val(data.longitude);
+            initMap('edit', data.latitude, data.longitude);
+            fetch_type_school('edit', data.sc_type);
+            fetch_editAddress(data.sc_district, data.sc_province, data.sc_amphur);
         });
     }
 
@@ -910,6 +987,7 @@
     function fetch_add() {
         fetch_type_school('add');
         fetch_province('add');
+        initMap('add');
     }
 
     function reset_form(ref) {
@@ -930,6 +1008,7 @@
             form_id.forEach(element => {
                 $(element).val('');
             });
+            clearMarkers();
         }
         if (ref == 'edit') {
             var form_id = [
@@ -948,6 +1027,7 @@
             form_id.forEach(element => {
                 $(element).val('');
             });
+            clearMarkers();
         }
 
         $('#SelectTS1,#SelectTS2').empty();
@@ -961,7 +1041,61 @@
         $('#SelectAm1,#SelectAm2').prop('disabled', true);
     }
 
-    function fetch_type_school(type) {
+    async function fetch_editAddress(district_id, province_id, amphur_id) {
+        await $.get('<?php echo base_url('api/address/province'); ?>', (res) => {
+            res.forEach(element => {
+                if (element.PROVINCE_ID == province_id) {
+                    $('#SelectPro2').append('<option value="' + element.PROVINCE_ID + '" selected>' + element.PROVINCE_NAME + '</option>')
+                } else {
+                    $('#SelectPro2').append('<option value="' + element.PROVINCE_ID + '">' + element.PROVINCE_NAME + '</option>')
+                }
+            });
+        })
+
+
+        var p = await $('#SelectPro2').val();
+        if (p == '--- กรุณาเลือก ---') {
+            await $('#SelectAm2').prop('disabled', true);
+        } else {
+            await $('#SelectAm2').empty();
+            await $('#SelectAm2').append('<option selected="">--- กรุณาเลือก ---</option>');
+            await $('#SelectAm2').prop('disabled', false);
+            await $('#SelectDist2').prop('disabled', true);
+            await $.get('<?php echo base_url('api/address/amphur'); ?>/' + p, (res) => {
+                res.forEach(element => {
+                    if (element.AMPHUR_ID == amphur_id) {
+                        $('#SelectAm2').append('<option value="' + element.AMPHUR_ID + '" selected>' + element.AMPHUR_NAME + '</option>')
+                    } else {
+                        $('#SelectAm2').append('<option value="' + element.AMPHUR_ID + '">' + element.AMPHUR_NAME + '</option>')
+                    }
+                });
+            })
+        }
+
+        var amphur = await $('#SelectAm2').val();
+        if (amphur == '--- กรุณาเลือก ---') {
+            await $('#SelectDist2').append('<option selected="">--- กรุณาเลือก ---</option>');
+            await $('#SelectDist2').prop('disabled', true);
+        } else {
+            await $.get('<?php echo base_url('api/address/amphurById'); ?>/' + amphur, (res) => {
+                $('#Postcode2').val(res.POSTCODE);
+            })
+            await $('#SelectDist2').prop('disabled', false);
+            await $('#SelectDist2').empty();
+            await $('#SelectDist2').append('<option selected="">--- กรุณาเลือก ---</option>');
+            await $.get('<?php echo base_url('api/address/district'); ?>/' + amphur, (res) => {
+                res.forEach(element => {
+                    if (element.DISTRICT_ID == district_id) {
+                        $('#SelectDist2').append('<option value="' + element.DISTRICT_ID + '" selected>' + element.DISTRICT_NAME + '</option>')
+                    } else {
+                        $('#SelectDist2').append('<option value="' + element.DISTRICT_ID + '">' + element.DISTRICT_NAME + '</option>');
+                    }
+                });
+            });
+        }
+    }
+
+    function fetch_type_school(type, id = null) {
         if (type == 'add') {
             $('#SelectTS1').empty();
             $('#SelectTS1').append('<option selected="">--- กรุณาเลือก ---</option>');
@@ -977,7 +1111,11 @@
             $('#SelectTS2').append('<option selected="">--- กรุณาเลือก ---</option>');
             $.get('<?php echo base_url('admin/type_school/getListSelect'); ?>', (res) => {
                 res.data.forEach(element => {
-                    $('#SelectTS2').append('<option value="' + element.tsc_id + '">' + element.tsc_name + '</option>')
+                    if (element.tsc_id == id) {
+                        $('#SelectTS2').append('<option value="' + element.tsc_id + '" selected>' + element.tsc_name + '</option>')
+                    } else {
+                        $('#SelectTS2').append('<option value="' + element.tsc_id + '">' + element.tsc_name + '</option>')
+                    }
                 });
             })
         }

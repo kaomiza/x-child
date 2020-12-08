@@ -534,28 +534,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="row" style="padding-top: 10px;">
-                    <div class="col-md-12">
-                        <div style="border-bottom: 1px solid #dedede;"></div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-3">
-
-                    </div>
-                    <div class="col-md-6" style="text-align: center;">
-                        <div style="margin-bottom: 5px;">
-                            <label>
-                                สถานะการใช้งาน
-                            </label>
-                        </div>
-                        <div id="active">
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-
-                    </div>
-                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary text_btn" data-dismiss="modal">ปิด</button>
@@ -564,20 +542,50 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade show" tabindex="-1" role="dialog" id="ParentInfo" style="display:none;">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title text-heading">แก้ไขผู้ปกครอง</h4>
+                <button type="button" class="close" data-dismiss="modal">×</button>
+            </div>
+            <div class="modal-boby">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary text_btn" data-dismiss="modal">ปิด</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="main-margin padding_main">
     <div class="padding_main bgWhite mainBoxRadius boxHeader">
         <div>
             <h1 class="h1-title">ผู้ปกครอง</h1>
         </div>
+    </div>
+    <div class="bgWhite padding_main mainBoxRadius main-margin">
         <div>
             <button class="btn_backend text_btn btn" id="btnInsert" data-toggle="modal" data-target="#insertParents" onclick="add_fetchData()"><i class="fa fa-plus"></i>&nbsp;&nbsp;เพิ่มผู้ปกครอง</button>
         </div>
-    </div>
-    <div class="bgWhite padding_main mainBoxRadius">
-        <div id="data-container">
-            <!-- fetch_list -->
-        </div>
-        <div class="d-flex justify-content-center mt-3" id="pagination-container"></div>
+        <table id="parents" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th class="th_text">สถานะ</th>
+                    <th class="th_text">ลำดับ</th>
+                    <th class="th_text">รหัสผู้ปกครอง</th>
+                    <th class="th_text">ชื่อ</th>
+                    <th class="th_text">โรงเรียนที่นำเด็กเข้าศึกษา</th>
+                    <th class="th_text">เบอร์ติดต่อ</th>
+                    <th class="th_text">อีเมล์</th>
+                    <th class="th_text">ที่อยู่</th>
+                    <th class="th_text">แก้ไข</th>
+                    <th class="th_text"></th>
+                </tr>
+            </thead>
+        </table>
     </div>
 </div>
 <link rel="stylesheet" href="<?php echo base_url(); ?>assets/paginationjs/dist/pagination.css">
@@ -590,6 +598,103 @@
         reset_form('edit');
     })
 </script>
+<!-- datateble -->
+<script>
+    $("#parents").DataTable({
+        "processing": true,
+        "responsive": true,
+        "autoWidth": false,
+        "ajax": {
+            url: "<?php echo base_url('admin/parents/getAll'); ?>",
+            type: "GET"
+        },
+        "order": [
+            [1, "asc"]
+        ],
+        "columns": [{
+                "data": null,
+                'orderable': false,
+                "render": (data, type, row, meta) => {
+                    return `
+                            <label for="toggle-` + row.pa_id + `" class="toggle-1">
+                                <input type="checkbox" id="toggle-` + row.pa_id + `" 
+                                class="toggle-1__input"  ` + (row.pa_status == 1 ? 'checked' : '') + `
+                                onchange="onClickActivate(` + row.pa_id + `)">
+                                <span class="toggle-1__button"></span>
+                            </label> 
+                        `;
+                },
+            },
+            {
+                "data": null,
+                className: "td_text",
+                width: 50,
+                "render": (data, type, row, meta) => {
+                    return meta.row + 1;
+                }
+            },
+            {
+                "data": "pa_id",
+                width: 100,
+                className: "td_text"
+            },
+            {
+                data: null,
+                className: "td_text",
+                width: 100,
+                render: (data, type, row, meta) => {
+                    return row.n_thainame + ' ' + row.pa_fnameTH + ' ' + row.pa_lnameTH + ' ' +
+                        '<br>' + row.n_engname + ' ' + row.pa_fnameEN + ' ' + row.pa_lnameEN
+                }
+            },
+            {
+                "data": null,
+                className: "td_text",
+                render: (data, type, row, meta) => {
+                    return row.sc_nameTH + '<br>' + row.sc_nameEN
+                }
+            },
+            {
+                "data": "phone",
+                className: "td_text"
+            },
+            {
+                "data": "email",
+                className: "td_text"
+            },
+            {
+                "data": null,
+                className: "td_text",
+                render: (data, type, row, meta) => {
+                    return (row.pa_house_no == '' ? ' - ' : row.pa_house_no) + ' หมู่ ' +
+                        (row.pa_village_no == '' ? ' - ' : row.pa_village_no) + ' ถนน ' +
+                        row.pa_road + ' จังหวัด ' + row.PROVINCE_NAME + ' ตำบล ' + row.DISTRICT_NAME +
+                        ' อำเภอ ' + row.AMPHUR_NAME + row.POSTCODE;
+                }
+            },
+            {
+                "data": null,
+                "render": (data, type, row, meta) => {
+                    return `
+                        <button class="btn btn-flat" style="padding: 2px .75rem; color: #199a6f;" data-toggle="modal" data-target="#editParents"
+                        onclick="onClickEdit(` + row.pa_id + `)"><i class="fa fa-edit"></i>
+                        </button>
+                        `;
+                }
+            },
+            {
+                "data": null,
+                "render": (data, type, row, meta) => {
+                    return `
+                        <button class="btn btn-outline-info" data-toggle="modal" data-target="#ParentInfo"
+                        > รายชื่อเด็กที่ดูแล </button>
+                        `;
+                }
+            }
+        ]
+    });
+</script>
+<!-- Action function -->
 <script>
     var prename = [];
     var path_image = null;
@@ -625,14 +730,6 @@
             $("#preview2").attr("src", "<?php echo base_url(); ?>" + res.pa_img);
             path_image = res.pa_img;
             $('.edit_btn').attr('id', res.pa_id);
-            $('#active').append(`
-               <label for="toggle-` + res.pa_id + `" class="toggle-1">
-                    <input type="checkbox" id="toggle-` + res.pa_id + `" 
-                    class="toggle-1__input" ` + (res.pa_status == 1 ? 'checked' : '') + ` 
-                    onchange="onClickActivate(` + res.pa_id + `)">
-                    <span class="toggle-1__button"></span>
-                </label>
-            `);
         });
     }
 
@@ -760,7 +857,6 @@
             });
         }
         if (fn == 'edit') {
-            $('#active').empty();
             $('#drug_update').empty();
             $('#diseased_update').empty();
             $("#preview2").attr("src", "<?php echo base_url(); ?>assets/images/admin/DefualtUser.png");
@@ -793,7 +889,7 @@
                 $(element).append('<option selected="">--- กรุณาเลือก ---</option>');
             });
         }
-        list_reload();
+        $('#parents').DataTable().ajax.reload();
         hideError();
     }
 
@@ -1052,87 +1148,7 @@
         }
     }
 </script>
-<script>
-    $('#pagination-container').pagination({
-        dataSource: (done) => {
-            $.ajax({
-                type: 'GET',
-                url: '<?php echo base_url('admin/parents/getall'); ?>',
-                success: (response) => {
-                    done(response);
-                }
-            });
-        },
-        pageSize: 4,
-        className: 'paginationjs-theme-blue paginationjs-big',
-        callback: function(data, pagination) {
-            var html = Templating(data);
-            $('#data-container').html(html);
-        }
-    });
-
-    function list_reload() {
-        $('#data-container').empty();
-        $('#pagination-container').pagination({
-            dataSource: (done) => {
-                $.ajax({
-                    type: 'GET',
-                    url: '<?php echo base_url('admin/parents/getall'); ?>',
-                    success: (response) => {
-                        done(response);
-                    }
-                });
-            },
-            pageSize: 4,
-            className: 'paginationjs-theme-blue paginationjs-big',
-            callback: function(data, pagination) {
-                var html = Templating(data);
-                $('#data-container').html(html);
-            }
-        });
-    }
-
-    function Templating(data) {
-        var html = '<div class="row">';
-        $.each(data, function(index, item) {
-            var status = '';
-            if (item.pa_status == 1) {
-                status += '<span style="color: #1ebb63;">เปิดใช้งาน</span>'
-            } else {
-                status += '<span style="color: #ff2727;">ปิดใช้งาน</span>'
-            }
-            html +=
-                `
-            <div class="col-md-3 main-margin" style="text-align: center;">
-                    <div class="cardUser cardBox main-margin" style="cursor: pointer;" data-toggle="modal" data-target="#editParents" onclick="onClickEdit(` +
-                item.pa_id + `)">
-                        <div class="main-margin">
-                            <div>
-                                <img style="width: 80%; height: 80%;" src="<?php echo base_url(); ?>` + item.pa_img + `">
-                            </div>
-                            <div>
-                                <label style="cursor: pointer;" class="text-paragraph">` +
-                item.n_thainame + ' ' +
-                item.pa_fnameTH + ' ' +
-                item.pa_lnameTH +
-                `<br>` +
-                item.n_engname + ' ' +
-                item.pa_fnameEN + ' ' +
-                item.pa_fnameEN +
-                `</label>
-                            </div>
-                            <div>
-                                <label style="cursor: pointer;" class="text-paragraph">สถานะการใช้งาน : ` + status + `</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `;
-        });
-        html += '</div>';
-        return html;
-    }
-</script>
+<!-- submit function -->
 <script>
     $(document).on("click", ".cardUser", function() {
         $('.toggle').css("width", "100px");

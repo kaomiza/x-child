@@ -87,11 +87,12 @@
             <button class="btn_backend text_btn btn" id="btnInsert" data-toggle="modal" data-target="#insertPrename"><i class="fa fa-plus"></i>&nbsp;&nbsp;เพิ่มคำนำหน้าชื่อ</button>
         </div>
         <div>
-            <table id="prename" class="table table-bordered table-striped">
+            <table id="prename" class="table table-striped table-bordered dt-responsive nowrap" style="width: 100%;">
                 <thead>
                     <tr>
                         <th class="th_text">สถานะ</th>
-                        <th class="th_text">เลขที่</th>
+                        <th class="th_text">ลำดับ</th>
+                        <th class="th_text">รหัสคำนำหน้าชื่อ</th>
                         <th class="th_text">คำนำหน้าชื่อไทย</th>
                         <th class="th_text">คำนำหน้าชื่ออังกฤษ</th>
                         <th class="th_text">แก้ไข</th>
@@ -112,7 +113,11 @@
                 url: "<?php echo base_url('admin/pre_name/getAll'); ?>",
                 type: "GET"
             },
+            "order": [
+                [1, "asc"]
+            ],
             "columns": [{
+                    'orderable': false,
                     "data": null,
                     "render": (data, type, row, meta) => {
                         return `
@@ -126,6 +131,13 @@
                     },
                     width: 10
                 }, {
+                    "data": null,
+                    className: "td_text",
+                    "render": (data, type, row, meta) => {
+                        return meta.row + 1;
+                    }
+                },
+                {
                     "data": "n_id",
                     className: "td_text"
                 },

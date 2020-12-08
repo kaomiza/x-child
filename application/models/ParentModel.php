@@ -26,11 +26,19 @@ class ParentModel extends CI_Model
     ];
 
     protected $table_join = [
-        'prename'
+        'prename',
+        'school',
+        'province',
+        'district',
+        'amphur'
     ];
 
     protected $join = [
-        'prename.n_id = parent.pa_prename'
+        'prename.n_id = parent.pa_prename',
+        'school.sc_id = parent.school_id',
+        'province.PROVINCE_ID = parent.pa_province',
+        'district.DISTRICT_ID = parent.pa_district',
+        'amphur.AMPHUR_ID = parent.pa_amphur'
     ];
 
 
@@ -43,8 +51,31 @@ class ParentModel extends CI_Model
 
     public function findAll()
     {
-        $this->db->select('pa_id,n_thainame,n_engname,pa_fnameTH,pa_lnameTH,pa_fnameEN,pa_lnameEN,pa_status,pa_img');
+        $this->db->select('
+        pa_id,
+        n_thainame,
+        n_engname,
+        pa_fnameTH,
+        pa_lnameTH,
+        pa_fnameEN,
+        pa_lnameEN,
+        sc_nameTH,
+        sc_nameEN,
+        parent.phone,
+        email,
+        pa_house_no,
+        pa_village_no,
+        pa_road,
+        pa_status,
+        PROVINCE_NAME,
+        AMPHUR_NAME,
+        POSTCODE,
+        ');
         $this->db->join($this->table_join[0], $this->join[0]);
+        $this->db->join($this->table_join[1], $this->join[1]);
+        $this->db->join($this->table_join[2], $this->join[2]);
+        $this->db->join($this->table_join[3], $this->join[3]);
+        $this->db->join($this->table_join[4], $this->join[4]);
         return $this->db->get($this->table)->result();
     }
 

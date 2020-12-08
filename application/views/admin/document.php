@@ -284,7 +284,15 @@
         }
 
         if (fn == 'edit') {
-            $.get().done((res) => {});
+            $.get('<?php echo base_url('admin/type_document/getListSelect'); ?>').done((res) => {
+                res.data.forEach(element => {
+                    if (element.tc_id == id) {
+                        $('#SelectTD2').append('<option selected value="' + element.tc_id + '">' + element.tc_name + '</option>')
+                    } else {
+                        $('#SelectTD2').append('<option value="' + element.tc_id + '">' + element.tc_name + '</option>')
+                    }
+                });
+            });
         }
     }
 

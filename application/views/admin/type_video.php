@@ -1,5 +1,3 @@
-<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
-<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 <div class="modal fade show" tabindex="-1" role="dialog" id="insertTypeVdo" style="display:none;">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -67,7 +65,8 @@
                 <thead>
                     <tr>
                         <th class="th_text">สถานะ</th>
-                        <th class="th_text">เลขที่</th>
+                        <th class="th_text">ลำดับ</th>
+                        <th class="th_text">รหัสประเภทวิดิโอความรู้</th>
                         <th class="th_text">ชื่อประเภทวิดีโอความรู้</th>
                         <th class="th_text">แก้ไข</th>
                     </tr>
@@ -86,8 +85,12 @@
             url: "<?php echo base_url('admin/type_video/getAll'); ?>",
             type: "GET"
         },
+        "order": [
+            [1, "asc"]
+        ],
         "columns": [{
                 "data": null,
+                'orderable': false,
                 "render": (data, type, row, meta) => {
                     return `
                         <label for="toggle-` + row.tv_id + `" class="toggle-1">
@@ -99,6 +102,13 @@
                         `;
                 },
                 width: 10
+            },
+            {
+                "data": null,
+                className: "td_text",
+                "render": (data, type, row, meta) => {
+                    return meta.row + 1;
+                }
             },
             {
                 "data": "tv_id"

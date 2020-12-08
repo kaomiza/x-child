@@ -24,7 +24,10 @@ class Children extends CI_Controller
     {
         if ($this->input->server('REQUEST_METHOD') == 'GET') {
             header('Content-Type: application/json');
-            echo json_encode($this->ChildrenModel->findAll());
+            $output = [
+                'data' => $this->ChildrenModel->findAll()
+            ];
+            echo json_encode($output);
         } else {
             show_error('Allow Form GET', 405);
         }

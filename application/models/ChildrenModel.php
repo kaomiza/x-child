@@ -17,6 +17,7 @@ class ChildrenModel extends CI_Model
         'c_house_no',
         'c_village_no',
         'c_road',
+        'c_province',
         'c_district',
         'c_amphur',
         'c_zip',
@@ -25,17 +26,52 @@ class ChildrenModel extends CI_Model
     ];
 
     protected $table_join = [
-        'prename'
+        'prename',
+        'school',
+        'type_children',
+        'province',
+        'district',
+        'amphur'
     ];
 
     protected $join = [
-        'prename.n_id = children.c_prename'
+        'prename.n_id = children.c_prename',
+        'school.sc_id = children.school_id',
+        'type_children.tc_id = children.tc_id',
+        'province.PROVINCE_ID = children.c_province',
+        'district.DISTRICT_ID = children.c_district',
+        'amphur.AMPHUR_ID = children.c_amphur'
     ];
 
     public function findAll()
     {
-        $this->db->select('c_id,n_thainame,n_engname,c_fnameTH,c_lnameTH,c_fnameEN,c_lnameEN,c_status,c_img');
+        // $this->db->select('*');
+        $this->db->select('
+        c_id,
+        n_thainame,
+        n_engname,
+        c_fnameTH,
+        c_lnameTH,
+        c_fnameEN,
+        c_lnameEN,
+        c_house_no,
+        c_village_no,
+        c_road,
+        date,
+        sc_nameTH,
+        sc_nameEN,
+        tc_name,
+        c_status,
+        PROVINCE_NAME,
+        AMPHUR_NAME,
+        POSTCODE
+        ');
         $this->db->join($this->table_join[0], $this->join[0]);
+        $this->db->join($this->table_join[1], $this->join[1]);
+        $this->db->join($this->table_join[2], $this->join[2]);
+        $this->db->join($this->table_join[3], $this->join[3]);
+        $this->db->join($this->table_join[4], $this->join[4]);
+        $this->db->join($this->table_join[5], $this->join[5]);
         return $this->db->get($this->table)->result();
     }
 

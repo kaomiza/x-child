@@ -155,7 +155,7 @@
                             <label class="text-paragraph" style="color: red;">*</label>
                         </div>
                         <div>
-                            <select class="select2bs4 form-control text-paragraph" id="parent1" required="">
+                            <select class="select2bs4 form-control text-paragraph" id="parent1" required="" onchange="autoAddressByParent('add')">
                                 <option selected="">--- กรุณาเลือก ---</option>
                             </select>
                             <label class="text-paragraph" id="erparent1" style="color: red; display:none; padding-top:5px;">
@@ -463,7 +463,7 @@
                             <label class="text-paragraph" style="color: red;">*</label>
                         </div>
                         <div>
-                            <select class="form-control text-paragraph select2bs4" id="parent2" required="">
+                            <select class="form-control text-paragraph select2bs4" id="parent2" onchange="autoAddressByParent('edit')" required="">
                                 <option selected="">--- กรุณาเลือก ---</option>
                             </select>
                             <label class="text-paragraph" id="erparent2" style="color: red; display:none; padding-top:5px;">
@@ -616,9 +616,6 @@
                                 สถานะการใช้งาน
                             </label>
                         </div>
-                        <div id="active">
-
-                        </div>
                     </div>
                     <div class="col-md-3">
 
@@ -637,15 +634,26 @@
         <div>
             <h1 class="h1-title">เด็กพิเศษ</h1>
         </div>
+    </div>
+    <div class="bgWhite padding_main mainBoxRadius main-margin">
         <div>
             <button class="btn_backend text_btn btn" id="btnInsert" data-toggle="modal" data-target="#insertChildren" onclick="add_fetchData()"><i class="fa fa-plus"></i>&nbsp;&nbsp;เพิ่มเด็กพิเศษ</button>
         </div>
-    </div>
-    <div class="bgWhite padding_main mainBoxRadius">
-        <div id="data-container">
-            <!-- fetch_list -->
-        </div>
-        <div class="d-flex justify-content-center mt-3" id="pagination-container"></div>
+        <table id="children" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th class="th_text">สถานะ</th>
+                    <th class="th_text">ลำดับ</th>
+                    <th class="th_text">รหัสเด็ก</th>
+                    <th class="th_text">ชื่อ</th>
+                    <th class="th_text">ประเภทเด็ก</th>
+                    <th class="th_text">โรงเรียน</th>
+                    <th class="th_text">วันเกิด</th>
+                    <th class="th_text">ที่อยู่</th>
+                    <th class="th_text">แก้ไข</th>
+                </tr>
+            </thead>
+        </table>
     </div>
 </div>
 <link rel="stylesheet" href="<?php echo base_url(); ?>assets/paginationjs/dist/pagination.css">
@@ -658,6 +666,7 @@
         reset_form('edit');
     })
 </script>
+<!-- Action function -->
 <script>
     var prename = [];
     var drug1 = [];
@@ -691,18 +700,10 @@
             $("#preview2").attr("src", "<?php echo base_url(); ?>" + res.c_img);
             path_image = res.c_img;
             $('.edit_btn').attr('id', res.c_id);
-            $('#active').append(`
-               <label for="toggle-` + res.c_id + `" class="toggle-1">
-                    <input type="checkbox" id="toggle-` + res.c_id + `" 
-                    class="toggle-1__input" ` + (res.c_status == 1 ? 'checked' : '') + ` 
-                    onchange="StatusChildren(` + res.c_id + `)">
-                    <span class="toggle-1__button"></span>
-                </label>
-            `);
         });
     }
 
-    function StatusChildren(id) {
+    function onClickActivate(id) {
         if ($('#toggle-' + id).is(":checked")) {
             $.post('<?php echo base_url('admin/children/update'); ?>/' + id, {
                 c_status: 1
@@ -852,6 +853,60 @@
         }
     }
 
+    async function fetch_AddAddress(district_id, province_id, amphur_id) {
+        await $.get('<?php echo base_url('api/address/province'); ?>', (res) => {
+            res.forEach(element => {
+                if (element.PROVINCE_ID == province_id) {
+                    $('#SelectPro1').append('<option value="' + element.PROVINCE_ID + '" selected>' + element.PROVINCE_NAME + '</option>')
+                } else {
+                    $('#SelectPro1').append('<option value="' + element.PROVINCE_ID + '">' + element.PROVINCE_NAME + '</option>')
+                }
+            });
+        })
+
+
+        var p = await $('#SelectPro1').val();
+        if (p == '--- กรุณาเลือก ---') {
+            await $('#SelectAm1').prop('disabled', true);
+        } else {
+            await $('#SelectAm1').empty();
+            await $('#SelectAm1').append('<option selected="">--- กรุณาเลือก ---</option>');
+            await $('#SelectAm1').prop('disabled', false);
+            await $('#SelectDist1').prop('disabled', true);
+            await $.get('<?php echo base_url('api/address/amphur'); ?>/' + p, (res) => {
+                res.forEach(element => {
+                    if (element.AMPHUR_ID == amphur_id) {
+                        $('#SelectAm1').append('<option value="' + element.AMPHUR_ID + '" selected>' + element.AMPHUR_NAME + '</option>')
+                    } else {
+                        $('#SelectAm1').append('<option value="' + element.AMPHUR_ID + '">' + element.AMPHUR_NAME + '</option>')
+                    }
+                });
+            })
+        }
+
+        var amphur = await $('#SelectAm1').val();
+        if (amphur == '--- กรุณาเลือก ---') {
+            await $('#SelectDist1').append('<option selected="">--- กรุณาเลือก ---</option>');
+            await $('#SelectDist1').prop('disabled', true);
+        } else {
+            await $.get('<?php echo base_url('api/address/amphurById'); ?>/' + amphur, (res) => {
+                $('#Postcode1').val(res.POSTCODE);
+            })
+            await $('#SelectDist1').prop('disabled', false);
+            await $('#SelectDist1').empty();
+            await $('#SelectDist1').append('<option selected="">--- กรุณาเลือก ---</option>');
+            await $.get('<?php echo base_url('api/address/district'); ?>/' + amphur, (res) => {
+                res.forEach(element => {
+                    if (element.DISTRICT_ID == district_id) {
+                        $('#SelectDist1').append('<option value="' + element.DISTRICT_ID + '" selected>' + element.DISTRICT_NAME + '</option>')
+                    } else {
+                        $('#SelectDist1').append('<option value="' + element.DISTRICT_ID + '">' + element.DISTRICT_NAME + '</option>');
+                    }
+                });
+            });
+        }
+    }
+
     function add_fetchData() {
         fetch_prename('add');
         fetch_typechildren('add');
@@ -907,7 +962,6 @@
             });
         }
         if (fn == 'edit') {
-            $('#active').empty();
             $('#drug_update').empty();
             $('#diseased_update').empty();
             $("#preview2").attr("src", "<?php echo base_url(); ?>assets/images/admin/DefualtUser.png");
@@ -944,7 +998,7 @@
                 $(element).append('<option selected="">--- กรุณาเลือก ---</option>');
             });
         }
-        list_reload();
+        $('#children').DataTable().ajax.reload();
     }
 
     function fetch_children_drug(fn) {
@@ -1504,87 +1558,105 @@
             }
         );
     }
-</script>
-<script>
-    $('#pagination-container').pagination({
-        dataSource: (done) => {
-            $.ajax({
-                type: 'GET',
-                url: '<?php echo base_url('admin/children/getall'); ?>',
-                success: (response) => {
-                    done(response);
-                }
+
+    function autoAddressByParent(fn) {
+        if (fn == 'add') {
+            var parent = $('#parent1').val();
+            $.get('<?php echo base_url('admin/parents/getById'); ?>/' + parent).done((res) => {
+                fetch_AddAddress(res.pa_district, res.pa_province, res.pa_amphur);
             });
-        },
-        pageSize: 4,
-        className: 'paginationjs-theme-blue paginationjs-big',
-        callback: function(data, pagination) {
-            var html = Templating(data);
-            $('#data-container').html(html);
         }
-    });
-
-    function list_reload() {
-        $('#data-container').empty();
-        $('#pagination-container').pagination({
-            dataSource: (done) => {
-                $.ajax({
-                    type: 'GET',
-                    url: '<?php echo base_url('admin/children/getall'); ?>',
-                    success: (response) => {
-                        done(response);
-                    }
-                });
+        if (fn == 'edit') {
+            var parent = $('#parent2').val();
+            $.get('<?php echo base_url('admin/parents/getById'); ?>/' + parent).done((res) => {
+                fetch_editAddress(res.pa_district, res.pa_province, res.pa_amphur);
+            });
+        }
+    }
+</script>
+<!-- datatable -->
+<script>
+    $("#children").DataTable({
+        "processing": true,
+        "responsive": true,
+        "paging": false,
+        "ajax": {
+            url: "<?php echo base_url('admin/children/getAll'); ?>",
+            type: "GET"
+        },
+        "order": [
+            [1, "asc"]
+        ],
+        "columns": [{
+                "data": null,
+                'orderable': false,
+                "render": (data, type, row, meta) => {
+                    return `
+                            <label for="toggle-` + row.c_id + `" class="toggle-1">
+                                <input type="checkbox" id="toggle-` + row.c_id + `" 
+                                class="toggle-1__input"  ` + (row.c_status == 1 ? 'checked' : '') + `
+                                onchange="onClickActivate(` + row.c_id + `)">
+                                <span class="toggle-1__button"></span>
+                            </label> 
+                        `;
+                },
             },
-            pageSize: 4,
-            className: 'paginationjs-theme-blue paginationjs-big',
-            callback: function(data, pagination) {
-                var html = Templating(data);
-                $('#data-container').html(html);
+            {
+                "data": null,
+                className: "td_text",
+                "render": (data, type, row, meta) => {
+                    return meta.row + 1;
+                }
+            },
+            {
+                "data": "c_id",
+                className: "td_text"
+            },
+            {
+                data: null,
+                className: "td_text",
+                render: (data, type, row, meta) => {
+                    return row.n_thainame + ' ' + row.c_fnameTH + ' ' + row.c_lnameTH + ' ' +
+                        '<br>' + row.n_engname + ' ' + row.c_fnameEN + ' ' + row.c_lnameEN
+                }
+            },
+            {
+                "data": "tc_name",
+                className: "td_text"
+            },
+            {
+                "data": null,
+                className: "td_text",
+                render: (data, type, row, meta) => {
+                    return row.sc_nameTH + '<br>' + row.sc_nameEN
+                }
+            },
+            {
+                "data": "date",
+                className: "td_text"
+            },
+            {
+                "data": null,
+                className: "td_text",
+                render: (data, type, row, meta) => {
+                    return (row.c_house_no == '' ? ' - ' : row.c_house_no) + ' หมู่ ' +
+                        (row.c_village_no == '' ? ' - ' : row.c_village_no) + ' ถนน ' +
+                        row.c_road + ' จังหวัด ' + row.PROVINCE_NAME + ' ตำบล ' + row.DISTRICT_NAME +
+                        ' อำเภอ ' + row.AMPHUR_NAME + row.POSTCODE;
+                }
+            },
+            {
+                "data": null,
+                "render": (data, type, row, meta) => {
+                    return `
+                        <button class="btn btn-flat" style="padding: 2px .75rem; color: #199a6f;" data-toggle="modal" data-target="#editChildren"
+                        onclick="onClickEdit(` + row.c_id + `)"><i class="fa fa-edit"></i>
+                        </button>
+                        `;
+                }
             }
-        });
-    }
-
-    function Templating(data) {
-        var html = '<div class="row">';
-        $.each(data, function(index, item) {
-            var status = '';
-            if (item.c_status == 1) {
-                status += '<span style="color: #1ebb63;">เปิดใช้งาน</span>'
-            } else {
-                status += '<span style="color: #ff2727;">ปิดใช้งาน</span>'
-            }
-            html +=
-                `
-            <div class="col-md-3 main-margin" style="text-align: center;">
-                    <div class="cardUser cardBox main-margin" style="cursor: pointer;" data-toggle="modal" data-target="#editChildren" onclick="onClickEdit(` +
-                item.c_id + `)">
-                        <div class="main-margin">
-                            <div>
-                                <img style="width: 80%; height: 80%;" src="<?php echo base_url(); ?>` + item.c_img + `">
-                            </div>
-                            <div>
-                                <label style="cursor: pointer;" class="text-paragraph">` +
-                item.n_thainame + ' ' +
-                item.c_fnameTH + ' ' +
-                item.c_lnameTH +
-                `<br>` +
-                item.n_engname + ' ' +
-                item.c_fnameEN + ' ' +
-                item.c_fnameEN +
-                `</label>
-                            </div>
-                            <div>
-                                <label style="cursor: pointer;" class="text-paragraph">สถานะการใช้งาน : ` + status + `</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `;
-        });
-        html += '</div>';
-        return html;
-    }
+        ]
+    });
 </script>
 <script>
     var path_image = null;
@@ -1890,7 +1962,6 @@
                     update_diseased(res.insert_id, diseased1);
                     $('#insertChildren').modal('hide');
                     toastr.success('เพิ่มข้อมูลสำเร็จ');
-                    list_reload();
                 }).fail((xhr, status, error) => {
                     toastr.error('ไม่สามารถเพิ่มข้อมูลได้ โปรดลองใหม่ภายหลัง');
                 });
@@ -2067,7 +2138,6 @@
                     update_diseased(id_user, diseased2);
                     $('#editChildren').modal('hide');
                     toastr.success('เพิ่มข้อมูลสำเร็จ');
-                    list_reload();
                 }).fail((xhr, status, error) => {
                     toastr.error('ไม่สามารถเพิ่มข้อมูลได้ โปรดลองใหม่ภายหลัง');
                 });
