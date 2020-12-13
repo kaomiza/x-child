@@ -1,4 +1,3 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/css/bootstrap.min.css">
 <!-- use http://una.im/CSSgram/ for filters -->
 <link rel="stylesheet" href="https://cdn.rawgit.com/una/CSSgram/master/source/css/cssgram.css">
 <!-- app styles -->
@@ -428,7 +427,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.2.3/backbone-min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
 <!-- Check our qbMediaRecorder https://github.com/QuickBlox/javascript-media-recorder -->
 <script src="https://unpkg.com/media-recorder-js@2.0.0/qbMediaRecorder.js"></script>

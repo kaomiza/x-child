@@ -1,5 +1,5 @@
 <?php
-class TypeVideoModel extends CI_Model
+class VideoModel extends CI_Model
 {
     protected $table = 'video_info';
     protected $primaryKey = 'v_id';
