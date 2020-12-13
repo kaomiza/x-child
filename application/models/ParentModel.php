@@ -68,6 +68,7 @@ class ParentModel extends CI_Model
         pa_road,
         pa_status,
         PROVINCE_NAME,
+        DISTRICT_NAME,
         AMPHUR_NAME,
         POSTCODE,
         ');

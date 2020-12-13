@@ -63,6 +63,7 @@ class ChildrenModel extends CI_Model
         tc_name,
         c_status,
         PROVINCE_NAME,
+        DISTRICT_NAME,
         AMPHUR_NAME,
         POSTCODE
         ');
@@ -73,6 +74,13 @@ class ChildrenModel extends CI_Model
         $this->db->join($this->table_join[4], $this->join[4]);
         $this->db->join($this->table_join[5], $this->join[5]);
         return $this->db->get($this->table)->result();
+    }
+
+    public function getListChildByParent($parent_id)
+    {
+        $this->db->select('c_id,n_thainame,c_fnameTH,c_lnameTH');
+        $this->db->join($this->table_join[0], $this->join[0]);
+        return $this->db->get_where($this->table, array('c_parent_id' => $parent_id))->result();
     }
 
     public function findById($id)

@@ -1,5 +1,3 @@
-<link href="https://giDOCdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
-<script src="https://giDOCdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 <div class="modal fade show" tabindex="-1" role="dialog" id="insertTypeChild" style="display:none;">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -132,8 +130,20 @@
         var fileName = $(this).val();
         //replace the "Choose a file" label
         $(this).next('.custom-file-label').html(fileName);
-    })
+    });
 </script>
+<!-- Action function -->
+<script>
+    function onClickEdit(id){
+
+    }
+
+    function onClickActivate(){
+
+    }
+
+</script>
+<!-- submit funtion -->
 <script>
     function onClickSave(func) {
         console.log(func);

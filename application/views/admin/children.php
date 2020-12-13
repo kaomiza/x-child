@@ -606,21 +606,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-3">
-
-                    </div>
-                    <div class="col-md-6" style="text-align: center;">
-                        <div style="margin-bottom: 5px;">
-                            <label>
-                                สถานะการใช้งาน
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-
-                    </div>
-                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary text_btn" data-dismiss="modal">ปิด</button>
@@ -639,10 +624,11 @@
         <div>
             <button class="btn_backend text_btn btn" id="btnInsert" data-toggle="modal" data-target="#insertChildren" onclick="add_fetchData()"><i class="fa fa-plus"></i>&nbsp;&nbsp;เพิ่มเด็กพิเศษ</button>
         </div>
-        <table id="children" class="table table-bordered table-striped">
+        <table id="children" class="table table-bordered table-striped nowrap">
             <thead>
                 <tr>
-                    <th class="th_text">สถานะ</th>
+                    <th></th>
+                    <th class="th_text">สภานะ</th>
                     <th class="th_text">ลำดับ</th>
                     <th class="th_text">รหัสเด็ก</th>
                     <th class="th_text">ชื่อ</th>
@@ -656,8 +642,6 @@
         </table>
     </div>
 </div>
-<link rel="stylesheet" href="<?php echo base_url(); ?>assets/paginationjs/dist/pagination.css">
-<script src="<?php echo base_url(); ?>assets/paginationjs/dist/pagination.min.js"></script>
 <script>
     $('#insertChildren').on('hidden.bs.modal', function() {
         reset_form('add');
@@ -1578,16 +1562,27 @@
 <script>
     $("#children").DataTable({
         "processing": true,
-        "responsive": true,
-        "paging": false,
+        "autoWidth": false,
+        "responsive": {
+            details: {
+                type: 'column'
+            }
+        },
         "ajax": {
             url: "<?php echo base_url('admin/children/getAll'); ?>",
             type: "GET"
         },
         "order": [
-            [1, "asc"]
+            [2, "asc"]
         ],
         "columns": [{
+                data: null,
+                width: 30,
+                className: 'dtr-control',
+                orderable: false,
+                "defaultContent": ''
+            },
+            {
                 "data": null,
                 'orderable': false,
                 "render": (data, type, row, meta) => {
@@ -1597,7 +1592,7 @@
                                 class="toggle-1__input"  ` + (row.c_status == 1 ? 'checked' : '') + `
                                 onchange="onClickActivate(` + row.c_id + `)">
                                 <span class="toggle-1__button"></span>
-                            </label> 
+                            </label>
                         `;
                 },
             },
@@ -1616,8 +1611,7 @@
                 data: null,
                 className: "td_text",
                 render: (data, type, row, meta) => {
-                    return row.n_thainame + ' ' + row.c_fnameTH + ' ' + row.c_lnameTH + ' ' +
-                        '<br>' + row.n_engname + ' ' + row.c_fnameEN + ' ' + row.c_lnameEN
+                    return row.n_thainame + ' ' + row.c_fnameTH + ' ' + row.c_lnameTH
                 }
             },
             {
@@ -1625,11 +1619,8 @@
                 className: "td_text"
             },
             {
-                "data": null,
-                className: "td_text",
-                render: (data, type, row, meta) => {
-                    return row.sc_nameTH + '<br>' + row.sc_nameEN
-                }
+                "data": 'sc_nameTH',
+                className: "td_text"
             },
             {
                 "data": "date",
@@ -1656,6 +1647,21 @@
                 }
             }
         ]
+    });
+
+    $('#children tbody').on('click', 'td.details-control', function() {
+        var tr = $(this).closest('tr');
+        var row = table.row(tr);
+
+        if (row.child.isShown()) {
+            // This row is already open - close it
+            row.child.hide();
+            tr.removeClass('shown');
+        } else {
+            // Open this row
+            row.child(format(row.data())).show();
+            tr.addClass('shown');
+        }
     });
 </script>
 <script>
@@ -1762,7 +1768,6 @@
                         async: true,
                         success: (res) => {
                             path_image = 'upload/images/' + res.image_metadata.file_name
-                            console.log(path_image);
                         }
                     });
                 } else {

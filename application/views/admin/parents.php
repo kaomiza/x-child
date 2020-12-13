@@ -547,11 +547,20 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title text-heading">แก้ไขผู้ปกครอง</h4>
+                <h4 class="modal-title text-heading">รายชื่อเด็กที่ดูแล</h4>
                 <button type="button" class="close" data-dismiss="modal">×</button>
             </div>
             <div class="modal-boby">
+                <table class="table">
+                    <thead>
+                        <th class="th_text">ลำดับ</th>
+                        <th class="th_text">รหัสเด็กพิเศษ</th>
+                        <th class="th_text">ชื่อ</th>
+                    </thead>
+                    <tbody id="childList">
 
+                    </tbody>
+                </table>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary text_btn" data-dismiss="modal">ปิด</button>
@@ -570,9 +579,10 @@
         <div>
             <button class="btn_backend text_btn btn" id="btnInsert" data-toggle="modal" data-target="#insertParents" onclick="add_fetchData()"><i class="fa fa-plus"></i>&nbsp;&nbsp;เพิ่มผู้ปกครอง</button>
         </div>
-        <table id="parents" class="table table-bordered table-striped">
+        <table id="parents" class="table table-bordered table-striped nowrap">
             <thead>
                 <tr>
+                    <th></th>
                     <th class="th_text">สถานะ</th>
                     <th class="th_text">ลำดับ</th>
                     <th class="th_text">รหัสผู้ปกครอง</th>
@@ -602,16 +612,27 @@
 <script>
     $("#parents").DataTable({
         "processing": true,
-        "responsive": true,
+        "responsive": {
+            details: {
+                type: 'column'
+            }
+        },
         "autoWidth": false,
         "ajax": {
             url: "<?php echo base_url('admin/parents/getAll'); ?>",
             type: "GET"
         },
         "order": [
-            [1, "asc"]
+            [2, "asc"]
         ],
         "columns": [{
+                data: null,
+                width: 30,
+                className: 'dtr-control',
+                orderable: false,
+                "defaultContent": ''
+            },
+            {
                 "data": null,
                 'orderable': false,
                 "render": (data, type, row, meta) => {
@@ -635,23 +656,20 @@
             },
             {
                 "data": "pa_id",
-                width: 100,
                 className: "td_text"
             },
             {
                 data: null,
                 className: "td_text",
-                width: 100,
                 render: (data, type, row, meta) => {
-                    return row.n_thainame + ' ' + row.pa_fnameTH + ' ' + row.pa_lnameTH + ' ' +
-                        '<br>' + row.n_engname + ' ' + row.pa_fnameEN + ' ' + row.pa_lnameEN
+                    return row.n_thainame + ' ' + row.pa_fnameTH + ' ' + row.pa_lnameTH;
                 }
             },
             {
                 "data": null,
                 className: "td_text",
                 render: (data, type, row, meta) => {
-                    return row.sc_nameTH + '<br>' + row.sc_nameEN
+                    return row.sc_nameTH;
                 }
             },
             {
@@ -687,7 +705,7 @@
                 "render": (data, type, row, meta) => {
                     return `
                         <button class="btn btn-outline-info" data-toggle="modal" data-target="#ParentInfo"
-                        > รายชื่อเด็กที่ดูแล </button>
+                        onclick="onClickListChilddetail(` + row.pa_id + `)"> รายชื่อเด็กที่ดูแล </button>
                         `;
                 }
             }
@@ -698,6 +716,31 @@
 <script>
     var prename = [];
     var path_image = null;
+
+    function onClickListChilddetail(parent_id) {
+        $('#childList').empty();
+        $.get('<?php echo base_url('admin/Children/getListChildrenByParent'); ?>/' + parent_id).done((res) => {
+            var num = 1;
+            console.log(res.data);
+            if (res.data.length == 0) {
+                $('#childList').append(`
+                    <tr>
+                        <td colspan="3" class="text-center"> <p>ไม่มีเด็กภายใต้การดูแล</p> </td>
+                    </tr>
+                `);
+            }
+            res.data.forEach(element => {
+                $('#childList').append(`
+                    <tr>
+                        <td> ` + num + `</td>
+                        <td> ` + element.c_id + `</td>
+                        <td> ` + element.n_thainame + ` ` + element.c_fnameTH + ` ` + element.c_lnameTH + ` </td>
+                    </tr>
+                `);
+                num += 1;
+            });
+        });
+    }
 
     async function hashPassword(pain_text) {
         var passh = null;

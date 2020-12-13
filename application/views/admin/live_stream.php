@@ -46,7 +46,6 @@
     }
 </style>
 
-
 <div class="modal fade show" tabindex="-1" role="dialog" id="insertLive" style="display:none;">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -128,6 +127,7 @@
         </div>
     </div>
 </div>
+
 <div class="modal fade show" tabindex="-1" role="dialog" id="editLive" style="display:none;">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -261,6 +261,7 @@
         </div>
     </div>
 </div>
+
 <div class="modal fade show" tabindex="-1" role="dialog" id="statusLive" style="display:none;">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -386,6 +387,7 @@
 
     </div>
 </div>
+<!-- datepickker -->
 <script>
     //*********start datepickker************ */
     $('#start_date_1').datetimepicker({
@@ -409,6 +411,7 @@
         uiLibrary: 'bootstrap4'
     });
 </script>
+<!-- summit function -->
 <script>
     function datetimeToDate(datetime) {
         var splitD = datetime.split(' ');

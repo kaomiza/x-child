@@ -34,7 +34,7 @@
                 </div>
                 <div class="custom-file">
                     <input type="file" class="custom-file-input" accept=".txt" id="file_doc1">
-                    <label class="custom-file-label" for="file_doc1">เลือกไฟล์</label>
+                    <label class="custom-file-label" for="file_doc1" id="label_doc1">เลือกไฟล์</label>
                     <label class="text-paragraph" id="erfile_doc1" style="color: red; display:none; padding-top:5px;">
                         กรุณาเลือกไฟล์เอกสารความรู้ให้ถูกต้อง เช่น นิทานกระต่ายกับเต่า.txt
                     </label>
@@ -84,7 +84,7 @@
                 </div>
                 <div class="custom-file">
                     <input type="file" class="custom-file-input" accept=".txt" id="file_doc2">
-                    <label class="custom-file-label" for="file_doc2">เลือกไฟล์</label>
+                    <label class="custom-file-label" id="label_doc2" for="file_doc2">เลือกไฟล์</label>
                     <label class="text-paragraph" id="erfile_doc2" style="color: red; display:none; padding-top:5px;">
                         กรุณาเลือกไฟล์เอกสารความรู้ให้ถูกต้อง เช่น นิทานกระต่ายกับเต่า.txt
                     </label>
@@ -112,7 +112,8 @@
                 <thead>
                     <tr>
                         <th class="th_text">สถานะ</th>
-                        <th class="th_text">เลขที่</th>
+                        <th class="th_text">ลำดับ</th>
+                        <th class="th_text">รหัสประเภทเอกสาร</th>
                         <th class="th_text">ประเภทเอกสารความรู้</th>
                         <th class="th_text">ชื่อเอกสารความรู้</th>
                         <th class="th_text">แก้ไข</th>
@@ -120,9 +121,9 @@
                 </thead>
             </table>
         </div>
-
     </div>
 </div>
+<!-- datateble -->
 <script>
     $("#document").DataTable({
         "processing": true,
@@ -131,8 +132,12 @@
             url: "<?php echo base_url('admin/document/getAll'); ?>",
             type: "GET"
         },
+        "order": [
+            [1, "asc"]
+        ],
         "columns": [{
                 "data": null,
+                'orderable': false,
                 "render": (data, type, row, meta) => {
                     return `
                         <label for="toggle-` + row.doc_id + `" class="toggle-1">
@@ -144,6 +149,14 @@
                         `;
                 },
                 width: 10
+            },
+            {
+                "data": null,
+                className: "td_text",
+                width: 50,
+                "render": (data, type, row, meta) => {
+                    return meta.row + 1;
+                }
             },
             {
                 "data": "doc_id",
@@ -170,14 +183,57 @@
         ]
     });
 </script>
+<!-- file input -->
 <script>
-    $('#file_doc1').on('change', function() {
+    var path_file;
+    $('#file_doc1').on('change', function(e) {
         //get the file name
-        var fileName = $(this).val();
+        if (e.target.files[0]) {
+            var fileName = e.target.files[0].name;
+            var file = e.target.files[0];
+            var allowedExtensions = /(\.txt)$/i;
+            $(this).next("#label_doc1").html(fileName);
+            if (!allowedExtensions.exec(fileName)) {
+                alert('Invalid file type');
+                $("#file_doc1").val('');
+                $(this).next("#label_doc1").html('เลือกไฟล์');
+                return false;
+            } else {
+                if (e.target.files[0].size <= 5000000) {
+                    var formData = new FormData();
+                    formData.append('file', file);
+                    $.ajax({
+                        url: '<?php echo base_url('admin/document/storeFileDoc'); ?>',
+                        type: "post",
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        cache: false,
+                        async: true,
+                        success: (res) => {
+                            path_file = 'upload/document/' + res.doc_metadata.file_name;
+                        }
+                    });
+                } else {
+                    $("#file_doc1").val('');
+                    alert('ขนาดไฟล์ต้องไม่เกิน 5 mb');
+                    $(this).next("#label_doc1").html('เลือกไฟล์');
+                    return false;
+                }
+            }
+        } else {
+            $(this).next("#label_doc1").html('เลือกไฟล์');
+        }
+    })
+
+    $('#file_doc2').on('change', function() {
+        //get the file name
+        var fileName = e.target.files[0].name;
         //replace the "Choose a file" label
         $(this).next('.custom-file-label').html(fileName);
     })
 </script>
+<!-- modal reset form -->
 <script>
     $('#insertDoc').on('hidden.bs.modal', function() {
         reset_form('add');
@@ -188,13 +244,19 @@
 
     function reset_form(fn) {
         if (fn == 'add') {
-
+            $('#SelectTD1').empty();
+            $('#SelectTD1').append('<option selected="">--- กรุณาเลือก ---</option>');
+            path_file = '';
         }
         if (fn == 'edit') {
-
+            $('#SelectTD2').empty();
+            $('#SelectTD2').append('<option selected="">--- กรุณาเลือก ---</option>');
+            path_file = '';
         }
+        $('#document').DataTable().ajax.reload();
     }
 </script>
+
 <script>
     function onClickSave(func) {
         console.log(func);
@@ -235,6 +297,19 @@
                     checkError = false;
                 }
             }
+            if (checkError == true) {
+                // insert
+                $.post('<?php echo base_url('admin/document/create'); ?>', {
+                    td_id: SelectTD,
+                    doc_name: input,
+                    doc_path: path_file
+                }).done((res) => {
+                    $('#insertDoc').modal('hide');
+                    toastr.success('เพิ่มข้อมูลสำเร็จ');
+                }).fail((xhr, status, error) => {
+                    toastr.error('ไม่สามารถเพิ่มข้อมูลได้ โปรดลองใหม่ภายหลัง');
+                });
+            }
         } else if (func == 'edit') {
             var input = document.getElementById("InputDOC2").value;
             var SelectTD = document.getElementById("SelectTD2").value;
@@ -255,21 +330,18 @@
                 document.getElementById("erSelectTD2").style.display = "none";
                 document.getElementById("SelectTD2").style.border = "1px solid #ced4da";
             }
-            if (file_doc == "") {
-                document.getElementById("erfile_doc2").style.display = "block";
-                document.getElementById("file_doc2").style.border = "1px solid #bd2130";
-                checkError = false;
-            } else {
-                document.getElementById("erfile_doc2").style.display = "none";
-                document.getElementById("file_doc2").style.border = "1px solid #ced4da";
-                if (file_doc.endsWith(".txt")) {
-                    document.getElementById("erfile_doc2").style.display = "none";
-                    document.getElementById("file_doc2").style.border = "1px solid #ced4da";
-                } else {
-                    document.getElementById("erfile_doc2").style.display = "block";
-                    document.getElementById("file_doc2").style.border = "1px solid #bd2130";
-                    checkError = false;
-                }
+            if (checkError == true) {
+                var id_doc = $('.edit_btn').attr('id');
+                $.post('<?php echo base_url('admin/document/update'); ?>/' + id_doc, {
+                    td_id: SelectTD,
+                    doc_name: input,
+                    doc_path: path_file
+                }).done((res) => {
+                    $('#editDoc').modal('hide');
+                    toastr.success('แก้ไขข้อมูลสำเร็จ');
+                }).fail((xhr, status, error) => {
+                    toastr.error('ไม่สามารถแก้ไขข้อมูลได้ โปรดลองใหม่ภายหลัง');
+                });
             }
         }
     }
@@ -298,8 +370,11 @@
 
     function onClickEdit(id) {
         $.get('<?php echo base_url('admin/document/getById'); ?>/' + id).done((res) => {
-            console.log(res);
-            $('.edit_btn').attr('id', res.tc_id);
+            $('.edit_btn').attr('id', res.doc_id);
+            $('#InputDOC2').val(res.doc_name);
+            fetch_type_document('edit', res.td_id);
+            path_file = res.doc_path;
+            $('#label_doc2').html(res.doc_path);
         });
     }
 

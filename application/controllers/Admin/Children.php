@@ -33,6 +33,19 @@ class Children extends CI_Controller
         }
     }
 
+    public function getListChildrenByParent($parent_id)
+    {
+        if ($this->input->server('REQUEST_METHOD') == 'GET') {
+            header('Content-Type: application/json');
+            $result = [
+                'data' => $this->ChildrenModel->getListChildByParent($parent_id)
+            ];
+            echo json_encode($result);
+        } else {
+            show_error('Allow Form GET', 405);
+        }
+    }
+
     public function getById($id)
     {
         if ($this->input->server('REQUEST_METHOD') == 'GET') {
