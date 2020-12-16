@@ -35,8 +35,10 @@ class Login extends CI_Controller
                             'U_id' => $result->e_id,
                             'U_user' => $result->e_user,
                             'U_pass' => $result->e_pass,
-                            'U_name' => $result->e_fnameEN . " " . $result->e_lnameEN,
+                            'U_fname' => $result->e_fnameEN,
+                            'U_lname' => $result->e_lnameEN,
                             'U_status' => $result->e_status,
+                            'U_img' => $result->e_img,
                             'U_admin' => 1,
                         );
                         $this->session->set_userdata($session_data);
@@ -55,8 +57,10 @@ class Login extends CI_Controller
                             'U_id' => $result->pa_id,
                             'U_user' => $result->pa_user,
                             'U_pass' => $result->pa_pass,
-                            'U_name' => $result->pa_fnameEN . " " . $result->pa_lnameEN,
+                            'U_fname' => $result->pa_fnameEN,
+                            'U_lname' => $result->pa_lnameEN,
                             'U_status' => $result->pa_status,
+                            'U_img' => $result->pa_img,
                             'U_admin' => 0,
                         );
                         $this->session->set_userdata($session_data);

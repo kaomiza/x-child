@@ -98,7 +98,6 @@
                     <div class="col-md-12">
                         <div>
                             <label class="text-paragraph">URL Youtube</label>
-                            <label class="text-paragraph" style="color: red;">*</label>
                         </div>
                         <div>
                             <input id="url1" style="font-family: 'Kanit';" type="text" class="form-control" placeholder="เช่น www.youtube.com/watch?v=xxxxxx">
@@ -114,7 +113,7 @@
                             <label class="text-paragraph">รายละเอียดของการถ่ายทอดสด</label>
                         </div>
                         <div>
-                            <textarea class="form-control"></textarea>
+                            <textarea id="l_detail1" class="form-control"></textarea>
                         </div>
                     </div>
                 </div>
@@ -180,7 +179,6 @@
                     <div class="col-md-12">
                         <div>
                             <label class="text-paragraph">URL Youtube</label>
-                            <label class="text-paragraph" style="color: red;">*</label>
                         </div>
                         <div>
                             <input id="url2" style="font-family: 'Kanit';" type="text" class="form-control" placeholder="เช่น www.youtube.com/watch?v=xxxxxx">
@@ -196,7 +194,7 @@
                             <label class="text-paragraph">รายละเอียดของการถ่ายทอดสด</label>
                         </div>
                         <div>
-                            <textarea class="form-control"></textarea>
+                            <textarea id="l_detail2" class="form-control"></textarea>
                         </div>
                     </div>
                 </div>
@@ -204,7 +202,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary text_btn" data-dismiss="modal">ปิด</button>
-                <button type="button" class="btn text_btn" style="background-color: #1e7e34; color:white;" onclick="onClickSave('edit')">บันทึก</button>
+                <button type="button" class="btn text_btn edit_btn" style="background-color: #1e7e34; color:white;" onclick="onClickSave('edit')">บันทึก</button>
             </div>
         </div>
     </div>
@@ -222,7 +220,7 @@
                     <div class="col-md-12">
                         <div>
                             <label class="text-paragraph">ชื่อเรื่อง : </label>
-                            <label class="text-paragraph">xxxxxxxx</label>
+                            <label id="p_title" class="text-paragraph"></label>
                         </div>
                     </div>
                 </div>
@@ -230,16 +228,13 @@
                     <div class="col-md-12">
                         <div>
                             <label class="text-paragraph">URL Youtube : </label>
-                            <label class="text-paragraph">xxxxxxxx</label>
+                            <label id="p_url" class="text-paragraph"></label>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <div>
-                            <div class="embed-responsive embed-responsive-16by9">
-                                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/aX86T1XBGFk" allowfullscreen></iframe>
-                            </div>
+                        <div id="embed">
                         </div>
                     </div>
                 </div>
@@ -249,7 +244,7 @@
                             <label class="text-paragraph">รายละเอียดของการถ่ายทอดสด</label>
                         </div>
                         <div>
-                            <label class="text-paragraph">xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</label>
+                            <label id="p_detail" class="text-paragraph"></label>
                         </div>
                     </div>
                 </div>
@@ -263,7 +258,7 @@
 </div>
 
 <div class="modal fade show" tabindex="-1" role="dialog" id="statusLive" style="display:none;">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title text-heading">สถานะการถ่ายทอดสด</h4>
@@ -272,33 +267,8 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-12">
-                        <div>
-                            <div class="embed-responsive embed-responsive-16by9">
-                                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/aX86T1XBGFk" allowfullscreen></iframe>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div>
-                            <div style="display: flex; align-items: center; justify-content: center;">
-                                <div>
-                                    <label>Status :</label>
-                                </div>
-                                <div style="display: flex;">
-                                    <div class="status_orange"></div>
-                                    <label>รอดำเนินการ</label>
-                                </div>
-                                <div style="display: flex;">
-                                    <div class="status_green"></div>
-                                    <label>ออนไลน์</label>
-                                </div>
-                                <div style="display: flex;">
-                                    <div class="status_red"></div>
-                                    <label>เสร็จสิ้น</label>
-                                </div>
-                            </div>
+                        <div id="embed_web">
+
                         </div>
                     </div>
                 </div>
@@ -311,17 +281,17 @@
                             <div>
                                 <div class="form-check">
                                     <label class="form-check-label">
-                                        <input type="radio" class="form-check-input" name="status_radio" id="pending" checked>รอดำเนินการ
+                                        <input type="radio" class="form-check-input" value="0" name="status_radio" id="pending">รอดำเนินการ
                                     </label>
                                 </div>
                                 <div class="form-check">
                                     <label class="form-check-label">
-                                        <input type="radio" class="form-check-input" name="status_radio" id="online">ออนไลน์
+                                        <input type="radio" class="form-check-input" value="1" name="status_radio" id="online">ออนไลน์
                                     </label>
                                 </div>
                                 <div class="form-check">
                                     <label class="form-check-label">
-                                        <input type="radio" class="form-check-input" name="status_radio" id="finish">เสร็จสิ้น
+                                        <input type="radio" class="form-check-input" value="2" name="status_radio" id="finish">เสร็จสิ้น
                                     </label>
                                 </div>
                             </div>
@@ -339,7 +309,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary text_btn" data-dismiss="modal">ปิด</button>
-                <button type="button" class="btn text_btn" style="background-color: #1e7e34; color:white;" onclick="onClickSave('edit')">บันทึก</button>
+                <button type="button" class="btn text_btn btn_status" style="background-color: #1e7e34; color:white;" onclick="onSaveStatus()">บันทึก</button>
             </div>
         </div>
     </div>
@@ -387,26 +357,237 @@
 
     </div>
 </div>
+
+<!-- datateble -->
+<script>
+    $('#Live').DataTable({
+        "processing": true,
+        "autoWidth": false,
+        "ajax": {
+            url: "<?php echo base_url('admin/Live_Stream/getAll'); ?>",
+            type: "GET"
+        },
+        "order": [
+            [1, "asc"]
+        ],
+        "columns": [{
+                "data": null,
+                className: "td_text",
+                width: 50,
+                "render": (data, type, row, meta) => {
+                    return meta.row + 1;
+                }
+            },
+            {
+                "data": "l_title",
+                className: "td_text"
+            },
+            {
+                "data": 'e_user',
+                className: "td_text"
+            },
+            {
+                "data": null,
+                className: "td_text",
+                "render": (data, type, row, meta) => {
+                    return row.l_Startdate + ` - ` + row.l_EndDate;
+                }
+            },
+            {
+                "data": null,
+                "render": (data, type, row, meta) => {
+                    return `
+                        <button class="btn" style="padding: 2px .75rem; color: #199a6f;" data-toggle="modal" data-target="#editLive"
+                        onclick="onClickEdit(` + row.l_id + `)"><i class="fa fa-edit"></i>
+                        </button>
+                        <button class="btn" style="padding: 2px .75rem; color: #007bff;" data-toggle="modal" data-target="#previewLive"
+                        onclick="onClickPreview(` + row.l_id + `)"><i class="fas fa-eye"></i>
+                        </button>
+                        <button class="btn" style="padding: 2px .75rem; color: #c82333;"
+                        onclick="onDelete(` + row.l_id + `)"><i class="fas fa-trash"></i>
+                        </button>
+                        `;
+                }
+            },
+            {
+                "data": null,
+                "render": (data, type, row, meta) => {
+                    var bt;
+                    if (row.l_status == 0) {
+                        bt = `<button style="background-color: orange;" class="btn btn-block btn-default btn-flat p-3" onclick="onClickStatus(` + row.l_id +
+                            `)" data-toggle="modal" data-target="#statusLive"></button>`;
+                    }
+                    if (row.l_status == 1) {
+                        bt = `<button style="background-color: #0ce40c;" class="btn btn-block btn-default btn-flat p-3" onclick="onClickStatus(` + row.l_id +
+                            `)" data-toggle="modal" data-target="#statusLive"></button>`;
+                    }
+                    if (row.l_status == 2) {
+                        bt = `<button style="background-color: red;" class="btn btn-block btn-default btn-flat p-3" onclick="onClickStatus(` + row.l_id +
+                            `)" data-toggle="modal" data-target="#statusLive"></button>`;
+                    }
+                    return bt;
+                }
+            }
+        ]
+    });
+</script>
+
+<!-- modal reset form -->
+<script>
+    $('#insertLive').on('hidden.bs.modal', function() {
+        reset_form('add');
+    })
+    $('#editLive').on('hidden.bs.modal', function() {
+        reset_form('edit');
+    })
+    $('#previewLive').on('hidden.bs.modal', function() {
+        $('#p_title').empty();
+        $('#p_url').empty();
+        $('#p_detail').empty();
+        $('#embed').empty();
+        $('#Live').DataTable().ajax.reload();
+    })
+    $('#statusLive').on('hidden.bs.modal', function() {
+        $('#Live').DataTable().ajax.reload();
+    })
+
+    function reset_form(fn) {
+        if (fn == 'add') {
+
+        }
+        if (fn == 'edit') {
+
+        }
+        $('#Live').DataTable().ajax.reload();
+    }
+</script>
+
+<!-- action function -->
+<script>
+    function onClickEdit(id) {
+        $.get('<?php echo base_url('admin/Live_Stream/getById'); ?>/' + id).done((res) => {
+            console.log(res);
+            $('.edit_btn').attr('id', res.l_id);
+            $('#namelive2').val(res.l_title);
+            $('#start_date_2').val(res.l_StartDate);
+            $('#end_date_2').val(res.l_EndDate);
+            if (res.l_id_url != '') {
+                $('#url2').val('https://www.youtube.com/watch?v=' + res.l_id_url);
+            } else {
+                $('#url2').val(res.l_id_url);
+            }
+            $('#l_detail2').val(res.l_detail);
+        });
+    }
+
+    function onClickPreview(id) {
+        $.get('<?php echo base_url('admin/Live_Stream/getById'); ?>/' + id).done((res) => {
+            $('#p_title').html(res.l_title);
+            $('#p_detail').html(res.l_detail);
+            if (res.l_id_url != '') {
+                $('#p_url').html('https://www.youtube.com/watch?v=' + res.l_id_url);
+                $('#embed').html(`
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/` + res.l_id_url + `" allowfullscreen></iframe>
+                    </div>
+                `);
+            } else {
+                $('#p_url').html(res.l_id_url);
+                $('#embed').html(`
+                    <div class="text-center p-5">
+                        <dt style="color: red;">Youtube Live Stream Not Available</dt>
+                    </div>
+                `);
+            }
+        });
+    }
+
+    function onSaveStatus() {
+        var id = $('.btn_status').attr('id');
+        var radioValue = $("input[name='status_radio']:checked").val();
+        $.post('<?php echo base_url('admin/Live_Stream/update'); ?>/' + id, {
+            l_status: radioValue
+        }).done((res) => {
+            $('#statusLive').modal('hide');
+            toastr.success('อัพเดตสถานะสำเร็จ');
+        }).fail((xhr, status, error) => {
+            toastr.error('Error')
+        })
+    }
+
+    function onClickStatus(id) {
+        $('.btn_status').attr('id', id);
+        $.get('<?php echo base_url('admin/Live_Stream/getById'); ?>/' + id).done((res) => {
+            if (res.l_id_url != '') {
+                $('#embed_web').html(`
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <iframe class="embed-responsive-item" src="<?php echo base_url('live') ?>?v=` + res.l_id_url + `" allowfullscreen></iframe>
+                    </div>
+                `);
+            } else {
+                $('#embed_web').html(`
+                    <div class="text-center p-5">
+                        <dt style="color: red;">Youtube Live Stream Not Available</dt>
+                    </div>
+                `);
+            }
+
+            if (res.l_status == 0) {
+                $('#pending').attr('checked', '');
+            }
+            if (res.l_status == 1) {
+                $('#online').attr('checked', '');
+            }
+            if (res.l_status == 2) {
+                $('#finish').attr('checked', '');
+            }
+
+        });
+    }
+
+    function onDelete(id) {
+        Swal.fire({
+            title: 'Are you sure?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.get('<?php echo base_url('admin/Live_Stream/Delete'); ?>/' + id).done((res) => {
+                    Swal.fire(
+                        'Deleted!',
+                        'Your liveStream has been deleted.',
+                        'success'
+                    );
+                    $('#Live').DataTable().ajax.reload();
+                });
+            }
+        })
+    }
+</script>
+
 <!-- datepickker -->
 <script>
     //*********start datepickker************ */
     $('#start_date_1').datetimepicker({
-        format: 'dd/mm/yyyy HH:MM',
+        format: 'yyyy-mm-dd HH:MM',
         footer: true,
         uiLibrary: 'bootstrap4'
     });
     $('#end_date_1').datetimepicker({
-        format: 'dd/mm/yyyy HH:MM',
+        format: 'yyyy-mm-dd HH:MM',
         footer: true,
         uiLibrary: 'bootstrap4'
     });
     $('#start_date_2').datetimepicker({
-        format: 'dd/mm/yyyy HH:MM',
+        format: 'yyyy-mm-dd HH:MM',
         footer: true,
         uiLibrary: 'bootstrap4'
     });
     $('#end_date_2').datetimepicker({
-        format: 'dd/mm/yyyy HH:MM',
+        format: 'yyyy-mm-dd HH:MM',
         footer: true,
         uiLibrary: 'bootstrap4'
     });
@@ -417,19 +598,29 @@
         var splitD = datetime.split(' ');
         var date = splitD[0];
         var time = splitD[1];
-        var splitdate = date.split('/');
-        var dateselect = new Date(splitdate[1] + "/" + splitdate[0] + "/" + splitdate[2] + " " + time);
+        var splitdate = date.split('-');
+        var dateselect = new Date(splitdate[0] + "-" + splitdate[1] + "-" + splitdate[2] + " " + time);
         return dateselect;
     }
 
+
+    function youtube_parser(url) {
+        var regExp = /^https?\:\/\/(?:www\.youtube(?:\-nocookie)?\.com\/|m\.youtube\.com\/|youtube\.com\/)?(?:ytscreeningroom\?vi?=|youtu\.be\/|vi?\/|user\/.+\/u\/\w{1,2}\/|embed\/|watch\?(?:.*\&)?vi?=|\&vi?=|\?(?:.*\&)?vi?=)([^#\&\?\n\/<>"']*)/i;
+        var match = url.match(regExp);
+        return (match && match[1].length == 11) ? match[1] : false;
+    }
+
+
     function onClickSave(func) {
         console.log(func);
+        var id_youtube;
         var checkError = true;
         if (func == 'insert') {
             var namelive1 = document.getElementById("namelive1").value;
             var start_date_1 = document.getElementById("start_date_1").value;
             var end_date_1 = document.getElementById("end_date_1").value;
             var url1 = document.getElementById("url1").value;
+            var detail = document.getElementById("l_detail1").value;
             if (namelive1 == "") {
                 document.getElementById("ernamelive1").style.display = "block";
                 document.getElementById("namelive1").style.border = "1px solid #bd2130";
@@ -438,6 +629,7 @@
                 document.getElementById("ernamelive1").style.display = "none";
                 document.getElementById("namelive1").style.border = "1px solid #ced4da";
             }
+
             if (start_date_1 == 'วัน/เดือน/ปี เวลา' || start_date_1 == '') {
                 document.getElementById("erstart_date_1").style.display = "block";
                 document.getElementById("start_date_1").style.border = "1px solid #bd2130";
@@ -455,6 +647,7 @@
                     document.getElementById("start_date_1").style.border = "1px solid #ced4da";
                 }
             }
+
             if (end_date_1 == 'วัน/เดือน/ปี เวลา' || end_date_1 == '') {
                 document.getElementById("erend_date_1").style.display = "block";
                 document.getElementById("end_date_1").style.border = "1px solid #bd2130";
@@ -474,26 +667,32 @@
                 }
             }
 
-            if (url1 == "") {
-                document.getElementById("erurl1").style.display = "block";
-                document.getElementById("url1").style.border = "1px solid #bd2130";
-                checkError = false;
-            } else {
-                var urlHTTPSAccept = url1.startsWith("https://www.youtube.com/watch?v=");
-                var urlAccept = url1.startsWith("www.youtube.com/watch?v=");
-                if (urlHTTPSAccept == false || urlAccept == false) {
+            if (url1 != '') {
+                if (youtube_parser(url1)) {
+                    id_youtube = youtube_parser(url1);
+                    document.getElementById("erurl1").style.display = "none";
+                    document.getElementById("url1").style.border = "1px solid #ced4da";
+                } else {
                     document.getElementById("erurl1").style.display = "block";
                     document.getElementById("url1").style.border = "1px solid #bd2130";
                     checkError = false;
                 }
-                if (urlHTTPSAccept == true || urlAccept == true) {
-                    document.getElementById("erurl1").style.display = "none";
-                    document.getElementById("url1").style.border = "1px solid #ced4da";
-                    checkError = true;
-                }
             }
-            if (checkError == true) {
 
+            if (checkError == true) {
+                $.post('<?php echo base_url('admin/Live_Stream/create'); ?>', {
+                    l_title: namelive1,
+                    l_Startdate: start_date_1,
+                    l_EndDate: end_date_1,
+                    l_id_url: id_youtube,
+                    ex_id: '<?php echo $this->session->userdata('U_id'); ?>',
+                    l_detail: detail
+                }).done((res) => {
+                    $('#insertLive').modal('hide');
+                    toastr.success('เพิ่มข้อมูลสำเร็จ');
+                }).fail((xhr, status, error) => {
+                    toastr.error('ไม่สามารถเพิ่มข้อมูลได้ โปรดลองใหม่ภายหลัง');
+                });
             }
         } else if (func == 'edit') {
             var namelive2 = document.getElementById("namelive2").value;
@@ -508,6 +707,7 @@
                 document.getElementById("ernamelive2").style.display = "none";
                 document.getElementById("namelive2").style.border = "1px solid #ced4da";
             }
+
             if (start_date_2 == 'วัน/เดือน/ปี เวลา' || start_date_2 == '') {
                 document.getElementById("erstart_date_2").style.display = "block";
                 document.getElementById("start_date_2").style.border = "1px solid #bd2130";
@@ -544,26 +744,35 @@
                 }
             }
 
-            if (url2 == "") {
-                document.getElementById("erurl2").style.display = "block";
-                document.getElementById("url2").style.border = "1px solid #bd2130";
-                checkError = false;
-            } else {
-                var urlHTTPSAccept = url2.startsWith("https://www.youtube.com/watch?v=");
-                var urlAccept = url2.startsWith("www.youtube.com/watch?v=");
-                if (urlHTTPSAccept == false || urlAccept == false) {
+            if (url2 != '') {
+                if (youtube_parser(url2)) {
+                    id_youtube = youtube_parser(url2);
+                    document.getElementById("erurl2").style.display = "none";
+                    document.getElementById("url2").style.border = "1px solid #ced4da";
+                } else {
                     document.getElementById("erurl2").style.display = "block";
                     document.getElementById("url2").style.border = "1px solid #bd2130";
                     checkError = false;
                 }
-                if (urlHTTPSAccept == true || urlAccept == true) {
-                    document.getElementById("erurl2").style.display = "none";
-                    document.getElementById("url2").style.border = "1px solid #ced4da";
-                    checkError = true;
-                }
+            } else {
+                id_youtube = '';
             }
+
             if (checkError == true) {
-                
+                var id = $('.edit_btn').attr('id');
+                console.log();
+                $.post('<?php echo base_url('admin/Live_Stream/update') ?>/' + id, {
+                    l_title: namelive1,
+                    l_Startdate: start_date_1,
+                    l_EndDate: end_date_1,
+                    l_id_url: id_youtube,
+                    l_detail: detail
+                }).done((res) => {
+                    $('#editLive').modal('hide');
+                    toastr.success('แก้ไขข้อมูลสำเร็จ');
+                }).fail((xhr, status, error) => {
+                    toastr.error('ไม่สามารถแก้ไขข้อมูลได้ โปรดลองใหม่ภายหลัง');
+                });
             }
         }
 

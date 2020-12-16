@@ -6,7 +6,7 @@ class Home_admin extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        //Do your magic here
+        $this->load->model('SumResultModel');
     }
 
     public function index()
@@ -16,5 +16,15 @@ class Home_admin extends CI_Controller
             'admin_content' => $this->load->view('admin/dashboard', NULL, TRUE)
         ];
         $this->load->view('index_admin', $data);
+    }
+
+    public function countAll()
+    {
+        if ($this->input->server('REQUEST_METHOD') == 'GET') {
+            header('Content-Type: application/json');
+            echo json_encode($this->SumResultModel->getAll());
+        } else {
+            show_error('Allow Form GET', 405);
+        }
     }
 }

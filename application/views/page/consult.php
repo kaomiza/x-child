@@ -17,19 +17,6 @@
 </style>
 
 <div class="wrapper j-wrapper site-wrapper">
-    <header class="header">
-        <div class="inner">
-            <div class="header__logo">
-                <a href="<?php echo base_url(); ?>" class="header__logo_img"><img src="<?php echo base_url(); ?>assets/images/logo/logo-menu.png"></a>
-            </div>
-
-            <h2 class="header__title">ปรึกษาผู้เชี่ยวชาญ</h2>
-            <!-- <span class="j-version header_version"></span> -->
-        </div>
-    </header>
-    <?php
-    $rtc = $this->session->all_userdata();
-    ?>
     <main class="app" id="app">
         <div class="page">
             <!-- JOIN -->
@@ -40,11 +27,13 @@
 
                 <div class="join__body">
                     <div class="join__row">
-                        <input type="text" class="join__input inbg" value="<?php echo $rtc['U_name'] ?>" name="username" placeholder="Username" autofocus required title="Field should contain alphanumeric characters only in a range 3 to 20. The first character must be a letter." pattern="^[a-zA-Z][\w]{2,19}$" readonly>
+                        <input type="text" class="join__input inbg" value="<?php echo $this->session->userdata('U_fname').' '.$this->session->userdata('U_lname'); ?>" 
+                        name="username" placeholder="Username" autofocus required 
+                        title="Field should contain alphanumeric characters only in a range 3 to 20. The first character must be a letter." pattern="^[a-zA-Z][\w]{2,19}$" readonly>
                     </div>
 
                     <div class="join__row d-none">
-                        <input type="text" class="join__input j-join__login" value="<?php echo $rtc['U_user'] ?>" name="login" placeholder="login" required title="Field should contain alphanumeric characters only in a range 3 to 20. The first character must be a letter." pattern="^[a-zA-Z][\w]{2,19}$">
+                        <input type="text" class="join__input j-join__login" value="<?php echo $this->session->userdata('U_user'); ?>" name="login" placeholder="login" required title="Field should contain alphanumeric characters only in a range 3 to 20. The first character must be a letter." pattern="^[a-zA-Z][\w]{2,19}$">
                     </div>
 
                     <div class="join__row">

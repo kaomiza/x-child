@@ -127,6 +127,11 @@
 <script>
     $("#document").DataTable({
         "processing": true,
+        "responsive": {
+            details: {
+                type: 'column'
+            }
+        },
         "autoWidth": false,
         "ajax": {
             url: "<?php echo base_url('admin/document/getAll'); ?>",

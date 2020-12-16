@@ -38,6 +38,7 @@
     <script src="<?php echo base_url(); ?>assets/adminlte/plugins/inputmask/min/jquery.inputmask.bundle.min.js"></script>
     <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
     <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
     </script>
     <script>
@@ -76,17 +77,14 @@
                 </div>
                 <div class="sidebar-header">
                     <div class="user-pic">
-                        <img class="img-responsive img-rounded" src="https://scontent.fkkc3-1.fna.fbcdn.net/v/t1.0-1/p200x200/126184096_3450329945193043_4975428876046841981_n.jpg?_nc_cat=105&ccb=2&_nc_sid=7206a8&_nc_eui2=AeFs8K9GFNd5YYUuNaZMRELfzkNhPgxZKwLOQ2E-DFkrAjadEQaGLP1xf2CMjoe--p26B47vT5UHwPc-k7vPNMpr&_nc_ohc=GehO3gRGSG8AX-FN7pD&_nc_ht=scontent.fkkc3-1.fna&tp=6&oh=69f02080e92a5a139da75eab87ddce02&oe=5FEE218C" alt="User picture">
+                        <img class="img-responsive img-rounded" src="<?php echo base_url($this->session->userdata('U_img')); ?>" alt="User picture">
                     </div>
                     <div class="user-info">
-                        <span class="user-name">Kunat
-                            <strong>Kamprommapirak</strong>
+                        <span class="user-name">
+                            <?php echo $this->session->userdata('U_fname'); ?>
+                            <?php echo $this->session->userdata('U_lname'); ?>
                         </span>
                         <span class="user-role">Administrator</span>
-                        <span class="user-status">
-                            <i class="fa fa-circle"></i>
-                            <span>Online</span>
-                        </span>
                     </div>
                 </div>
                 <div class="sidebar-menu">
@@ -112,9 +110,7 @@
                             <div class="sidebar-submenu">
                                 <ul>
                                     <li>
-                                        <a href="<?php echo base_url('admin/pre_name'); ?>">คำนำหน้าชื่อ
-                                            <!-- <span class="badge badge-pill badge-success">Pro</span> -->
-                                        </a>
+                                        <a href="<?php echo base_url('admin/pre_name'); ?>">คำนำหน้าชื่อ</a>
                                     </li>
                                     <li>
                                         <a href="<?php echo base_url('admin/type_school'); ?>">ประเภทโรงเรียน</a>
@@ -143,7 +139,7 @@
                                     <li>
                                         <a href="<?php echo base_url('admin/type_children'); ?>">ข้อมูลประเภทเด็กพิการ</a>
                                     </li>
-                                    <li>
+                                    <!-- <li>
                                         <a href="#">
                                             <span>จัดการจังหวัด</span>
                                         </a>
@@ -157,7 +153,7 @@
                                         <a href="#">
                                             <span>จัดการตำบล</span>
                                         </a>
-                                    </li>
+                                    </li> -->
                                 </ul>
                             </div>
                         </li>
@@ -198,7 +194,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="Live_Stream">
+                            <a href="<?php echo base_url('admin/Live_Stream'); ?>">
                                 <i class="fas fa-podcast"></i>
                                 <span>ถ่ายทอดสด</span>
                             </a>
