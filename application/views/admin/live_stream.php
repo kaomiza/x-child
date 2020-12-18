@@ -100,9 +100,9 @@
                             <label class="text-paragraph">URL Youtube</label>
                         </div>
                         <div>
-                            <input id="url1" style="font-family: 'Kanit';" type="text" class="form-control" placeholder="เช่น www.youtube.com/watch?v=xxxxxx">
+                            <input id="url1" style="font-family: 'Kanit';" type="text" class="form-control" placeholder="เช่น https://www.youtube.com/watch?v=xxxxxx">
                             <label class="text-paragraph" id="erurl1" style="color: red; display:none; padding-top:5px;">
-                                กรุณากรอก URL Youtube ให้ถูกต้อง เช่น https://www.youtube.com/watch?v=ไอดี หรือ www.youtube.com/watch?v=ไอดี
+                                กรุณากรอก URL Youtube ให้ถูกต้อง เช่น https://www.youtube.com/watch?v=ไอดี
                             </label>
                         </div>
                     </div>
@@ -181,9 +181,9 @@
                             <label class="text-paragraph">URL Youtube</label>
                         </div>
                         <div>
-                            <input id="url2" style="font-family: 'Kanit';" type="text" class="form-control" placeholder="เช่น www.youtube.com/watch?v=xxxxxx">
+                            <input id="url2" style="font-family: 'Kanit';" type="text" class="form-control" placeholder="เช่น https://www.youtube.com/watch?v=xxxxxx">
                             <label class="text-paragraph" id="erurl2" style="color: red; display:none; padding-top:5px;">
-                                กรุณากรอก URL Youtube ให้ถูกต้อง เช่น https://www.youtube.com/watch?v=ไอดี หรือ www.youtube.com/watch?v=ไอดี
+                                กรุณากรอก URL Youtube ให้ถูกต้อง เช่น https://www.youtube.com/watch?v=ไอดี
                             </label>
                         </div>
                     </div>
@@ -390,7 +390,7 @@
                 "data": null,
                 className: "td_text",
                 "render": (data, type, row, meta) => {
-                    return row.l_Startdate + ` - ` + row.l_EndDate;
+                    return row.l_Startdate + ` ถึง ` + row.l_EndDate;
                 }
             },
             {

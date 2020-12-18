@@ -84,7 +84,8 @@
                             <?php echo $this->session->userdata('U_fname'); ?>
                             <?php echo $this->session->userdata('U_lname'); ?>
                         </span>
-                        <span class="user-role">Administrator</span>
+                        <?php echo $this->session->userdata('U_admin') == 1 ? '<span class="user-role">ผู้เชียวชาญ</span>' : ''; ?>
+                        <?php echo $this->session->userdata('U_admin') == 2 ? '<span class="user-role">ผู้ดูแล</span>' : ''; ?>
                     </div>
                 </div>
                 <div class="sidebar-menu">
@@ -160,6 +161,16 @@
                         <li class="header-menu">
                             <span>User Management</span>
                         </li>
+                        <?php
+                        echo $this->session->userdata('U_admin') == 2 ? '
+                        <li>
+                            <a href="' . base_url('admin/Manage') . '">
+                                <i class="fas fa-users-cog"></i>
+                                <span>จัดการข้อมูลผู้ดูแลระบบ</span>
+                            </a>
+                        </li>
+                        ' : '';
+                        ?>
                         <li>
                             <a href="<?php echo base_url('admin/Children'); ?>">
                                 <i class="fas fa-baby"></i>

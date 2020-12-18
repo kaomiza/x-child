@@ -236,9 +236,12 @@
                             <label class="text-paragraph" style="color: red;">*</label>
                         </div>
                         <div>
-                            <input style="font-family: 'Kanit';" id="username1" type="text" class="form-control" maxlength="20" placeholder="เช่น username._123">
+                            <input style="font-family: 'Kanit';" id="username1" type="text" class="form-control" maxlength="20" placeholder="เช่น username._123" onkeyup="heveUser()">
                             <label class="text-paragraph" id="erusername1" style="color: red; display:none; padding-top:5px;">
                                 กรุณากรอกชื่อผู้ใช้งานให้ถูกต้อง ชื่อผู้ใช้ต้องมีความยาวต้องอยู่ระหว่าง 8-20 ตัวอักษร และ ต้องมีเฉพาะตัวอักษรอักกฤษ ตัวเลข . และ _ เช่น username._123
+                            </label>
+                            <label class="text-paragraph" id="erhaveuser" style="color: red; display:none; padding-top:5px;">
+                                ชื่อผู้ใช้งานถูกใช้แล้ว
                             </label>
                         </div>
                     </div>
@@ -1193,6 +1196,7 @@
 </script>
 <!-- submit function -->
 <script>
+    userUse = true;
     $(document).on("click", ".cardUser", function() {
         $('.toggle').css("width", "100px");
     });
@@ -1469,6 +1473,11 @@
                     document.getElementById("erusername1").style.display = "none";
                     document.getElementById("username1").style.border = "2px solid #ced4da";
                 }
+                if (userUse == false) {
+                    document.getElementById("username1").style.border = null;
+                    $('#username1').addClass('is-invalid');
+                    checkError = false;
+                }
             }
             if (password1.length < 8 && password1.length <= 20) {
                 document.getElementById("erpassword1").style.display = "block";
@@ -1674,6 +1683,30 @@
                 });
                 console.log('Start Edit');
             }
+        }
+    }
+
+    function heveUser() {
+        user = $('#username1').val();
+        if (user.length >= 8 && user.length <= 20) {
+            $.post('<?php echo base_url('Login/haveUser'); ?>', {
+                username: user
+            }).done((res) => {
+                document.getElementById("erusername1").style.display = "none";
+                document.getElementById("username1").style.border = null;
+                if (res.hasUser) {
+                    document.getElementById("erhaveuser").style.display = "none";
+                    $('#username1').removeClass('is-invalid');
+                    userUse = true;
+                } else {
+                    userUse = false;
+                    document.getElementById("erhaveuser").style.display = "block";
+                    $('#username1').addClass('is-invalid');
+                }
+            });
+        } else {
+            document.getElementById("erhaveuser").style.display = "none";
+            $('#username1').removeClass('is-invalid');
         }
     }
 

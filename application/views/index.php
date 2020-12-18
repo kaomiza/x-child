@@ -25,8 +25,6 @@
 			width: 100%;
 			background-color: gray;
 		}
-
-		
 	</style>
 </head>
 
@@ -49,7 +47,7 @@
 									<li><a href="<?php echo base_url('contact/about'); ?>">เกี่ยวกับเรา</a></li>
 									<?php if ($this->session->has_userdata('U_id')) { ?>
 										<?php
-										if ($this->session->U_status == 1 && $this->session->U_admin == 1) {
+										if ($this->session->U_status == 1 && ($this->session->U_admin == 1 || $this->session->U_admin == 2)) {
 										?>
 											<li><a href="<?php echo base_url('admin'); ?>" class="color-w">จัดการข้อมูล</a></li>
 										<?php }  ?>
@@ -59,7 +57,9 @@
 									?>
 										<li class="has-children">
 											<a data-toggle="dropdown" href="#"><i class="fas fa-user-circle i-size-user"></i>
-												<span><?php echo ($this->session->U_admin == 0) ? '(ผู้ปกครอง)' : '(ผู้ดูแล)'; ?></span>
+												<?php echo ($this->session->U_admin == 0) ? '<span>(ผู้ปกครอง)</span>' : ''; ?>
+												<?php echo ($this->session->U_admin == 1) ? '<span>(ผู้เชียวชาญ)</span>' : ''; ?>
+												<?php echo ($this->session->U_admin == 2) ? '<span>(ผู้ดูแล)</span>' : ''; ?>
 												<?php echo $this->session->U_user; ?>
 											</a>
 											<ul class="dropdown">
