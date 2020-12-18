@@ -76,7 +76,7 @@ $query_builder = TRUE;
 if($_SERVER['SERVER_NAME'] == "localhost"){
 	$db['default'] = array(
 		'dsn'	=> '',
-		'hostname' => '172.17.0.1',
+		'hostname' => 'localhost',
 		'username' => 'root',
 		'password' => '',
 		'database' => 'intlabco_kao',
