@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db
--- Generation Time: Dec 16, 2020 at 03:50 AM
+-- Generation Time: Dec 18, 2020 at 06:47 AM
 -- Server version: 8.0.22
 -- PHP Version: 7.4.11
 
@@ -20,6 +20,26 @@ SET time_zone = "+00:00";
 --
 -- Database: `intlabco_kao`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin`
+--
+
+CREATE TABLE `admin` (
+  `id_admin` int NOT NULL,
+  `admin_user` text NOT NULL,
+  `admin_pass` text NOT NULL,
+  `admin_status` tinyint(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`id_admin`, `admin_user`, `admin_pass`, `admin_status`) VALUES
+(1, 'admin', 'ec6a120cbad023eebd888c1c16b2f30089b0af74f26683b07367e6e65abf9587', 1);
 
 -- --------------------------------------------------------
 
@@ -10099,8 +10119,8 @@ CREATE TABLE `expert` (
 --
 
 INSERT INTO `expert` (`e_id`, `e_user`, `e_pass`, `e_prename`, `e_fnameTH`, `e_lnameTH`, `e_fnameEN`, `e_lnameEN`, `e_email`, `school_id`, `position_id`, `e_phone`, `e_house_no`, `e_village_no`, `e_road`, `e_province`, `e_district`, `e_amphur`, `e_zip`, `e_img`, `e_status`) VALUES
-(1, 'admin', 'ec6a120cbad023eebd888c1c16b2f30089b0af74f26683b07367e6e65abf9587', 1, 'แอดมิน', 'แอดมิน', 'admin', 'admin', 'admin@admin.com', 1, 1, '0000000000', '', '', '', 1, 1, 1, '10200', 'upload/images/6855438c80a00d26fce8e81b0865e3dc.jpg', 1),
-(3, 'admin_02', 'ae508cd786fb18697e466f00ea4290acf84eee50a4b2cb25d4c92dca355e106c', 2, 'แอด', 'แอด', 'admin', 'admin', 'asasas@sd.com', 1, 6, '0161245888', '10', '10', 'ชลประทาน', 4, 384, 69, '12170', 'upload/images/b191fb49f1750e07f381bbce5ea86f2d.png', 1);
+(1, 'expert01', '651addaeb7400a4597c0090581916b90cbde756fa41257593a3b99af031f60d8', 1, 'แอดมิน', 'แอดมิน', 'admin', 'admin', 'admin@admin.com', 1, 1, '0000000000', '', '', '', 1, 1, 1, '10200', 'upload/images/6855438c80a00d26fce8e81b0865e3dc.jpg', 1),
+(3, 'expert02', '651addaeb7400a4597c0090581916b90cbde756fa41257593a3b99af031f60d8', 2, 'แอด', 'แอด', 'admin', 'admin', 'asasas@sd.com', 1, 6, '0161245888', '10', '10', 'ชลประทาน', 4, 384, 69, '12170', 'upload/images/b191fb49f1750e07f381bbce5ea86f2d.png', 1);
 
 -- --------------------------------------------------------
 
@@ -10174,7 +10194,7 @@ CREATE TABLE `livestream` (
 --
 
 INSERT INTO `livestream` (`l_id`, `ex_id`, `l_title`, `l_detail`, `l_id_url`, `l_StartDate`, `l_EndDate`, `l_status`) VALUES
-(12, 1, 'test', '', 'gHz86-ffH5o', '2020-12-16 12:00:00', '2020-12-16 13:00:00', 2);
+(13, 1, 'test', '', 'zjnbFB0lZfc', '2020-12-18 12:00:00', '2020-12-18 12:15:00', 0);
 
 -- --------------------------------------------------------
 
@@ -10212,7 +10232,7 @@ CREATE TABLE `parent` (
 INSERT INTO `parent` (`pa_id`, `pa_user`, `pa_pass`, `pa_prename`, `pa_fnameTH`, `pa_lnameTH`, `pa_fnameEN`, `pa_lnameEN`, `school_id`, `phone`, `email`, `pa_house_no`, `pa_village_no`, `pa_road`, `pa_province`, `pa_district`, `pa_amphur`, `pa_zip`, `pa_img`, `pa_status`) VALUES
 (1, 'kaomiz', 'c91ca7681d222abaa0cf9eb1677cc2022825ec61da6688b458ce0a54acd72c71', 2, 'สารัช', 'ธนภัทรภักดี', 'sarat', 'thanabhatbhakdi', 1, '0801764154', 'test@gmail.com', '', '', '', 1, 1, 1, '46120', 'assets/images/admin/DefualtUser.png	', '1'),
 (2, 'jantima', 'c91ca7681d222abaa0cf9eb1677cc2022825ec61da6688b458ce0a54acd72c71', 6, 'จันทิมา', 'พลพินิจ', 'Jantima', 'Polpinij', 5, '0968105815', 'jantima.p@msu.ac.th', '70', '1', '', 1, 1, 1, '10200', 'assets/images/admin/DefualtUser.png ', '1'),
-(6, 'ASDF1234', '862ba848a19dc92984681983d9208f95c0ba3b79320c2be28a5ce7afd7582d9a', 1, 'คุณัฐญ์', 'คำพรมมาภิรักษ์', 'asd', 'asd', 1, '0161245888', 'asasas@sd.com', '70', '', '', 4, 383, 69, '12170', 'assets/images/admin/DefualtUser.png', '1');
+(8, 'parent01', 'ec6a120cbad023eebd888c1c16b2f30089b0af74f26683b07367e6e65abf9587', 2, 'คุณัฐญ์', 'คำพรมมาภิรักษ์', 'Kunat', 'Kamprommapirak', 1, '0161245888', 'asasas@sd.com', '10', '10', 'ชลประทาน', 1, 22, 3, '10530', 'assets/images/admin/DefualtUser.png', '1');
 
 -- --------------------------------------------------------
 
@@ -10544,6 +10564,12 @@ INSERT INTO `video_info` (`v_id`, `tv_id`, `v_name`, `v_detail`, `v_user_upload`
 --
 
 --
+-- Indexes for table `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`id_admin`);
+
+--
 -- Indexes for table `amphur`
 --
 ALTER TABLE `amphur`
@@ -10698,6 +10724,12 @@ ALTER TABLE `video_info`
 --
 
 --
+-- AUTO_INCREMENT for table `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `id_admin` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `amphur`
 --
 ALTER TABLE `amphur`
@@ -10755,13 +10787,13 @@ ALTER TABLE `knowledge_info`
 -- AUTO_INCREMENT for table `livestream`
 --
 ALTER TABLE `livestream`
-  MODIFY `l_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `l_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `parent`
 --
 ALTER TABLE `parent`
-  MODIFY `pa_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `pa_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `position`
