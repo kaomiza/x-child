@@ -62,3 +62,16 @@
         $('#footer').hide();
     });
 </script>
+<?php
+if ($this->session->flashdata('error-login')) {
+    echo "
+    <script>
+    Swal.fire(
+        '".$this->session->flashdata('error-login')."',
+        '',
+        'error'
+    )
+    </script>
+    ";
+}
+?>

@@ -6,7 +6,13 @@ class Drug extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('DrugModel');
+
+        if ($this->session->userdata('U_admin') == 1 || $this->session->userdata('U_admin') == 2) {
+            $this->load->model('DrugModel');
+        } else {
+            $this->session->set_flashdata('error-login', 'กรุณา login ก่อนเพื่อใช้งาน');
+            redirect('login');
+        }
     }
 
     public function index()

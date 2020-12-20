@@ -909,6 +909,7 @@
             });
         }
         hideError();
+        $('#expert').DataTable().ajax.reload();
     }
 
     function hideError() {

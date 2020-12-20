@@ -7,10 +7,15 @@ class HashPassword extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        header('Content-Type: application/json');
+        if ($this->session->userdata('U_admin') == 1 || $this->session->userdata('U_admin') == 2) {
+            header('Content-Type: application/json');
+        } else {
+             show_error('401 (Unauthorized)', 401);
+        }
     }
 
-    public function hashpass(){
+    public function hashpass()
+    {
         if ($this->input->server('REQUEST_METHOD') == 'POST') {
             $input = $this->input->post();
             $passhash = hash('sha256', $this->salt . $input['password']);

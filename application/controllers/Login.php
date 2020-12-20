@@ -23,13 +23,14 @@ class Login extends CI_Controller
         unset($_SESSION['error user']);
         unset($_SESSION['is-invalid password']);
         unset($_SESSION['error pass']);
+        unset($_SESSION['error-login']);
     }
 
 
     public function haveUser()
     {
-        header('Content-Type: application/json');
         if ($this->input->server('REQUEST_METHOD') == 'POST') {
+            header('Content-Type: application/json');
             $data = $this->input->post();
             $username = $data['username'];
             $output = [
@@ -66,10 +67,10 @@ class Login extends CI_Controller
     {
         $this->form_validation->set_rules('username', 'Username', 'required');
         $this->form_validation->set_rules('password', 'Password', 'required|min_length[6]|trim');
-        $data = $this->input->post();
-        $username = $data['username'];
-        $password = $data['password'];
         if ($this->input->server('REQUEST_METHOD') == 'POST') {
+            $data = $this->input->post();
+            $username = $data['username'];
+            $password = $data['password'];
             if ($this->form_validation->run()) {
                 $passhash = hash('sha256', $this->salt . $password);
                 // Admin
