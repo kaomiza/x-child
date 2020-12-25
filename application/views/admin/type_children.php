@@ -199,8 +199,8 @@
 
     function onClickEdit(id) {
         $.get('<?php echo base_url('admin/type_children/getById'); ?>/' + id).done((res) => {
-            $('#InputTC2').val(res.td_name);
-            $('.edit_btn').attr('id', res.td_id);
+            $('#InputTC2').val(res.tc_name);
+            $('.edit_btn').attr('id', res.tc_id);
         });
     }
 

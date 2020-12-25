@@ -747,7 +747,7 @@
 
     async function hashPassword(pain_text) {
         var passh = null;
-        await $.post('<?php echo base_url('api/hashpassword/hashpass'); ?>', {
+        await $.post('<?php echo base_url('Api/HashPassword/hashpass'); ?>', {
             password: pain_text
         }).done((res) => {
             passh = res.hasdata;
@@ -800,7 +800,7 @@
     }
 
     async function fetch_editAddress(district_id, province_id, amphur_id) {
-        await $.get('<?php echo base_url('api/address/province'); ?>', (res) => {
+        await $.get('<?php echo base_url('Api/Address/province'); ?>', (res) => {
             res.forEach(element => {
                 if (element.PROVINCE_ID == province_id) {
                     $('#SelectPro2').append('<option value="' + element.PROVINCE_ID + '" selected>' + element.PROVINCE_NAME + '</option>')
@@ -819,7 +819,7 @@
             await $('#SelectAm2').append('<option selected="">--- กรุณาเลือก ---</option>');
             await $('#SelectAm2').prop('disabled', false);
             await $('#SelectDist2').prop('disabled', true);
-            await $.get('<?php echo base_url('api/address/amphur'); ?>/' + p, (res) => {
+            await $.get('<?php echo base_url('Api/Address/amphur'); ?>/' + p, (res) => {
                 res.forEach(element => {
                     if (element.AMPHUR_ID == amphur_id) {
                         $('#SelectAm2').append('<option value="' + element.AMPHUR_ID + '" selected>' + element.AMPHUR_NAME + '</option>')
@@ -835,13 +835,13 @@
             await $('#SelectDist2').append('<option selected="">--- กรุณาเลือก ---</option>');
             await $('#SelectDist2').prop('disabled', true);
         } else {
-            await $.get('<?php echo base_url('api/address/amphurById'); ?>/' + amphur, (res) => {
+            await $.get('<?php echo base_url('Api/Address/amphurById'); ?>/' + amphur, (res) => {
                 $('#Postcode2').val(res.POSTCODE);
             })
             await $('#SelectDist2').prop('disabled', false);
             await $('#SelectDist2').empty();
             await $('#SelectDist2').append('<option selected="">--- กรุณาเลือก ---</option>');
-            await $.get('<?php echo base_url('api/address/district'); ?>/' + amphur, (res) => {
+            await $.get('<?php echo base_url('Api/Address/district'); ?>/' + amphur, (res) => {
                 res.forEach(element => {
                     if (element.DISTRICT_ID == district_id) {
                         $('#SelectDist2').append('<option value="' + element.DISTRICT_ID + '" selected>' + element.DISTRICT_NAME + '</option>')
@@ -1089,7 +1089,7 @@
         if (type == 'add') {
             $('#SelectPro1').empty();
             $('#SelectPro1').append('<option selected="">--- กรุณาเลือก ---</option>');
-            $.get('<?php echo base_url('api/address/province'); ?>', (res) => {
+            $.get('<?php echo base_url('Api/Address/province'); ?>', (res) => {
                 res.forEach(element => {
                     $('#SelectPro1').append('<option value="' + element.PROVINCE_ID + '">' + element.PROVINCE_NAME + '</option>')
                 });
@@ -1098,7 +1098,7 @@
         if (type == 'edit') {
             $('#SelectPro2').empty();
             $('#SelectPro2').append('<option selected="">--- กรุณาเลือก ---</option>');
-            $.get('<?php echo base_url('api/address/province'); ?>', (res) => {
+            $.get('<?php echo base_url('Api/Address/province'); ?>', (res) => {
                 res.forEach(element => {
                     $('#SelectPro2').append('<option value="' + element.PROVINCE_ID + '">' + element.PROVINCE_NAME + '</option>')
                 });
@@ -1123,7 +1123,7 @@
                 $('#SelectAm1').append('<option selected="">--- กรุณาเลือก ---</option>');
                 $('#SelectAm1').prop('disabled', false);
                 $('#SelectDist1').prop('disabled', true);
-                $.get('<?php echo base_url('api/address/amphur'); ?>/' + p, (res) => {
+                $.get('<?php echo base_url('Api/Address/amphur'); ?>/' + p, (res) => {
                     res.forEach(element => {
                         $('#SelectAm1').append('<option value="' + element.AMPHUR_ID + '">' + element.AMPHUR_NAME + '</option>')
                     });
@@ -1144,7 +1144,7 @@
                 $('#SelectAm2').append('<option selected="">--- กรุณาเลือก ---</option>');
                 $('#SelectAm2').prop('disabled', false);
                 $('#SelectDist2').prop('disabled', true);
-                $.get('<?php echo base_url('api/address/amphur'); ?>/' + p, (res) => {
+                $.get('<?php echo base_url('Api/Address/amphur'); ?>/' + p, (res) => {
                     res.forEach(element => {
                         $('#SelectAm2').append('<option value="' + element.AMPHUR_ID + '">' + element.AMPHUR_NAME + '</option>')
                     });
@@ -1160,13 +1160,13 @@
                 $('#SelectDist1').append('<option selected="">--- กรุณาเลือก ---</option>');
                 $('#SelectDist1').prop('disabled', true);
             } else {
-                $.get('<?php echo base_url('api/address/amphurById'); ?>/' + amphur, (res) => {
+                $.get('<?php echo base_url('Api/Address/amphurById'); ?>/' + amphur, (res) => {
                     $('#Postcode1').val(res.POSTCODE);
                 })
                 $('#SelectDist1').prop('disabled', false);
                 $('#SelectDist1').empty();
                 $('#SelectDist1').append('<option selected="">--- กรุณาเลือก ---</option>');
-                $.get('<?php echo base_url('api/address/district'); ?>/' + amphur, (res) => {
+                $.get('<?php echo base_url('Api/Address/district'); ?>/' + amphur, (res) => {
                     res.forEach(element => {
                         $('#SelectDist1').append('<option value="' + element.DISTRICT_ID + '">' + element.DISTRICT_NAME + '</option>')
                     });
@@ -1179,13 +1179,13 @@
                 $('#SelectDist2').append('<option selected="">--- กรุณาเลือก ---</option>');
                 $('#SelectDist2').prop('disabled', true);
             } else {
-                $.get('<?php echo base_url('api/address/amphurById'); ?>/' + amphur, (res) => {
+                $.get('<?php echo base_url('Api/Address/amphurById'); ?>/' + amphur, (res) => {
                     $('#Postcode2').val(res.POSTCODE);
                 })
                 $('#SelectDist2').prop('disabled', false);
                 $('#SelectDist2').empty();
                 $('#SelectDist2').append('<option selected="">--- กรุณาเลือก ---</option>');
-                $.get('<?php echo base_url('api/address/district'); ?>/' + amphur, (res) => {
+                $.get('<?php echo base_url('Api/Address/district'); ?>/' + amphur, (res) => {
                     res.forEach(element => {
                         $('#SelectDist2').append('<option value="' + element.DISTRICT_ID + '">' + element.DISTRICT_NAME + '</option>')
                     });

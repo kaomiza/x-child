@@ -211,3 +211,14 @@
         </div>
     </form>
 </div>
+
+<script>
+    <?php
+    $type = $this->session->userdata('U_admin');
+    $id = $this->session->userdata('U_id');
+    ?>
+    $.get('<?php echo base_url('Profile/getUser'); ?>?userType=' + <?php echo $type; ?> + '&userId=' + <?php echo $id; ?>)
+        .done((res) => {
+            console.log(res);
+        });
+</script>

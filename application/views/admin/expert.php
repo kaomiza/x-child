@@ -709,7 +709,7 @@
 
     async function hashPassword(pain_text) {
         var passh = null;
-        await $.post('<?php echo base_url('Api/Hashpassword/hashpass'); ?>', {
+        await $.post('<?php echo base_url('Api/HashPassword/hashpass'); ?>', {
             password: pain_text
         }).done((res) => {
             passh = res.hasdata;
