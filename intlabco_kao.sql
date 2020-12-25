@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db
--- Generation Time: Dec 18, 2020 at 06:47 AM
+-- Generation Time: Dec 25, 2020 at 10:37 AM
 -- Server version: 8.0.22
 -- PHP Version: 7.4.11
 
@@ -1088,8 +1088,7 @@ CREATE TABLE `children` (
 
 INSERT INTO `children` (`c_id`, `c_prename`, `c_fnameTH`, `c_lnameTH`, `c_fnameEN`, `c_lnameEN`, `tc_id`, `school_id`, `c_parent_id`, `c_expert_id`, `date`, `c_house_no`, `c_village_no`, `c_road`, `c_province`, `c_district`, `c_amphur`, `c_zip`, `c_img`, `c_status`) VALUES
 (1, 2, 'เกียรติศักดิ์', 'เลือดใหม่', 'kattisack', 'radmai', 3, 1, 1, 1, '01/02/2020', '', '', '', 1, 1, 1, '10200', 'assets/images/admin/DefualtUser.png', '1'),
-(8, 2, 'สารัช', 'ธนภัทรภักดี', 'sarat', 'thanaphatphakdi', 5, 5, 1, 1, '11/11/2020', '12', '10', 'ชลประทาน', 1, 1, 1, '10200', 'upload/images/cb91f209ce9d0ad2bf9048475cf561f3.png', '1'),
-(11, 2, 'คุณัฐญ์', 'คำพรมมาภิรักษ์', 'Kunat', 'Kamprommapirak', 2, 1, 1, 1, '08/07/2020', '10', '10', '', 3, 303, 58, '11000', 'upload/images/7684d54e1ade9cbd2ad21c6eba416383.jpg', '1');
+(8, 2, 'สารัช', 'ธนภัทรภักดี', 'sarat', 'thanaphatphakdi', 5, 5, 1, 1, '11/11/2020', '12', '10', 'ชลประทาน', 1, 1, 1, '10200', 'upload/images/cb91f209ce9d0ad2bf9048475cf561f3.png', '1');
 
 -- --------------------------------------------------------
 
@@ -10727,7 +10726,7 @@ ALTER TABLE `video_info`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id_admin` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_admin` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `amphur`
