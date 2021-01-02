@@ -56,19 +56,27 @@
 									<?php
 									if ($this->session->has_userdata('U_id')) {
 									?>
-										<li class="has-children">
-											<a data-toggle="dropdown" href="#"><i class="fas fa-user-circle i-size-user"></i>
-												<?php echo ($this->session->U_admin == 0) ? '<span>(ผู้ปกครอง)</span>' : ''; ?>
-												<?php echo ($this->session->U_admin == 1) ? '<span>(ผู้เชียวชาญ)</span>' : ''; ?>
-												<?php echo ($this->session->U_admin == 2) ? '<span>(ผู้ดูแล)</span>' : ''; ?>
+										<?php if ($this->session->U_admin == 0 || $this->session->U_admin == 1) { ?>
+											<li class="has-children">
+												<a data-toggle="dropdown" href="#"><i class="fas fa-user-circle i-size-user"></i>
+													<?php echo ($this->session->U_admin == 0) ? '<span>(ผู้ปกครอง)</span>' : ''; ?>
+													<?php echo ($this->session->U_admin == 1) ? '<span>(ผู้เชียวชาญ)</span>' : ''; ?>
+													<?php echo $this->session->U_user; ?>
+												</a>
+												<ul class="dropdown">
+													<li><a href="<?php echo base_url('profile'); ?>" class="color-w">ตั้งค่าผู้ใช้</a></li>
+												</ul>
+											</li>
+										<?php } ?>
+
+										<?php if ($this->session->U_admin == 2) { ?>
+											<li>
+												<i class="fas fa-user-circle i-size-user"></i>
+												<span>(ผู้ดูแล)</span>
 												<?php echo $this->session->U_user; ?>
-											</a>
-											<ul class="dropdown">
-												<li><a href="<?php echo base_url('profile'); ?>" class="color-w">ตั้งค่าผู้ใช้</a></li>
-											</ul>
-										</li>
+											</li>
+										<?php } ?>
 									<?php
-									} else {
 									}
 									?>
 								</ul>

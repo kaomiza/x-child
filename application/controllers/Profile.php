@@ -15,6 +15,10 @@ class Profile extends CI_Controller
         //     $this->load->model('ExpertModel');
         //     $this->load->model('ParentModel');
         // }
+
+        $this->load->model('AdminModel');
+        $this->load->model('ExpertModel');
+        $this->load->model('ParentModel');
     }
 
     public function index()
@@ -30,11 +34,27 @@ class Profile extends CI_Controller
     {
         if ($this->input->server('REQUEST_METHOD') == 'GET') {
             header('Content-Type: application/json');
-            $user_type = $this->input->get('userType',TRUE);
-            $user_id = $this->input->get('userId',TRUE);
-            echo json_encode($user_type);
+            $user_type = $this->input->get('userType', TRUE);
+            $user_id = $this->input->get('userId', TRUE);
+            if ($user_type == 0) {
+                echo json_encode($this->ParentModel->findById($user_id));
+            } else if ($user_type == 1) {
+                echo json_encode($this->ExpertModel->findById($user_id));
+            } else if ($user_type == 2) {
+                echo json_encode($this->AdminModel->findById($user_id));
+            } else {
+                echo json_encode(["error" => 'Not Allow UserType']);
+            }
         } else {
             show_error('Allow Form GET', 405);
+        }
+    }
+
+    public function create()
+    {
+        if ($this->input->server('REQUEST_METOHD') == 'GET') {
+            header('Content-Type: application/json');
+            $input = $this->input->post();
         }
     }
 }
