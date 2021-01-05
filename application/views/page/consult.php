@@ -1,5 +1,5 @@
 <!-- use http://una.im/CSSgram/ for filters -->
-<link rel="stylesheet" href="https://cdn.rawgit.com/una/CSSgram/master/source/css/cssgram.css">
+<!-- <link rel="stylesheet" href="https://cdn.rawgit.com/una/CSSgram/master/source/css/cssgram.css"> -->
 <!-- app styles -->
 <link rel="stylesheet" href="<?php echo base_url(); ?>assets/webrtc/styles.css">
 
@@ -22,35 +22,30 @@
             <!-- JOIN -->
             <form class="join j-join">
                 <h3 class="join__title">
-                    <p> ติดต่อปรึกษาผู้เชียวชาญ </p>
+                    <p style="color: #000;"> ติดต่อปรึกษาผู้เชียวชาญ </p>
                 </h3>
 
                 <div class="join__body">
-                    <div class="join__row">
-                        <input type="text" class="join__input inbg" value="<?php echo $this->session->userdata('U_fname').' '.$this->session->userdata('U_lname'); ?>" 
-                        name="username" placeholder="Username" autofocus required 
-                        title="Field should contain alphanumeric characters only in a range 3 to 20. The first character must be a letter." pattern="^[a-zA-Z][\w]{2,19}$" readonly>
+                    <div class="join_row text-center">
+                        <img id="IMG" class="img-fluid rounded" src="<?php echo base_url('assets/images/admin/expert.png'); ?>" alt="image-expert" width="200">
                     </div>
-
-                    <div class="join__row d-none">
-                        <input type="text" class="join__input j-join__login" value="<?php echo $this->session->userdata('U_user'); ?>" name="login" placeholder="login" required title="Field should contain alphanumeric characters only in a range 3 to 20. The first character must be a letter." pattern="^[a-zA-Z][\w]{2,19}$">
+                    <div class="join__row mt-2 text-center">
+                        <label style="color: #000;">ชื่อผู้ใช้งาน : <?php echo $this->session->userdata('U_fname') . ' ' . $this->session->userdata('U_lname'); ?></label>
                     </div>
-
                     <div class="join__row">
-                        <button type="submit" class="join__btn"> เริ่มต้นใช้งาน </button>
+                        <button type="submit" class="join__btn"> เข้าสู่ห้องแชท </button>
                     </div>
                 </div>
             </form>
-
             <div class="dashboard j-dashboard">
+
             </div>
         </div>
     </main>
 </div>
-
 <!-- MODALS -->
 
-<div class="modal fade" id="join_err" tabindex="-1" data-backdrop="static" data-keyboard="false">
+<div class="modal fade" id="join_err" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
@@ -75,8 +70,7 @@
     </div>
 </div>
 
-
-<div class="modal fade" id="connect_err" tabindex="-1" data-backdrop="static" data-keyboard="false">
+<div class="modal fade" id="connect_err" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
@@ -96,7 +90,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="already_auth" tabindex="-1">
+<div class="modal fade" id="already_auth">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
@@ -112,7 +106,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="error_no_calles" tabindex="-1">
+<div class="modal fade" id="error_no_calles">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
@@ -128,7 +122,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="income_call" tabindex="-1" data-backdrop="static" data-keyboard="false">
+<div class="modal fade" id="income_call" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
@@ -221,133 +215,102 @@
 <script type="text/template" id="dashboard_tpl">
     <div class="state_board j-state_board"></div>
 
-    <div class="dashboard__inner container">
-        <div class="users j-users_wrap"></div>
-
-        <div class="board clearfix j-board"></div>
+    <div class="container dashboard__inner">
+        <div class="row">
+            <div class="col-12 col-md-9">
+                <div class="clearfix j-board"></div>
+            </div>
+            <div class="col-12 col-md-3">
+                <div class="j-users_wrap"></div>
+            </div>
+        </div>
     </div>
 </script>
 
 <script type="text/template" id="frames_tpl">
     <div class="row">
-    <div class="col-md-6">
-    <div class="">
-        <div class="frames__main">
-            <div class="frames__main_timer invisible" id="timer">
+        <div class="col-12">
+            <div class="frames__main">
+                <div class="frames__main_timer invisible" id="timer">
+                </div>
+
+                <div class="qb-video">
+                    <video id="main_video" class="frames__main_v qb-video_source" autoplay playsinline></video>
+                </div>
+                <video id="localVideo" class="qb-video_local" autoplay playsinline></video>
+                <!-- <div class="qb-video">
+                    <video id="localVideo" class="qb-video_source" autoplay playsinline></video>
+                </div> -->
             </div>
 
-            <div class="qb-video">
-                <video id="main_video" class="frames__main_v qb-video_source" autoplay playsinline></video>
-            </div>
-        </div>
+            <div class="frames__callees j-callees"></div>
 
-        <div class="frames__callees j-callees"></div>
-    </div>
-    </div>
-
-    <div class="col-md-6">
-    <div class="">
-        <div class="caller__ctrl">
-            <button class="caller__ctrl_btn j-actions m-video_call" data-call="video"></button>
-            <button class="caller__ctrl_btn j-actions m-audio_call" data-call="audio"></button>
-        </div>
-
-        <h4 class="caller__name">
-            <b>You</b>
-            <span class="j-caller_name">(<%= nameUser %>)</span>
-        </h4>
-
-        <div class="caller__frames">
-            <div class="qb-video">
-                <video id="localVideo" class="qb-video_source" autoplay playsinline></video>
-            </div>
-
-            <div class="caller__frames_acts">
-                <button class="caller__frames_acts_btn j-caller__ctrl" data-target="video">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19" version="1.1">
-                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                            <g transform="translate(-290.000000, -80.000000)">
-                                <g transform="translate(288.000000, 78.000000)">
-                                    <path d="M0 0L24 0 24 24 0 24 0 0Z"/>
-                                    <path class="svg_icon"
-                                          d="M21 6.5L17 10.5 17 7C17 6.45 16.55 6 16 6L9.82 6 21 17.18 21 6.5 21 6.5ZM3.27 2L2 3.27 4.73 6 4 6C3.45 6 3 6.45 3 7L3 17C3 17.55 3.45 18 4 18L16 18C16.21 18 16.39 17.92 16.54 17.82L19.73 21 21 19.73 3.27 2 3.27 2Z"/>
+            <div class="caller__frames mb-2">
+                <div class="caller__frames_acts">
+                    <button class="caller__frames_acts_btn j-caller__ctrl" data-target="video">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19" version="1.1">
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <g transform="translate(-290.000000, -80.000000)">
+                                    <g transform="translate(288.000000, 78.000000)">
+                                        <path d="M0 0L24 0 24 24 0 24 0 0Z"/>
+                                        <path class="svg_icon"
+                                            d="M21 6.5L17 10.5 17 7C17 6.45 16.55 6 16 6L9.82 6 21 17.18 21 6.5 21 6.5ZM3.27 2L2 3.27 4.73 6 4 6C3.45 6 3 6.45 3 7L3 17C3 17.55 3.45 18 4 18L16 18C16.21 18 16.39 17.92 16.54 17.82L19.73 21 21 19.73 3.27 2 3.27 2Z"/>
+                                    </g>
                                 </g>
                             </g>
-                        </g>
-                    </svg>
-                </button>
+                        </svg>
+                    </button>
 
-                <% if(navigator.mediaDevices && navigator.mediaDevices.getDisplayMedia) { %>
-                <button class="caller__frames_acts_btn j-caller__ctrl" data-target="screen">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19" version="1.1">
-                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                            <g transform="translate(-290.000000, -80.000000)">
-                                <g transform="translate(288.000000, 78.000000)">
-                                    <path d="M21.22 18.02l2 2H24v-2h-2.78zm.77-2l.01-10a2 2 0 0 0-2-2H7.22l5.23 5.23c.18-.04.36-.07.55-.1V7.02l4 3.73-1.58 1.47 5.54 5.54c.61-.33 1.03-.99 1.03-1.74zM2.39 1.73L1.11 3l1.54 1.54c-.4.36-.65.89-.65 1.48v10a2 2 0 0 0 2 2H0v2h18.13l2.71 2.71 1.27-1.27L2.39 1.73zM7 15.02c.31-1.48.92-2.95 2.07-4.06l1.59 1.59c-1.54.38-2.7 1.18-3.66 2.47z"
-                                          fill="#626262"/>
+                    <% if(navigator.mediaDevices && navigator.mediaDevices.getDisplayMedia) { %>
+                    <button class="caller__frames_acts_btn j-caller__ctrl" data-target="screen">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19" version="1.1">
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <g transform="translate(-290.000000, -80.000000)">
+                                    <g transform="translate(288.000000, 78.000000)">
+                                        <path d="M21.22 18.02l2 2H24v-2h-2.78zm.77-2l.01-10a2 2 0 0 0-2-2H7.22l5.23 5.23c.18-.04.36-.07.55-.1V7.02l4 3.73-1.58 1.47 5.54 5.54c.61-.33 1.03-.99 1.03-1.74zM2.39 1.73L1.11 3l1.54 1.54c-.4.36-.65.89-.65 1.48v10a2 2 0 0 0 2 2H0v2h18.13l2.71 2.71 1.27-1.27L2.39 1.73zM7 15.02c.31-1.48.92-2.95 2.07-4.06l1.59 1.59c-1.54.38-2.7 1.18-3.66 2.47z"
+                                            fill="#626262"/>
+                                    </g>
                                 </g>
                             </g>
-                        </g>
-                    </svg>
-                </button>
-                <% } %>
+                        </svg>
+                    </button>
+                    <% } %>
 
-
-                <button class="caller__frames_acts_btn j-caller__ctrl" data-target="audio">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="19" viewBox="0 0 18 19" version="1.1">
-                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                            <g transform="translate(-347.000000, -80.000000)">
-                                <g transform="translate(344.000000, 78.000000)">
-                                    <path d="M0 0L24 0 24 24 0 24 0 0Z"/>
-                                    <path class="svg_icon"
-                                          d="M19 11L17.3 11C17.3 11.74 17.14 12.43 16.87 13.05L18.1 14.28C18.66 13.3 19 12.19 19 11L19 11ZM14.98 11.17C14.98 11.11 15 11.06 15 11L15 5C15 3.34 13.66 2 12 2 10.34 2 9 3.34 9 5L9 5.18 14.98 11.17 14.98 11.17ZM4.27 3L3 4.27 9.01 10.28 9.01 11C9.01 12.66 10.34 14 12 14 12.22 14 12.44 13.97 12.65 13.92L14.31 15.58C13.6 15.91 12.81 16.1 12 16.1 9.24 16.1 6.7 14 6.7 11L5 11C5 14.41 7.72 17.23 11 17.72L11 21 13 21 13 17.72C13.91 17.59 14.77 17.27 15.54 16.82L19.73 21 21 19.73 4.27 3 4.27 3Z"/>
+                    <button class="caller__frames_acts_btn j-caller__ctrl" data-target="audio">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="19" viewBox="0 0 18 19" version="1.1">
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <g transform="translate(-347.000000, -80.000000)">
+                                    <g transform="translate(344.000000, 78.000000)">
+                                        <path d="M0 0L24 0 24 24 0 24 0 0Z"/>
+                                        <path class="svg_icon"
+                                            d="M19 11L17.3 11C17.3 11.74 17.14 12.43 16.87 13.05L18.1 14.28C18.66 13.3 19 12.19 19 11L19 11ZM14.98 11.17C14.98 11.11 15 11.06 15 11L15 5C15 3.34 13.66 2 12 2 10.34 2 9 3.34 9 5L9 5.18 14.98 11.17 14.98 11.17ZM4.27 3L3 4.27 9.01 10.28 9.01 11C9.01 12.66 10.34 14 12 14 12.22 14 12.44 13.97 12.65 13.92L14.31 15.58C13.6 15.91 12.81 16.1 12 16.1 9.24 16.1 6.7 14 6.7 11L5 11C5 14.41 7.72 17.23 11 17.72L11 21 13 21 13 17.72C13.91 17.59 14.77 17.27 15.54 16.82L19.73 21 21 19.73 4.27 3 4.27 3Z"/>
+                                    </g>
                                 </g>
                             </g>
-                        </g>
-                    </svg>
-                </button>
-            </div>
-
-            <div class="caller__frames_fl">
-                <select class="qb-select j-filter">
-                    <option value="no">No Filter</option>
-                    <option value="_1977">1977</option>
-                    <option value="inkwell">inkwell</option>
-                    <option value="moon">moon</option>
-                    <option value="nashville">nashville</option>
-                    <option value="slumber">slumber</option>
-                    <option value="toaster">toaster</option>
-                    <option value="walden">walden</option>
-                </select>
-            </div>
-
-            <div class="caller__frames_bandwidth">
-                <select class="qb-select j-bandwidth">
-                    <option value="">Standart</option>
-                    <option value="2048">2048 kbps</option>
-                    <option value="1024">1024 kbps</option>
-                    <option value="512">512 kbps</option>
-                    <option value="256">256 kbps</option>
-                    <option value="128">128 kbps</option>
-                </select>
-            </div>
-
-            <div class="caller__frames_media_source j-media_sources invisible">
-                <h4 class="source_label j-video_source_label">Video track:</h4>
-                <select class="qb-select j-video_source"></select>
-
-                <h4 class="source_label j-audio_source_label">Audio track:</h4>
-                <select class="qb-select j-audio_source"></select>
-
-                <button class="caller__ctrl_btn confirm_media j-confirm_media">Confirm</button>
+                        </svg>
+                    </button>
+                </div>
             </div>
         </div>
-    </div>
-    </div>
     </div>
 </script>
 
 <script type="text/template" id="users_tpl">
+
+    <div class="caller__ctrl mb-2">
+        <button class="caller__ctrl_btn j-actions m-video_call" data-call="video"></button>
+        <button class="caller__ctrl_btn j-actions m-audio_call" data-call="audio"></button>
+    </div>
+
+    <div class="caller__frames_media_source j-media_sources invisible mb-2">
+        <h4 class="source_label j-video_source_label">Video track:</h4>
+        <select class="qb-select j-video_source"></select>
+
+        <h4 class="source_label j-audio_source_label">Audio track:</h4>
+        <select class="qb-select j-audio_source"></select>
+
+        <button class="caller__ctrl_btn confirm_media j-confirm_media">Confirm</button>
+    </div>
 
     <div style="padding-bottom: 10px;">
         <input type="text" id="search_by_username" class="join__input j-join__username" style="height: 50px;"
@@ -394,7 +357,6 @@
             <p class="frames_callee__status j-callee_status_<%=userID%>">
                 <%=state%>
             </p>
-
             <div class="qb-video">
                 <video class="j-callees__callee__video qb-video_source"
                        id="remote_video_<%=userID%>"
@@ -424,7 +386,7 @@
 <script src="<?php echo base_url(); ?>assets/webrtc/quickblox.min.js"></script>
 
 <!-- app -->
-<script src="<?php echo base_url(); ?>assets/webrtc/config.js"></script>
-<script src="<?php echo base_url(); ?>assets/webrtc/js/helpers.js"></script>
-<script src="<?php echo base_url(); ?>assets/webrtc/js/stateBoard.js"></script>
-<script src="<?php echo base_url(); ?>assets/webrtc/js/app.js"></script>
+<?php include APPPATH . 'helpers/config.php'; ?>
+<?php include APPPATH . 'helpers/helpers.php'; ?>
+<?php include APPPATH . 'helpers/stateBoard.php'; ?>
+<?php include APPPATH . 'helpers/app.php'; ?>

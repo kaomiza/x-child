@@ -57,18 +57,16 @@
 $type = $this->session->userdata('U_admin');
 $id = $this->session->userdata('U_id');
 ?>
-<div class="container-fluid profile-bg">
+<div class="container profile-bg">
     <div class="row">
 
         <div class="col-lg-3 p-1">
             <div class="col-12 p-3 btn-r profile-user">
                 <img id="IMG" class="img-fluid profile-img rounded" src="<?php echo base_url('upload/images/admin.png'); ?>" alt="image-profile">
-
                 <ul class="profile-menu list-group">
                     <li><a class="text-light" href="#" data-toggle="modal" data-target="#myModal1"><i class="fas fa-file-image"></i><span>Upload image Profile</span></a></li>
                     <li><a class="text-light" href="#" data-toggle="modal" data-target="#myModal2"><i class="fas fa-key"></i><span>Change Password</span></a></li>
                 </ul>
-
             </div>
         </div>
 
@@ -112,14 +110,14 @@ $id = $this->session->userdata('U_id');
                         <div class="col-md-4 zmp">
                             <div class="form-group">
                                 <span>ชื่อภาษาอังกฤษ</span>
-                                <input type="text" class="form-control" id="fnameEN" name="fnameEN" >
+                                <input type="text" class="form-control" id="fnameEN" name="fnameEN">
                                 <span class="text-danger"></span>
                             </div>
                         </div>
                         <div class="col-md-4 zmp">
                             <div class="form-group">
                                 <span>นามสกุลภาษาอังกฤษ</span>
-                                <input type="text" class="form-control" id="lnameEN" name="lnameEN" >
+                                <input type="text" class="form-control" id="lnameEN" name="lnameEN">
                                 <span class="text-danger"></span>
                             </div>
                         </div>
@@ -130,7 +128,7 @@ $id = $this->session->userdata('U_id');
                         <div class="col-md-12 zmp">
                             <div class="form-group">
                                 <span>Mobile</span>
-                                <input type="text" class="form-control" id="phone" name="phone" >
+                                <input type="text" class="form-control" id="phone" name="phone">
                                 <span class="text-danger"></span>
                             </div>
                         </div>
@@ -140,14 +138,14 @@ $id = $this->session->userdata('U_id');
                         <div class="col-md-6 zmp">
                             <div class="form-group">
                                 <span>บ้านเลขที่</span>
-                                <input type="text" class="form-control" id="address" name="no_house" >
+                                <input type="text" class="form-control" id="address" name="no_house">
                                 <span class="text-danger"></span>
                             </div>
                         </div>
                         <div class="col-md-6 zmp">
                             <div class="form-group">
                                 <span>หมู่ที่</span>
-                                <input type="text" class="form-control" id="village" name="no_village" >
+                                <input type="text" class="form-control" id="village" name="no_village">
                                 <span class="text-danger"></span>
                             </div>
                         </div>
@@ -157,14 +155,14 @@ $id = $this->session->userdata('U_id');
                         <div class="col-md-6 zmp">
                             <div class="form-group">
                                 <span>ซอย</span>
-                                <input type="text" class="form-control" id="lane" name="lane" >
+                                <input type="text" class="form-control" id="lane" name="lane">
                                 <span class="text-danger"></span>
                             </div>
                         </div>
                         <div class="col-md-6 zmp">
                             <div class="form-group">
                                 <span>ถนน</span>
-                                <input type="text" class="form-control" id="road" name="road" >
+                                <input type="text" class="form-control" id="road" name="road">
                                 <span class="text-danger"></span>
                             </div>
                         </div>
@@ -202,7 +200,7 @@ $id = $this->session->userdata('U_id');
                         <div class="col-md-6 zmp">
                             <div class="form-group">
                                 <span>หมายเลขไปรษณีย์</span>
-                                <input type="text" class="form-control" id="zip" name="zip" >
+                                <input type="text" class="form-control" id="zip" name="zip">
                                 <span class="text-danger"></span>
                             </div>
                         </div>
