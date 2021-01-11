@@ -11,7 +11,8 @@
     p {
         color: black;
     }
-    label{
+
+    label {
         margin-bottom: 0px;
     }
 
@@ -119,7 +120,7 @@
     }
 </style>
 <div class="container">
-    <div class="p-4 mt-4 card" style="background-color: #a00000;">
+    <div class="p-4 mt-4 card" style="background-color: #a00000;z-index: -1;">
         <div class="row">
             <div class="col-md-4">
                 <h2>ไลฟ์สด</h2>
@@ -184,8 +185,13 @@
                 <h2 style="color: #333333;">test</h2>
             </div>
             <div class="">
-                testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttes
+                123456
             </div>
         </div>
     </div>
 </div>
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const myParam = urlParams.get('v');
+    console.log(myParam);
+</script>

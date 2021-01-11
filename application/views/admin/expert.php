@@ -1041,7 +1041,7 @@
 
         if (fn == 'edit') {
             var p_id = $('#prenameTH2').val();
-            $('#prenameEN1').empty();
+            $('#prenameEN2').empty();
             $('#prenameEN2').append('<option selected="">--- select ---</option>');
             prename.forEach(element => {
                 if (element.n_id == p_id) {

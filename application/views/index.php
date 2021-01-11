@@ -7,19 +7,45 @@
 	<meta name="description" content="The small framework with powerful features">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="shortcut icon" href="<?php echo base_url(); ?>assets/images/logo/favicon.ico">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Kanit|Roboto" rel="stylesheet">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/owl/assets/owl.carousel.min.css">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/owl/assets/owl.theme.default.min.css">
+	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/fontawesome/css/all.min.css">
+	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/adminlte/plugins/select2/css/select2.min.css">
+	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/adminlte/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/icomoon/style.css">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/aos/aos.css">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/style.css">
-	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/fontawesome/css/all.min.css">
-	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/icomoon/style.css">
-	<link href="https://fonts.googleapis.com/css?family=Kanit|Roboto" rel="stylesheet">
+
+	<script src="<?php echo base_url(); ?>assets/admin_init/validateCheck.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
 	<script src="<?php echo base_url(); ?>assets/jquery/dist/jquery.min.js"></script>
 	<script src="<?php echo base_url(); ?>assets/owl/owl.carousel.min.js"></script>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/adminlte/plugins/toastr/toastr.min.css">
+	<script src="<?php echo base_url(); ?>assets/adminlte/plugins/toastr/toastr.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.20/lodash.min.js"></script>
+	<script>
+		toastr.options = {
+			"closeButton": false,
+			"debug": false,
+			"newestOnTop": false,
+			"progressBar": false,
+			"positionClass": "toast-top-right",
+			"preventDuplicates": false,
+			"onclick": null,
+			"showDuration": "300",
+			"hideDuration": "1000",
+			"timeOut": "2000",
+			"extendedTimeOut": "1000",
+			"showEasing": "swing",
+			"hideEasing": "linear",
+			"showMethod": "fadeIn",
+			"hideMethod": "fadeOut"
+		}
+	</script>
 	<style>
 		.raimg {
 			border-radius: 1.5rem;
@@ -168,9 +194,17 @@
 		</footer>
 	</div>
 	<!-- SCRIPTS -->
+	<script src="<?php echo base_url(); ?>assets/adminlte/plugins/select2/js/select2.full.min.js"></script>
 	<script src="<?php echo base_url(); ?>assets/bootstrap/js/bootstrap.min.js"></script>
 	<script src="<?php echo base_url(); ?>assets/aos/aos.js"></script>
 	<script src="<?php echo base_url(); ?>assets/main.js"></script>
+	<script>
+		jQuery(function($) {
+			$('.select2bs4').select2({
+				theme: 'bootstrap4'
+			})
+		});
+	</script>
 	<!-- -->
 </body>
 

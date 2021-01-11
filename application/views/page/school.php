@@ -28,7 +28,7 @@
 </script>
 
 <div class="container">
-    <div class="container p-4 mt-4 card" style="background-color: #f9ed69;">
+    <div class="container p-4 mt-4 card" style="background-color: #f9ed69;z-index: -1;">
         <div class="row">
             <div class="col-md-4">
                 <h2>ค้นหาโรงเรียน</h2>

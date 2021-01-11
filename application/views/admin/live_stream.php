@@ -453,10 +453,18 @@
 
     function reset_form(fn) {
         if (fn == 'add') {
-
+            $('#namelive1').val('');
+            $('#start_date_1').val('');
+            $('#end_date_1').val('');
+            $('#url1').val('');
+            $('#l_detail1').val('');
         }
         if (fn == 'edit') {
-
+            $('#namelive2').val('');
+            $('#start_date_2').val('');
+            $('#end_date_2').val('');
+            $('#url2').val('');
+            $('#l_detail2').val('');
         }
         $('#Live').DataTable().ajax.reload();
     }

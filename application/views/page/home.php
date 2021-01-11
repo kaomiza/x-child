@@ -5,10 +5,10 @@
 
     .bannerimg {
         width: 100%;
-        height: 700px;
+        height: auto;
     }
 
-    @media (min-width: 1025px) and (max-width: 1280px) {
+    /* @media (min-width: 1025px) and (max-width: 1280px) {
         .bannerimg {
             width: 100%;
             height: auto;
@@ -27,7 +27,7 @@
             width: 100%;
             height: auto;
         }
-    }
+    } */
 
     .content_warpper {
         display: flex;
@@ -210,7 +210,7 @@
     }
 </style>
 <div>
-    <img src="<?php echo base_url(); ?>/assets/images/background.png" alt="bg" class="bannerimg">
+    <img src="<?php echo base_url(); ?>/assets/images/background.png" alt="index" class="bannerimg img-fluid">
 </div>
 <div class="site-section">
     <div class="container">
@@ -412,7 +412,7 @@
                 </div>
             </div>
             <div>
-                
+
             </div>
             <div class="col block-3 products-wrap">
                 <div class="owl-carousel owl-theme">

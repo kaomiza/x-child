@@ -7,7 +7,7 @@ class Pre_name extends CI_Controller
     {
         parent::__construct();
 
-        if ($this->session->userdata('U_admin') == 1 || $this->session->userdata('U_admin') == 2) {
+        if ($this->session->userdata('U_id')) {
             $this->load->model('PrenameModel');
         } else {
             $this->session->set_flashdata('error-login', 'กรุณา login ก่อนเพื่อใช้งาน');
