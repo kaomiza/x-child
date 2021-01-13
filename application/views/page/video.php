@@ -108,13 +108,45 @@
     }
 </style>
 <div class="container">
-    <div class="p-4 mt-4 card" style="background-color: #a00000;z-index: -1;">
+    <div class="p-4 mt-4 card" style="background-color: #ffffff;z-index: -1;">
         <div class="row">
             <div class="col-md-4">
-                <h2>ไลฟ์สด</h2>
+                <h2 class="text-dark">วิดีโอความรู้</h2>
             </div>
         </div>
     </div>
+
+    <div class="sticky-top col rounded mt-3" style="background-color: #ffffff;">
+        <div class="row p-2">
+            <div class="col-12 col-md-4">
+                <select name="selectSm" id="selectSm" class="form-control m-1" required="">
+                    <option value="0">Please select</option>
+                    <option value="1">เด็กที่มีความบกพร่องทางสติปัญญา</option>
+                    <option value="2">เด็กที่มีความบกพร่องทางการได้ยิน</option>
+                    <option value="3">เด็กที่มีความบกพร่องทางการมองเห็น</option>
+                    <option value="4">เด็กที่มีความบกพร่องทางร่างกายและสุขภาพ</option>
+                    <option value="5">เด็กที่มีความบกพร่องทางการพูดและภาษา</option>
+                    <option value="6">เด็กที่มีความบกพร่องทางพฤติกรรมและอารมณ์</option>
+                    <option value="7">เด็กที่มีปัญหาทางการเรียนรู้</option>
+                    <option value="8">เด็กออทิสติก</option>
+                    <option value="9">เด็กพิการซ้ำซ้อน</option>
+                    <option value="10">test1</option>
+                    <option value="11">test2</option>
+                </select>
+            </div>
+            <div class="col-12 col-md-8">
+                <div class="input-group m-1">
+                    <input type="text" class="form-control" placeholder="Search this blog">
+                    <div class="input-group-append">
+                        <button class="btn btn-secondary" type="button">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <div class="live_warpper">
         <div class="live_video_warpper" id="live_video">
@@ -134,7 +166,8 @@
     const urlParams = new URLSearchParams(window.location.search);
     const myParam = urlParams.get('v');
     get_list_livestream(myParam);
-
+    var similarity = stringSimilarity.compareTwoStrings('ยินดีที่ได้รู้จักครับ', 'ยินดีที่ได้รู้จักค่ะ');
+    console.log(similarity);
     function get_list_livestream(watch) {
         $.get('<?php echo base_url('Live/getAll'); ?>').done((res) => {
             if (res.data.length == 0) {
@@ -167,7 +200,7 @@
                 if (watch == null) {
                     $('#live_video').append(`
                     <div class="embed-responsive embed-responsive-16by9">
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/` + res.data[0].l_id_url + `?autoplay=1&mute=1" frameborder="0" allowfullscreen></iframe>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/` + res.data[0].l_id_url + `" frameborder="0" allowfullscreen></iframe>
                     </div>
                 `);
                     $('#live_detail').append(`
@@ -181,7 +214,7 @@
                 } else {
                     $('#live_video').append(`
                     <div class="embed-responsive embed-responsive-16by9">
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/` + watch + `?autoplay=1&mute=1" frameborder="0" allowfullscreen></iframe>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/` + watch + `" frameborder="0" allowfullscreen></iframe>
                     </div>
                 `);
                 }

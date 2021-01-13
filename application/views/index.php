@@ -27,6 +27,7 @@
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/adminlte/plugins/toastr/toastr.min.css">
 	<script src="<?php echo base_url(); ?>assets/adminlte/plugins/toastr/toastr.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.20/lodash.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/string-similarity@4.0.4/umd/string-similarity.min.js"></script>
 	<script>
 		toastr.options = {
 			"closeButton": false,
