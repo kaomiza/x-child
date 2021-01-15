@@ -18,6 +18,7 @@
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/icomoon/style.css">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/aos/aos.css">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/style.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/coliff/bootstrap-rfs/bootstrap-rfs.css">
 
 	<script src="<?php echo base_url(); ?>assets/admin_init/validateCheck.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
@@ -28,7 +29,10 @@
 	<script src="<?php echo base_url(); ?>assets/adminlte/plugins/toastr/toastr.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.20/lodash.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/string-similarity@4.0.4/umd/string-similarity.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/locale/th.min.js"></script>
 	<script>
+		moment().format('LL');
 		toastr.options = {
 			"closeButton": false,
 			"debug": false,
@@ -52,6 +56,56 @@
 			border-radius: 1.5rem;
 			width: 100%;
 			background-color: gray;
+		}
+
+		.site-navbar .site-navigation .site-menu .has-children .dropdown{
+			z-index: 1025;
+		}
+
+		@media (max-width: 1200px) {
+			legend {
+				font-size: calc(1.275rem + 0.3vw);
+			}
+
+			h1,
+			.h1 {
+				font-size: calc(1.375rem + 1.5vw);
+			}
+
+			h2,
+			.h2 {
+				font-size: calc(1.325rem + 0.9vw);
+			}
+
+			h3,
+			.h3 {
+				font-size: calc(1.3rem + 0.6vw);
+			}
+
+			h4,
+			.h4 {
+				font-size: calc(1.275rem + 0.3vw);
+			}
+
+			.display-1 {
+				font-size: calc(1.725rem + 5.7vw);
+			}
+
+			.display-2 {
+				font-size: calc(1.675rem + 5.1vw);
+			}
+
+			.display-3 {
+				font-size: calc(1.575rem + 3.9vw);
+			}
+
+			.display-4 {
+				font-size: calc(1.475rem + 2.7vw);
+			}
+
+			.close {
+				font-size: calc(1.275rem + 0.3vw);
+			}
 		}
 	</style>
 </head>

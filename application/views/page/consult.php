@@ -10,6 +10,9 @@
         width: 100%;
         min-height: 70vh;
     }
+    .site-footer{
+        display: none;
+    }
 
     .inbg {
         background-color: #eeeeee;

@@ -3,6 +3,10 @@
         background-color: #212121;
     }
 
+    .site-footer{
+        display: none;
+    }
+
     h2 {
         color: white;
     }
@@ -51,20 +55,19 @@
         flex-direction: column;
         width: 100%;
         background-color: white;
-        border-radius: 5px;
-        height: 500px;
+        height: 800px;
     }
 
 
     @media (min-width: 768px) and (max-width: 1024px) {
         .list_live_box {
-            height: 300px;
+            height: 400px;
         }
     }
 
     @media (min-width: 200px) and (max-width: 767px) {
         .list_live_box {
-            height: 200px;
+            height: 300px;
         }
     }
 
@@ -94,7 +97,6 @@
         height: auto;
         width: 100%;
         padding: 20px;
-        border-radius: 5px;
         display: flex;
         flex-direction: column;
     }
@@ -107,8 +109,8 @@
         margin-bottom: 10px;
     }
 </style>
-<div class="container">
-    <div class="p-4 mt-4 card" style="background-color: #a00000;z-index: -1;">
+<div class="container-fluid">
+    <div class="p-4 mt-4" style="background-color: #a00000;z-index: -1;">
         <div class="row">
             <div class="col-md-4">
                 <h2>ไลฟ์สด</h2>
@@ -147,21 +149,26 @@
             } else {
                 res.data.forEach(element => {
                     $('#list_live').append(`
-                <a class="list_live_item" href="` + '<?php echo base_url('live'); ?>?v=' + element.l_id_url + `">
+                <a class="list_live_item" href="` + '<?php echo base_url('live'); ?>?v=' + element.l_id + `">
                     <div class="card_live">
                         ` + element.l_title + ` <span class="badge badge-danger">สด</span>
                     </div>
                 </a>
                 `);
-                    if (element.l_id_url == watch) {
+                    if (element.l_id == watch) {
+                        $('#live_video').append(`
+                            <div class="embed-responsive embed-responsive-16by9">
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/` + element.l_id_url + `?autoplay=1&mute=1" frameborder="0" allowfullscreen></iframe>
+                            </div>
+                        `);
                         $('#live_detail').append(`
-                    <div>
-                        <h2 style="color: #333333;">` + element.l_title + `</h2>
-                    </div>
-                    <div>
-                        ` + element.l_detail + `
-                    </div>
-                `);
+                            <div data-toggle="collapse" href="#collapse-title" role="button" aria-expanded="false" aria-controls="collapse-title">
+                                <h2 style="color: #333333;">` + element.l_title + `</h2>
+                            </div>
+                            <div>
+                                ` + element.l_detail + `
+                            </div>
+                        `);
                     }
                 });
                 if (watch == null) {
@@ -176,12 +183,6 @@
                     </div>
                     <div>
                         ` + res.data[0].l_detail + `
-                    </div>
-                `);
-                } else {
-                    $('#live_video').append(`
-                    <div class="embed-responsive embed-responsive-16by9">
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/` + watch + `?autoplay=1&mute=1" frameborder="0" allowfullscreen></iframe>
                     </div>
                 `);
                 }

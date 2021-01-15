@@ -241,16 +241,16 @@
 
     function onClickActivate(id) {
         if ($('#toggle-' + id).is(":checked")) {
-            $.post('<?php echo base_url('admin/video/update'); ?>/' + id, {
-                tv_status: 1
+            $.post('<?php echo base_url('admin/Video/update'); ?>/' + id, {
+                v_status: 1
             }).done((res) => {
                 toastr.info('NO');
             }).fail((xhr, status, error) => {
                 toastr.error('Error')
             })
         } else {
-            $.post('<?php echo base_url('admin/video/update'); ?>/' + id, {
-                tv_status: 0
+            $.post('<?php echo base_url('admin/Video/update'); ?>/' + id, {
+                v_status: 0
             }).done((res) => {
                 toastr.info('OFF');
             }).fail((xhr, status, error) => {
@@ -261,7 +261,7 @@
 
     function fetch_type_video(fn, id = null) {
         if (fn == 'add') {
-            $.get('<?php echo base_url('admin/type_video/getListSelect'); ?>').done((res) => {
+            $.get('<?php echo base_url('admin/Type_video/getListSelect'); ?>').done((res) => {
                 res.data.forEach(element => {
                     $('#SelectTV1').append('<option value="' + element.tv_id + '">' + element.tv_name + '</option>')
                 });

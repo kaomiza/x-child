@@ -26,14 +26,29 @@ class VideoModel extends CI_Model
 
     public function findAll()
     {
-        $this->db->select('
-        v_id,
-        v_name,
-        v_register_date,
-        tv_name,
-        v_status,
-        ');
+        $this->db->select('*');
         $this->db->join($this->table_join[0], $this->join[0]);
+        return $this->db->get($this->table)->result();
+    }
+
+    public function concernVideo($type)
+    {
+        $this->db->where($this->fields[0] . ' = ' . $type);
+        $this->db->order_by('v_register_date', 'DESC');
+        return $this->db->get($this->table, 10, 0)->result();
+    }
+
+    public function loadMore($start, $end)
+    {
+        $this->db->order_by('v_register_date', 'DESC');
+        return $this->db->get($this->table, $end, $start)->result();
+    }
+
+    public function search($type)
+    {
+        if ($type != 0) {
+            $this->db->where($this->fields[0] . ' = ' . $type);
+        }
         return $this->db->get($this->table)->result();
     }
 
