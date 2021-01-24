@@ -1,10 +1,7 @@
 <style>
-    body {
-        background-color: #212121;
-    }
 
-    .site-footer{
-        display: none;
+    body{
+        background-color: #212121;
     }
 
     h2 {
@@ -89,7 +86,6 @@
 
     .detail_live_warpper {
         display: flex;
-        margin-bottom: 20px;
     }
 
     .detail_live_box {
@@ -109,8 +105,8 @@
         margin-bottom: 10px;
     }
 </style>
-<div class="container-fluid">
-    <div class="p-4 mt-4" style="background-color: #a00000;z-index: -1;">
+<div class="container-xl p-0 mt-1 mb-1">
+    <div class="p-4 rounded" style="background-color: #a00000;z-index: -1;">
         <div class="row">
             <div class="col-md-4">
                 <h2>ไลฟ์สด</h2>
@@ -118,7 +114,11 @@
         </div>
     </div>
 
-    <div class="live_warpper">
+    <div class="pt-5 d-none" id="not-found" style="background-color: #555555;padding-bottom: 15%;">
+
+    </div>
+
+    <div class="live_warpper" id="warp-l">
         <div class="live_video_warpper" id="live_video">
         </div>
         <div class="list_live_warpper">
@@ -126,7 +126,7 @@
             </div>
         </div>
     </div>
-    <div class="detail_live_warpper">
+    <div class="detail_live_warpper" id="warp-d">
         <div class="detail_live_box" id="live_detail">
 
         </div>
@@ -140,12 +140,17 @@
     function get_list_livestream(watch) {
         $.get('<?php echo base_url('Live/getAll'); ?>').done((res) => {
             if (res.data.length == 0) {
-                console.log(res);
-                $('#live_video,#list_live,#live_detail').append(`
-                <div style="background-color: White;" class="d-flex justify-content-center align-items-center w-100">
-                liveStream Not Found
+                $('#warp-d').empty();
+                $('#warp-l').empty();
+                $('#not-found').append(`
+                <div class="text-center">
+                    <img style="width: 20%;margin-bottom: 2%;" src="<?php echo base_url('assets/images/not-found.svg') ?>" alt="not-found">
+                    <br>
+                    <h3 class="text-white">liveStream Not Found</h3> 
                 </div>
                 `);
+                $('#not-found').removeClass('d-none');
+                $('#not-found').removeClass('d-block');
             } else {
                 res.data.forEach(element => {
                     $('#list_live').append(`

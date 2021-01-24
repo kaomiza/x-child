@@ -89,167 +89,183 @@ if ($this->session->flashdata('success')) {
     ";
 }
 ?>
+<style>
+    .breadcrumb {
+        background-color: #fff;
+    }
+</style>
 
-<div class="container profile-bg mt-5" style="margin-bottom: 5%;">
-    <div class="row">
-        <div class="col-lg-3 p-1">
-            <div class="col-12 p-3 btn-r profile-user">
-                <img id="IMG" class="img-fluid profile-img rounded" src="<?php echo base_url('assets/images/user-null.png'); ?>" alt="image-profile">
-                <ul class="profile-menu list-group">
-                    <li><a class="text-light" href="#" data-toggle="modal" data-target="#uploadImage"><i class="fas fa-file-image"></i><span>Upload image Profile</span></a></li>
-                    <li><a class="text-light" href="#" data-toggle="modal" data-target="#editPassword"><i class="fas fa-key"></i><span>Change Password</span></a></li>
-                </ul>
+<div class="container align-content-center">
+    <div class="container profile-bg mt-3">
+        <div class="row p-3">
+            <ol class="breadcrumb float-sm-left m-0">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item active">General Form</li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="container profile-bg mt-3" style="margin-bottom: 3%;">
+        <div class="row">
+            <div class="col-lg-4 p-2">
+                <div class="col-12 p-3 btn-r profile-user">
+                    <img id="IMG" class="img-fluid profile-img rounded" src="<?php echo base_url('assets/images/user-null.png'); ?>" alt="image-profile">
+                    <ul class="profile-menu list-group">
+                        <li><a class="text-light" href="#" data-toggle="modal" data-target="#uploadImage"><i class="fas fa-file-image"></i><span>Upload image Profile</span></a></li>
+                        <li><a class="text-light" href="#" data-toggle="modal" data-target="#editPassword"><i class="fas fa-key"></i><span>Change Password</span></a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-lg-8 p-2">
+                <form id="update_form" enctype="multipart/form-data" method="POST" action="<?php echo base_url('Profile/update') . '/' . $type . '/' . $id; ?>" onsubmit="return save_profile()">
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-md-4 zmp">
+                                <div class="form-group">
+                                    <span>คำนำหน้าชื่อภาษาไทย</span><span style="color: red;">*</span>
+                                    <select class="form-control select2bs4" id="prenameTH" name="prenameTH" onchange="fecth_AutoPrename()">
+                                    </select>
+                                    <div class="invalid-feedback"> กรุณาเลือกคำนำหน้าชื่อ </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 zmp">
+                                <div class="form-group">
+                                    <span>ชื่อภาษาไทย</span><span style="color: red;">*</span>
+                                    <input onkeyup="isThaichar(this.value,this)" type="text" class="form-control" id="fnameTH" name="fnameTH" maxlength="100">
+                                    <div class="invalid-feedback"> กรุณากรอกชื่อภาษาไทย </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 zmp">
+                                <div class="form-group">
+                                    <span>นามสกุลภาษาไทย</span><span style="color: red;">*</span>
+                                    <input onkeyup="isThaichar(this.value,this)" type="text" class="form-control" id="lnameTH" name="lnameTH" maxlength="100">
+                                    <div class="invalid-feedback"> กรุณากรอกนามสกุลภาษาไทย </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4 zmp">
+                                <div class="form-group">
+                                    <span>คำนำหน้าชื่อภาษาอังกฤษ</span>
+                                    <select class="form-control select2bs4" id="prenameEN" name="prenameEN" disabled="">
+                                        <option value="1"></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4 zmp">
+                                <div class="form-group">
+                                    <span>ชื่อภาษาอังกฤษ</span><span style="color: red;">*</span>
+                                    <input onkeyup="isEngchar(this.value,this)" type="text" class="form-control" id="fnameEN" name="fnameEN" maxlength="100">
+                                    <div class="invalid-feedback"> กรุณากรอกชื่อภาษาอังกฤษ </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 zmp">
+                                <div class="form-group">
+                                    <span>นามสกุลภาษาอังกฤษ</span><span style="color: red;">*</span>
+                                    <input onkeyup="isEngchar(this.value,this)" type="text" class="form-control" id="lnameEN" name="lnameEN" maxlength="100">
+                                    <div class="invalid-feedback"> กรุณากรอกนามสกุลภาษาอังกฤษ </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4 zmp">
+                                <div class="form-group">
+                                    <span>เบอร์ติดต่อ</span><span style="color: red;">*</span>
+                                    <input onkeyup="isNumEngchar(this.value,this)" type="text" class="form-control" id="phone" name="phone" maxlength="10">
+                                    <div class="invalid-feedback" id="phone-error"></div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 zmp">
+                                <div class="form-group">
+                                    <span>อีเมล์</span><span style="color: red;">*</span>
+                                    <input type="text" class="form-control" id="email" name="email" maxlength="30">
+                                    <div class="invalid-feedback" id="email-error"></div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 zmp">
+                                <div class="form-group">
+                                    <span>บ้านเลขที่</span>
+                                    <input type="text" class="form-control" id="no_house" name="no_house" maxlength="10" onkeyup="isHomeNumchar(this.value,this)">
+                                    <span class="text-danger"></span>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-md-4 zmp">
+                                <div class="form-group">
+                                    <span>หมู่ที่</span>
+                                    <input type="text" class="form-control" id="village" name="no_village" maxlength="5" onkeyup="isNumAllchar(this.value,this)">
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 zmp">
+                                <div class="form-group">
+                                    <span>ถนน</span>
+                                    <input type="text" class="form-control" id="road" name="road" maxlength="20" onkeyup="isRoadchar(this.value,this)">
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 zmp">
+                                <div class="form-group">
+                                    <span>จังหวัด</span><span style="color: red;">*</span>
+                                    <select class="form-control select2bs4" id="province" name="province" onchange="change_amphur()">
+                                    </select>
+                                    <div class="invalid-feedback"> กรุณาเลือกจังหวัด </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4 zmp">
+                                <div class="form-group">
+                                    <span>อำเภอ</span><span style="color: red;">*</span>
+                                    <select class="form-control select2bs4" id="amphur" name="amphur" onchange="change_district()">
+                                    </select>
+                                    <div class="invalid-feedback"> กรุณาเลือกอำเภอ </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 zmp">
+                                <div class="form-group">
+                                    <span>ตำบล</span><span style="color: red;">*</span>
+                                    <select class="form-control select2bs4" id="district" name="district">
+                                    </select>
+                                    <div class="invalid-feedback"> กรุณาเลือกตำบล </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 zmp">
+                                <div class="form-group">
+                                    <span>หมายเลขไปรษณีย์</span>
+                                    <input type="text" class="form-control" id="zip" name="zip" readonly>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12 zmp">
+                                <div class="col-md-6 p-0 float-right">
+                                    <button type="submit" class="btn btn-primary btn-block btn-r" disabled="" id="submit-data">Save</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
             </div>
         </div>
-
-        <div class="col-lg-8 p-1">
-            <form id="update_form" enctype="multipart/form-data" method="POST" action="<?php echo base_url('Profile/update') . '/' . $type . '/' . $id; ?>" onsubmit="return save_profile()">
-                <div class="col-12">
-                    <div class="row">
-                        <div class="col-md-4 zmp">
-                            <div class="form-group">
-                                <span>คำนำหน้าชื่อภาษาไทย</span><span style="color: red;">*</span>
-                                <select class="form-control select2bs4" id="prenameTH" name="prenameTH" onchange="fecth_AutoPrename()">
-                                </select>
-                                <div class="invalid-feedback"> กรุณาเลือกคำนำหน้าชื่อ </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4 zmp">
-                            <div class="form-group">
-                                <span>ชื่อภาษาไทย</span><span style="color: red;">*</span>
-                                <input onkeyup="isThaichar(this.value,this)" type="text" class="form-control" id="fnameTH" name="fnameTH" maxlength="100">
-                                <div class="invalid-feedback"> กรุณากรอกชื่อภาษาไทย </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4 zmp">
-                            <div class="form-group">
-                                <span>นามสกุลภาษาไทย</span><span style="color: red;">*</span>
-                                <input onkeyup="isThaichar(this.value,this)" type="text" class="form-control" id="lnameTH" name="lnameTH" maxlength="100">
-                                <div class="invalid-feedback"> กรุณากรอกนามสกุลภาษาไทย </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-4 zmp">
-                            <div class="form-group">
-                                <span>คำนำหน้าชื่อภาษาอังกฤษ</span>
-                                <select class="form-control select2bs4" id="prenameEN" name="prenameEN" disabled="">
-                                    <option value="1"></option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-4 zmp">
-                            <div class="form-group">
-                                <span>ชื่อภาษาอังกฤษ</span><span style="color: red;">*</span>
-                                <input onkeyup="isEngchar(this.value,this)" type="text" class="form-control" id="fnameEN" name="fnameEN" maxlength="100">
-                                <div class="invalid-feedback"> กรุณากรอกชื่อภาษาอังกฤษ </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4 zmp">
-                            <div class="form-group">
-                                <span>นามสกุลภาษาอังกฤษ</span><span style="color: red;">*</span>
-                                <input onkeyup="isEngchar(this.value,this)" type="text" class="form-control" id="lnameEN" name="lnameEN" maxlength="100">
-                                <div class="invalid-feedback"> กรุณากรอกนามสกุลภาษาอังกฤษ </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-4 zmp">
-                            <div class="form-group">
-                                <span>เบอร์ติดต่อ</span><span style="color: red;">*</span>
-                                <input onkeyup="isNumEngchar(this.value,this)" type="text" class="form-control" id="phone" name="phone" maxlength="10">
-                                <div class="invalid-feedback" id="phone-error"></div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4 zmp">
-                            <div class="form-group">
-                                <span>อีเมล์</span><span style="color: red;">*</span>
-                                <input type="text" class="form-control" id="email" name="email" maxlength="30">
-                                <div class="invalid-feedback" id="email-error"></div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4 zmp">
-                            <div class="form-group">
-                                <span>บ้านเลขที่</span>
-                                <input type="text" class="form-control" id="no_house" name="no_house" maxlength="10" onkeyup="isHomeNumchar(this.value,this)">
-                                <span class="text-danger"></span>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="row">
-
-                        <div class="col-md-4 zmp">
-                            <div class="form-group">
-                                <span>หมู่ที่</span>
-                                <input type="text" class="form-control" id="village" name="no_village" maxlength="5" onkeyup="isNumAllchar(this.value,this)">
-                            </div>
-                        </div>
-
-                        <div class="col-md-4 zmp">
-                            <div class="form-group">
-                                <span>ถนน</span>
-                                <input type="text" class="form-control" id="road" name="road" maxlength="20" onkeyup="isRoadchar(this.value,this)">
-                            </div>
-                        </div>
-
-                        <div class="col-md-4 zmp">
-                            <div class="form-group">
-                                <span>จังหวัด</span><span style="color: red;">*</span>
-                                <select class="form-control select2bs4" id="province" name="province" onchange="change_amphur()">
-                                </select>
-                                <div class="invalid-feedback"> กรุณาเลือกจังหวัด </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-4 zmp">
-                            <div class="form-group">
-                                <span>อำเภอ</span><span style="color: red;">*</span>
-                                <select class="form-control select2bs4" id="amphur" name="amphur" onchange="change_district()">
-                                </select>
-                                <div class="invalid-feedback"> กรุณาเลือกอำเภอ </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4 zmp">
-                            <div class="form-group">
-                                <span>ตำบล</span><span style="color: red;">*</span>
-                                <select class="form-control select2bs4" id="district" name="district">
-                                </select>
-                                <div class="invalid-feedback"> กรุณาเลือกตำบล </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4 zmp">
-                            <div class="form-group">
-                                <span>หมายเลขไปรษณีย์</span>
-                                <input type="text" class="form-control" id="zip" name="zip" readonly>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-12 zmp">
-                            <div class="col-md-6 p-0 float-right">
-                                <button type="submit" class="btn btn-primary btn-block btn-r" disabled="" id="submit-data">Save</button>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </form>
-        </div>
-
     </div>
+
 </div>
 
 <script>

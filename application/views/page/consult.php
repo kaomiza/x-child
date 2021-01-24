@@ -4,13 +4,18 @@
 <link rel="stylesheet" href="<?php echo base_url(); ?>assets/webrtc/styles.css">
 
 <style>
+    body {
+        background-color: #fff;
+    }
+
     .site-wrapper {
         display: flex;
         flex-direction: column;
         width: 100%;
         min-height: 70vh;
     }
-    .site-footer{
+
+    .site-footer {
         display: none;
     }
 

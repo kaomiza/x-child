@@ -73,15 +73,22 @@ a:hover {
   visibility: visible;
 }
 
-.btn {
+/* .btn {
   -webkit-transition: 0.3s all ease-in-out;
   -o-transition: 0.3s all ease-in-out;
   transition: 0.3s all ease-in-out;
   text-transform: uppercase;
   border-width: 2px;
+} */
+
+.btn {
+  -webkit-transition: 0.3s all ease-in-out;
+  -o-transition: 0.3s all ease-in-out;
+  transition: 0.3s all ease-in-out;
+  text-transform: uppercase;
 }
 
-.btn:hover,
+/* .btn:hover,
 .btn:active,
 .btn:focus {
   outline: none;
@@ -127,7 +134,7 @@ a:hover {
 .form-control:focus {
   -webkit-box-shadow: none !important;
   box-shadow: none !important;
-}
+} */
 
 .site-section {
   padding: 2.5em 0;

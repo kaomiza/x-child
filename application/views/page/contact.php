@@ -1,12 +1,6 @@
-<style>
-    body {
-        background-color: #c9d6df;
-    }
-</style>
-
 <div class="container profile-bg p-0 profile-con mb-5">
     <form id="update_form" method="post" action="">
-        <div class="row">
+        <div class="row p-5">
 
             <div class="col-lg-2">
             </div>

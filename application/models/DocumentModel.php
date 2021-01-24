@@ -25,11 +25,19 @@ class DocumentModel extends CI_Model
         return $this->db->get($this->table)->result();
     }
 
+    public function search()
+    {
+        $this->db->select('doc_id,td_name,doc_name,doc_status');
+        $this->db->join($this->table_join[0], $this->join[0]);
+        $this->db->where($this->fields[3], 1);
+        return $this->db->get($this->table)->result();
+    }
+
     public function findById($id)
     {
         return $this->db->get_where($this->table, array($this->primaryKey => $id))->row();
     }
-    
+
     public function create($data)
     {
         $this->db->insert($this->table, $data);

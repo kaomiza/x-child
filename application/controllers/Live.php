@@ -8,13 +8,12 @@ class Live extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        // if (!$this->session->userdata('U_id')) {
-        //     $this->session->set_flashdata('error-login', 'กรุณา login ก่อนเพื่อใช้งาน');
-        //     redirect('login');
-        // } else {
-        //     $this->load->model('LiveStreamModel');
-        // }
-        $this->load->model('LiveStreamModel');
+        if (!$this->session->userdata('U_id')) {
+            $this->session->set_flashdata('error-login', 'กรุณา login ก่อนเพื่อใช้งาน');
+            redirect('login');
+        } else {
+            $this->load->model('LiveStreamModel');
+        }
     }
 
     public function index()

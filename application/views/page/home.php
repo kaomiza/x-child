@@ -8,27 +8,6 @@
         height: auto;
     }
 
-    /* @media (min-width: 1025px) and (max-width: 1280px) {
-        .bannerimg {
-            width: 100%;
-            height: auto;
-        }
-    }
-
-    @media (min-width: 768px) and (max-width: 1024px) {
-        .bannerimg {
-            width: 100%;
-            height: auto;
-        }
-    }
-
-    @media (min-width: 200px) and (max-width: 767px) {
-        .bannerimg {
-            width: 100%;
-            height: auto;
-        }
-    } */
-
     .content_warpper {
         display: flex;
         flex-direction: row;
@@ -223,7 +202,7 @@
             </div>
 
             <div class="col-4 col-sm-4 col-md-2 mb-4 mb-lg-0 p-sm-1 banner-2 h-100 d-flex">
-                <a title="ฟังก์ชันอ่านนิทาน" href="<?php echo base_url('child_speech'); ?>">
+                <a title="ฟังก์ชันอ่านนิทาน" href="<?php echo base_url('tale'); ?>">
                     <img class="banner-wrap img-fluid" src="<?php echo base_url(); ?>assets/images/fun_2.png" alt="stttts">
                 </a>
             </div>
@@ -418,7 +397,10 @@
     function get_list_livestream(watch) {
         $.get('<?php echo base_url('Live/getAll'); ?>').done((res) => {
             if (res.data.length == 0) {
-                console.log(res);
+                $('#live_list').append(`
+                    <div class="content_live_item text-center">
+                        ยังไม่มีการสตรีมสดในขณะนี้
+                    </div>`);
             } else {
                 console.log(res);
                 res.data.forEach(element => {

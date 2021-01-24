@@ -249,11 +249,17 @@
 
     function reset_form(fn) {
         if (fn == 'add') {
+            $('#InputDOC1').val('');
+            $('#file_doc1').val('');
+            $('#label_doc1').html('เลือกไฟล์');
             $('#SelectTD1').empty();
             $('#SelectTD1').append('<option selected="">--- กรุณาเลือก ---</option>');
             path_file = '';
         }
         if (fn == 'edit') {
+            $('#InputDOC2').val('');
+            $('#file_doc2').val('');
+            $('#label_doc2').html('เลือกไฟล์');
             $('#SelectTD2').empty();
             $('#SelectTD2').append('<option selected="">--- กรุณาเลือก ---</option>');
             path_file = '';

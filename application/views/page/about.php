@@ -1,9 +1,3 @@
-<style>
-    body {
-        background-color: #c9d6df;
-    }
-</style>
-
 <div class="" style="margin-top:4rem;">
     <div class="container card" style="margin-top:2rem;margin-bottom:5rem; color:black;">
         <div class="row font-K2D p-3">

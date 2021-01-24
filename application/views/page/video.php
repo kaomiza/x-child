@@ -1,12 +1,4 @@
 <style>
-    body {
-        background-color: #212121;
-    }
-
-    .site-footer {
-        display: none;
-    }
-
     .border-background {
         box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.2);
     }
@@ -200,9 +192,9 @@
     }
 </style>
 <div class="loading" id="page-load">Loading&#8230;</div>
-<div class="container-fluid">
+<div class="container-xl p-0 mt-1 mb-1">
 
-    <nav class="row navbar navbar-expand-lg sticky-top border-background mt-1" style="background-color: #797a7e;">
+    <nav class="row navbar navbar-expand-lg sticky-top border-background rounded" style="background-color: #797a7e;">
         <div class="navbar-brand">
             <h2 class="text-white mb-0" onclick="reload()" style="cursor:pointer;">วิดีโอความรู้</h2>
         </div>
@@ -213,11 +205,11 @@
         </div>
         <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
 
-            <div class="col-12 col-md-2 mb-1">
-                <select name="selectSm" id="selectSm" class="custom-select" required="">
+            <div class="col-12 col-md-3 mb-1">
+                <select name="selectSm" id="selectSm" class="custom-select " required="">
                 </select>
             </div>
-            <div class="col-12 col-md-6">
+            <div class="col-12 col-md-6 float-right">
                 <form onsubmit="return search_video()">
                     <div class="row">
                         <div class="col-12 col-md-6 mb-1">
@@ -234,7 +226,7 @@
         </div>
     </nav>
 
-    <div class="pt-1 pb-1">
+    <div class="container-fluid rounded">
 
         <div class="text-center d-none" id="load-search-word">
             <div class="col-12 p-5 d-flex justify-content-center align-items-center">
@@ -244,9 +236,10 @@
             </div>
         </div>
 
-        <div id="not-found" class="text-center"></div>
+        <div id="not-found" class="text-center bg-secondary rounded d-none" style="padding-bottom: 15%;"></div>
 
-        <div id="search-menu" style="background-color: #ffffff;margin-right:-15px;margin-left: -15px;">
+
+        <div id="search-menu" class="rounded" style="background-color: #ffffff;margin-right:-15px;margin-left: -15px;">
             <div class="row ml-1 mr-1" id="search-menu-content">
 
             </div>
@@ -260,7 +253,7 @@
             </div>
         </div>
 
-        <div id="list-menu" style="background-color: #ffffff;margin-right:-15px;margin-left: -15px;">
+        <div id="list-menu" class=" rounded" style="background-color: #ffffff;margin-right:-15px;margin-left: -15px;">
             <div class="row ml-1 mr-1" id="list-menu-content">
 
             </div>
@@ -280,7 +273,7 @@
                 <div class="p-3" id="live_detail">
                 </div>
             </div>
-            <div class="col-12 col-md-4 border-l p-0" style="background-color: #ffffff;">
+            <div class="col-12 col-md-4 p-0" style="background-color: #ffffff;">
                 <div class="list-live-content" id="list_live">
                 </div>
             </div>
@@ -292,6 +285,11 @@
     const urlParams = new URLSearchParams(window.location.search);
     const myParam = urlParams.get('v');
     var type_video;
+    var list_of_search = [];
+    var searching = false;
+    var onload_data = false;
+    var start = 0;
+    var end = 8;
 
     if (myParam == '') {
         window.location.href = "<?php echo base_url('Video'); ?>";
@@ -321,22 +319,32 @@
 
 
     function loadVideo() {
-        var start = 0;
-        var end = 8;
 
         $.get('<?php echo base_url('Video/getLoad'); ?>/' + start + '/' + 12).done((res) => {
+            if (res.data.length == 0) {
+                $('#not-found').empty();
+                $('#not-found').append(`
+                    <div style="padding-top: 10%;color: white;">
+                        <div>
+                            <img style="width: 20%;margin-bottom: 2%;" src="<?php echo base_url('assets/images/not-found.svg') ?>" alt="not-found">
+                            <h3>ยังไม่มีรายการวิดิโอ</h3>
+                        </div>
+                    </div>
+                `);
+            }
             res.data.forEach(element => {
                 $('#list-menu-content').append(`
                     <div class="col-12 col-md-3 p-1">
                         <a href="<?php echo base_url('Video?v='); ?>` + element.v_id + `">
                             <img class="img-fluid" src="https://i.ytimg.com/vi/` + element.v_path_video + `/hqdefault.jpg">
                             <div class="details">
-                            ` + element.v_name + ` <br><span><small> อัพเดต · ` + moment(element.v_register_date, "YYYYMMDD").fromNow() + ` </small></span>
+                            ` + element.v_name + ` <br><span><small> อัพเดต · ` + moment(element.v_register_date, "YYYYMMDD").format('LL') + ` </small></span>
                             </div>
                         </a>
                     </div>
                 `);
             })
+            start = start + 12
         });
 
         $(window).scroll(function() {
@@ -344,32 +352,67 @@
             var position = $(window).scrollTop();
             var bottom = $(document).height() - $(window).height();
 
-            if (position == bottom) {
-                start = start + end;
+            if (position == bottom && onload_data == false && searching == false) {
+                onload_data = true;
                 $('#loading').removeClass('d-none');
                 $('#loading').addClass('d-block');
                 setTimeout(function() {
                     $.get('<?php echo base_url('Video/getLoad'); ?>/' + start + '/' + end).done((res) => {
-                        if (res.data.length == 0) {
-                            $('#loading').empty();
-                        }
-                        res.data.forEach(element => {
+                        if (res.data.length != 0) {
+                            start = start + end;
+                            onload_data = false;
                             $('#loading').removeClass('d-block');
                             $('#loading').addClass('d-none');
-                            $('#list-menu-content').append(`
+                            res.data.forEach(element => {
+                                $('#list-menu-content').append(`
                                 <div class="col-12 col-md-3 p-1">
                                     <a href="<?php echo base_url('Video?v='); ?>` + element.v_id + `">
                                         <img class="img-fluid" src="https://i.ytimg.com/vi/` + element.v_path_video + `/hqdefault.jpg">
                                         <div class="details">
-                                        ` + element.v_name + ` <br><span><small> อัพเดต · ` + moment(element.v_register_date, "YYYYMMDD").fromNow() + ` </small></span> 
+                                        ` + element.v_name + ` <br><span><small> อัพเดต · ` + moment(element.v_register_date, "YYYYMMDD").format('LL') + ` </small></span> 
                                         </div>
                                     </a>
                                 </div>
                             `);
-                        })
+                            })
+                        } else {
+                            onload_data = false;
+                            $('#loading').removeClass('d-block');
+                            $('#loading').addClass('d-none');
+                        }
                     });
                 }, 1000);
+            }
 
+            if (position == bottom && onload_data == false && searching == true) {
+                onload_data = true;
+                $('#loading-search').removeClass('d-none');
+                $('#loading-search').addClass('d-block');
+                setTimeout(async function() {
+                    if (start > list_of_search.length) {
+                        $('#loading-search').removeClass('d-block');
+                        $('#loading-search').addClass('d-none');
+                    } else {
+                        $('#loading-search').removeClass('d-block');
+                        $('#loading-search').addClass('d-none');
+                        for (var i in list_of_search) {
+                            if (i >= start && i < (start + end)) {
+                                $('#search-menu-content').append(`
+                                <div class="col-12 col-md-3 p-1">
+                                    <a href="<?php echo base_url('Video?v='); ?>` + list_of_search[i].v_id + `">
+                                        <img class="img-fluid" src="https://i.ytimg.com/vi/` + list_of_search[i].v_path_video + `/hqdefault.jpg">
+                                        <div class="details">
+                                        ` + list_of_search[i].v_name + ` <br><span><small> อัพเดต · ` + moment(list_of_search[i].v_register_date, "YYYYMMDD").fromNow() + ` </small></span>
+                                        </div>
+                                    </a>
+                                </div>
+                            `);
+                            }
+                        }
+                        start = start + end;
+                        onload_data = false;
+                    }
+                }, 1000);
             }
 
         });
@@ -377,9 +420,7 @@
     }
 
     function loadSearch(list) {
-        var start = 12;
-        var end = 8;
-
+        list_of_search = [];
         for (var i in list) {
             if (i < 12) {
                 $('#search-menu-content').append(`
@@ -392,44 +433,13 @@
                         </a>
                     </div>
                 `);
+            } else {
+                list_of_search.push(list[i]);
             }
         }
-
-        $(window).scroll(function() {
-
-            var position = $(window).scrollTop();
-            var bottom = $(document).height() - $(window).height();
-
-            if (position == bottom) {
-
-                $('#loading-search').removeClass('d-none');
-                $('#loading-search').addClass('d-block');
-                setTimeout(function() {
-                    if (start > list.length) {
-                        $('#loading-search').empty();
-                    } else {
-                        $('#loading-search').removeClass('d-block');
-                        $('#loading-search').addClass('d-none');
-                        for (var i in list) {
-                            if (i >= start && i < (start + end)) {
-                                $('#search-menu-content').append(`
-                                <div class="col-12 col-md-3 p-1">
-                                    <a href="<?php echo base_url('Video?v='); ?>` + list[i].v_id + `">
-                                        <img class="img-fluid" src="https://i.ytimg.com/vi/` + list[i].v_path_video + `/hqdefault.jpg">
-                                        <div class="details">
-                                        ` + list[i].v_name + ` <br><span><small> อัพเดต · ` + moment(list[i].v_register_date, "YYYYMMDD").fromNow() + ` </small></span>
-                                        </div>
-                                    </a>
-                                </div>
-                            `);
-                            }
-                        }
-                        start = start + end;
-                    }
-                }, 1000);
-            }
-
-        });
+        start = 0;
+        onload_data = false;
+        searching = true;
     }
 
 
@@ -469,23 +479,25 @@
                 `);
             } else {
                 res.data.forEach(element => {
-                    $('#list_live').append(`
+                    if (element.v_id != watch) {
+                        $('#list_live').append(`
                         <a href="` + '<?php echo base_url('Video'); ?>?v=' + element.v_id + `">
                             <div class="row card_live p-1">
                                 <div class="col-4 col-md-4 p-0">
-                                    <img class="img-fluid" src="https://i.ytimg.com/vi_webp/` + element.v_path_video + `/mqdefault.webp"/>
+                                    <img class="img-fluid" src="https://i.ytimg.com/vi/` + element.v_path_video + `/hqdefault.jpg"/>
                                 </div>
                                 <div class="col-8 col-md-8 pl-1">
                                     <div class="col-12 p-0">
                                         <p class="text-o m-0"> ` + element.v_name + ` </p>
                                     </div>
                                     <div class="col-12 p-0">
-                                        <span class="text-o text-justify p-0" style="font-size:12px;opacity: .6;">วันที่อัพข้อมูล: ` + element.v_register_date + `</span>
+                                        <span class="text-o text-justify p-0" style="font-size:12px;opacity: .6;">วันที่อัพข้อมูล: ` + moment(element.v_register_date, "YYYYMMDD").format('LL') + `</span>
                                     </div>
                                 </div>
                             </div>
                         </a>
                     `);
+                    }
                 });
             }
         });
@@ -505,6 +517,8 @@
         $('#content').empty();
         $('#not-found').empty();
         $('#search-menu-content').empty();
+        $('#not-found').removeClass('d-block');
+        $('#not-found').addClass('d-none');
         $('#load-search-word').removeClass('d-none');
         $('#load-search-word').addClass('d-block');
         $.post('<?php echo base_url('Video/search') ?>', {
@@ -525,6 +539,8 @@
             var list1 = rateHigth.concat(rateMid);
             var list2 = list1.concat(rateLow);
             if (list2.length == 0) {
+                $('#list-menu').empty();
+                $('#content').empty();
                 $('#not-found').empty();
                 $('#not-found').append(`
                     <div style="padding-top: 10%;color: white;">
@@ -535,6 +551,8 @@
                         </div>
                     </div>
                 `);
+                $('#not-found').removeClass('d-none');
+                $('#not-found').addClass('d-block');
             } else {
                 loadSearch(list2);
             }

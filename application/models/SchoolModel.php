@@ -67,6 +67,25 @@ class SchoolModel extends CI_Model
 
     public function findAllActive()
     {
+        $this->db->select('sc_id,sc_nameTH,
+        sc_nameEN,
+        tsc_name,
+        sc_house_no,
+        sc_village_no,
+        sc_road,
+        PROVINCE_NAME,
+        DISTRICT_NAME,
+        AMPHUR_NAME,
+        POSTCODE,
+        website,
+        phone,
+        latitude,
+        longitude,
+        sc_status');
+        $this->db->join($this->table_join[1], $this->join[1]);
+        $this->db->join($this->table_join[2], $this->join[2]);
+        $this->db->join($this->table_join[3], $this->join[3]);
+        $this->db->join($this->table_join[0], $this->join[0]);
         $this->db->where($this->Fields[14], 1);
         $this->db->order_by($this->primaryKey, 'DESC');
         $query =  $this->db->get($this->table);

@@ -9,16 +9,20 @@
 	<link rel="shortcut icon" href="<?php echo base_url(); ?>assets/images/logo/favicon.ico">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link href="https://fonts.googleapis.com/css?family=Kanit|Roboto" rel="stylesheet">
-	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/owl/assets/owl.carousel.min.css">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/owl/assets/owl.theme.default.min.css">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/fontawesome/css/all.min.css">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/adminlte/plugins/select2/css/select2.min.css">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/adminlte/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/icomoon/style.css">
+	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/adminlte/dist/css/adminlte.min.css">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/aos/aos.css">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/style.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/coliff/bootstrap-rfs/bootstrap-rfs.css">
+	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/adminlte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/adminlte/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+	<link rel="stylesheet" href="<?php echo base_url('assets/paginationjs/dist/pagination.css') ?>">
 
 	<script src="<?php echo base_url(); ?>assets/admin_init/validateCheck.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
@@ -31,6 +35,13 @@
 	<script src="https://cdn.jsdelivr.net/npm/string-similarity@4.0.4/umd/string-similarity.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/locale/th.min.js"></script>
+	<script type="text/javascript" src="<?php echo base_url(); ?>assets/jquery/timer/jquery.timer.js"></script>
+	<script src="<?php echo base_url(); ?>assets/adminlte/plugins/datatables/jquery.dataTables.min.js"></script>
+	<script src="<?php echo base_url(); ?>assets/adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+	<script src="<?php echo base_url(); ?>assets/adminlte/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+	<script src="<?php echo base_url(); ?>assets/adminlte/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+	<script src="<?php echo base_url('assets/paginationjs/dist/pagination.js') ?>"></script>
+
 	<script>
 		moment().format('LL');
 		toastr.options = {
@@ -52,13 +63,17 @@
 		}
 	</script>
 	<style>
+		body {
+			background-color: #c9d6df;
+		}
+
 		.raimg {
 			border-radius: 1.5rem;
 			width: 100%;
 			background-color: gray;
 		}
 
-		.site-navbar .site-navigation .site-menu .has-children .dropdown{
+		.site-navbar .site-navigation .site-menu .has-children .dropdown {
 			z-index: 1025;
 		}
 
@@ -250,7 +265,7 @@
 	</div>
 	<!-- SCRIPTS -->
 	<script src="<?php echo base_url(); ?>assets/adminlte/plugins/select2/js/select2.full.min.js"></script>
-	<script src="<?php echo base_url(); ?>assets/bootstrap/js/bootstrap.min.js"></script>
+	<script src="<?php echo base_url(); ?>assets/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 	<script src="<?php echo base_url(); ?>assets/aos/aos.js"></script>
 	<script src="<?php echo base_url(); ?>assets/main.js"></script>
 	<script>
