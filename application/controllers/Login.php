@@ -163,7 +163,102 @@ class Login extends CI_Controller
             show_error('Allow Form POST', 405);
         }
     }
+    public function AuthMobile()
+    {
+        if ($this->input->server('REQUEST_METHOD') == 'POST') {
+            header('Content-Type: application/json');
+            $data = $this->input->post();
+            $username = $data['username'];
+            $password = $data['password'];
 
+            $passhash = hash('sha256', $this->salt . $password);
+            // Admin
+            if ($this->AuthModel->haveUserAdmin($username)) {
+                if ($this->AuthModel->verifypasswordAdmin($username, $passhash)) {
+                    $result = $this->AuthModel->getAdmin($username);
+                    $session_data = array(
+                        'U_id' => $result->id_admin,
+                        'U_user' => $result->admin_user,
+                        'U_pass' => $result->admin_pass,
+                        'U_fname' => $result->admin_user,
+                        'U_lname' => '',
+                        'U_status' => $result->admin_status,
+                        'U_img' => 'upload/images/admin.png',
+                        'U_admin' => 2,
+                    );
+                    $this->session->set_userdata($session_data);
+                    $redirectData = array(
+                        'authen' => "pass",
+                    );
+                    echo json_encode($redirectData);
+                } else {
+                    $redirectData = array(
+                        'authen' => "fail",
+                    );
+                    echo json_encode($redirectData);
+                }
+            }
+            // Expert
+            else if ($this->AuthModel->haveUserExpert($username)) {
+                if ($this->AuthModel->verifypasswordExpert($username, $passhash)) {
+                    $result = $this->AuthModel->getExpert($username);
+                    $session_data = array(
+                        'U_id' => $result->e_id,
+                        'U_user' => $result->e_user,
+                        'U_pass' => $result->e_pass,
+                        'U_fname' => $result->e_fnameEN,
+                        'U_lname' => $result->e_lnameEN,
+                        'U_status' => $result->e_status,
+                        'U_img' => $result->e_img,
+                        'U_admin' => 1,
+                    );
+                    $this->session->set_userdata($session_data);
+                    $redirectData = array(
+                        'authen' => "pass",
+                    );
+                    echo json_encode($redirectData);
+                } else {
+                    $redirectData = array(
+                        'authen' => "fail",
+                    );
+                    echo json_encode($redirectData);
+                }
+            }
+            // Parent
+            else if ($this->AuthModel->haveUserParent($username)) {
+                if ($this->AuthModel->verifypasswordParent($username, $passhash)) {
+                    $result = $this->AuthModel->getParent($username);
+                    $session_data = array(
+                        'U_id' => $result->pa_id,
+                        'U_user' => $result->pa_user,
+                        'U_pass' => $result->pa_pass,
+                        'U_fname' => $result->pa_fnameEN,
+                        'U_lname' => $result->pa_lnameEN,
+                        'U_status' => $result->pa_status,
+                        'U_img' => $result->pa_img,
+                        'U_admin' => 0,
+                    );
+                    $this->session->set_userdata($session_data);
+                    $redirectData = array(
+                        'authen' => "pass",
+                    );
+                    echo json_encode($redirectData);
+                } else {
+                    $redirectData = array(
+                        'authen' => "fail",
+                    );
+                    echo json_encode($redirectData);
+                }
+            } else {
+                $redirectData = array(
+                    'authen' => "fail",
+                );
+                echo json_encode($redirectData);
+            }
+        } else {
+            show_error('Allow Form POST', 405);
+        }
+    }
     public function logout()
     {
         $this->session->sess_destroy();

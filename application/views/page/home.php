@@ -260,8 +260,8 @@
                 <div class="img_live_box">
                     <img class="banner-wrap img-fluid" src="<?php echo base_url(); ?>/assets/images/live-picture-4.png" alt="live">
                 </div>
-                <div class="content_live_box">
-                    <div class="content_live_item">
+                <div class="content_live_box" id="live_list">
+                    <!-- <div class="content_live_item">
                         <a href="<?php echo base_url('live'); ?>">
                             <p> [Live 🔴] การถ่ายทอดสดจากผู้เชี่ยวชาญเด็กพิการทางสายตา 25/01/2563</p>
                         </a>
@@ -275,7 +275,7 @@
                         <a href="<?php echo base_url('live'); ?>">
                             <p> [Live 🔴] การถ่ายทอดสดจากผู้เชี่ยวชาญเด็กพิการทางสายตา 25/01/2563</p>
                         </a>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div class="knowledge_warpper">
@@ -337,63 +337,7 @@
 
     </div>
 </div>
-<!-- <div class="site-section">
-    <div class="container">
 
-        <div class="row">
-            <div class="title-section text-center col">
-                <h2 class="text-uppercase">ความรู้เกี่ยวกับเด็กพิเศษ</h2>
-            </div>
-        </div>
-        <div id="show">
-            <div class="row" id="subrow0">
-
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col text-center">
-                <a href="#" id="addshow" class="btn btn-primary  pl-5 pr-5">ดูเพิ่ม</a>
-            </div>
-        </div>
-
-    </div>
-</div> -->
-
-<!-- <div class="site-section">
-    <div class="container">
-        <div class="row">
-            <div class="title-section text-center col-12">
-                <h2 class="text-uppercase">ข่าวประชาสัมพันธ์การถ่ายทอดสด</h2>
-            </div>
-        </div>
-        <div class="row" style="background-color: white;">
-            <div class="col block-3 products-wrap">
-                <div class="row item">
-                    <div class="col-md-6">
-                        <a> <img class="owl-image raimg" src="<?php echo base_url(); ?>/assets/images/about.jpg" alt="Image"></a>
-                    </div>
-                    <div class="col-md-6">
-                        <hr width="90%" size="50%" color="#8c92a0">
-                        <a href="<?php echo base_url('live'); ?>">
-                            <p> [Live 🔴] การถ่ายทอดสดจากผู้เชี่ยวชาญเด็กพิการทางสายตา 25/01/2563</p>
-                        </a>
-                        <hr width="90%" size="50%" color="#8c92a0">
-                        <a href="<?php echo base_url('live'); ?>">
-                            <p> [Live 🔴] การถ่ายทอดสดจากผู้เชี่ยวชาญเด็กที่มีความบกพร่องด้านการฟัง 25/01/2563</p>
-                        </a>
-                        <hr width="90%" size="50%" color="#8c92a0">
-                        <a href="<?php echo base_url('live'); ?>">
-                            <p> [Live 🔴] การให้ความรู้จากผู้เชี่ยวชาญ 05/11/2562</p>
-                        </a>
-                        <hr width="90%" size="50%" color="#8c92a0">
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> -->
 
 <div style=" padding-bottom: 2em; ">
     <div class="container">
@@ -465,6 +409,32 @@
         autoplay: true,
         items: 1,
     })
+</script>
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const myParam = urlParams.get('v');
+    get_list_livestream(myParam);
+
+    function get_list_livestream(watch) {
+        $.get('<?php echo base_url('Live/getAll'); ?>').done((res) => {
+            if (res.data.length == 0) {
+                console.log(res);
+            } else {
+                console.log(res);
+                res.data.forEach(element => {
+                    console.log(element.l_title);
+                    $('#live_list').append(`
+                    <div class="content_live_item">
+                        <a href="` + '<?php echo base_url('live'); ?>?v=' + element.l_id + `">
+                            <p>` + element.l_title + `</p>
+                        </a>
+                    </div>`);
+                });
+
+            }
+
+        });
+    }
 </script>
 <!-- <script>
     jQuery(document).ready(function($) {
