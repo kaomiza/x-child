@@ -408,7 +408,7 @@
                     $('#live_list').append(`
                     <div class="content_live_item">
                         <a href="` + '<?php echo base_url('live'); ?>?v=' + element.l_id + `">
-                            <p>` + element.l_title + `</p>
+                            <p>` + element.l_title + (element.l_status == 1 ? ` <span class="badge badge-danger">สด</span>` : ``) + `</p>
                         </a>
                     </div>`);
                 });

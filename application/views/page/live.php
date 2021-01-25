@@ -1,6 +1,5 @@
 <style>
-
-    body{
+    body {
         background-color: #212121;
     }
 
@@ -154,11 +153,11 @@
             } else {
                 res.data.forEach(element => {
                     $('#list_live').append(`
-                <a class="list_live_item" href="` + '<?php echo base_url('live'); ?>?v=' + element.l_id + `">
-                    <div class="card_live">
-                        ` + element.l_title + ` <span class="badge badge-danger">สด</span>
-                    </div>
-                </a>
+                        <a class="list_live_item" href="` + '<?php echo base_url('live'); ?>?v=' + element.l_id + `">
+                            <div class="card_live">
+                                ` + element.l_title + (element.l_status == 1 ? ` <span class="badge badge-danger">สด</span>` : ``) + `
+                            </div>
+                        </a>
                 `);
                     if (element.l_id == watch) {
                         $('#live_video').append(`

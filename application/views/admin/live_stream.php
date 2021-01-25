@@ -61,7 +61,7 @@
                             <label class="text-paragraph" style="color: red;">*</label>
                         </div>
                         <div>
-                            <input id="namelive1" style="font-family: 'Kanit';" type="text" class="form-control" placeholder="เช่น การถ่ายทอดสดเกี่ยวกับการเรียนรู้ของเด็กตาบอด">
+                            <input id="namelive1" style="font-family: 'Kanit';" type="text" class="form-control" placeholder="เช่น การถ่ายทอดสดเกี่ยวกับการเรียนรู้ของเด็กตาบอด" maxlength="150">
                             <label class="text-paragraph" id="ernamelive1" style="color: red; display:none; padding-top:5px;">
                                 กรุณากรอกชื่อเรื่องให้ถูกต้อง
                             </label>
@@ -142,7 +142,7 @@
                             <label class="text-paragraph" style="color: red;">*</label>
                         </div>
                         <div>
-                            <input id="namelive2" style="font-family: 'Kanit';" type="text" class="form-control" placeholder="เช่น การถ่ายทอดสดเกี่ยวกับการเรียนรู้ของเด็กตาบอด">
+                            <input id="namelive2" style="font-family: 'Kanit';" type="text" class="form-control" placeholder="เช่น การถ่ายทอดสดเกี่ยวกับการเรียนรู้ของเด็กตาบอด" maxlength="150">
                             <label class="text-paragraph" id="ernamelive2" style="color: red; display:none; padding-top:5px;">
                                 กรุณากรอกชื่อเรื่องให้ถูกต้อง
                             </label>
@@ -342,7 +342,7 @@
                 </div>
             </div>
         </div>
-        <table id="Live" class="table table-bordered table-striped nowrap" style="width:100%">
+        <table id="Live" class="table table-bordered table-striped" style="width:100%">
             <thead>
                 <tr>
                     <th class="th_text">ลำดับ</th>
@@ -707,6 +707,7 @@
             var start_date_2 = document.getElementById("start_date_2").value;
             var end_date_2 = document.getElementById("end_date_2").value;
             var url2 = document.getElementById("url2").value;
+            var detail = document.getElementById("l_detail2").value;
             if (namelive2 == "") {
                 document.getElementById("ernamelive2").style.display = "block";
                 document.getElementById("namelive2").style.border = "1px solid #bd2130";
@@ -768,11 +769,10 @@
 
             if (checkError == true) {
                 var id = $('.edit_btn').attr('id');
-                console.log();
                 $.post('<?php echo base_url('admin/Live_Stream/update') ?>/' + id, {
-                    l_title: namelive1,
-                    l_Startdate: start_date_1,
-                    l_EndDate: end_date_1,
+                    l_title: namelive2,
+                    l_Startdate: start_date_2,
+                    l_EndDate: end_date_2,
                     l_id_url: id_youtube,
                     l_detail: detail
                 }).done((res) => {

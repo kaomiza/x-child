@@ -99,8 +99,8 @@ if ($this->session->flashdata('success')) {
     <div class="container profile-bg mt-3">
         <div class="row p-3">
             <ol class="breadcrumb float-sm-left m-0">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">General Form</li>
+                <li class="breadcrumb-item"><a href="<?= base_url();?>">Home</a></li>
+                <li class="breadcrumb-item active">Profile</li>
             </ol>
         </div>
     </div>
