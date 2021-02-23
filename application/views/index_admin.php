@@ -171,9 +171,9 @@
                         ' : '';
                         ?>
                         <li>
-                            <a href="<?php echo base_url('admin/Children'); ?>">
-                                <i class="fas fa-baby"></i>
-                                <span>จัดการข้อมูลเด็กพิเศษ</span>
+                            <a href="<?php echo base_url('admin/Expert'); ?>">
+                                <i class="fas fa-users-cog"></i>
+                                <span>จัดการข้อมูลผู้เชี่ยวชาญ</span>
                             </a>
                         </li>
                         <li>
@@ -183,18 +183,18 @@
                             </a>
                         </li>
                         <li>
-                            <a href="<?php echo base_url('admin/Expert'); ?>">
-                                <i class="fas fa-users-cog"></i>
-                                <span>จัดการข้อมูลผู้เชี่ยวชาญ</span>
+                            <a href="<?php echo base_url('admin/Children'); ?>">
+                                <i class="fas fa-baby"></i>
+                                <span>จัดการข้อมูลเด็กพิเศษ</span>
                             </a>
                         </li>
                         <li class="header-menu">
                             <span>Document & Video</span>
                         </li>
                         <li>
-                            <a href="<?php echo base_url('admin/document'); ?>">
-                                <i class="fa fa-book"></i>
-                                <span>จัดการเอกสารความรู้</span>
+                            <a href="<?php echo base_url('admin/Live_Stream'); ?>">
+                                <i class="fas fa-podcast"></i>
+                                <span>ถ่ายทอดสด</span>
                             </a>
                         </li>
                         <li>
@@ -204,11 +204,23 @@
                             </a>
                         </li>
                         <li>
-                            <a href="<?php echo base_url('admin/Live_Stream'); ?>">
-                                <i class="fas fa-podcast"></i>
-                                <span>ถ่ายทอดสด</span>
+                            <a href="<?php echo base_url('admin/document'); ?>">
+                                <i class="fa fa-book"></i>
+                                <span>จัดการเอกสารความรู้สําหรับเด็กพิการทางสายตา</span>
                             </a>
                         </li>
+                        <!-- <li>
+                            <a href="<?php echo base_url('admin/article'); ?>">
+                                <i class="fa fa-book"></i>
+                                <span>จัดการบทความ</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="<?php echo base_url('admin/news'); ?>">
+                                <i class="fa fa-book"></i>
+                                <span>จัดการข่าวประชาสัมพันธ์</span>
+                            </a>
+                        </li> -->
                     </ul>
                 </div>
                 <!-- sidebar-menu  -->

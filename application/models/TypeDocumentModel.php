@@ -1,11 +1,11 @@
 <?php
 class TypeDocumentModel extends CI_Model
 {
-    protected $table = 'type_children';
-    protected $primaryKey = 'tc_id';
+    protected $table = 'type_document';
+    protected $primaryKey = 'td_id';
     protected $fields = [
-        'tc_name',
-        'tc_status'
+        'td_name',
+        'td_status'
     ];
 
     public function findAll()

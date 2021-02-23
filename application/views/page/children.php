@@ -1,312 +1,3 @@
-<div class="modal fade show" tabindex="-1" role="dialog" id="insertChildren" style="display:none;">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title text-heading">เพิ่มเด็กพิเศษ</h4>
-                <button type="button" class="close" data-dismiss="modal">×</button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-4">
-                    </div>
-                    <div class="col-md-4" style="text-align: center;">
-                        <div>
-                            <img style="width: 200px; height: 200px;" src="<?php echo base_url(); ?>assets/images/admin/DefualtUser.png" id="preview1" class="img-thumbnail">
-                        </div>
-                        <div>
-                            <input id="inputFile1" type="file" style="visibility: hidden;position: absolute;" class="file1" accept="image/*">
-                            <div class="input-group my-3">
-                                <input type="text" class="form-control" disabled placeholder="เลือกรูปโปรไฟล์" id="file1">
-                                <div class="input-group-append">
-                                    <button type="button" id="browse1" class="browse btn btn-primary">เลือกไฟล์</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div>
-                            <label class="text-paragraph">คำนำหน้าชื่อภาษาไทย</label>
-                            <label class="text-paragraph" style="color: red;">*</label>
-                        </div>
-                        <div>
-                            <select class="form-control text-paragraph select2bs4" id="prenameTH1" required="" onchange="auto_prename('add')">
-                                <option selected="">--- กรุณาเลือก ---</option>
-                            </select>
-                            <label class="text-paragraph" id="erprenameTH1" style="color: red; display:none; padding-top:5px;">
-                                กรุณาเลือกคำนำหน้าชื่อภาษาไทย
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div>
-                            <label class="text-paragraph">ชื่อ (ภาษาไทย)</label>
-                            <label class="text-paragraph" style="color: red;">*</label>
-                        </div>
-                        <div>
-                            <input onkeyup="isThaichar(this.value,this)" id="fnameTH1" style="font-family: 'Kanit';" type="text" class="form-control" placeholder="เช่น สวัสดี">
-                            <label class="text-paragraph" id="erfnameTH1" style="color: red; display:none; padding-top:5px;">
-                                กรุณากรอกชื่อภาษาไทย
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div>
-                            <label class="text-paragraph">นามสกุล (ภาษาไทย)</label>
-                            <label class="text-paragraph" style="color: red;">*</label>
-                        </div>
-                        <div>
-                            <input onkeyup="isThaichar(this.value,this)" id="lnameTH1" style="font-family: 'Kanit';" type="text" class="form-control" placeholder="เช่น สมมุติ">
-                            <label class="text-paragraph" id="erlnameTH1" style="color: red; display:none; padding-top:5px;">
-                                กรุณากรอกชื่อภาษาไทย
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div>
-                            <label class="text-paragraph">คำนำหน้าชื่อภาษาอังกฤษ</label>
-                            <label class="text-paragraph" style="color: red;">*</label>
-                        </div>
-                        <div>
-                            <select class="form-control text-paragraph select2bs4" id="prenameEN1" required="" disabled>
-                                <option selected="">--- กรุณาเลือก ---</option>
-                            </select>
-                            <label class="text-paragraph" id="erprenameEN1" style="color: red; display:none; padding-top:5px;">
-                                กรุณาเลือกคำนำหน้าชื่อภาษาอังกฤษ
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div>
-                            <label class="text-paragraph">ชื่อ (ภาษาอังกฤษ)</label>
-                            <label class="text-paragraph" style="color: red;">*</label>
-                        </div>
-                        <div>
-                            <input onkeyup="isEngchar(this.value,this)" id="fnameEN1" style="font-family: 'Kanit';" type="text" class="form-control" placeholder="เช่น สวัสดี">
-                            <label class="text-paragraph" id="erfnameEN1" style="color: red; display:none; padding-top:5px;">
-                                กรุณากรอกชื่อภาษาอังกฤษ
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div>
-                            <label class="text-paragraph">นามสกุล (ภาษาอังกฤษ)</label>
-                            <label class="text-paragraph" style="color: red;">*</label>
-                        </div>
-                        <div>
-                            <input onkeyup="isEngchar(this.value,this)" id="lnameEN1" style="font-family: 'Kanit';" type="text" class="form-control" placeholder="เช่น สมมุติ">
-                            <label class="text-paragraph" id="erlnameEN1" style="color: red; display:none; padding-top:5px;">
-                                กรุณากรอกชื่อภาษาอังกฤษ
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div>
-                            <label class="text-paragraph">วัน/เดือน/ปี เกิด</label>
-                            <label class="text-paragraph" style="color: red;">*</label>
-                        </div>
-                        <div>
-                            <input id="datepicker1" placeholder="วัน/เดือน/ปี" readonly>
-                            <label class="text-paragraph" id="erdatepicker1" style="color: red; display:none; padding-top:5px;">
-                                กรุณาเลือกวันเกิดให้ถูกต้อง
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div>
-                            <label class="text-paragraph">ประเภทเด็กพิเศษ</label>
-                            <label class="text-paragraph" style="color: red;">*</label>
-                        </div>
-                        <div>
-                            <select class="form-control text-paragraph select2bs4" id="tc1" required="">
-                                <option selected="">--- กรุณาเลือก ---</option>
-                            </select>
-                            <label class="text-paragraph" id="ertc1" style="color: red; display:none; padding-top:5px;">
-                                กรุณาเลือกประเภทเด็กพิเศษ
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div>
-                            <label class="text-paragraph">โรงเรียน</label>
-                            <label class="text-paragraph" style="color: red;">*</label>
-                        </div>
-                        <div>
-                            <select class="form-control text-paragraph select2bs4" id="school1" required="">
-                                <option selected="">--- กรุณาเลือก ---</option>
-                            </select>
-                            <label class="text-paragraph" id="erschool1" style="color: red; display:none; padding-top:5px;">
-                                กรุณาเลือกโรงเรียน
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div>
-                            <label class="text-paragraph">ผู้ปกครอง</label>
-                            <label class="text-paragraph" style="color: red;">*</label>
-                        </div>
-                        <div>
-                            <select class="select2bs4 form-control text-paragraph" id="parent1" required="" onchange="autoAddressByParent('add')">
-                                <option selected="">--- กรุณาเลือก ---</option>
-                            </select>
-                            <label class="text-paragraph" id="erparent1" style="color: red; display:none; padding-top:5px;">
-                                กรุณาเลือกผู้ปกครอง
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div>
-                            <label class="text-paragraph">ผู้เชียวชาญ</label>
-                            <label class="text-paragraph" style="color: red;">*</label>
-                        </div>
-                        <div>
-                            <select class="form-control text-paragraph select2bs4" id="expert1" required="">
-                                <option selected="">--- กรุณาเลือก ---</option>
-                            </select>
-                            <label class="text-paragraph" id="erexpert1" style="color: red; display:none; padding-top:5px;">
-                                กรุณาเลือกผู้เชี่ยวชาญ
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div>
-                            <label class="text-paragraph">บ้านเลขที่</label>
-                        </div>
-                        <div>
-                            <input id="HouseNo1" onkeyup="isHomeNumchar(this.value,this)" style="font-family: 'Kanit';" type="text" class="form-control" placeholder="เช่น 70/1">
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div>
-                            <label class="text-paragraph">หมู่</label>
-                        </div>
-                        <div>
-                            <input id="VillageNo1" onkeyup="isNumAllchar(this.value,this)" style="font-family: 'Kanit';" type="text" class="form-control" placeholder="เช่น 10">
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div>
-                            <label class="text-paragraph">ถนน</label>
-                        </div>
-                        <div>
-                            <input id="Road1" onkeyup="isRoadchar(this.value,this)" style="font-family: 'Kanit';" type="text" class="form-control" placeholder="เช่น ถนนมิตรภาพ">
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div>
-                            <label class="text-paragraph">จังหวัด</label>
-                            <label class="text-paragraph" style="color: red;">*</label>
-                        </div>
-                        <div>
-                            <select class="form-control text-paragraph select2bs4" id="SelectPro1" required="" onchange="fetch_amphur('add')">
-                                <option selected="">--- กรุณาเลือก ---</option>
-                            </select>
-                            <label class="text-paragraph" id="erSelectPro1" style="color: red; display:none; padding-top:5px;">
-                                กรุณาเลือกจังหวัด
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div>
-                            <label class="text-paragraph">อำเภอ</label>
-                            <label class="text-paragraph" style="color: red;">*</label>
-                        </div>
-                        <div>
-                            <select class="form-control text-paragraph select2bs4" disabled id="SelectAm1" required="" onchange="fetch_district('add')">
-                                <option selected="">--- กรุณาเลือก ---</option>
-                            </select>
-                            <label class="text-paragraph" id="erSelectAm1" style="color: red; display:none; padding-top:5px;">
-                                กรุณาเลือกอำเภอ
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div>
-                            <label class="text-paragraph">ตำบล</label>
-                            <label class="text-paragraph" style="color: red;">*</label>
-                        </div>
-                        <div>
-                            <select class="form-control text-paragraph select2bs4" disabled id="SelectDist1" required="">
-                                <option selected="">--- กรุณาเลือก ---</option>
-                            </select>
-                            <label class="text-paragraph" id="erSelectDist1" style="color: red; display:none; padding-top:5px;">
-                                กรุณาเลือกตำบล
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div>
-                            <label class="text-paragraph">ไปรษณีย์</label>
-                        </div>
-                        <div>
-                            <input id="Postcode1" style="font-family: 'Kanit';" type="text" class="form-control" disabled placeholder="30000">
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div>
-                            <label class="text-paragraph">การแพ้ยาของเด็กพิเศษ</label>
-                        </div>
-                        <div id="drug_add">
-
-                        </div>
-                        <div>
-                            <div class="input-group">
-                                <select class="custom-select text-paragraph" id="selectDrug1">
-                                    <option selected>--- กรุณาเลือก ---</option>
-                                </select>
-                                <div class="input-group-append">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-outline-secondary" type="button" onclick="addDrug()"><i class="fas fa-plus-square"></i></button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div>
-                            <label class="text-paragraph">โรคประจำตัวของเด็กพิเศษ</label>
-                        </div>
-                        <div id="diseased_add">
-
-                        </div>
-                        <div>
-                            <div class="input-group">
-                                <select class="custom-select text-paragraph" id="selectDiseased1">
-                                    <option selected>--- กรุณาเลือก ---</option>
-                                </select>
-                                <div class="input-group-append">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-outline-secondary" type="button" onclick="addDiseased()"><i class="fas fa-plus-square"></i></button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary text_btn" data-dismiss="modal">ปิด</button>
-                <button type="button" class="btn text_btn" style="background-color: #1e7e34; color:white;" onclick="onClickSave('insert')">บันทึก</button>
-            </div>
-        </div>
-    </div>
-</div>
-
 <div class="modal fade show" tabindex="-1" role="dialog" id="editChildren" style="display:none;">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -464,7 +155,7 @@
                             <label class="text-paragraph" style="color: red;">*</label>
                         </div>
                         <div>
-                            <select class="form-control text-paragraph select2bs4" id="parent2" onchange="autoAddressByParent('edit')" required="">
+                            <select class="form-control text-paragraph select2bs4" id="parent2" disabled required="">
                                 <option selected="">--- กรุณาเลือก ---</option>
                             </select>
                             <label class="text-paragraph" id="erparent2" style="color: red; display:none; padding-top:5px;">
@@ -478,7 +169,7 @@
                             <label class="text-paragraph" style="color: red;">*</label>
                         </div>
                         <div>
-                            <select class="form-control text-paragraph select2bs4" id="expert2" required="">
+                            <select class="form-control text-paragraph select2bs4" id="expert2" disabled required="">
                                 <option selected="">--- กรุณาเลือก ---</option>
                             </select>
                             <label class="text-paragraph" id="erexpert2" style="color: red; display:none; padding-top:5px;">
@@ -616,21 +307,21 @@
     </div>
 </div>
 
-<div class="main-margin padding_main">
-    <div class="padding_main bgWhite mainBoxRadius boxHeader">
-        <div>
-            <h1 class="h1-title">เด็กพิเศษ</h1>
+<div class="container align-content-center">
+    <div class="container profile-bg mt-3">
+        <div class="row p-3">
+            <ol class="breadcrumb float-sm-left m-0">
+                <li class="breadcrumb-item"><a href="<?= base_url(); ?>">Home</a></li>
+                <li class="breadcrumb-item active">แก้ไขข้อมูลเด็กพิเศษ</li>
+            </ol>
         </div>
     </div>
-    <div class="bgWhite padding_main mainBoxRadius main-margin">
-        <div>
-            <button class="btn_backend text_btn btn" id="btnInsert" data-toggle="modal" data-target="#insertChildren" onclick="add_fetchData()"><i class="fa fa-plus"></i>&nbsp;&nbsp;เพิ่มเด็กพิเศษ</button>
-        </div>
+
+    <div class="container profile-bg mt-3 p-5" style="margin-bottom: 3%;">
         <table id="children" class="table table-bordered table-striped nowrap">
             <thead>
                 <tr>
                     <th></th>
-                    <th class="th_text">สภานะ</th>
                     <th class="th_text">ลำดับ</th>
                     <th class="th_text">รหัสเด็ก</th>
                     <th class="th_text">ชื่อ</th>
@@ -643,7 +334,9 @@
             </thead>
         </table>
     </div>
+
 </div>
+
 <script>
     $('#insertChildren').on('hidden.bs.modal', function() {
         reset_form('add');
@@ -661,7 +354,7 @@
     var diseased2 = [];
 
     function onClickEdit(id) {
-        $.get('<?php echo base_url('admin/children/getById'); ?>/' + id, (res) => {
+        $.get('<?php echo base_url('children/getById'); ?>/' + id, (res) => {
             fetch_prename('edit', res.c_prename);
             fetch_typechildren('edit', res.tc_id);
             fetch_school('edit', res.school_id);
@@ -689,28 +382,9 @@
         });
     }
 
-    function onClickActivate(id) {
-        if ($('#toggle-' + id).is(":checked")) {
-            $.post('<?php echo base_url('admin/children/update'); ?>/' + id, {
-                c_status: 1
-            }).done((res) => {
-                toastr.info('เปิดการใช้งาน');
-            }).fail((xhr, status, error) => {
-                toastr.error('Error')
-            })
-        } else {
-            $.post('<?php echo base_url('admin/children/update'); ?>/' + id, {
-                c_status: 0
-            }).done((res) => {
-                toastr.info('ปิดการใช้งาน');
-            }).fail((xhr, status, error) => {
-                toastr.error('Error')
-            })
-        }
-    }
 
     function createListDrug(id) {
-        $.get('<?php echo base_url('admin/children/DrugSelected'); ?>/' + id).done((res) => {
+        $.get('<?php echo base_url('children/DrugSelected'); ?>/' + id).done((res) => {
             res.forEach(element => {
                 var name = element.drug_name_th;
                 var id = element.drug_id;
@@ -748,7 +422,7 @@
     }
 
     function createListDiseased(id) {
-        $.get('<?php echo base_url('admin/children/DiseasedSelected'); ?>/' + id).done((res) => {
+        $.get('<?php echo base_url('children/DiseasedSelected'); ?>/' + id).done((res) => {
             res.forEach(element => {
                 var name = element.d_nameTH;
                 var id = element.d_id;
@@ -991,7 +665,7 @@
         if (fn == 'add') {
             $('#selectDrug1').empty();
             $('#selectDrug1').append('<option selected="">--- กรุณาเลือก ---</option>');
-            $.get('<?php echo base_url('admin/drug/getListSelect'); ?>').done((res) => {
+            $.get('<?php echo base_url('children/drug_getListSelect'); ?>').done((res) => {
                 res.data.forEach(element => {
                     $('#selectDrug1').append('<option value="' + element.drug_id + '">' +
                         element.drug_name_th + '</option>');
@@ -1001,7 +675,7 @@
         if (fn == 'edit') {
             $('#selectDrug2').empty();
             $('#selectDrug2').append('<option selected="">--- กรุณาเลือก ---</option>');
-            $.get('<?php echo base_url('admin/drug/getListSelect'); ?>').done((res) => {
+            $.get('<?php echo base_url('children/drug_getListSelect'); ?>').done((res) => {
                 res.data.forEach(element => {
                     $('#selectDrug2').append('<option value="' + element.drug_id + '">' +
                         element.drug_name_th + '</option>');
@@ -1014,7 +688,7 @@
         if (fn == 'add') {
             $('#selectDiseased1').empty();
             $('#selectDiseased1').append('<option selected="">--- กรุณาเลือก ---</option>');
-            $.get('<?php echo base_url('admin/Diseased/getListSelect'); ?>').done((res) => {
+            $.get('<?php echo base_url('children/diseased_getListSelect'); ?>').done((res) => {
                 res.data.forEach(element => {
                     $('#selectDiseased1').append('<option value="' + element.d_id + '">' +
                         element.d_nameTH + '</option>');
@@ -1024,7 +698,7 @@
         if (fn == 'edit') {
             $('#selectDiseased2').empty();
             $('#selectDiseased2').append('<option selected="">--- กรุณาเลือก ---</option>');
-            $.get('<?php echo base_url('admin/Diseased/getListSelect'); ?>').done((res) => {
+            $.get('<?php echo base_url('children/diseased_getListSelect'); ?>').done((res) => {
                 res.data.forEach(element => {
                     $('#selectDiseased2').append('<option value="' + element.d_id + '">' +
                         element.d_nameTH + '</option>');
@@ -1039,7 +713,7 @@
             $('#prenameTH1').append('<option selected="">--- กรุณาเลือก ---</option>');
             $('#prenameEN1').empty();
             $('#prenameEN1').append('<option selected="">--- select ---</option>');
-            $.get('<?php echo base_url("admin/pre_name/getListSelect"); ?>').done((res) => {
+            $.get('<?php echo base_url("children/prename_getListSelect"); ?>').done((res) => {
                 res.data.forEach(element => {
                     $('#prenameTH1').append('<option value="' + element.n_id + '">' + element
                         .n_thainame +
@@ -1054,7 +728,7 @@
             $('#prenameTH2').append('<option>--- กรุณาเลือก ---</option>');
             $('#prenameEN2').empty();
             $('#prenameEN2').append('<option>--- select ---</option>');
-            $.get('<?php echo base_url("admin/pre_name/getListSelect"); ?>').done((res) => {
+            $.get('<?php echo base_url("children/prename_getListSelect"); ?>').done((res) => {
                 res.data.forEach(element => {
                     if (element.n_id == id) {
                         $('#prenameTH2').append('<option selected value="' + element.n_id + '">' + element
@@ -1113,7 +787,7 @@
         if (fn == 'add') {
             $('#tc1').empty();
             $('#tc1').append('<option selected="">--- กรุณาเลือก ---</option>');
-            $.get('<?php echo base_url('admin/type_children/getListSelect'); ?>').done((res) => {
+            $.get('<?php echo base_url('children/type_children_getListSelect'); ?>').done((res) => {
                 res.data.forEach(element => {
                     $('#tc1').append('<option value="' + element.tc_id + '">' + element.tc_name +
                         '</option>');
@@ -1123,7 +797,7 @@
         if (fn == 'edit') {
             $('#tc2').empty();
             $('#tc2').append('<option>--- กรุณาเลือก ---</option>');
-            $.get('<?php echo base_url('admin/type_children/getListSelect'); ?>').done((res) => {
+            $.get('<?php echo base_url('children/type_children_getListSelect'); ?>').done((res) => {
                 res.data.forEach(element => {
                     if (element.tc_id == id) {
                         $('#tc2').append('<option selected value="' + element.tc_id + '">' + element.tc_name +
@@ -1141,7 +815,7 @@
         if (fn == 'add') {
             $('#school1').empty();
             $('#school1').append('<option selected="">--- กรุณาเลือก ---</option>');
-            $.get('<?php echo base_url('admin/school/getListSelect'); ?>').done((res) => {
+            $.get('<?php echo base_url('children/school_getListSelect'); ?>').done((res) => {
                 res.data.forEach(element => {
                     $('#school1').append('<option value="' + element.sc_id + '">' + element.sc_nameTH +
                         '</option>');
@@ -1151,7 +825,7 @@
         if (fn == 'edit') {
             $('#school2').empty();
             $('#school2').append('<option>--- กรุณาเลือก ---</option>');
-            $.get('<?php echo base_url('admin/school/getListSelect'); ?>').done((res) => {
+            $.get('<?php echo base_url('children/school_getListSelect'); ?>').done((res) => {
                 res.data.forEach(element => {
                     if (element.sc_id == id) {
                         $('#school2').append('<option selected value="' + element.sc_id + '">' + element.sc_nameTH +
@@ -1170,7 +844,7 @@
         if (fn == 'add') {
             $('#parent1').empty();
             $('#parent1').append('<option selected="">--- กรุณาเลือก ---</option>');
-            $.get('<?php echo base_url('admin/parents/getlistselect'); ?>').done((res) => {
+            $.get('<?php echo base_url('children/parent_getListSelect'); ?>').done((res) => {
                 res.forEach(element => {
                     $('#parent1').append('<option value="' + element.pa_id + '">' +
                         element.n_thainame + ' ' +
@@ -1184,7 +858,7 @@
         if (fn == 'edit') {
             $('#parent2').empty();
             $('#parent2').append('<option>--- กรุณาเลือก ---</option>');
-            $.get('<?php echo base_url('admin/parents/getlistselect'); ?>').done((res) => {
+            $.get('<?php echo base_url('children/parent_getListSelect'); ?>').done((res) => {
                 res.forEach(element => {
                     if (element.pa_id == id) {
                         $('#parent2').append('<option selected value="' + element.pa_id + '">' +
@@ -1207,7 +881,7 @@
 
     function fetch_expert(fn, id = null) {
         if (fn == 'add') {
-            $.get('<?php echo base_url('admin/expert/getlistselect'); ?>').done((res) => {
+            $.get('<?php echo base_url('children/expert_getListSelect'); ?>').done((res) => {
                 $('#expert1').empty();
                 $('#expert1').append('<option selected="">--- กรุณาเลือก ---</option>');
                 res.forEach(element => {
@@ -1221,7 +895,7 @@
         }
 
         if (fn == 'edit') {
-            $.get('<?php echo base_url('admin/expert/getlistselect'); ?>').done((res) => {
+            $.get('<?php echo base_url('children/expert_getListSelect'); ?>').done((res) => {
                 $('#expert2').empty();
                 $('#expert2').append('<option>--- กรุณาเลือก ---</option>');
                 res.forEach(element => {
@@ -1545,26 +1219,6 @@
         );
     }
 
-    function autoAddressByParent(fn) {
-        if (fn == 'add') {
-            var parent = $('#parent1').val();
-            $.get('<?php echo base_url('admin/parents/getById'); ?>/' + parent).done((res) => {
-                fetch_AddAddress(res.pa_district, res.pa_province, res.pa_amphur);
-                $('#HouseNo1').val(res.pa_house_no);
-                $('#VillageNo1').val(res.pa_village_no);
-                $('#Road1').val(res.pa_road);
-            });
-        }
-        if (fn == 'edit') {
-            var parent = $('#parent2').val();
-            $.get('<?php echo base_url('admin/parents/getById'); ?>/' + parent).done((res) => {
-                fetch_editAddress(res.pa_district, res.pa_province, res.pa_amphur);
-                $('#HouseNo2').val(res.pa_house_no);
-                $('#VillageNo2').val(res.pa_village_no);
-                $('#Road2').val(res.pa_road);
-            });
-        }
-    }
 </script>
 <!-- datatable -->
 <script>
@@ -1577,7 +1231,7 @@
             }
         },
         "ajax": {
-            url: "<?php echo base_url('admin/children/getAll'); ?>",
+            url: "<?php echo base_url('children/getAll').'/'.$this->session->userdata('U_id'); ?>" ,
             type: "GET"
         },
         "order": [
@@ -1589,20 +1243,6 @@
                 className: 'dtr-control',
                 orderable: false,
                 "defaultContent": ''
-            },
-            {
-                "data": null,
-                'orderable': false,
-                "render": (data, type, row, meta) => {
-                    return `
-                            <label for="toggle-` + row.c_id + `" class="toggle-1">
-                                <input type="checkbox" id="toggle-` + row.c_id + `" 
-                                class="toggle-1__input"  ` + (row.c_status == 1 ? 'checked' : '') + `
-                                onchange="onClickActivate(` + row.c_id + `)">
-                                <span class="toggle-1__button"></span>
-                            </label>
-                        `;
-                },
             },
             {
                 "data": null,
@@ -1706,7 +1346,7 @@
                     var formData = new FormData();
                     formData.append('file', file);
                     $.ajax({
-                        url: '<?php echo base_url('admin/children/storeImage'); ?>',
+                        url: '<?php echo base_url('children/storeImage'); ?>',
                         type: "post",
                         data: formData,
                         processData: false,
@@ -1755,7 +1395,7 @@
                     var formData = new FormData();
                     formData.append('file', file);
                     $.ajax({
-                        url: '<?php echo base_url('admin/children/storeImage'); ?>',
+                        url: '<?php echo base_url('children/storeImage'); ?>',
                         type: "post",
                         data: formData,
                         processData: false,
@@ -1777,7 +1417,7 @@
     //********end chooseImg************* */
 
     function update_drug(user_id, list) {
-        $.post('<?php echo base_url('admin/children/storeDrug') ?>/' + user_id, {
+        $.post('<?php echo base_url('children/storeDrug') ?>/' + user_id, {
             drug: list
         }).done((res) => {
             console.log(res);
@@ -1785,7 +1425,7 @@
     }
 
     function update_diseased(user_id, list) {
-        $.post('<?php echo base_url('admin/children/storeDiseased') ?>/' + user_id, {
+        $.post('<?php echo base_url('children/storeDiseased') ?>/' + user_id, {
             diseased: list
         }).done((res) => {
             console.log(res);
@@ -1939,33 +1579,6 @@
                 var VillageNo = document.getElementById("VillageNo1").value;
                 var Road = document.getElementById("Road1").value;
                 var Postcode = document.getElementById("Postcode1").value;
-                $.post('<?php echo base_url('admin/children/create'); ?>', {
-                    c_prename: prenameTH1,
-                    c_fnameTH: fnameTH1,
-                    c_lnameTH: lnameTH1,
-                    c_fnameEN: fnameEN1,
-                    c_lnameEN: lnameEN1,
-                    tc_id: tc1,
-                    school_id: school1,
-                    c_parent_id: parent1,
-                    c_expert_id: expert1,
-                    date: birthday1,
-                    c_house_no: HouseNo,
-                    c_village_no: VillageNo,
-                    c_road: Road,
-                    c_province: SelectPro1,
-                    c_district: SelectDist1,
-                    c_amphur: SelectAm1,
-                    c_zip: Postcode,
-                    c_img: path_image != null ? path_image : 'assets/images/admin/DefualtUser.png',
-                }).done((res) => {
-                    update_drug(res.insert_id, drug1);
-                    update_diseased(res.insert_id, diseased1);
-                    $('#insertChildren').modal('hide');
-                    toastr.success('เพิ่มข้อมูลสำเร็จ');
-                }).fail((xhr, status, error) => {
-                    toastr.error('ไม่สามารถเพิ่มข้อมูลได้ โปรดลองใหม่ภายหลัง');
-                });
                 console.log('Start Insert');
             }
         } else if (func == 'edit') {
@@ -2115,7 +1728,7 @@
                 var VillageNo = document.getElementById("VillageNo2").value;
                 var Road = document.getElementById("Road2").value;
                 var Postcode = document.getElementById("Postcode2").value;
-                $.post('<?php echo base_url('admin/children/update'); ?>/' + id_user, {
+                $.post('<?php echo base_url('children/update'); ?>/' + id_user, {
                     c_prename: prenameTH2,
                     c_fnameTH: fnameTH2,
                     c_lnameTH: lnameTH2,

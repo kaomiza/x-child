@@ -76,6 +76,40 @@ class ChildrenModel extends CI_Model
         return $this->db->get($this->table)->result();
     }
 
+    public function findAll_Parent($id)
+    {
+        // $this->db->select('*');
+        $this->db->select('
+        c_id,
+        n_thainame,
+        n_engname,
+        c_fnameTH,
+        c_lnameTH,
+        c_fnameEN,
+        c_lnameEN,
+        c_house_no,
+        c_village_no,
+        c_road,
+        date,
+        sc_nameTH,
+        sc_nameEN,
+        tc_name,
+        c_status,
+        PROVINCE_NAME,
+        DISTRICT_NAME,
+        AMPHUR_NAME,
+        POSTCODE
+        ');
+        $this->db->join($this->table_join[0], $this->join[0]);
+        $this->db->join($this->table_join[1], $this->join[1]);
+        $this->db->join($this->table_join[2], $this->join[2]);
+        $this->db->join($this->table_join[3], $this->join[3]);
+        $this->db->join($this->table_join[4], $this->join[4]);
+        $this->db->join($this->table_join[5], $this->join[5]);
+        $this->db->where($this->Fields[7], $id);
+        return $this->db->get($this->table)->result();
+    }
+
     public function getListChildByParent($parent_id)
     {
         $this->db->select('c_id,n_thainame,c_fnameTH,c_lnameTH');

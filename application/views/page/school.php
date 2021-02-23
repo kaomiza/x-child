@@ -21,20 +21,6 @@
     }
 </style>
 
-<script>
-    var map;
-
-    function init() {
-        map = new longdo.Map({
-            placeholder: document.getElementById('map')
-        });
-        map.location(longdo.LocationMode.Geolocation);
-        map.Ui.Toolbar.visible(false);
-        map.Ui.LayerSelector.visible(false);
-        map.Ui.Fullscreen.visible(false);
-    }
-</script>
-
 <div class="container p-0">
     <div class="p-4 mt-1 rounded" style="background-color: #f9ed69;z-index: -1;">
         <div class="row">
@@ -165,15 +151,31 @@
         }
         $('#table-search').addClass('d-block');
         $("#result-search").empty();
-        var list = [];
+        var list_c = [];
+        var list_nc = [];
         for (var i = 0; i < locations.length; i++) {
-            var similarity = stringSimilarity.compareTwoStrings(keyword, locations[i].nameTH + ',' + locations[i].nameEN);
+            var similarity = stringSimilarity.compareTwoStrings(keyword, locations[i].nameTH);
             if (similarity > 0) {
-                list.push({
-                    "id_marker": i,
-                    "similarity": similarity
-                });
+                console.log(similarity)
+                if (similarity == 1) {
+                    list_c.push({
+                        "id_marker": i,
+                        "similarity": similarity
+                    });
+                }
+                if (similarity >= 0.6) {
+                    list_nc.push({
+                        "id_marker": i,
+                        "similarity": similarity
+                    });
+                }
             }
+        }
+        var list = [];
+        if (list_c.lenght != 0) {
+            list = list_c;
+        } else {
+            list = list_nc;
         }
         if (list.length == 0) {
             $("#result-search").append(`
@@ -184,6 +186,7 @@
         }
         hideAllInfoWindows(map);
         list.sort((a, b) => parseFloat(b.similarity) - parseFloat(a.similarity));
+        console.log(list);
         list.forEach(function(element) {
             $("#result-search").append(
                 `<tr onclick="find_position(` + element.id_marker + `)">

@@ -529,7 +529,7 @@
             if (res.l_id_url != '') {
                 $('#embed_web').html(`
                     <div class="embed-responsive embed-responsive-16by9">
-                        <iframe class="embed-responsive-item" src="<?php echo base_url('live') ?>?v=` + res.l_id_url + `" allowfullscreen></iframe>
+                        <iframe class="embed-responsive-item" src="<?php echo base_url('live') ?>?v=` + res.l_id + `" allowfullscreen></iframe>
                     </div>
                 `);
             } else {

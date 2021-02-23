@@ -361,7 +361,7 @@
         if (fn == 'add') {
             $.get('<?php echo base_url('admin/type_document/getListSelect'); ?>').done((res) => {
                 res.data.forEach(element => {
-                    $('#SelectTD1').append('<option value="' + element.tc_id + '">' + element.tc_name + '</option>')
+                    $('#SelectTD1').append('<option value="' + element.td_id + '">' + element.td_name + '</option>')
                 });
             });
         }
@@ -369,10 +369,10 @@
         if (fn == 'edit') {
             $.get('<?php echo base_url('admin/type_document/getListSelect'); ?>').done((res) => {
                 res.data.forEach(element => {
-                    if (element.tc_id == id) {
-                        $('#SelectTD2').append('<option selected value="' + element.tc_id + '">' + element.tc_name + '</option>')
+                    if (element.td_id == id) {
+                        $('#SelectTD2').append('<option selected value="' + element.td_id + '">' + element.td_name + '</option>')
                     } else {
-                        $('#SelectTD2').append('<option value="' + element.tc_id + '">' + element.tc_name + '</option>')
+                        $('#SelectTD2').append('<option value="' + element.td_id + '">' + element.td_name + '</option>')
                     }
                 });
             });

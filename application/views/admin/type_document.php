@@ -92,10 +92,10 @@
                 'orderable': false,
                 "render": (data, type, row, meta) => {
                     return `
-                        <label for="toggle-` + row.tc_id + `" class="toggle-1">
-                            <input type="checkbox" id="toggle-` + row.tc_id + `" 
-                            class="toggle-1__input"  ` + (row.tc_status == 1 ? 'checked' : '') + `
-                            onchange="onClickActivate(` + row.tc_id + `)">
+                        <label for="toggle-` + row.td_id + `" class="toggle-1">
+                            <input type="checkbox" id="toggle-` + row.td_id + `" 
+                            class="toggle-1__input"  ` + (row.td_status == 1 ? 'checked' : '') + `
+                            onchange="onClickActivate(` + row.td_id + `)">
                             <span class="toggle-1__button"></span>
                         </label>
                         `;
@@ -110,11 +110,11 @@
                 }
             },
             {
-                "data": "tc_id",
+                "data": "td_id",
                 className: "td_text"
             },
             {
-                "data": "tc_name",
+                "data": "td_name",
                 className: "td_text"
             },
             {
@@ -122,7 +122,7 @@
                 "render": (data, type, row, meta) => {
                     return `
                         <button class="btn" style="padding: 2px .75rem; color: #199a6f;" data-toggle="modal" data-target="#editTypeDoc"
-                        onclick="onClickEdit(` + row.tc_id + `)"><i class="fa fa-edit"></i>
+                        onclick="onClickEdit(` + row.td_id + `)"><i class="fa fa-edit"></i>
                         </button>
                         `;
                 }
@@ -147,7 +147,7 @@
             if (checkError == true) {
                 /********insert**********/
                 $.post('<?php echo base_url('admin/type_document/create') ?>', {
-                    tc_name: input
+                    td_name: input
                 }).done((res) => {
                     if (res == true) {
                         $('#InputTD1').val();
@@ -178,7 +178,7 @@
                 /********update**********/
                 var id = $('.edit_btn').attr('id');
                 $.post('<?php echo base_url('admin/type_document/update') ?>/' + id, {
-                    tc_name: input
+                    td_name: input
                 }).done((res) => {
                     if (res == true) {
                         $('#InputTD2').val();
@@ -198,15 +198,15 @@
 
     function onClickEdit(id) {
         $.get('<?php echo base_url('admin/type_document/getById'); ?>/' + id).done((res) => {
-            $('#InputTD2').val(res.tc_name);
-            $('.edit_btn').attr('id', res.tc_id);
+            $('#InputTD2').val(res.td_name);
+            $('.edit_btn').attr('id', res.td_id);
         });
     }
 
     function onClickActivate(id) {
         if ($('#toggle-' + id).is(":checked")) {
             $.post('<?php echo base_url('admin/type_document/update'); ?>/' + id, {
-                tc_status: 1
+                td_status: 1
             }).done((res) => {
                 toastr.info('NO');
             }).fail((xhr, status, error) => {
@@ -214,7 +214,7 @@
             })
         } else {
             $.post('<?php echo base_url('admin/type_document/update'); ?>/' + id, {
-                tc_status: 0
+                td_status: 0
             }).done((res) => {
                 toastr.info('OFF');
             }).fail((xhr, status, error) => {

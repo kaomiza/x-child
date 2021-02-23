@@ -510,9 +510,8 @@
             alert('กรุณากรอกข้อมูลค้นหา');
             return false;
         }
-        var rateLow = [];
-        var rateMid = [];
-        var rateHigth = [];
+        var rate1 = [];
+        var rate2 = [];
         $('#list-menu').empty();
         $('#content').empty();
         $('#not-found').empty();
@@ -528,16 +527,20 @@
             $('#load-search-word').addClass('d-none');
             res.data.forEach(element => {
                 var similarity = stringSimilarity.compareTwoStrings(keyword, element.v_name);
-                if (similarity > 0 && similarity <= 0.3) {
-                    rateLow.push(element);
-                } else if (similarity > 0.3 && similarity <= 0.6) {
-                    rateMid.push(element);
-                } else if (similarity > 0.6 && similarity <= 1) {
-                    rateHigth.push(element);
+                console.log(element.v_name +'|'+ similarity);
+                if (similarity == 1) {
+                    rate1.push(element);
+                } else if (similarity >= 0.3) {
+                    rate2.push(element);
                 }
             });
-            var list1 = rateHigth.concat(rateMid);
-            var list2 = list1.concat(rateLow);
+
+            var list2 = [];
+            if (rate1.length != 0) {
+                list2 = rate1;
+            } else {
+                list2 = rate2;
+            }
             if (list2.length == 0) {
                 $('#list-menu').empty();
                 $('#content').empty();

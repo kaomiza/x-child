@@ -41,6 +41,8 @@
 	<script src="<?php echo base_url(); ?>assets/adminlte/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
 	<script src="<?php echo base_url(); ?>assets/adminlte/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
 	<script src="<?php echo base_url('assets/paginationjs/dist/pagination.js') ?>"></script>
+	<link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
 
 	<script>
 		moment().format('LL');
@@ -160,7 +162,10 @@
 													<?php echo $this->session->U_user; ?>
 												</a>
 												<ul class="dropdown">
-													<li><a href="<?php echo base_url('profile'); ?>" class="color-w">ตั้งค่าผู้ใช้</a></li>
+													<li><a href="<?php echo base_url('profile'); ?>" class="color-w">จัดการข้อมูลส่วนตัว</a></li>
+													<?php if ($this->session->U_admin == 0) { ?>
+														<li><a href="<?php echo base_url('Children'); ?>" class="color-w">จัดการข้อมูลเด็กพิเศษ</a></li>
+													<?php } ?>
 												</ul>
 											</li>
 										<?php } ?>

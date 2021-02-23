@@ -1200,6 +1200,9 @@
         $('.toggle').css("width", "100px");
     });
     //*********start datepickker************ */
+    var now = new Date();
+    var duedate = new Date(now);
+    var befor1Year = new Date(duedate.setDate(now.getDate() - 365));
     $('#datepicker1').datepicker({
         format: 'dd/mm/yyyy',
         uiLibrary: 'bootstrap4'

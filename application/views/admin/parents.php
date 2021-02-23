@@ -601,8 +601,7 @@
         </table>
     </div>
 </div>
-<link rel="stylesheet" href="<?php echo base_url(); ?>assets/paginationjs/dist/pagination.css">
-<script src="<?php echo base_url(); ?>assets/paginationjs/dist/pagination.min.js"></script>
+
 <script>
     $('#insertParents').on('hidden.bs.modal', function() {
         reset_form('add');
@@ -1201,13 +1200,15 @@
         $('.toggle').css("width", "100px");
     });
     //*********start datepickker************ */
+    var now = new Date();
+    var duedate = new Date(now);
     $('#datepicker1').datepicker({
         format: 'dd/mm/yyyy',
-        uiLibrary: 'bootstrap4'
+        uiLibrary: 'bootstrap4',
     });
     $('#datepicker2').datepicker({
         format: 'dd/mm/yyyy',
-        uiLibrary: 'bootstrap4'
+        uiLibrary: 'bootstrap4',
     });
     //*********end datepickker************ */
     //*********start chooseImg************ */

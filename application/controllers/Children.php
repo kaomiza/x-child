@@ -1,0 +1,285 @@
+<?php
+
+defined('BASEPATH') or exit('No direct script access allowed');
+
+class Children extends CI_Controller
+{
+
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->model('ChildrenModel');
+        $this->load->model('ChildDiseasedModel');
+        $this->load->model('DrugAllergyModel');
+        $this->load->model('DrugModel');
+        $this->load->model('DiseasedModel');
+        $this->load->model('TypeChildrenModel');
+        $this->load->model('SchoolModel');
+        $this->load->model('ParentModel');
+        $this->load->model('ExpertModel');
+        $this->load->model('PrenameModel');
+    }
+
+    public function index()
+    {
+        $data = [
+            'title' => 'แก้ไขข้อมูลเด็กพิเศษ | X-Child',
+            'main_content' => $this->load->view('page/children', NULL, TRUE)
+        ];
+        $this->load->view('index', $data);
+    }
+
+    public function getAll($id)
+    {
+        if ($this->input->server('REQUEST_METHOD') == 'GET') {
+            header('Content-Type: application/json');
+            $output = [
+                'data' => $this->ChildrenModel->findAll_Parent($id)
+            ];
+            echo json_encode($output);
+        } else {
+            show_error('Allow Form GET', 405);
+        }
+    }
+
+    public function expert_getListSelect()
+    {
+        if ($this->input->server('REQUEST_METHOD') == 'GET') {
+            header('Content-Type: application/json');
+            echo json_encode($this->ExpertModel->listSelect());
+        } else {
+            show_error('Allow Form GET', 405);
+        }
+    }
+
+    public function parent_getListSelect()
+    {
+        if ($this->input->server('REQUEST_METHOD') == 'GET') {
+            header('Content-Type: application/json');
+            echo json_encode($this->ParentModel->listSelect());
+        } else {
+            show_error('Allow Form GET', 405);
+        }
+    }
+
+    public function school_getListSelect()
+    {
+        if ($this->input->server('REQUEST_METHOD') == 'GET') {
+            header('Content-Type: application/json');
+            $data = [
+                'data' => $this->SchoolModel->listSelect()
+            ];
+            echo json_encode($data);
+        } else {
+            show_error('Allow Form GET', 405);
+        }
+    }
+
+    public function type_children_getListSelect()
+    {
+        if ($this->input->server('REQUEST_METHOD') == 'GET') {
+            header('Content-Type: application/json');
+            $data = [
+                'data' => $this->TypeChildrenModel->listSelect()
+            ];
+            echo json_encode($data);
+        } else {
+            show_error('Allow Form GET', 405);
+        }
+    }
+
+    public function diseased_getListSelect()
+    {
+        if ($this->input->server('REQUEST_METHOD') == 'GET') {
+            header('Content-Type: application/json');
+            $data = [
+                'data' => $this->DiseasedModel->listSelect()
+            ];
+            echo json_encode($data);
+        } else {
+            show_error('Allow Form GET', 405);
+        }
+    }
+
+    public function prename_getListSelect()
+    {
+        if ($this->input->server('REQUEST_METHOD') == 'GET') {
+            header('Content-Type: application/json');
+            $data = [
+                'data' => $this->PrenameModel->listSelect()
+            ];
+            echo json_encode($data);
+        } else {
+            show_error('Allow Form GET', 405);
+        }
+    }
+
+    public function drug_getListSelect()
+    {
+        if ($this->input->server('REQUEST_METHOD') == 'GET') {
+            header('Content-Type: application/json');
+            $data = [
+                'data' => $this->DrugModel->listSelect()
+            ];
+            echo json_encode($data);
+        } else {
+            show_error('Allow Form GET', 405);
+        }
+    }
+
+    public function getListChildrenByParent($parent_id)
+    {
+        if ($this->input->server('REQUEST_METHOD') == 'GET') {
+            header('Content-Type: application/json');
+            $result = [
+                'data' => $this->ChildrenModel->getListChildByParent($parent_id)
+            ];
+            echo json_encode($result);
+        } else {
+            show_error('Allow Form GET', 405);
+        }
+    }
+
+    public function getById($id)
+    {
+        if ($this->input->server('REQUEST_METHOD') == 'GET') {
+            header('Content-Type: application/json');
+            $result = $this->ChildrenModel->findById($id);
+            echo json_encode($result);
+        } else {
+            show_error('Allow Form GET', 405);
+        }
+    }
+
+
+    public function DrugSelected($id)
+    {
+        if ($this->input->server('REQUEST_METHOD') == 'GET') {
+            header('Content-Type: application/json');
+            $result = $this->DrugAllergyModel->SelectedById($id);
+            echo json_encode($result);
+        } else {
+            show_error('Allow Form GET', 405);
+        }
+    }
+
+    public function DiseasedSelected($id)
+    {
+        if ($this->input->server('REQUEST_METHOD') == 'GET') {
+            header('Content-Type: application/json');
+            $result = $this->ChildDiseasedModel->SelectedById($id);
+            echo json_encode($result);
+        } else {
+            show_error('Allow Form GET', 405);
+        }
+    }
+
+    public function storeImage()
+    {
+        if ($this->input->server('REQUEST_METHOD') == 'POST') {
+            header('Content-Type: application/json');
+            $config['upload_path'] = './upload/images/';
+            $config['allowed_types'] = 'gif|jpg|png';
+            $config['max_size'] = 2000000;
+            $config['encrypt_name'] = TRUE;
+            $this->load->library('upload', $config);
+            if (!$this->upload->do_upload('file')) {
+                $error = array('error' => $this->upload->display_errors());
+                echo json_encode($error);
+            } else {
+                $data = array('image_metadata' => $this->upload->data());
+                echo json_encode($data);
+            }
+        } else {
+            show_error('Allow Form POST', 405);
+        }
+    }
+
+    public function storeDrug($c_id)
+    {
+        if ($this->input->server('REQUEST_METHOD') == 'POST') {
+            header('Content-Type: application/json');
+            $data = $this->DrugAllergyModel->findById($c_id);
+            $input = $this->input->post();
+            try {
+                if ($data != null) {
+                    $del = $this->DrugAllergyModel->delete($c_id);
+                    if ($del) {
+                        foreach ($input['drug'] as $item) {
+                            $insert = [
+                                'c_id' => $c_id,
+                                'drug_id' => $item
+                            ];
+                            $this->DrugAllergyModel->create($insert);
+                        }
+                    }
+                } else {
+                    foreach ($input['drug'] as $item) {
+                        $insert = [
+                            'c_id' => $c_id,
+                            'drug_id' => $item
+                        ];
+                        $this->DrugAllergyModel->create($insert);
+                    }
+                }
+                echo json_encode(['status' => 'success']);
+            } catch (\Throwable $th) {
+                echo json_encode(['status' => $th]);
+            }
+        } else {
+            show_error('Allow Form POST', 405);
+        }
+    }
+
+    public function storeDiseased($c_id)
+    {
+        if ($this->input->server('REQUEST_METHOD') == 'POST') {
+            header('Content-Type: application/json');
+            $data = $this->ChildDiseasedModel->findById($c_id);
+            $input = $this->input->post();
+            try {
+                if ($data != null) {
+                    $del = $this->ChildDiseasedModel->delete($c_id);
+                    if ($del) {
+                        foreach ($input['diseased'] as $item) {
+                            $insert = [
+                                'c_id' => $c_id,
+                                'd_id' => $item
+                            ];
+                            $this->ChildDiseasedModel->create($insert);
+                        }
+                    }
+                } else {
+                    foreach ($input['diseased'] as $item) {
+                        $insert = [
+                            'c_id' => $c_id,
+                            'd_id' => $item
+                        ];
+                        $this->ChildDiseasedModel->create($insert);
+                    }
+                }
+                echo json_encode(['status' => 'success']);
+            } catch (\Throwable $th) {
+                echo json_encode(['status' => $th]);
+            }
+        } else {
+            show_error('Allow Form POST', 405);
+        }
+    }
+
+
+    public function update($id)
+    {
+        if ($this->input->server('REQUEST_METHOD') == 'POST') {
+            header('Content-Type: application/json');
+            $data = $this->input->post();
+            $result = $this->ChildrenModel->update($id, $data);
+            echo json_encode($result);
+        } else {
+            show_error('Allow Form POST', 405);
+        }
+    }
+}
+
+/* End of file Children.php */

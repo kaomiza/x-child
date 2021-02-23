@@ -78,7 +78,6 @@
 
     .img_live_box {
         border-radius: 10px;
-        cursor: pointer;
     }
 
     @media (min-width: 768px) and (max-width: 1024px) {
@@ -117,6 +116,10 @@
 
     .content_live_item {
         padding: 10px 0px;
+    }
+
+    .content_live_item:hover {
+        background-color: #ECECEC;
     }
 
     .content_knowledge_box {
@@ -271,7 +274,7 @@
                         <div class="detail_knowledge_box">
                             <div>
                                 <div>
-                                    <a href="#">
+                                    <a href="<?php echo base_url('article/content/1');?>">
                                         <h7>เด็กพิเศษ หมายถึงอะไร?</h7>
                                     </a>
                                 </div>
@@ -294,7 +297,7 @@
                         <div class="detail_knowledge_box">
                             <div>
                                 <div>
-                                    <a href="#">
+                                    <a href="<?php echo base_url('article/content/2');?>">
                                         <h7>เด็กออทิสติกเรียนร่วมกับเด็กปกติได้หรือไม่</h7>
                                     </a>
                                 </div>
@@ -342,34 +345,34 @@
 
                     <div class="row item">
                         <div class="col-md-6">
-                            <a href="<?php echo base_url('news1'); ?>"><img class="owl-image raimg" src="<?php echo base_url(); ?>/assets/images/news/n-1.jpg" alt="Image"></a>
+                            <a href="<?php echo base_url('news/content'); ?>/1"><img class="owl-image raimg" src="<?php echo base_url(); ?>/assets/images/news/n-1.jpg" alt="Image"></a>
                         </div>
                         <div class="col-md-6">
-                            <h4 class="text-dark"><a href="<?php echo base_url('news1'); ?>">สกัด "เด็กพิเศษ" หลุดระบบ สพฐ.เปิดยุทธศาสตร์เชิงรุกขับเคลื่อนงานการศึกษาพิเศษ</a></h4>
+                            <h4 class="text-dark"><a href="<?php echo base_url('news/content'); ?>/1">สกัด "เด็กพิเศษ" หลุดระบบ สพฐ.เปิดยุทธศาสตร์เชิงรุกขับเคลื่อนงานการศึกษาพิเศษ</a></h4>
                             <p style="margin-top: 2%;" class="text-dark"> ลูกเกิดมามีร่างกายครบ 32 ประการ คือ สุดยอดปรารถนาของพ่อแม่ทุกคน ที่ต้องการเห็นลูกมีทั้งร่างกาย รวมถึงจิตใจ ...</p>
-                            <a style="margin-top: 10%;" href="<?php echo base_url('news1'); ?>" class="btn btn-info"> อ่านเพิ่มเติม </a>
+                            <a style="margin-top: 10%;" href="<?php echo base_url('news/content'); ?>/1" class="btn btn-info"> อ่านเพิ่มเติม </a>
                         </div>
                     </div>
 
                     <div class="row item">
                         <div class="col-md-6">
-                            <a href="<?php echo base_url('news2'); ?>"> <img class="owl-image raimg" src="<?php echo base_url(); ?>/assets/images/news/n-2.jpg" alt="Image"></a>
+                            <a href="<?php echo base_url('news/content'); ?>/2"> <img class="owl-image raimg" src="<?php echo base_url(); ?>/assets/images/news/n-2.jpg" alt="Image"></a>
                         </div>
                         <div class="col-md-6">
-                            <h4 class="text-dark"><a href="<?php echo base_url('news2'); ?>">เปลี่ยน “ภาระ” เป็น “พลัง” จูงใจคนพิการก้าวข้ามความบกพร่องของร่างกาย</a></h4>
+                            <h4 class="text-dark"><a href="<?php echo base_url('news/content'); ?>/2">เปลี่ยน “ภาระ” เป็น “พลัง” จูงใจคนพิการก้าวข้ามความบกพร่องของร่างกาย</a></h4>
                             <p style="margin-top: 2%;" class="text-dark"> เปลี่ยน “ภาระ” เป็น “พลัง” ก้าวข้ามความบกพร่องของร่างกาย ที่ไม่ได้เป็นอุปสรรคของชีวิตอีกต่อไป โดย เอ็ม บี เค กรุ๊ป ได้ร่วมกับองค์กรที่พัฒนาศักยภาพ ...</p>
-                            <a style="margin-top: 10%;" href="<?php echo base_url('news2'); ?>" class="btn btn-info"> อ่านเพิ่มเติม </a>
+                            <a style="margin-top: 10%;" href="<?php echo base_url('news/content'); ?>/2" class="btn btn-info"> อ่านเพิ่มเติม </a>
                         </div>
                     </div>
 
                     <div class="row item">
                         <div class="col-md-6">
-                            <a href="<?php echo base_url('news3'); ?>"> <img class="owl-image raimg" src="<?php echo base_url(); ?>/assets/images/news/n-3.jpg" alt="Image"></a>
+                            <a href="<?php echo base_url('news/content'); ?>/3"> <img class="owl-image raimg" src="<?php echo base_url(); ?>/assets/images/news/n-3.jpg" alt="Image"></a>
                         </div>
                         <div class="col-md-6">
-                            <h4 class="text-dark"><a href="<?php echo base_url('news3'); ?>"> เด็กพิการขอนแก่น คว้า 1 เหรียญเงิน 2 ทองแดง กีฬาเยาวชนโลกชิงแชมป์โลก</a></h4>
+                            <h4 class="text-dark"><a href="<?php echo base_url('news/content'); ?>/3"> เด็กพิการขอนแก่น คว้า 1 เหรียญเงิน 2 ทองแดง กีฬาเยาวชนโลกชิงแชมป์โลก</a></h4>
                             <p style="margin-top: 2%;" class="text-dark"> ชื่อนชมคนเก่ง! เด็กพิการ ร.ร.ศรีสังวาลย์ขอนแก่น คว้า 1 เหรียญเงิน 2 เหรียญทองแดง การแข่งขันกีฬาเยาวชนโลกชิงแชมป์โลก ...</p>
-                            <a style="margin-top: 10%;" href="<?php echo base_url('news3'); ?>" class="btn btn-info"> อ่านเพิ่มเติม </a>
+                            <a style="margin-top: 10%;" href="<?php echo base_url('news/content'); ?>/3" class="btn btn-info"> อ่านเพิ่มเติม </a>
                         </div>
                     </div>
 
@@ -393,31 +396,40 @@
     const urlParams = new URLSearchParams(window.location.search);
     const myParam = urlParams.get('v');
     get_list_livestream(myParam);
+    var check_strem = 0;
 
     function get_list_livestream(watch) {
-        $.get('<?php echo base_url('Live/getAll'); ?>').done((res) => {
+        $.get('<?php echo base_url('Live/getActivate'); ?>').done((res) => {
             if (res.data.length == 0) {
                 $('#live_list').append(`
                     <div class="content_live_item text-center">
                         ยังไม่มีการสตรีมสดในขณะนี้
                     </div>`);
             } else {
-                console.log(res);
                 res.data.forEach(element => {
-                    console.log(element.l_title);
-                    $('#live_list').append(`
-                    <div class="content_live_item">
-                        <a href="` + '<?php echo base_url('live'); ?>?v=' + element.l_id + `">
-                            <p>` + element.l_title + (element.l_status == 1 ? ` <span class="badge badge-danger">สด</span>` : ``) + `</p>
-                        </a>
-                    </div>`);
+                    if (element.l_status == 1) {
+                        $('#live_list').append(`
+                        <div class="content_live_item">
+                            <a href="` + '<?php echo base_url('live'); ?>?v=' + element.l_id + `">
+                                <p>` + element.l_title + ` <span class="badge badge-danger">สด</span></p>
+                            </a>
+                        </div>`);
+                    } else {
+
+                    }
                 });
 
             }
 
+        }).fail((res) => {
+            $('#live_list').append(`
+            <div class="content_live_item text-center">
+                ยังไม่มีการสตรีมสดในขณะนี้
+            </div>`);
         });
     }
 </script>
+
 <!-- <script>
     jQuery(document).ready(function($) {
         var start = 0;

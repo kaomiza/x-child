@@ -145,20 +145,42 @@
                 <div class="text-center">
                     <img style="width: 20%;margin-bottom: 2%;" src="<?php echo base_url('assets/images/not-found.svg') ?>" alt="not-found">
                     <br>
-                    <h3 class="text-white">liveStream Not Found</h3> 
+                    <h3 class="text-white">LiveStream Waiting</h3> 
                 </div>
                 `);
                 $('#not-found').removeClass('d-none');
                 $('#not-found').removeClass('d-block');
             } else {
                 res.data.forEach(element => {
-                    $('#list_live').append(`
+                    if (element.l_status == 0) {
+                        $('#list_live').append(`
                         <a class="list_live_item" href="` + '<?php echo base_url('live'); ?>?v=' + element.l_id + `">
                             <div class="card_live">
-                                ` + element.l_title + (element.l_status == 1 ? ` <span class="badge badge-danger">สด</span>` : ``) + `
+                                ` + element.l_title + ` <span class="text-primary"><small>
+                                เริ่มสตรีมสดเวลา ` + moment(element.l_Startdate, "YYYY-MM-DD  hh:mm:ss").format('LLL') + ` </small>
+                                 </span>
                             </div>
                         </a>
-                `);
+                        `);
+                    } else if (element.l_status == 1) {
+                        $('#list_live').append(`
+                        <a class="list_live_item" href="` + '<?php echo base_url('live'); ?>?v=' + element.l_id + `">
+                            <div class="card_live">
+                                ` + element.l_title + ` <span class="badge badge-danger">สด</span>
+                            </div>
+                        </a>
+                        `);
+                    } else {
+                        $('#list_live').append(`
+                        <a class="list_live_item" href="` + '<?php echo base_url('live'); ?>?v=' + element.l_id + `">
+                            <div class="card_live">
+                                ` + element.l_title + ` <span class="text-muted">
+                                สตรีมสดเมื่อ ` + moment(element.l_EndDate, "YYYY-MM-DD  hh:mm:ss").fromNow() + ` ที่ผ่านมา</small>
+                                </span>
+                            </div>
+                        </a>
+                        `);
+                    }
                     if (element.l_id == watch) {
                         $('#live_video').append(`
                             <div class="embed-responsive embed-responsive-16by9">

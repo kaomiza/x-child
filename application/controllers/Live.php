@@ -8,16 +8,15 @@ class Live extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        if (!$this->session->userdata('U_id')) {
-            $this->session->set_flashdata('error-login', 'กรุณา login ก่อนเพื่อใช้งาน');
-            redirect('login');
-        } else {
-            $this->load->model('LiveStreamModel');
-        }
+        $this->load->model('LiveStreamModel');
     }
 
     public function index()
     {
+        if (!$this->session->userdata('U_id')) {
+            $this->session->set_flashdata('error-login', 'กรุณา login ก่อนเพื่อใช้งาน');
+            redirect('login');
+        }
         $data = [
             'title' => 'live | X-Child',
             'main_content' => $this->load->view('page/live', NULL, TRUE)
@@ -31,6 +30,19 @@ class Live extends CI_Controller
             header('Content-Type: application/json');
             $result = [
                 'data' => $this->LiveStreamModel->findAll()
+            ];
+            echo json_encode($result);
+        } else {
+            show_error('Allow Form GET', 405);
+        }
+    }
+
+    public function getActivate()
+    {
+        if ($this->input->server('REQUEST_METHOD') == 'GET') {
+            header('Content-Type: application/json');
+            $result = [
+                'data' => $this->LiveStreamModel->findActivate()
             ];
             echo json_encode($result);
         } else {

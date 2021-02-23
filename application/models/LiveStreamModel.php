@@ -38,6 +38,23 @@ class LiveStreamModel extends CI_Model
         return $this->db->get($this->table)->result();
     }
 
+    public function findActivate()
+    {
+        $this->db->select('
+        l_id,
+        l_title,
+        l_detail,
+        l_id_url,
+        e_user,
+        l_Startdate,
+        l_EndDate,
+        l_status,
+        ');
+        $this->db->where($this->fields[6], 1);
+        $this->db->join($this->table_join[0], $this->join[0]);
+        return $this->db->get($this->table)->result();
+    }
+
     public function findById($id)
     {
         return $this->db->get_where($this->table, array($this->primaryKey => $id))->row();

@@ -2,7 +2,7 @@
 	.layout {
 		background-color: #ffffff;
 		padding: 1rem;
-		height: 63vh;
+		min-height: 63vh;
 	}
 
 	.search-panel {
@@ -71,7 +71,7 @@
 			</div>
 			<div class="col-12 col-md-9">
 				<div class="layout rounded">
-					<div class="col-12 p-3" id="data-container" style="height: 53vh;">
+					<div class="col-12 p-3" id="data-container" style="min-height: 53vh;overflow-y: auto;">
 					</div>
 					<div class="col-12 p-3">
 						<div id="pagination-container" class="paginationjs paginationjs-theme-blue"></div>

@@ -223,7 +223,6 @@ function reset_data() {
   page_Number = 1;
   munu_player = false;
   $("#keyword_search").val("");
-  onload();
 }
 
 function readTextFile(file) {
@@ -271,45 +270,99 @@ async function Search(word) {
       loading_audio.currentTime = 0;
     }, 1000);
     var list_data = [];
-    res.data.forEach((element) => {
+    var list_not_compete = [];
+    for (let element of res.data) {
       var similarity = stringSimilarity.compareTwoStrings(
         word,
         element.doc_name
       );
       if (similarity > 0) {
         console.log(similarity);
-        list_data.push(element);
-        num_list = num_list + 1;
+        if (similarity == 1) {
+          list_data.push({
+            similarity: similarity,
+            data: element,
+          });
+        } else if (similarity >= 0.6) {
+          list_not_compete.push({
+            similarity: similarity,
+            data: element,
+          });
+        }
       }
-    });
-
-    $("#pagination-container").pagination({
-      dataSource: list_data,
-      pageSize: 5,
-      callback: function (data, pagination) {
-        var html = simpleTemplating(data);
-        $("#data-container").html(html);
-      },
-    });
-
-    if (num_list != 0) {
-      selectMenu = true;
-      Speak(
-        "ผลลัพท์การค้นหา " +
-          num_list +
-          " รายการ กดขึ้นลงเพื่อเลือก กดขวาเพื่อค้นหาใหม่ กดซ้ายเพื่อฟัง"
+    }
+    var list_show = [];
+    if (list_data.length != 0) {
+      list_show = list_data;
+      num_list = list_data.length;
+    } else {
+      list_show = list_not_compete;
+      num_list = list_show.length;
+      list_show.sort(
+        (a, b) => parseFloat(b.similarity) - parseFloat(a.similarity)
       );
+    }
+    console.log(list_show);
+
+    if (list_show.length != 0) {
+      $("#pagination-container").pagination({
+        dataSource: list_show,
+        pageSize: 5,
+        callback: function (data, pagination) {
+          console.log(data);
+          var html = searchTemplating(data);
+          $("#data-container").html(html);
+        },
+      });
+      selectMenu = true;
+      Speak("ผลลัพท์การค้นหา " + num_list + " รายการ");
+      setTimeout(() => {
+        responsiveVoice.speak(
+          "กดขึ้นลงเพื่อเลือก กดขวาเพื่อค้นหาใหม่ กดซ้ายเพื่อฟัง",
+          voice,
+          { rate: 0.9 }
+        );
+      }, 4000);
       listening = true;
     } else {
+      reset_data();
       Speak("ไม่พบผลลัพท์ของการค้นหา ลองค้นหาใหม่อีกครั้ง");
+      $("#data-container").empty();
       $("#data-container").append(`
-        <div class="form-inline p-3 l-0 list-tale " onclick="show_tale(18)">
-          <div class="text-center"><strong>Not Found</strong></div>
+        <div class="form-inline p-3 l-0 list-tale ">
+          <div class="text-center"><strong>ไม่พบผลลัพท์</strong></div>
         </div>
       `);
-      reset_data();
     }
   });
+}
+
+function searchTemplating(data) {
+  var html = "";
+  $.each(data, function (index, item) {
+    html =
+      html +
+      `
+        <div class="form-inline p-3 l-` +
+      index +
+      ` list-tale " onclick="show_tale(` +
+      item.data.doc_id +
+      `)">
+          <i class="fas fa-file-alt p-3" style="font-size:2vw;color:#2CAB00 ;"></i>
+          <div class="ml-1">
+            <p class="m-0"><strong class="lt-` +
+      index +
+      `">` +
+      item.data.doc_name +
+      `</strong></p>
+            <p class="text-muted m-0"><small>ประเภทนิทาน : ` +
+      item.data.td_name +
+      `</small></p>
+          </div>
+        </div>
+    `;
+  });
+  return html;
 }
 
 function play() {
@@ -383,7 +436,6 @@ function up() {
       select_focus = $("#data-container").children().length - 1;
     }
   }
-  console.log(select_focus);
   $(".l-" + select_focus).addClass("active");
   Speak($(".lt-" + select_focus).text());
 }
@@ -410,7 +462,6 @@ function down() {
       container.pagination(page_Number);
     }
   }
-  console.log(select_focus);
   $(".l-" + select_focus).addClass("active");
   Speak($(".lt-" + select_focus).text());
 }
